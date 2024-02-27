@@ -20,6 +20,8 @@ public class MapGeneration : MonoBehaviour
     public int iteration;
     public float perlinScale = 0.1f;
 
+    public GameObject playerPrefab;
+
     private TileBase[,] grid;
 
     void Start()
@@ -30,6 +32,16 @@ public class MapGeneration : MonoBehaviour
         FloodFill();
         ApplyPerlinNoise();
         MoveWalls();
+        Vector3 spawnPosition = CalculateMiddlePoint();
+        Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
+    }
+
+    Vector3 CalculateMiddlePoint()
+    {
+        float middleX = width / 2f;
+        float middleY = height / 2f;
+
+        return new Vector3(middleX, middleY, 0);
     }
 
     void CreateGrid()
