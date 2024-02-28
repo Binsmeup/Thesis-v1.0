@@ -11,7 +11,10 @@ public class MapGeneration : MonoBehaviour
     public Tile Object1;
     public Tile Object2;
 
+    public GameObject Player;
+
     public Tilemap WallCollision;
+    public Tilemap Item;
 
 
     public int width;
@@ -19,8 +22,6 @@ public class MapGeneration : MonoBehaviour
     public int density;
     public int iteration;
     public float perlinScale = 0.1f;
-
-    public GameObject playerPrefab;
 
     private TileBase[,] grid;
 
@@ -32,16 +33,7 @@ public class MapGeneration : MonoBehaviour
         FloodFill();
         ApplyPerlinNoise();
         MoveWalls();
-        Vector3 spawnPosition = CalculateMiddlePoint();
-        Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
-    }
-
-    Vector3 CalculateMiddlePoint()
-    {
-        float middleX = width / 2f;
-        float middleY = height / 2f;
-
-        return new Vector3(middleX, middleY, 0);
+        PositionPlayer();
     }
 
     void CreateGrid()
@@ -244,8 +236,7 @@ public class MapGeneration : MonoBehaviour
         FloodFillConnect(x, y + 1, visited, group);
         FloodFillConnect(x, y - 1, visited, group);
     }
-    void ApplyPerlinNoise()
-    {
+    void ApplyPerlinNoise(){
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
@@ -260,40 +251,96 @@ public class MapGeneration : MonoBehaviour
 
                     if (modifiedValue >= 0 && modifiedValue < 1 && randomChance <= 5f)
                     {
-                        Tilemap.SetTile(tilePosition, Object1);
+                        Item.SetTile(tilePosition, Object1);
                     }
                     else if (modifiedValue >= 1 && modifiedValue < 2 && randomChance <= 10f)
                     {
-                        Tilemap.SetTile(tilePosition, Object1);
+                        Item.SetTile(tilePosition, Object1);
                     }
                     else if (modifiedValue >= 2 && modifiedValue < 3 && randomChance <= 15f)
                     {
-                        Tilemap.SetTile(tilePosition, Object2);
+                        Item.SetTile(tilePosition, Object2);
                     }
                     else if (modifiedValue == 3 && randomChance <= 30f)
                     {
-                        Tilemap.SetTile(tilePosition, Object2);
+                        Item.SetTile(tilePosition, Object2);
                     }
                 }
             }
         }
     }
-void MoveWalls()
+    void MoveWalls(){
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                Vector3Int tilePosition = new Vector3Int(x, y, 0);
+
+                TileBase currentTile = Tilemap.GetTile(tilePosition);
+
+                if (currentTile != null && currentTile.name == Wall.name)
+                {
+                    WallCollision.SetTile(tilePosition, currentTile);
+                Tilemap.SetTile(tilePosition, null);
+                }
+            }
+        }   
+    }   
+    void PositionPlayer()
 {
+    List<Vector3Int> floorTiles = new List<Vector3Int>();
+
+    // Collect all floor tile positions
     for (int x = 0; x < width; x++)
     {
         for (int y = 0; y < height; y++)
         {
             Vector3Int tilePosition = new Vector3Int(x, y, 0);
-
-            TileBase currentTile = Tilemap.GetTile(tilePosition);
-
-            if (currentTile != null && currentTile.name == Wall.name)
+            if (grid[x, y] == Floor)
             {
-                WallCollision.SetTile(tilePosition, currentTile);
-                Tilemap.SetTile(tilePosition, null);
+                floorTiles.Add(tilePosition);
             }
         }
     }
+
+    // Check if there are any floor tiles
+    if (floorTiles.Count > 0)
+    {
+        // Choose a random floor tile
+        Vector3Int randomFloorTile = floorTiles[Random.Range(0, floorTiles.Count)];
+
+        // Check if there are no walls within a 2-tile radius
+        if (!HasWallsInRadius(randomFloorTile, 0))
+        {
+            // Set the player's position to the chosen floor tile
+            Player.transform.position = Tilemap.GetCellCenterWorld(randomFloorTile);
+        }
+        else
+        {
+            Debug.LogWarning("No suitable floor tiles found for player positioning within a 2-tile radius.");
+        }
+    }
+    else
+    {
+        Debug.LogWarning("No floor tiles found for player positioning.");
+    }
+}
+
+bool HasWallsInRadius(Vector3Int centerTile, int radius)
+{
+    for (int x = centerTile.x - radius; x <= centerTile.x + radius; x++)
+    {
+        for (int y = centerTile.y - radius; y <= centerTile.y + radius; y++)
+        {
+            if (x >= 0 && x < width && y >= 0 && y < height)
+            {
+                if (grid[x, y] == Wall)
+                {
+                    return true; // There is a wall within the radius
+                }
+            }
+        }
+    }
+    return false; // No walls found within the radius
 }
 }
