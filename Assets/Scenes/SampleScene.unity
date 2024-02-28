@@ -192,8 +192,10 @@ GameObject:
   - component: {fileID: 45371781}
   - component: {fileID: 45371780}
   - component: {fileID: 45371779}
+  - component: {fileID: 45371783}
+  - component: {fileID: 45371784}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -207,14 +209,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 45371778}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 15
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -301,7 +303,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -323,11 +325,45 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.1396521, y: -0.52, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.16, y: 0.16, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &45371783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45371778}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e263f716f05968a42b20d55d34739095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  knockbackForce: 5
+  baseDamage: 2
+  damageMulti: 5
+--- !u!114 &45371784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45371778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 002d6962cedcfa444a55ead229b23215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableSimulation: 1
+  hasDamageCooldown: 1
+  damageCooldownTimer: 0.1
+  _damageCooldown: 0
+  _health: 1000
+  _targettable: 1
 --- !u!1 &125711046
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +605,7 @@ MonoBehaviour:
   m_AssetsPPU: 100
   m_RefResolutionX: 320
   m_RefResolutionY: 180
-  m_UpscaleRT: 1
+  m_UpscaleRT: 0
   m_PixelSnapping: 0
   m_CropFrameX: 0
   m_CropFrameY: 0
@@ -951,12 +987,13 @@ GameObject:
   - component: {fileID: 1206007869}
   - component: {fileID: 1206007868}
   - component: {fileID: 1206007867}
+  - component: {fileID: 1206007874}
   - component: {fileID: 1206007866}
   - component: {fileID: 1206007872}
   - component: {fileID: 1206007873}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -975,24 +1012,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 1206007873}
   attackSpeed: 0.3
-  damage: 2
-  moveSpeed: 1
+  baseDamage: 2
+  damageMulti: 5
+  knockbackForce: 5
+  moveSpeed: 500
   collisionOffset: 0
   Weapon: {fileID: 0}
-  movementFilter:
-    useTriggers: 0
-    useLayerMask: 0
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 0
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
 --- !u!50 &1206007867
 Rigidbody2D:
   serializedVersion: 4
@@ -1001,14 +1026,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1206007865}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 15
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1018,8 +1043,8 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!61 &1206007868
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1241,6 +1266,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1206007874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206007865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 002d6962cedcfa444a55ead229b23215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableSimulation: 1
+  hasDamageCooldown: 1
+  damageCooldownTimer: 0.5
+  _damageCooldown: 0
+  _health: 100
+  _targettable: 1
 --- !u!1 &1452518256
 GameObject:
   m_ObjectHideFlags: 0
