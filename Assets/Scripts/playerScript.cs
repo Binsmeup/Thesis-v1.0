@@ -44,7 +44,6 @@ public class playerScript : MonoBehaviour{
     }
 
     private void Update(){
-        //weapon facing to where ur mouse is
         if (Weapon != null){
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
@@ -104,13 +103,15 @@ public class playerScript : MonoBehaviour{
         movementInput = movementValue.Get<Vector2>();
     }
 
-        /*public void takeDamage(float enemyDamage){
-            health -= enemyDamage;
+    public void baseDamageUp(float amount){
+        baseDamage += amount;
+        Debug.Log("Base damage increased to: " + baseDamage);
+    }
 
-            if (health <= 0){
-            Destroy(gameObject);
-            Debug.Log("dead");
-        }
-    }*/
+    public void moveSpeedUp(float amount){
+        moveSpeed += amount;
+        Debug.Log("Move Speed increased to: " + moveSpeed);
+    }
+
 }
 

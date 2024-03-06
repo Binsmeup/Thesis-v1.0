@@ -13,8 +13,6 @@ public interface IDamagable{
 
     public void OnHit(float baseDamage, float DamageMulti);
 
-
-    public void OnObjectDestroyed();
     
 
 }
