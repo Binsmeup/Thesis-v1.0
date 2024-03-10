@@ -1,0 +1,70 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Stylesheets1.uss?fileID=7433441132597879392&amp;guid=35632dcb515ccaf4daaabbeb52c501b7&amp;type=3#Stylesheets1" />
+    <ui:VisualElement style="position: absolute; width: 1920px; height: 1080px; display: flex; top: 0; left: 0;">
+        <ui:VisualElement name="playersUI" style="width: 1920px; height: 1080px; display: flex;">
+            <ui:VisualElement name="left" class="container" style="width: 30%; height: 250px; position: absolute; bottom: 0;">
+                <ui:VisualElement name="PlayerAndMap" style="position: absolute; top: auto; left: auto; width: 500px; height: 250px; background-color: rgb(82, 0, 255); bottom: 0; display: flex; opacity: 1; right: 0; border-top-width: 10px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
+                    <ui:VisualElement name="Map" class="minimap" style="position: absolute; border-bottom-width: 0; border-right-width: 5px; border-left-width: 10px;">
+                        <ui:Label text="Minimaop" display-tooltip-when-elided="true" class="text" style="position: absolute; top: 94px; left: 38px;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="Plauer" class="player" style="position: absolute; left: 50%; border-left-width: 5px; border-bottom-width: 0; border-right-width: 10px; background-color: rgb(75, 75, 75);">
+                        <ui:Label text="player live avatar" display-tooltip-when-elided="true" class="text" style="position: absolute; top: 74px; left: 38px; height: 42px; width: 237px; white-space: normal;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="right" class="container" style="width: 30%; height: 250px; position: absolute; bottom: 0; left: auto; right: 0;">
+                <ui:VisualElement name="Inventory" class="inventory" style="position: absolute; top: auto; left: 0; width: 500px; height: 250px; background-color: rgb(75, 75, 75); bottom: 0; display: flex; opacity: 1; right: auto; border-right-width: 0;">
+                    <ui:Button display-tooltip-when-elided="true" class="cell" style="position: absolute; border-right-width: 10px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-bottom-width: 10px; background-color: rgb(75, 75, 75);" />
+                    <ui:Button display-tooltip-when-elided="true" class="cell" style="position: absolute; left: 25%; border-right-width: 10px; border-bottom-width: 10px; background-color: rgb(75, 75, 75);" />
+                    <ui:Button display-tooltip-when-elided="true" class="cell" style="position: absolute; left: 50%; border-right-width: 10px; border-bottom-width: 10px; background-color: rgb(75, 75, 75);" />
+                    <ui:Button display-tooltip-when-elided="true" class="cell" style="position: absolute; left: 75%; border-right-width: 10px; border-bottom-width: 10px; background-color: rgb(75, 75, 75);" />
+                    <ui:Button display-tooltip-when-elided="true" class="cell" style="position: absolute; top: 50%; border-right-width: 10px; background-color: rgb(75, 75, 75);" />
+                    <ui:Button display-tooltip-when-elided="true" class="cell" style="position: absolute; left: 25%; top: 50%; border-right-width: 10px; background-color: rgb(75, 75, 75);" />
+                    <ui:Button display-tooltip-when-elided="true" class="cell" style="position: absolute; left: 50%; top: 50%; border-right-width: 10px; background-color: rgb(75, 75, 75);" />
+                    <ui:Button display-tooltip-when-elided="true" class="cell" style="position: absolute; left: 75%; top: 50%; border-right-width: 10px; background-color: rgb(75, 75, 75);" />
+                </ui:VisualElement>
+                <ui:Label text="8 slot inventory" display-tooltip-when-elided="true" class="text" style="position: absolute; top: 62px; left: 56px; height: 42px; width: 443px; white-space: normal; color: rgb(0, 255, 219);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="middle" class="container" style="width: 40%; height: 200px; position: absolute; bottom: 0; left: 30%; right: 588px; background-color: rgb(75, 75, 75);">
+                <ui:VisualElement name="attackContainer" style="width: 20%; height: 100%; position: absolute; background-color: rgb(75, 75, 75);">
+                    <ui:VisualElement name="attack" class="attackimg" style="position: absolute; top: 25%; left: 10%; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; right: auto;" />
+                    <ui:Label display-tooltip-when-elided="true" name="damage" text="X" class="attackValue" style="left: 50%; top: 25%; color: rgb(255, 255, 255); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; right: auto;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="healtharmorcontainer" class="text" style="width: 60%; height: 100%; position: absolute; left: 20%; justify-content: flex-start; border-top-width: 0; border-right-width: 10px; border-bottom-width: 0; border-left-width: 10px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); background-color: rgb(75, 75, 75);">
+                    <ui:VisualElement name="armorimg" class="armorimg" style="position: absolute; top: 6%; left: 4%; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                    <ui:VisualElement name="heartimg" class="heartimg" style="position: absolute; top: 50%; left: 4%; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-image: url(&apos;project://database/Assets/assets/Heart_Red_1.png?fileID=2800000&amp;guid=e4fb1e49747c2884180a2d16efe12b75&amp;type=3#Heart_Red_1&apos;);" />
+                    <ui:ProgressBar value="22" title="X/X" class="text" style="height: 40px; width: 315px; position: absolute; top: 30px; left: 110px; background-color: rgba(0, 0, 0, 0); font-size: 20px; -unity-text-align: upper-left; color: rgb(0, 0, 0);" />
+                    <ui:ProgressBar value="22" title="X/X" style="height: 40px; width: 315px; position: absolute; top: 110px; left: 110px; background-color: rgba(0, 0, 0, 0); font-size: 20px; color: rgb(0, 0, 0);" />
+                </ui:VisualElement>
+                <ui:VisualElement name="GoldContainer" style="width: 20%; height: 100%; position: absolute; left: 80%; background-color: rgb(75, 75, 75);">
+                    <ui:VisualElement name="gold" class="goldimg" style="position: absolute; top: 25%; left: 10%; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                    <ui:Label display-tooltip-when-elided="true" name="goldcount" text="X" class="goldcount" style="left: 50%; top: 25%; -unity-text-align: middle-center; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; color: rgb(255, 255, 255);" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:Label text="Floor: X" display-tooltip-when-elided="true" name="Floor" class="floorlevel" style="position: absolute; left: 20px; top: 20px; color: rgb(0, 0, 0);" />
+            <ui:Label text="Time: X" display-tooltip-when-elided="true" name="time" class="floorlevel" style="position: absolute; left: 20px; top: 60px; color: rgb(0, 0, 0);" />
+            <ui:Button display-tooltip-when-elided="true" name="options" class="options" style="border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; position: absolute; left: 1800px; top: 20px; right: 20px; width: 100px; height: 100px;" />
+            <ui:VisualElement name="optionsscreen" class="optionsscreen" style="background-color: rgb(75, 75, 75); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); left: 710px; position: absolute; top: 20%; align-items: auto; justify-content: flex-start; display: none;">
+                <ui:Label text="PAUSED" display-tooltip-when-elided="true" class="text" style="position: absolute; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); width: 100%; -unity-text-align: middle-center; font-size: 50px; border-bottom-width: 10px; left: -2px; background-color: rgb(56, 37, 96); color: rgb(255, 255, 255); top: -4px; border-top-width: 0; height: 80px;" />
+                <ui:Slider picking-mode="Ignore" label="Sound" value="42" high-value="100" name="sound" class="text" style="position: absolute; top: 120px; left: 30px; font-size: 50px; width: 400px; color: rgb(255, 255, 255);" />
+                <ui:Slider picking-mode="Ignore" label="Music" value="42" high-value="100" name="music" class="text" style="position: absolute; top: 220px; left: 30px; width: 400px; font-size: 50px; color: rgb(255, 255, 255);" />
+                <ui:Button display-tooltip-when-elided="true" name="play" class="playbutton" style="position: absolute; width: 100px; height: 100px; top: 70%; left: auto; right: 42px;" />
+                <ui:Button display-tooltip-when-elided="true" name="restart" class="restartbutton" style="position: absolute; width: 100px; height: 100px; top: 336px; left: 185px;" />
+                <ui:Button display-tooltip-when-elided="true" name="home" class="homebutton" style="position: absolute; width: 100px; height: 100px; top: 70%; left: 42px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="whenudie" style="position: absolute; width: 1920px; height: 1080px; display: none; background-image: url(&apos;project://database/Assets/assets/bro%20falls%20with%20bg.png?fileID=2800000&amp;guid=d80ff3a18c88dd9418daf6bd3de7e5dd&amp;type=3#bro falls with bg&apos;);">
+            <ui:Label text="YOU DIED" display-tooltip-when-elided="true" class="text" style="top: 30%; left: 25%; font-size: 100px; width: 50%; -unity-text-align: upper-center;" />
+            <ui:Label text="Kills:  XXXXX" display-tooltip-when-elided="true" name="Kills" class="text" style="top: 490px; left: 200px; font-size: 50px; width: 50%; -unity-text-align: upper-left;" />
+            <ui:Label text="Floor: XXX" display-tooltip-when-elided="true" name="Floor" class="text" style="top: 560px; left: 200px; font-size: 50px; width: 50%; -unity-text-align: upper-left; align-items: stretch; bottom: 456px;" />
+            <ui:Label text="Time: XXXXX" display-tooltip-when-elided="true" name="Time" class="text" style="top: 630px; left: 200px; font-size: 50px; width: 50%; -unity-text-align: upper-left;" />
+            <ui:Button display-tooltip-when-elided="true" name="check" class="checkbutton" style="position: absolute; width: 100px; height: 100px; top: 536px; left: 1478px; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-color: rgba(188, 188, 188, 0);" />
+            <ui:TextField picking-mode="Ignore" label="Name: " value="filler text" text="__________" readonly="true" class="text" style="position: absolute; top: 550px; left: 814px; font-size: 60px; background-color: rgb(12, 12, 12);" />
+            <ui:Label text="Submitted!" display-tooltip-when-elided="true" name="submitted" class="text" style="top: 660px; left: 1038px; font-size: 50px; width: 396px; -unity-text-align: upper-center;" />
+            <ui:Button display-tooltip-when-elided="true" name="home" class="homebutton" style="position: absolute; width: 100px; height: 100px; top: 800px; left: 550px;" />
+            <ui:Label text="Restart" display-tooltip-when-elided="true" name="submitted" class="text" style="top: 900px; left: 1202px; font-size: 40px; width: 396px; -unity-text-align: upper-center;" />
+            <ui:Label text="Home" display-tooltip-when-elided="true" name="submitted" class="text" style="top: 900px; left: 406px; font-size: 40px; width: 396px; -unity-text-align: upper-center;" />
+            <ui:Button display-tooltip-when-elided="true" name="restart" class="restartbutton" style="position: absolute; width: 100px; height: 100px; top: 800px; left: 1340px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
