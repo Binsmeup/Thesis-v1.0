@@ -33,6 +33,12 @@
     border-top-color: rgb(0, 0, 0);
     border-bottom-color: rgb(0, 0, 0);
     background-color: rgb(75, 75, 75);
+    background-image: none;
+    -unity-background-scale-mode: scale-to-fit;
+    -unity-slice-left: 0;
+    -unity-slice-top: 0;
+    -unity-slice-right: 0;
+    -unity-slice-bottom: 0;
 }
 
 .inventory {
@@ -46,7 +52,7 @@
     border-bottom-color: rgb(0, 0, 0);
 }
 
-.cell {
+.cellinventory {
     width: 25%;
     height: 50%;
     border-top-width: 0;
@@ -320,4 +326,100 @@
 
 .checkbutton:active {
     background-image: url('project://database/Assets/assets/checked%20clicked.png?fileID=2800000&guid=258ac3829aba2f14a8fdb25457124e26&type=3#checked clicked');
+}
+
+.cellbuffs {
+    width: 100px;
+    height: 100%;
+    background-color: rgb(30, 30, 30);
+    background-image: url('project://database/Assets/assets/armor.png?fileID=2800000&guid=aace8343fa0b8de47bf9b51a00ae8372&type=3#armor');
+    border-right-width: 10px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-bottom-width: 0;
+}
+
+.areyousure {
+    width: 600px;
+    height: 300px;
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    font-size: 40px;
+    -unity-text-align: upper-center;
+}
+
+.nobutton {
+    width: 100px;
+    height: 100px;
+    top: 20px;
+    right: 20px;
+    left: 1800px;
+    position: absolute;
+    background-image: url('project://database/Assets/assets/close.png?fileID=2800000&guid=809580024c779924b95b95f141f65e05&type=3#close');
+    background-color: rgba(56, 56, 56, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.nobutton:hover {
+    width: 100px;
+    height: 100px;
+    top: 20px;
+    right: 20px;
+    left: 1800px;
+    position: absolute;
+    background-image: url('project://database/Assets/assets/close%20hover.png?fileID=2800000&guid=a2bc7b88a682233409a8decd0255e38f&type=3#close hover');
+    background-color: rgba(56, 56, 56, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.nobutton:active {
+    width: 100px;
+    height: 100px;
+    top: 20px;
+    right: 20px;
+    left: 1800px;
+    position: absolute;
+    background-image: url('project://database/Assets/assets/close%20button.png?fileID=2800000&guid=af4717abf3ca581498b549e5c2c4f57f&type=3#close button');
+    background-color: rgba(56, 56, 56, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.yesbutton {
+    width: 100px;
+    height: 100px;
+    background-image: url('project://database/Assets/assets/checked.png?fileID=2800000&guid=8c502ac7ccbd7a74c8dbc3cf4d7256ae&type=3#checked');
+    position: absolute;
+}
+
+.yesbutton:hover {
+    width: 100px;
+    height: 100px;
+    background-image: url('project://database/Assets/assets/checked%20hover.png?fileID=2800000&guid=74f08df2980074449b882e174b4a1304&type=3#checked hover');
+    position: absolute;
+}
+
+.yesbutton:active {
+    width: 100px;
+    height: 100px;
+    background-image: url('project://database/Assets/assets/checked%20clicked.png?fileID=2800000&guid=258ac3829aba2f14a8fdb25457124e26&type=3#checked clicked');
+    position: absolute;
 }
