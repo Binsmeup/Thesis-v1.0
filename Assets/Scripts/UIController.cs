@@ -105,14 +105,16 @@ public class UIController : MonoBehaviour
     void OnMusicVolumeChanged(ChangeEvent<int> evt)
     {
         int volume = evt.newValue;
-        AudioManager.instance.SetMusicVolume(volume); 
+        AudioManager.BGM.SetMusicVolume(volume);
+        PlayerPrefs.SetInt("MusicVolume", volume); // Save the music volume to PlayerPrefs
     }
 
     // Method to handle sound effects volume slider value change
     void OnSFXVolumeChanged(ChangeEvent<int> evt)
     {
         int volume = evt.newValue;
-        AudioManager.instance.SetSFXVolume(volume);
+        AudioManager.BGM.SetSFXVolume(volume);
+        PlayerPrefs.SetInt("SFXVolume", volume); // Save the SFX volume to PlayerPrefs
     }
 
     void CreditsButtonPressed()

@@ -7,28 +7,27 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource sfxSource;
 
     [Header("Clips")]
-    public AudioClip backgroundMusic;
+    public AudioClip BGMMain;
+    public AudioClip BGMGame;
     public AudioClip swingSound;
     public AudioClip walkSound;
 
     // Singleton instance
-    public static AudioManager instance;
+    public static AudioManager BGM;
 
     private void Awake()
     {
         // Ensure only one instance of AudioManager exists
-        if (instance == null)
+        if (BGM == null)
         {
-            instance = this;
+            BGM = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
             return;
         }
-
-        // Ensure AudioManager persists between scenes
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -40,15 +39,25 @@ public class AudioManager : MonoBehaviour
     // Play background music
     public void PlayBackgroundMusic()
     {
-        if (musicSource != null && backgroundMusic != null)
+        if (musicSource != null)
         {
-            musicSource.clip = backgroundMusic;
+            // Load appropriate background music based on the scene name
+            string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            if (sceneName == "Main_menu")
+            {
+                musicSource.clip = BGMMain;
+            }
+            else if (sceneName == "GameScene")
+            {
+                musicSource.clip = BGMGame;
+            }
+
             musicSource.loop = true;
             musicSource.Play();
         }
         else
         {
-            Debug.LogWarning("Music source or background music clip is not set!");
+            Debug.LogWarning("Music source is not set!");
         }
     }
 
@@ -118,11 +127,11 @@ public class AudioManager : MonoBehaviour
         if (musicSource != null)
         {
             // Return the current volume level (0% to 100%)
-            return sfxSource.volume * 100f;
+            return musicSource.volume * 100f;
         }
         else
         {
-            // If the sfxSource is null, return a default value
+            // If the musicSource is null, return a default value
             return 100f; // Assuming the default volume is 100%
         }
     }
