@@ -21,8 +21,8 @@ public class UIController : MonoBehaviour
     //Options
     public VisualElement Options;
     public Button Obackmenu;
-    public SliderInt music; 
-    public SliderInt sfx;   
+    public Slider music; 
+    public Slider sfx;   
 
     //Credits
     public VisualElement Credits;
@@ -56,8 +56,8 @@ public class UIController : MonoBehaviour
 
         //Options Section
         Obackmenu = root.Q<Button>("O-back");
-        music = root.Q<SliderInt>("MusicSlider");
-        sfx = root.Q<SliderInt>("SFXSlider");
+        music = root.Q<Slider>("MusicSlider");
+        sfx = root.Q<Slider>("SFXSlider");
         music.RegisterValueChangedCallback(OnMusicVolumeChanged);
         sfx.RegisterValueChangedCallback(OnSFXVolumeChanged);
         optionButton.clicked += OptionsButtonPressed;
@@ -102,19 +102,19 @@ public class UIController : MonoBehaviour
     }
 
     // Method to handle music volume slider value change
-    void OnMusicVolumeChanged(ChangeEvent<int> evt)
+    void OnMusicVolumeChanged(ChangeEvent<float> evt)
     {
-        int volume = evt.newValue;
+        float volume = evt.newValue;
         AudioManager.BGM.SetMusicVolume(volume);
-        PlayerPrefs.SetInt("MusicVolume", volume); // Save the music volume to PlayerPrefs
+        PlayerPrefs.SetFloat("MusicVolume", volume); // Save the music volume to PlayerPrefs
     }
 
     // Method to handle sound effects volume slider value change
-    void OnSFXVolumeChanged(ChangeEvent<int> evt)
+    void OnSFXVolumeChanged(ChangeEvent<float> evt)
     {
-        int volume = evt.newValue;
+        float volume = evt.newValue;
         AudioManager.BGM.SetSFXVolume(volume);
-        PlayerPrefs.SetInt("SFXVolume", volume); // Save the SFX volume to PlayerPrefs
+        PlayerPrefs.SetFloat("SFXVolume", volume); // Save the SFX volume to PlayerPrefs
     }
 
     void CreditsButtonPressed()

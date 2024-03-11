@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class AudioManager : MonoBehaviour
 {
@@ -28,6 +30,14 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        // Subscribe to the sceneLoaded event
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    private void OnDestroy()
+    {
+        // Unsubscribe from the sceneLoaded event when the AudioManager is destroyed
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Start()
@@ -42,13 +52,16 @@ public class AudioManager : MonoBehaviour
         if (musicSource != null)
         {
             // Load appropriate background music based on the scene name
-            string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            string sceneName = SceneManager.GetActiveScene().name;
+            Debug.Log("Current Scene: " + sceneName); // Add this line for debugging
+
             if (sceneName == "Main_menu")
             {
                 musicSource.clip = BGMMain;
             }
             else if (sceneName == "GameScene")
             {
+                Debug.Log("Playing BGMGame"); // Add this line for debugging
                 musicSource.clip = BGMGame;
             }
 
@@ -59,6 +72,13 @@ public class AudioManager : MonoBehaviour
         {
             Debug.LogWarning("Music source is not set!");
         }
+    }
+
+    // Method called when a scene is loaded
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Play background music when a new scene is loaded
+        PlayBackgroundMusic();
     }
 
     // Play swing sound effect
@@ -86,6 +106,7 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("SFX source or walk sound clip is not set!");
         }
     }
+
 
     // Method to set music volume
     public void SetMusicVolume(float volume)
