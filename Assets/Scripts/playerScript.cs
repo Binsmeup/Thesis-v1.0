@@ -13,21 +13,21 @@ public class playerScript : MonoBehaviour{
     }
 
     public Animator anim;
-
     public float attackSpeed;
-
     public float baseDamage;
-
     public float damageMulti;
-
+    public float critChance;
+    public float critDamage;
     public float knockbackForce;
-
     float cooldown;
-
     public float moveSpeed;
 
-    public float collisionOffset;
 
+    public string weaponType;
+    public GameObject currentWeapon;
+    public GameObject currentHelm;
+    public GameObject currentChest;
+    public GameObject currentLeg;
     public GameObject Weapon;
 
     Vector2 movementInput;
@@ -35,11 +35,15 @@ public class playerScript : MonoBehaviour{
 
     bool isMoving = false;
     private bool canRotateWeapon = true;
+
+    private ItemSOLibrary itemSOLibrary;
+
+    public float tempArmorHP;
   
-    List<RaycastHit2D> castCollisions =  new List<RaycastHit2D> {};
 
     private void Start(){
         rb = GetComponent<Rigidbody2D>();
+        itemSOLibrary = GameObject.Find("ItemList").GetComponent<ItemSOLibrary>();
         Weapon = GameObject.Find("Weapon");
     }
 
@@ -60,14 +64,24 @@ public class playerScript : MonoBehaviour{
             }
         }
 
-        if (cooldown <= 0f){
-            if (Input.GetMouseButtonDown(0)){
-                anim.SetTrigger("AttackSword");
-                cooldown = attackSpeed;
+    if (cooldown <= 0f){
+        if (Input.GetMouseButtonDown(0)){
+            switch (weaponType){
+                case "Spear":
+                    anim.SetTrigger("AttackSpear");
+                    attackLimit();
+                    break;
 
-                canRotateWeapon = false;
+                case "Sword":
+                    anim.SetTrigger("AttackSword");
+                    attackLimit();
+                    break;
+
+                default:
+                    break;
             }
         }
+    }
         else{
         cooldown -= Time.deltaTime;
 
@@ -81,9 +95,14 @@ public class playerScript : MonoBehaviour{
         if (damagable != null && other.tag == "Enemy") {
             Vector2 direction = (other.transform.position - transform.position).normalized;
             Vector2 knockback = direction * knockbackForce;
-            damagable.OnHit(baseDamage, damageMulti, knockback);
+            damagable.OnHit(baseDamage, damageMulti, critChance, critDamage, knockback);
             Debug.Log("Enemy hit");
         }
+    }
+
+    private void attackLimit(){
+        cooldown = attackSpeed;
+        canRotateWeapon = false;
     }
 
 
@@ -103,15 +122,75 @@ public class playerScript : MonoBehaviour{
         movementInput = movementValue.Get<Vector2>();
     }
 
-    public void baseDamageUp(float amount){
-        baseDamage += amount;
-        Debug.Log("Base damage increased to: " + baseDamage);
-    }
+    public void getItem(ItemManagement.Items item){
+    for (int i = 0; i < itemSOLibrary.itemList.Length; i++){
+        if (itemSOLibrary.itemList[i].itemName == item.ToString()){
+            if (itemSOLibrary.itemList[i].Type == "Weapon" || itemSOLibrary.itemList[i].Type == "Chestplate" ||
+                itemSOLibrary.itemList[i].Type == "Helmet" || itemSOLibrary.itemList[i].Type == "Leggings"){
+                itemDrop(item);
+            }
 
-    public void moveSpeedUp(float amount){
-        moveSpeed += amount;
-        Debug.Log("Move Speed increased to: " + moveSpeed);
+            itemSOLibrary.itemList[i].onEquip();
+            }
+        }
     }
+    public void itemDrop(ItemManagement.Items item){
+        for (int i = 0; i < itemSOLibrary.itemList.Length; i++){
+            if (itemSOLibrary.itemList[i].itemName == item.ToString()){
+                switch (itemSOLibrary.itemList[i].Type){
+                    case "Weapon":
+                        if (currentWeapon != null){
+                            for (int j = 0; j < itemSOLibrary.itemList.Length; j++){
+                                if (itemSOLibrary.itemList[j].itemName == currentWeapon.name){
+                                    itemSOLibrary.itemList[j].onUnequip();
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    case "Helmet":
+                        if (currentHelm != null){
+                            for (int j = 0; j < itemSOLibrary.itemList.Length; j++){
+                                if (itemSOLibrary.itemList[j].itemName == currentHelm.name){
+                                    itemSOLibrary.itemList[j].onUnequip();
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    case "Chestplate":
+                        if (currentChest != null){
+                            for (int j = 0; j < itemSOLibrary.itemList.Length; j++){
+                                if (itemSOLibrary.itemList[j].itemName == currentChest.name){
+                                    itemSOLibrary.itemList[j].onUnequip();
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    case "Leggings":
+                        if (currentLeg != null){
+                            for (int j = 0; j < itemSOLibrary.itemList.Length; j++){
+                                if (itemSOLibrary.itemList[j].itemName == currentLeg.name){
+                                    itemSOLibrary.itemList[j].onUnequip();
+                                    break;
+                                }
+                            }
+                        }
+                        break;
 
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+    public void SetArmorHP(float value){
+        tempArmorHP = value;
+    }
+    public float GetArmorHP()
+    {
+        return tempArmorHP;
+    }
 }
 

@@ -13,4 +13,20 @@ MonoBehaviour:
   m_Name: RingOfStrength
   m_EditorClassIdentifier: 
   itemName: RingOfStrength
+  Type: Item
+  WeaponType: 
+  baseDmg: 5
+  dmgMulti: 0
+  critCHA: 0
+  critDMG: 0
+  maxHP: 0
+  HP: 0
+  KB: 0
+  MS: 0
+  HelmetMaxHealth: 0
+  HelmetHealth: 0
+  ChestMaxHealth: 0
+  ChestHealth: 0
+  LegMaxHealth: 0
+  LegHealth: 0
   itemObject: {fileID: 2717819469764107534, guid: 58c21fa5d44653a49a3fe24ef5779fb0, type: 3}

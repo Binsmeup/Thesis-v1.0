@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     public float knockbackForce;
     public float baseDamage;
     public float damageMulti;
+    public float critChance;
+    public float critDamage;
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -20,7 +22,7 @@ public class Enemy : MonoBehaviour
             {
                 Vector2 direction = (collider.transform.position - transform.position).normalized;
                 Vector2 knockback = direction * knockbackForce;
-                damagable.OnHit(baseDamage, damageMulti, knockback);
+                damagable.OnHit(baseDamage, damageMulti, critChance, critDamage, knockback);
             }
         }
     }

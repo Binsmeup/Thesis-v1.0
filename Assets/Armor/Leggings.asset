@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 623175d241e6b0946a05b21d9207b70e, type: 3}
-  m_Name: RingOfSpeed
+  m_Name: Leggings
   m_EditorClassIdentifier: 
-  itemName: RingOfSpeed
-  Type: Item
+  itemName: Leggings
+  Type: Leggings
   WeaponType: 
   baseDmg: 0
   dmgMulti: 0
@@ -24,9 +24,6 @@ MonoBehaviour:
   KB: 0
   MS: 50
   HelmetMaxHealth: 0
-  HelmetHealth: 0
   ChestMaxHealth: 0
-  ChestHealth: 0
-  LegMaxHealth: 0
-  LegHealth: 0
-  itemObject: {fileID: 2717819469764107534, guid: 9950ae2a704d96e40938949e63afd6e4, type: 3}
+  LegMaxHealth: 2
+  itemObject: {fileID: 8245899473584220931, guid: a241975d0064fa54a9f684a7540c1495, type: 3}

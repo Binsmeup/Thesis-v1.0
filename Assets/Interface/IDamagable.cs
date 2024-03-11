@@ -9,9 +9,9 @@ public interface IDamagable{
 
     public bool damageCooldown { set; get; }
 
-    public void OnHit(float baseDamage, float DamageMulti, Vector2 knockback);
+    public void OnHit(float baseDamage, float damageMulti, float critChance, float critDamage, Vector2 knockback);
 
-    public void OnHit(float baseDamage, float DamageMulti);
+    public void OnHit(float baseDamage, float damageMulti, float critChance, float critDamage);
 
     
 

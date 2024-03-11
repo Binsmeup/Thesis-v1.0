@@ -4,86 +4,68 @@ using UnityEngine;
 
 public class ItemPickUp : MonoBehaviour
 {
-    [SerializeField] public ItemManagement.Items item; // Use the same enum type
+    [SerializeField] public ItemManagement.Items item;
+    [SerializeField] public bool isEquippable;
 
     private bool isPlayerInRange = false;
+    private bool isMouseOverPickUp = false;
+    private BoxCollider2D mouseCollider;
 
-    public enum ItemName
-    {
-        RingOfStrength,
-        RingOfSpeed,
-        RingOfHealth
-        // Add more item types as needed
+    private void Start(){
+        mouseCollider = GetComponent<BoxCollider2D>();
     }
 
-    private void Update()
-    {
-        if (isPlayerInRange && Input.GetKeyDown(KeyCode.F))
+    private void Update(){
+        if (isPlayerInRange && isMouseOverPickUp && Input.GetKeyDown(KeyCode.F))
         {
             PickUpItem();
         }
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        isMouseOverPickUp = mouseCollider.OverlapPoint((Vector2)ray.origin);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
+    private void OnTriggerEnter2D(Collider2D other){
+        if (other.CompareTag("Player")){
             isPlayerInRange = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
+    private void OnTriggerExit2D(Collider2D other){
+        if (other.CompareTag("Player")){
             isPlayerInRange = false;
         }
     }
 
-    private void PickUpItem()
-    {
-        playerScript player = FindObjectOfType<playerScript>(); // Assuming there's only one player or modify accordingly
+    private void PickUpItem(){
+        playerScript player = FindObjectOfType<playerScript>();
+        HealthManager playerhp = FindObjectOfType<HealthManager>();
 
-        if (player != null)
-        {
-            ApplyEffect(player);
-            IncreaseCounter(player);
-            Destroy(gameObject); // Remove the item from the scene after pickup
+        if (player != null){
+            itemPickUp(player, playerhp);
+            if (!isEquippable){
+                IncreaseCounter(player);
+            }
+            Destroy(gameObject);
         }
     }
 
-    private void ApplyEffect(playerScript player)
-    {
-        switch (item)
-        {
-            case ItemManagement.Items.RingOfStrength:
-                player.baseDamageUp(5);
-                Debug.Log("Ring of Strength picked up!");
-                break;
-            
-            case ItemManagement.Items.RingOfSpeed:
-                player.moveSpeedUp(50);
-                Debug.Log("Ring of Strength picked up!");
-                break;
-
-            case ItemManagement.Items.RingOfHealth:
-                Debug.Log("Ring of Health picked up!");
-                break;
-
-
-            default:
-                Debug.LogWarning("Unhandled item type: " + item);
-                break;
-        }
-    }
-
-    private void IncreaseCounter(playerScript player)
-    {
+    private void IncreaseCounter(playerScript player){
         ItemManagement itemManagement = player.GetComponent<ItemManagement>();
 
-        if (itemManagement != null)
-        {
+        if (itemManagement != null){
             itemManagement.IncreaseItemCount(item);
+        }
+    }
+
+    private void itemPickUp(playerScript player, HealthManager playerhp){
+        ItemManagement itemManagement = player.GetComponent<ItemManagement>();
+
+        if (itemManagement != null){
+            ArmorHealth armorHealth = GetComponent<ArmorHealth>();
+            if (armorHealth != null){
+                player.SetArmorHP(armorHealth.armorHealth);
+            }
+            player.getItem(item);
         }
     }
 }

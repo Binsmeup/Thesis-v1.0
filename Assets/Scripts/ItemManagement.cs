@@ -6,21 +6,22 @@ public class ItemManagement : MonoBehaviour
 {
     private Dictionary<Items, int> itemCounters = new Dictionary<Items, int>();
 
-    public enum Items
-    {
+    public enum Items{
+        Sword,
+        Spear,
+        Helmet,
+        Chestplate,
+        Leggings,
         RingOfStrength,
         RingOfSpeed,
         RingOfHealth
     }
 
-    public void IncreaseItemCount(Items items)
-    {
-        if (itemCounters.ContainsKey(items))
-        {
+    public void IncreaseItemCount(Items items){
+        if (itemCounters.ContainsKey(items)){
             itemCounters[items]++;
         }
-        else
-        {
+        else{
             itemCounters[items] = 1;
         }
 

@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 623175d241e6b0946a05b21d9207b70e, type: 3}
-  m_Name: RingOfSpeed
+  m_Name: Spear
   m_EditorClassIdentifier: 
-  itemName: RingOfSpeed
-  Type: Item
-  WeaponType: 
-  baseDmg: 0
-  dmgMulti: 0
-  critCHA: 0
-  critDMG: 0
+  itemName: Spear
+  Type: Weapon
+  WeaponType: Speat
+  baseDmg: 15
+  dmgMulti: 1
+  critCHA: 10
+  critDMG: 2
   maxHP: 0
   HP: 0
   KB: 0
-  MS: 50
+  MS: 0
   HelmetMaxHealth: 0
   HelmetHealth: 0
   ChestMaxHealth: 0
   ChestHealth: 0
   LegMaxHealth: 0
   LegHealth: 0
-  itemObject: {fileID: 2717819469764107534, guid: 9950ae2a704d96e40938949e63afd6e4, type: 3}
+  itemObject: {fileID: 2717819469764107534, guid: 5b7d92c541894504c8b0e20e0d30d600, type: 3}
