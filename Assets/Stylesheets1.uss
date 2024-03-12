@@ -423,3 +423,24 @@
     background-image: url('project://database/Assets/assets/checked%20clicked.png?fileID=2800000&guid=258ac3829aba2f14a8fdb25457124e26&type=3#checked clicked');
     position: absolute;
 }
+
+.downbutton {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url('project://database/Assets/assets/down.png?fileID=2800000&guid=8d664824a76dad94a97fa4ea0fd22cc7&type=3#down');
+}
+
+.downbutton:hover {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url('project://database/Assets/assets/down%20hover.png?fileID=2800000&guid=79f4d729175ccaa4583eec49dc440ead&type=3#down hover');
+}
+
+.downbutton:active {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url('project://database/Assets/assets/dow%20clicked.png?fileID=2800000&guid=dfcc96517fcc32844a8eaaaa63bd5497&type=3#dow clicked');
+}

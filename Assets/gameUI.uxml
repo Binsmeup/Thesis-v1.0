@@ -71,8 +71,8 @@
             <ui:VisualElement name="M-Options" style="width: 1718px; height: 898px; background-color: rgb(35, 35, 35); position: absolute; top: 106px; left: 103px; border-top-width: 10px; border-right-width: 10px; border-bottom-width: 10px; border-left-width: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); align-items: auto; right: 103px;">
                 <ui:Label text="Sound Fx" display-tooltip-when-elided="true" name="FX" class="musicfx" style="top: 422px; left: 170px; font-size: 60px;" />
                 <ui:Label text="Music" display-tooltip-when-elided="true" name="Music" class="musicfx" style="top: 244px; left: 170px; font-size: 60px;" />
-                <ui:Slider picking-mode="Ignore" label="Slider" value="42" high-value="100" name="MusicSlider" style="position: absolute; height: 275px; width: 1074px; top: 142px; left: 534px;" />
-                <ui:Slider picking-mode="Ignore" label="Slider" value="42" high-value="100" name="SFXSlider" style="position: absolute; height: 275px; width: 1074px; top: 330px; left: 534px;" />
+                <ui:Slider picking-mode="Ignore" value="42" high-value="100" name="MusicSlider" style="position: absolute; height: 275px; width: 1074px; top: 142px; left: 534px;" />
+                <ui:Slider picking-mode="Ignore" value="42" high-value="100" name="SFXSlider" focusable="true" style="position: absolute; height: 275px; width: 1074px; top: 330px; left: 534px;" />
             </ui:VisualElement>
             <ui:Button display-tooltip-when-elided="true" name="O-back" class="button3" style="background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); top: 942px; left: 66px; display: flex;" />
         </ui:VisualElement>

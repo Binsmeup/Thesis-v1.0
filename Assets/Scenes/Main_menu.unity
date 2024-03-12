@@ -455,7 +455,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1001 &3379886465130473583
+--- !u!1001 &2006979749498558666
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -463,47 +463,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5494418966315123399, guid: 90c8ce4396c6d5a4f9b59e76b4cdca06, type: 3}
+    - target: {fileID: 1779863616276268691, guid: 30a1ca12d0cc14344b18d676d4b6c2c4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.0387425
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5494418966315123399, guid: 90c8ce4396c6d5a4f9b59e76b4cdca06, type: 3}
+    - target: {fileID: 1779863616276268691, guid: 30a1ca12d0cc14344b18d676d4b6c2c4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.65871066
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5494418966315123399, guid: 90c8ce4396c6d5a4f9b59e76b4cdca06, type: 3}
+    - target: {fileID: 1779863616276268691, guid: 30a1ca12d0cc14344b18d676d4b6c2c4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0036182487
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5494418966315123399, guid: 90c8ce4396c6d5a4f9b59e76b4cdca06, type: 3}
+    - target: {fileID: 1779863616276268691, guid: 30a1ca12d0cc14344b18d676d4b6c2c4, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5494418966315123399, guid: 90c8ce4396c6d5a4f9b59e76b4cdca06, type: 3}
+    - target: {fileID: 1779863616276268691, guid: 30a1ca12d0cc14344b18d676d4b6c2c4, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5494418966315123399, guid: 90c8ce4396c6d5a4f9b59e76b4cdca06, type: 3}
+    - target: {fileID: 1779863616276268691, guid: 30a1ca12d0cc14344b18d676d4b6c2c4, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5494418966315123399, guid: 90c8ce4396c6d5a4f9b59e76b4cdca06, type: 3}
+    - target: {fileID: 1779863616276268691, guid: 30a1ca12d0cc14344b18d676d4b6c2c4, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5494418966315123399, guid: 90c8ce4396c6d5a4f9b59e76b4cdca06, type: 3}
+    - target: {fileID: 1779863616276268691, guid: 30a1ca12d0cc14344b18d676d4b6c2c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5494418966315123399, guid: 90c8ce4396c6d5a4f9b59e76b4cdca06, type: 3}
+    - target: {fileID: 1779863616276268691, guid: 30a1ca12d0cc14344b18d676d4b6c2c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5494418966315123399, guid: 90c8ce4396c6d5a4f9b59e76b4cdca06, type: 3}
+    - target: {fileID: 1779863616276268691, guid: 30a1ca12d0cc14344b18d676d4b6c2c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6177538058520477403, guid: 90c8ce4396c6d5a4f9b59e76b4cdca06, type: 3}
+    - target: {fileID: 7308773738364336641, guid: 30a1ca12d0cc14344b18d676d4b6c2c4, type: 3}
       propertyPath: m_Name
       value: Audio Manager
       objectReference: {fileID: 0}
@@ -511,7 +511,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 90c8ce4396c6d5a4f9b59e76b4cdca06, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 30a1ca12d0cc14344b18d676d4b6c2c4, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -520,4 +520,4 @@ SceneRoots:
   - {fileID: 1256804796}
   - {fileID: 519420032}
   - {fileID: 1384337948}
-  - {fileID: 3379886465130473583}
+  - {fileID: 2006979749498558666}

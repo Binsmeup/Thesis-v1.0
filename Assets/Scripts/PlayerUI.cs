@@ -46,7 +46,7 @@ public class PlayerUI : MonoBehaviour
         }
         if (PlayerPrefs.HasKey("SFXVolume"))
         {
-            sfx.value = PlayerPrefs.GetFloat("SFXVolume");
+            sfx.value = PlayerPrefs.GetFloat("SFXSlider");
         }
     }
 

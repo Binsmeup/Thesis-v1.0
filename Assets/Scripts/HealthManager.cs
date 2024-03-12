@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamagableCharacters : MonoBehaviour, IDamagable
+public class HealthManager : MonoBehaviour, IDamagable
 {
-    public bool disableSimulation = false;
     public bool hasDamageCooldown = false;
     public float damageCooldownTimer;
 
@@ -14,29 +13,24 @@ public class DamagableCharacters : MonoBehaviour, IDamagable
     private Loot loot;
 
     public bool _damageCooldown;
+    public float maxHealth;
     public float _health;
     public bool _targettable;
 
-    public bool damageCooldown
-    {
+    public bool damageCooldown{
         get { return _damageCooldown; }
-        set
-        {
+        set{
             _damageCooldown = value;
-            if (_damageCooldown == true)
-            {
+            if (_damageCooldown == true){
                 damageCooldownTimeElapsed = 0f;
             }
         }
     }
 
-    public float health
-    {
-        set
-        {
+    public float health{
+        set{
             _health = value;
-            if (_health <= 0)
-            {
+            if (_health <= 0){
                 if (gameObject.CompareTag("Enemy"))
                 {
                     if (loot == null)
@@ -44,19 +38,19 @@ public class DamagableCharacters : MonoBehaviour, IDamagable
                         loot = GetComponent<Loot>();
                         if (loot == null)
                         {
-                            // Attach the EnemyLoot component if not present
                             loot = gameObject.AddComponent<Loot>();
                         }
                     }
 
-                    // Call the dropItem method
                     dropItem();
                 }
                 Destroy(gameObject);
             }
+            if (maxHealth < _health){
+                _health = maxHealth;
+            }
         }
-        get
-        {
+        get{
             return _health;
         }
     }
@@ -70,24 +64,21 @@ public class DamagableCharacters : MonoBehaviour, IDamagable
     public float LegMaxHP;
     public float LegHP;
 
-    public bool Targettable
-    {
+
+    public bool Targettable{
         get { return _targettable; }
-        set
-        {
+        set{
             _targettable = value;
             physicsCollider.enabled = value;
         }
     }
 
-    public void Start()
-    {
+    public void Start(){
         rb = GetComponent<Rigidbody2D>();
         physicsCollider = GetComponent<Collider2D>();
     }
 
-public void OnHit(float baseDamage, float damageMulti, Vector2 knockback)
-    {
+public void OnHit(float baseDamage, float damageMulti, float critChance, float critDamage, Vector2 knockback){
         if (!damageCooldown){
             List<string> ArmorParts = new List<string>();
 
@@ -106,19 +97,24 @@ public void OnHit(float baseDamage, float damageMulti, Vector2 knockback)
                 rb.AddForce(knockback, ForceMode2D.Impulse);
             }
             else{
-                health -= (baseDamage * damageMulti);
-                rb.AddForce(knockback, ForceMode2D.Impulse);
-            }
+                float critValue = Random.Range(0f, 100f);
+                if (critChance >= critValue){
+                    health -= (baseDamage * damageMulti * critDamage);
+                    rb.AddForce(knockback, ForceMode2D.Impulse);
+                }
+                else{
+                    health -= (baseDamage * damageMulti);
+                    rb.AddForce(knockback, ForceMode2D.Impulse);
+                
+            }   
         }
-
-        if (hasDamageCooldown)
-        {
+    }
+        if (hasDamageCooldown){
             damageCooldown = true;
         }
     }
 
-    public void OnHit(float baseDamage, float damageMulti)
-    {
+    public void OnHit(float baseDamage, float damageMulti, float critChance, float critDamage){
         if (!damageCooldown)
         {
             List<string> partsWithHP = new List<string>();
@@ -136,12 +132,16 @@ public void OnHit(float baseDamage, float damageMulti, Vector2 knockback)
                 DamageArmorPart(randomPart);
             }
             else{
-                health -= (baseDamage * damageMulti);
+                float critValue = Random.Range(0f, 100f);
+                if (critChance >= critValue){
+                    health -= (baseDamage * damageMulti * critDamage);
+                }
+                else{
+                    health -= (baseDamage * damageMulti);
+                }
             }
         }
-
-        if (hasDamageCooldown)
-        {
+        if (hasDamageCooldown){
             damageCooldown = true;
         }
     }
