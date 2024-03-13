@@ -69,7 +69,12 @@ public class PlayerUI : MonoBehaviour
         //Bar
         armorBar = root.Q<ProgressBar>("armorbar");
         healthBar = root.Q<ProgressBar>("healthbar");
-        healthManager = FindObjectOfType<HealthManager>();
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+
+        if (playerObject != null)
+        {
+            healthManager = playerObject.GetComponent<HealthManager>();
+        }
 
 
         // Load the music and SFX volumes from PlayerPrefs
@@ -87,11 +92,10 @@ public class PlayerUI : MonoBehaviour
     {
         if (healthManager != null)
         {
-            // Update health bar
-            healthBar.title = $"Health: 100/100";//tempo
-            healthBar.lowValue = 0;//tempo
-            healthBar.highValue = healthManager.maxHealth;//tempo
-            healthBar.value = healthManager.health;//tempo
+            healthBar.title = $"Health: {healthManager.health}/{healthManager.maxHealth}";
+            healthBar.lowValue = 0;
+            healthBar.highValue = healthManager.maxHealth;
+            healthBar.value = healthManager.health;
 
             // Update armor bar
             float armorValue = healthManager.HelmHP + healthManager.ChestHP + healthManager.LegHP;

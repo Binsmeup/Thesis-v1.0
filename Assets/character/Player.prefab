@@ -485,6 +485,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1381200521729808076}
+  - component: {fileID: 5022608775116993961}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -508,6 +509,30 @@ Transform:
   - {fileID: 7051160298111491342}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5022608775116993961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7151423482783304621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 002d6962cedcfa444a55ead229b23215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasDamageCooldown: 1
+  damageCooldownTimer: 0.5
+  _damageCooldown: 0
+  maxHealth: 100
+  _health: 100
+  _targettable: 1
+  HelmMaxHP: 0
+  HelmHP: 0
+  ChestMaxHP: 0
+  ChestHP: 0
+  LegMaxHP: 0
+  LegHP: 0
 --- !u!114 &3560522446633318725
 MonoBehaviour:
   m_ObjectHideFlags: 0
