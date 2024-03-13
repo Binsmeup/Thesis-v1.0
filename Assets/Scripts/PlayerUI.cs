@@ -17,6 +17,23 @@ public class PlayerUI : MonoBehaviour
 
     public VisualElement OptionsScreen;
 
+    //Stats
+    public Label attackSpeedLabel;
+    public Label baseDamageLabel;
+    public Label damageMultiplierLabel;
+    public Label criticalChanceLabel;
+    public Label criticalDamageLabel;
+    public Label knockbackForceLabel;
+    public Label moveSpeedLabel;
+
+    //bars
+    public ProgressBar armorBar;
+    public ProgressBar healthBar;
+
+
+    private HealthManager healthManager;
+    private playerScript player;
+
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
@@ -30,13 +47,29 @@ public class PlayerUI : MonoBehaviour
         music = root.Q<Slider>("music");
         sfx = root.Q<Slider>("sound");
 
-
         gameOptions.clicked += OptionsButtonPressed;
         gamePlay.clicked += PlayButtonPressed;
         gameRestart.clicked += RestartButtonPressed;
         gameMainmenu.clicked += HomeButtonPressed;
         music.RegisterValueChangedCallback(OnMusicVolumeChanged);
         sfx.RegisterValueChangedCallback(OnSFXVolumeChanged);
+
+        //stats
+        attackSpeedLabel = root.Q<Label>("attackspeed");
+        baseDamageLabel = root.Q<Label>("basedamage");
+        damageMultiplierLabel = root.Q<Label>("damagemultiplier");
+        criticalChanceLabel = root.Q<Label>("criticalchance");
+        criticalDamageLabel = root.Q<Label>("criticaldamage");
+        knockbackForceLabel = root.Q<Label>("knockbackforce");
+        moveSpeedLabel = root.Q<Label>("movespeed");
+
+        player = GameObject.FindObjectOfType<playerScript>();
+
+
+        //Bar
+        armorBar = root.Q<ProgressBar>("armorbar");
+        healthBar = root.Q<ProgressBar>("healthbar");
+        healthManager = FindObjectOfType<HealthManager>();
 
 
         // Load the music and SFX volumes from PlayerPrefs
@@ -48,6 +81,45 @@ public class PlayerUI : MonoBehaviour
         {
             sfx.value = PlayerPrefs.GetFloat("SFXSlider");
         }
+    }
+
+    void UpdateUI()
+    {
+        if (healthManager != null)
+        {
+            // Update health bar
+            healthBar.title = $"Health: 100/100";//tempo
+            healthBar.lowValue = 0;//tempo
+            healthBar.highValue = healthManager.maxHealth;//tempo
+            healthBar.value = healthManager.health;//tempo
+
+            // Update armor bar
+            float armorValue = healthManager.HelmHP + healthManager.ChestHP + healthManager.LegHP;
+            float maxArmorValue = healthManager.HelmMaxHP + healthManager.ChestMaxHP + healthManager.LegMaxHP;
+            armorBar.title = $"Armor: {armorValue}/{maxArmorValue}";
+            armorBar.lowValue = 0;
+            armorBar.highValue = maxArmorValue;
+            armorBar.value = armorValue;
+        }
+
+        if (player != null)
+        {
+            attackSpeedLabel.text = "Attack Speed: " + player.attackSpeed.ToString();
+            baseDamageLabel.text = "Base Damage: " + player.baseDamage.ToString();
+            damageMultiplierLabel.text = "Damage Multiplier: " + player.damageMulti.ToString();
+            criticalChanceLabel.text = "Critical Chance: " + player.critChance.ToString();
+            criticalDamageLabel.text = "Critical Damage: " + player.critDamage.ToString();
+            knockbackForceLabel.text = "Knockback Force: " + player.knockbackForce.ToString();
+            moveSpeedLabel.text = "Movement Speed: " + player.moveSpeed.ToString();
+
+
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        UpdateUI();
     }
 
     // Update is called once per frame
@@ -65,7 +137,6 @@ public class PlayerUI : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene");
     }
-
 
     void HomeButtonPressed()
     {
