@@ -1,0 +1,446 @@
+.minimap {
+    width: 50%;
+    height: 100%;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+}
+
+.player {
+    width: 50%;
+    height: 100%;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+}
+
+.container {
+    border-top-width: 10px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    background-color: rgb(75, 75, 75);
+    background-image: none;
+    -unity-background-scale-mode: scale-to-fit;
+    -unity-slice-left: 0;
+    -unity-slice-top: 0;
+    -unity-slice-right: 0;
+    -unity-slice-bottom: 0;
+}
+
+.inventory {
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 0;
+    border-left-width: 10px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+}
+
+.cellinventory {
+    width: 25%;
+    height: 50%;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    background-color: rgb(82, 0, 255);
+    color: rgb(41, 41, 41);
+}
+
+.attackimg {
+    width: 80px;
+    height: 80px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    top: auto;
+    right: auto;
+    left: auto;
+    position: absolute;
+    background-image: url('project://database/Assets/assets/Swords.png?fileID=2800000&guid=05a3801ae1b8780459d4fbfd7550e9cb&type=3#Swords');
+}
+
+.attackValue {
+    width: 80px;
+    height: 80px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    top: auto;
+    right: auto;
+    left: auto;
+    position: absolute;
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    -unity-text-align: middle-center;
+    font-size: 40px;
+}
+
+.armorimg {
+    width: 80px;
+    height: 80px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    top: auto;
+    right: auto;
+    left: auto;
+    position: absolute;
+    background-image: url('project://database/Assets/assets/armor.png?fileID=2800000&guid=aace8343fa0b8de47bf9b51a00ae8372&type=3#armor');
+}
+
+.heartimg {
+    width: 80px;
+    height: 80px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    top: auto;
+    right: auto;
+    left: auto;
+    position: absolute;
+    background-image: url('project://database/Assets/assets/heart.png?fileID=2800000&guid=a4f85208bd5d2074ba752b96eba03d3a&type=3#heart');
+}
+
+.goldimg {
+    width: 80px;
+    height: 80px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    top: auto;
+    right: auto;
+    left: auto;
+    position: absolute;
+    background-image: url('project://database/Assets/assets/coin.png?fileID=2800000&guid=3c70d97e0569df2458320ce865be7174&type=3#coin');
+}
+
+.goldcount {
+    width: 80px;
+    height: 80px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    top: auto;
+    right: auto;
+    left: auto;
+    position: absolute;
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    font-size: 40px;
+    color: rgb(0, 0, 0);
+}
+
+.options {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url('project://database/Assets/assets/options.png?fileID=2800000&guid=0e17e19a11f8fdf4695fb241bc45accb&type=3#options');
+}
+
+.options:hover {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url('project://database/Assets/assets/options%20hover.png?fileID=2800000&guid=0e3fbfa4d86cc924b8eed3fb7cf9c4a6&type=3#options hover');
+}
+
+.options:active {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url('project://database/Assets/assets/options%20clicked.png?fileID=2800000&guid=a0ef1d76746a00246b2da2831fbf743c&type=3#options clicked');
+}
+
+.floorlevel {
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    font-size: 30px;
+}
+
+.currentime {
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    font-size: 30px;
+}
+
+.text {
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    position: absolute;
+}
+
+.optionsscreen {
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    left: auto;
+    top: auto;
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    background-color: rgb(75, 75, 75);
+}
+
+.homebutton {
+    background-image: url('project://database/Assets/assets/home.png?fileID=2800000&guid=98a30b3ccc3a851439c7de226b32418b&type=3#home');
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.homebutton:hover {
+    background-image: url('project://database/Assets/assets/home%20hover.png?fileID=2800000&guid=1b10b238f91b37a4ba922abcdb6f5a22&type=3#home hover');
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.homebutton:active {
+    background-image: url('project://database/Assets/assets/home%20clicked.png?fileID=2800000&guid=ce412102afdc63f42bc4ff41f9c4211f&type=3#home clicked');
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.restartbutton {
+    background-image: url('project://database/Assets/assets/restart.png?fileID=2800000&guid=5fdf811c252a80545bd44906ecd1167c&type=3#restart');
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.restartbutton:hover {
+    background-image: url('project://database/Assets/assets/restart%20hover.png?fileID=2800000&guid=78b00a0aedabbf04d9e8589736808420&type=3#restart hover');
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.restartbutton:active {
+    background-image: url('project://database/Assets/assets/restart%20clicked.png?fileID=2800000&guid=2ea5cf9c75b943245ada554d2bd19841&type=3#restart clicked');
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.playbutton {
+    background-image: url('project://database/Assets/assets/next.png?fileID=2800000&guid=dcda8c78011e5834d8ed1cb7c87c5733&type=3#next');
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.playbutton:hover {
+    background-image: url('project://database/Assets/assets/next%20hover.png?fileID=2800000&guid=5f298e757227e0247ad5b3eceb45a803&type=3#next hover');
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.playbutton:active {
+    background-image: url('project://database/Assets/assets/next%20clicked.png?fileID=2800000&guid=1ec97cc617d545c47a42a97a6b5fe4aa&type=3#next clicked');
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.checkbutton {
+    background-image: url('project://database/Assets/assets/checked.png?fileID=2800000&guid=8c502ac7ccbd7a74c8dbc3cf4d7256ae&type=3#checked');
+}
+
+.checkbutton:hover {
+    background-image: url('project://database/Assets/assets/checked%20hover.png?fileID=2800000&guid=74f08df2980074449b882e174b4a1304&type=3#checked hover');
+}
+
+.checkbutton:active {
+    background-image: url('project://database/Assets/assets/checked%20clicked.png?fileID=2800000&guid=258ac3829aba2f14a8fdb25457124e26&type=3#checked clicked');
+}
+
+.cellbuffs {
+    width: 100px;
+    height: 100%;
+    background-color: rgb(30, 30, 30);
+    background-image: url('project://database/Assets/assets/armor.png?fileID=2800000&guid=aace8343fa0b8de47bf9b51a00ae8372&type=3#armor');
+    border-right-width: 10px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-bottom-width: 0;
+}
+
+.areyousure {
+    width: 600px;
+    height: 300px;
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    font-size: 40px;
+    -unity-text-align: upper-center;
+}
+
+.nobutton {
+    width: 100px;
+    height: 100px;
+    top: 20px;
+    right: 20px;
+    left: 1800px;
+    position: absolute;
+    background-image: url('project://database/Assets/assets/close.png?fileID=2800000&guid=809580024c779924b95b95f141f65e05&type=3#close');
+    background-color: rgba(56, 56, 56, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.nobutton:hover {
+    width: 100px;
+    height: 100px;
+    top: 20px;
+    right: 20px;
+    left: 1800px;
+    position: absolute;
+    background-image: url('project://database/Assets/assets/close%20hover.png?fileID=2800000&guid=a2bc7b88a682233409a8decd0255e38f&type=3#close hover');
+    background-color: rgba(56, 56, 56, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.nobutton:active {
+    width: 100px;
+    height: 100px;
+    top: 20px;
+    right: 20px;
+    left: 1800px;
+    position: absolute;
+    background-image: url('project://database/Assets/assets/close%20button.png?fileID=2800000&guid=af4717abf3ca581498b549e5c2c4f57f&type=3#close button');
+    background-color: rgba(56, 56, 56, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.yesbutton {
+    width: 100px;
+    height: 100px;
+    background-image: url('project://database/Assets/assets/checked.png?fileID=2800000&guid=8c502ac7ccbd7a74c8dbc3cf4d7256ae&type=3#checked');
+    position: absolute;
+}
+
+.yesbutton:hover {
+    width: 100px;
+    height: 100px;
+    background-image: url('project://database/Assets/assets/checked%20hover.png?fileID=2800000&guid=74f08df2980074449b882e174b4a1304&type=3#checked hover');
+    position: absolute;
+}
+
+.yesbutton:active {
+    width: 100px;
+    height: 100px;
+    background-image: url('project://database/Assets/assets/checked%20clicked.png?fileID=2800000&guid=258ac3829aba2f14a8fdb25457124e26&type=3#checked clicked');
+    position: absolute;
+}
+
+.downbutton {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url('project://database/Assets/assets/down.png?fileID=2800000&guid=8d664824a76dad94a97fa4ea0fd22cc7&type=3#down');
+}
+
+.downbutton:hover {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url('project://database/Assets/assets/down%20hover.png?fileID=2800000&guid=79f4d729175ccaa4583eec49dc440ead&type=3#down hover');
+}
+
+.downbutton:active {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url('project://database/Assets/assets/dow%20clicked.png?fileID=2800000&guid=dfcc96517fcc32844a8eaaaa63bd5497&type=3#dow clicked');
+}

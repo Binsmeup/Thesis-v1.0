@@ -7,6 +7,7 @@ public class ItemManagement : MonoBehaviour
     private Dictionary<Items, int> itemCounters = new Dictionary<Items, int>();
 
     public enum Items{
+        BeginnerSword,
         Sword,
         Spear,
         Helmet,

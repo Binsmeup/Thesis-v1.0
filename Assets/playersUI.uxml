@@ -1,0 +1,113 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Stylesheets1.uss?fileID=7433441132597879392&amp;guid=35632dcb515ccaf4daaabbeb52c501b7&amp;type=3#Stylesheets1" />
+    <Style src="project://database/Assets/Stylesheets.uss?fileID=7433441132597879392&amp;guid=f868701e1087d7340803448b9c9d12b7&amp;type=3#Stylesheets" />
+    <ui:VisualElement style="position: absolute; width: 1920px; height: 1080px; display: flex;">
+        <ui:VisualElement name="LoadingScreen4" style="position: absolute; width: 1920px; height: 1080px; background-image: url(&apos;project://database/Assets/assets/level%20progression%20loading%20screen.png?fileID=2800000&amp;guid=5265bfcd42c854b48a17f4592c6d549c&amp;type=3#level progression loading screen&apos;); display: none;" />
+        <ui:VisualElement name="playersUI" style="width: 1920px; height: 1080px; display: flex; background-color: rgba(56, 56, 56, 0);">
+            <ui:VisualElement name="left" class="container" style="width: 30%; height: 200px; position: absolute; bottom: 0; background-color: rgb(30, 30, 30); background-image: url(&apos;project://database/Assets/assets/2.png?fileID=2800000&amp;guid=cd8f61ced9ac43543bb6bb631109e275&amp;type=3#2&apos;);">
+                <ui:VisualElement name="PlayerAndMap" style="position: absolute; top: auto; left: auto; width: 400px; height: 200px; background-color: rgb(30, 30, 30); bottom: 0; display: flex; opacity: 1; right: 0; border-top-width: 10px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
+                    <ui:VisualElement name="Map" class="minimap" style="position: absolute; border-bottom-width: 0; border-right-width: 5px; border-left-width: 10px; width: 200px; height: 100%; right: 50%; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); background-color: rgb(30, 30, 30);">
+                        <ui:Label text="Minimaop" display-tooltip-when-elided="true" class="text" style="position: absolute; top: 40px; left: 12px;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="Plauer" class="player" style="position: absolute; left: auto; border-left-width: 5px; border-bottom-width: 0; border-right-width: 10px; background-color: rgb(30, 30, 30); height: 100%; width: 200px; right: 0;">
+                        <ui:Label text="player live avatar" display-tooltip-when-elided="true" class="text" style="position: absolute; top: 44px; left: 30px; height: 80px; width: 139px; white-space: normal; -unity-text-align: upper-center;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="right" class="container" style="width: 30%; height: 200px; position: absolute; bottom: 0; left: auto; right: 0; background-color: rgb(30, 30, 30); background-image: url(&apos;project://database/Assets/assets/2.png?fileID=2800000&amp;guid=cd8f61ced9ac43543bb6bb631109e275&amp;type=3#2&apos;);">
+                <ui:VisualElement name="Inventory" class="inventory" style="position: absolute; top: auto; left: 0; width: 200px; height: 200px; background-color: rgb(30, 30, 30); bottom: 0; display: flex; opacity: 1; right: auto; border-right-width: 0;">
+                    <ui:Button display-tooltip-when-elided="true" class="cell cellinventory" style="position: absolute; border-right-width: 10px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-bottom-width: 10px; background-color: rgb(30, 30, 30); width: 50%;" />
+                    <ui:Button display-tooltip-when-elided="true" class="cell cellinventory" style="position: absolute; left: 50%; border-right-width: 0; border-bottom-width: 10px; background-color: rgb(30, 30, 30); width: 50%;" />
+                    <ui:Button display-tooltip-when-elided="true" class="cell cellinventory" style="position: absolute; top: 50%; border-right-width: 10px; background-color: rgb(30, 30, 30); width: 50%;" />
+                    <ui:Button display-tooltip-when-elided="true" class="cell cellinventory" style="position: absolute; left: 50%; top: 50%; border-right-width: 0; background-color: rgb(30, 30, 30); width: 50%;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="stats" class="inventory" style="position: absolute; top: auto; left: 200px; width: 270px; height: 200px; background-color: rgb(30, 30, 30); bottom: 0; display: flex; opacity: 1; right: auto; border-right-width: 10px;">
+                    <ui:Label tabindex="-1" text="Attack Speed:   XXX" parse-escape-sequences="true" display-tooltip-when-elided="true" name="attackspeed" class="text" style="width: 100%; font-size: 15px; left: 20px;" />
+                    <ui:Label tabindex="-1" text="Base Damage:   XXX" parse-escape-sequences="true" display-tooltip-when-elided="true" name="basedamage" class="text" style="width: 100%; top: 27px; font-size: 15px; left: 20px;" />
+                    <ui:Label tabindex="-1" text="Damage Multiplier:   XXX" parse-escape-sequences="true" display-tooltip-when-elided="true" name="damagemultiplier" class="text" style="width: 100%; top: 54px; font-size: 15px; left: 20px;" />
+                    <ui:Label tabindex="-1" text="Critical Chance:   XXX" parse-escape-sequences="true" display-tooltip-when-elided="true" name="criticalchance" class="text" style="width: 100%; top: 81px; font-size: 15px; left: 20px;" />
+                    <ui:Label tabindex="-1" text="Critical Damage:   XXX" parse-escape-sequences="true" display-tooltip-when-elided="true" name="criticaldamage" class="text" style="width: 100%; left: 20px; top: 108px; font-size: 15px; -unity-font-style: normal;" />
+                    <ui:Label tabindex="-1" text="Knockback Force:   XXX" parse-escape-sequences="true" display-tooltip-when-elided="true" name="knockbackforce" class="text" style="width: 100%; left: 20px; top: 135px; font-size: 15px;" />
+                    <ui:Label tabindex="-1" text="Movement Speed:   XXX" parse-escape-sequences="true" display-tooltip-when-elided="true" name="movespeed" class="text" style="width: 100%; left: 20px; top: auto; font-size: 15px; bottom: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="middle" class="container" style="width: 40%; height: 150px; position: absolute; bottom: 0; left: 30%; right: 576px; background-color: rgb(30, 30, 30);">
+                <ui:VisualElement name="attackContainer" style="width: 20%; height: 100%; position: absolute; background-color: rgb(30, 30, 30);">
+                    <ui:VisualElement name="attack" class="attackimg" style="position: absolute; top: 25%; left: 10%; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; right: auto;" />
+                    <ui:Label display-tooltip-when-elided="true" name="damage" text="XX" class="attackValue" style="left: 55%; top: 25%; color: rgb(255, 255, 255); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; right: auto; font-size: 30px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="healtharmorcontainer" class="text" style="width: 60%; height: 100%; position: absolute; left: 20%; justify-content: flex-start; border-top-width: 0; border-right-width: 10px; border-bottom-width: 0; border-left-width: 10px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); background-color: rgb(30, 30, 30);">
+                    <ui:VisualElement name="armorimg" class="armorimg" style="position: absolute; top: -9px; left: 18px; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                    <ui:VisualElement name="heartimg" class="heartimg" style="position: absolute; top: 59px; left: 14px; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-image: url(&apos;project://database/Assets/assets/Heart_Red_1.png?fileID=2800000&amp;guid=e4fb1e49747c2884180a2d16efe12b75&amp;type=3#Heart_Red_1&apos;);" />
+                    <ui:ProgressBar value="22" title="X/X" name="armorbar" class="text" style="height: 40px; width: 315px; position: absolute; top: 20px; left: 108px; background-color: rgba(0, 0, 0, 0); font-size: 20px; -unity-text-align: upper-left; color: rgb(0, 0, 0);" />
+                    <ui:ProgressBar value="22" title="X/X" name="healthbar" style="height: 40px; width: 315px; position: absolute; top: 85px; left: 108px; background-color: rgba(0, 0, 0, 0); font-size: 20px; color: rgb(0, 0, 0);" />
+                </ui:VisualElement>
+                <ui:VisualElement name="GoldContainer" style="width: 20%; height: 100%; position: absolute; left: 80%; background-color: rgb(30, 30, 30);">
+                    <ui:VisualElement name="gold" class="goldimg" style="position: absolute; top: 25%; left: 10%; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                    <ui:Label display-tooltip-when-elided="true" name="goldcount" text="XX" class="goldcount" style="left: 55%; top: 25%; -unity-text-align: middle-center; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; color: rgb(255, 255, 255); font-size: 30px;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="top" class="container" style="width: 100%; height: 100px; position: absolute; border-bottom-width: 10px; border-top-width: 0; align-items: center; background-color: rgb(30, 30, 30); background-image: url(&apos;project://database/Assets/assets/1.png?fileID=2800000&amp;guid=3270350bbaf40444f995f1e022541d27&amp;type=3#1&apos;);">
+                <ui:VisualElement name="buffcontaioner" style="width: 800px; height: 100%; position: relative; left: auto; top: auto; border-left-width: 10px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-right-width: 0; background-color: rgb(30, 30, 30);">
+                    <ui:Label display-tooltip-when-elided="true" name="1" class="cellbuffs" style="position: absolute; width: 12.5%;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); white-space: nowrap; position: relative; height: 23px;" />
+                    </ui:Label>
+                    <ui:Label display-tooltip-when-elided="true" name="2" class="cellbuffs" style="position: absolute; left: 100px; width: 12.5%;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); position: relative; height: 23px;" />
+                    </ui:Label>
+                    <ui:Label display-tooltip-when-elided="true" name="3" class="cellbuffs" style="position: absolute; left: 200px; width: 12.5%;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); position: relative;" />
+                    </ui:Label>
+                    <ui:Label display-tooltip-when-elided="true" name="4" class="cellbuffs" style="position: absolute; left: 300px; width: 12.5%;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); position: relative; height: 23px;" />
+                    </ui:Label>
+                    <ui:Label display-tooltip-when-elided="true" name="5" class="cellbuffs" style="position: absolute; left: 400px; width: 12.5%;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); position: relative; height: 23px;" />
+                    </ui:Label>
+                    <ui:Label display-tooltip-when-elided="true" name="6" class="cellbuffs" style="position: absolute; left: 500px; width: 12.5%;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); position: relative; height: 23px;" />
+                    </ui:Label>
+                    <ui:Label display-tooltip-when-elided="true" name="7" class="cellbuffs" style="position: absolute; left: 600px; width: 12.5%;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); position: relative; height: 23px;" />
+                    </ui:Label>
+                    <ui:Label display-tooltip-when-elided="true" name="8" class="cellbuffs" style="position: absolute; left: 700px; border-right-width: 10px; width: 12.5%;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); height: 23px; position: relative;" />
+                    </ui:Label>
+                </ui:VisualElement>
+                <ui:VisualElement name="floortimnercontainer" style="position: absolute; left: 90px; height: 100%; width: 400px; border-right-width: 10px; border-left-width: 10px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); background-color: rgb(30, 30, 30);">
+                    <ui:Label text="Floor: X" display-tooltip-when-elided="true" name="Floor" class="floorlevel" style="position: absolute; left: 20px; top: 30px; color: rgb(255, 255, 255); display: flex;" />
+                    <ui:Label text="Time: X" display-tooltip-when-elided="true" name="time" class="floorlevel" style="position: absolute; left: 205px; top: 30px; color: rgb(255, 255, 255); display: flex;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:Button display-tooltip-when-elided="true" name="options" class="options" style="border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; position: absolute; left: 1800px; top: -5px; right: 20px; width: 100px; height: 100px; display: flex;" />
+            <ui:VisualElement name="optionsscreen" class="optionsscreen" style="background-color: rgb(30, 30, 30); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); left: 710px; position: absolute; top: 20%; align-items: auto; justify-content: flex-start; display: none;">
+                <ui:Label text="PAUSED" display-tooltip-when-elided="true" class="text" style="position: absolute; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); width: 100%; -unity-text-align: middle-center; font-size: 50px; border-bottom-width: 10px; left: -2px; background-color: rgb(56, 37, 96); color: rgb(255, 255, 255); top: -4px; border-top-width: 0; height: 80px;" />
+                <ui:Slider picking-mode="Ignore" label="Music" value="42" high-value="100" name="music" class="text" style="position: absolute; top: 120px; left: 30px; font-size: 50px; width: 400px; color: rgb(255, 255, 255);" />
+                <ui:Slider picking-mode="Ignore" label="Sound" value="42" high-value="100" name="sound" class="text" style="position: absolute; top: 220px; left: 30px; width: 400px; font-size: 50px; color: rgb(255, 255, 255);" />
+                <ui:Button display-tooltip-when-elided="true" name="play" class="playbutton" style="position: absolute; width: 100px; height: 100px; top: 70%; left: auto; right: 80px;" />
+                <ui:Button display-tooltip-when-elided="true" name="restart" class="restartbutton" style="position: absolute; width: 100px; height: 100px; top: 336px; left: 185px;" />
+                <ui:Button display-tooltip-when-elided="true" name="home" class="homebutton" style="position: absolute; width: 100px; height: 100px; top: 70%; left: 80px;" />
+                <ui:VisualElement name="areyousureexit" class="areyousure" style="position: absolute; left: -60px; right: auto; top: 144px; background-color: rgb(69, 43, 52); -unity-font: url(&apos;project://database/Assets/TextMesh%20Pro/Fonts/eight-bit-dragon.otf?fileID=12800000&amp;guid=4b964699086386f49b3e35a928ab5775&amp;type=3#eight-bit-dragon&apos;); -unity-font-definition: url(&apos;project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&amp;guid=2e529d12155be324f9f23d3625f1b235&amp;type=2#eight-bit-dragon SDF 1&apos;); font-size: 40px; -unity-text-align: upper-center; display: none; height: 390px;">
+                    <ui:Label text="Are you sure&#10;you want to&#10; exit to the &#10;Main Menu?" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); white-space: normal; -unity-paragraph-spacing: 15px; word-spacing: 10px; letter-spacing: 10px; position: absolute; width: 100%; font-size: 50px; -unity-text-align: upper-center;" />
+                    <ui:Button display-tooltip-when-elided="true" name="Button" class="nobutton" style="left: 110px; top: 260px; right: 362px;" />
+                    <ui:Button display-tooltip-when-elided="true" name="Button" class="button6 yesbutton" style="top: 260px; left: 362px; background-color: rgba(188, 188, 188, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:Button display-tooltip-when-elided="true" name="downbutton" class="downbutton" style="border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; position: absolute; left: 1370px; top: -5px; right: 20px; width: 100px; height: 100px; display: flex;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="whenudie" style="position: absolute; width: 1920px; height: 1080px; display: none; background-image: url(&apos;project://database/Assets/assets/bro%20falls%20with%20bg.png?fileID=2800000&amp;guid=d80ff3a18c88dd9418daf6bd3de7e5dd&amp;type=3#bro falls with bg&apos;);">
+            <ui:Label text="YOU DIED" display-tooltip-when-elided="true" class="text" style="top: 30%; left: 25%; font-size: 80px; width: 50%; -unity-text-align: upper-center;" />
+            <ui:Label text="Kills:  XXXXX" display-tooltip-when-elided="true" name="Kills" class="text" style="top: 490px; left: 200px; font-size: 40px; width: 50%; -unity-text-align: upper-left;" />
+            <ui:Label text="Floor: XXX" display-tooltip-when-elided="true" name="Floor" class="text" style="top: 560px; left: 200px; font-size: 40px; width: 50%; -unity-text-align: upper-left; align-items: stretch; bottom: 456px;" />
+            <ui:Label text="Time: XXXXX" display-tooltip-when-elided="true" name="Time" class="text" style="top: 630px; left: 200px; font-size: 40px; width: 50%; -unity-text-align: upper-left;" />
+            <ui:Button display-tooltip-when-elided="true" name="check" class="checkbutton" style="position: absolute; width: 100px; height: 100px; top: 536px; left: 1478px; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-color: rgba(188, 188, 188, 0);" />
+            <ui:TextField picking-mode="Ignore" label="Name: " value="filler text" text="__________" readonly="true" class="text" style="position: absolute; top: 556px; left: 1004px; font-size: 40px; background-color: rgb(12, 12, 12);" />
+            <ui:Label text="Submitted!" display-tooltip-when-elided="true" name="submitted" class="text" style="top: 628px; left: 1122px; font-size: 40px; width: 396px; -unity-text-align: upper-center;" />
+            <ui:Button display-tooltip-when-elided="true" name="home" class="homebutton" style="position: absolute; width: 100px; height: 100px; top: 800px; left: 730px;" />
+            <ui:Label text="Restart" display-tooltip-when-elided="true" name="restart" class="text" style="top: 900px; left: 904px; font-size: 40px; width: 396px; -unity-text-align: upper-center;" />
+            <ui:Label text="Home" display-tooltip-when-elided="true" name="home" class="text" style="top: 900px; left: 586px; font-size: 40px; width: 396px; -unity-text-align: upper-center;" />
+            <ui:Button display-tooltip-when-elided="true" name="restart" class="restartbutton" style="position: absolute; width: 100px; height: 100px; top: 800px; left: 1044px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="LoadingScreen5" style="position: absolute; width: 1920px; height: 1080px; background-image: url(&apos;project://database/Assets/assets/heading%20back.png?fileID=2800000&amp;guid=b096a92dfab7db34781488bb99d3fe31&amp;type=3#heading back&apos;); display: none;" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -14,34 +14,27 @@ public class Loot : MonoBehaviour
     public List<ItemList> rareItems;
     public List<ItemList> commonItems;
 
-    public void DropItem()
-    {
+    public void DropItem(){
         float dropChance = Random.Range(0f, 1f);
 
-        if (dropChance <= itemDropChance)
-        {
+        if (dropChance <= itemDropChance){
             float legendaryItemPool = Random.Range(0f, 1f);
             float rareItemPool = Random.Range(0f, 1f);
 
-            if (legendaryItemPool <= legendaryChance)
-            {
+            if (legendaryItemPool <= legendaryChance){
                 DropRandomItem(legendaryItems);
             }
-            else if (rareItemPool <= rareChance)
-            {
+            else if (rareItemPool <= rareChance){
                 DropRandomItem(rareItems);
             }
-            else
-            {
+            else{
                 DropRandomItem(commonItems);
             }
         }
     }
 
-    private void DropRandomItem(List<ItemList> itemPool)
-    {
-        if (itemPool.Count > 0)
-        {
+    private void DropRandomItem(List<ItemList> itemPool){
+        if (itemPool.Count > 0){
             int randomIndex = Random.Range(0, itemPool.Count);
             ItemList selectedItem = itemPool[randomIndex];
 

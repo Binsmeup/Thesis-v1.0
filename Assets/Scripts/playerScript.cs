@@ -107,15 +107,19 @@ public class playerScript : MonoBehaviour{
 
 
     private void FixedUpdate(){
-    if (movementInput != Vector2.zero)
-    {
-        rb.AddForce(movementInput * moveSpeed * Time.deltaTime);
-
-        IsMoving = true;
-    }else{
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("SpearAttack") && !anim.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack")){
+            if (movementInput != Vector2.zero){
+                rb.AddForce(movementInput * moveSpeed * Time.deltaTime);
+                IsMoving = true;
+            }
+            else{
+                IsMoving = false;
+            }
+        }
+        else{
         IsMoving = false;
+        }
     }
-}
 
 
     void OnMove(InputValue movementValue){
@@ -188,8 +192,7 @@ public class playerScript : MonoBehaviour{
     public void SetArmorHP(float value){
         tempArmorHP = value;
     }
-    public float GetArmorHP()
-    {
+    public float GetArmorHP(){
         return tempArmorHP;
     }
 }

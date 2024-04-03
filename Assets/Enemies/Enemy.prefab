@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1259494853313468262}
   - component: {fileID: 5194359493328617267}
   - component: {fileID: 8522933726609848088}
+  - component: {fileID: 6850932637528539582}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -164,8 +165,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockbackForce: 5
-  baseDamage: 2
-  damageMulti: 5
+  baseDamage: 10
+  damageMulti: 1
+  critChance: 0
+  critDamage: 0
 --- !u!114 &5194359493328617267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,11 +181,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 002d6962cedcfa444a55ead229b23215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disableSimulation: 1
   hasDamageCooldown: 1
   damageCooldownTimer: 0.1
   _damageCooldown: 0
-  _health: 1000
+  maxHealth: 40
+  _health: 40
   _targettable: 1
   HelmMaxHP: 0
   HelmHP: 0
@@ -204,6 +207,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTag: Player
   chaseRange: 1
-  moveForce: 250
+  moveForce: 350
   rotationSpeed: 5
   minDistanceThreshold: 0.01
+--- !u!114 &6850932637528539582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7912796300759740165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d94816af087690742bc81c956999109a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldMin: 0
+  goldMax: 0
+  itemDropChance: 0.01
+  legendaryChance: 0.01
+  rareChance: 0.1
+  legendaryItems:
+  - {fileID: 11400000, guid: 479f8822267c6f84497b9554337530f5, type: 2}
+  rareItems:
+  - {fileID: 11400000, guid: 74c362485e569b540b380e23bb0bd936, type: 2}
+  commonItems:
+  - {fileID: 11400000, guid: 14ceda0f2ea610649988b17ce0afd4f8, type: 2}
+  - {fileID: 11400000, guid: 52cf57e1a2ef7184d95e62d301747437, type: 2}
+  - {fileID: 11400000, guid: ca9391d88d61eb847a1bf1939f337aa3, type: 2}
+  - {fileID: 11400000, guid: fd28fab3159abc34ea3b593527128332, type: 2}
+  - {fileID: 11400000, guid: 3aed2017c6843b544bf0d03251096bd7, type: 2}
+  - {fileID: 11400000, guid: 4239da8af8c27b84e887d84da05bda51, type: 2}

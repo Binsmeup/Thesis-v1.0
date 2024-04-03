@@ -14,19 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Spear
   Type: Weapon
-  WeaponType: Speat
+  WeaponType: Spear
   baseDmg: 15
   dmgMulti: 1
   critCHA: 10
   critDMG: 2
+  atkSPD: 0.5
   maxHP: 0
-  HP: 0
-  KB: 0
+  KB: 2
   MS: 0
   HelmetMaxHealth: 0
-  HelmetHealth: 0
   ChestMaxHealth: 0
-  ChestHealth: 0
   LegMaxHealth: 0
-  LegHealth: 0
   itemObject: {fileID: 2717819469764107534, guid: 5b7d92c541894504c8b0e20e0d30d600, type: 3}
