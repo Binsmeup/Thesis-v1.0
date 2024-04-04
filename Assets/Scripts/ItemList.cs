@@ -104,6 +104,10 @@ public class ItemList : ScriptableObject{
                 healthManager.LegMaxHP = 0;
                 healthManager.LegHP = 0;
             break;
+            
+            case "Weapon":
+            playerStats.weaponType = ("");
+            break;
 
             default:
             break;
@@ -111,7 +115,6 @@ public class ItemList : ScriptableObject{
 
         healthManager.maxHealth -= maxHP;
 
-        playerStats.weaponType = ("");
         playerStats.baseDamage -= baseDmg;
         playerStats.damageMulti -= dmgMulti;
         playerStats.critChance -= critCHA;

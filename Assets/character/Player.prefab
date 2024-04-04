@@ -322,6 +322,7 @@ GameObject:
   - component: {fileID: 8878044953485619197}
   - component: {fileID: 2337547694147251453}
   - component: {fileID: 7025562256199945779}
+  - component: {fileID: 3799353226893699606}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -385,7 +386,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1875853152, guid: e19a4279225116c4caf89f88ede8e74c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -536,15 +537,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 2337547694147251453}
-  attackSpeed: 0
-  baseDamage: 0
-  damageMulti: 0
-  critChance: 0
-  critDamage: 0
-  knockbackForce: 0
+  attackSpeed: 0.35
+  baseDamage: 7.5
+  damageMulti: 1
+  critChance: 2.5
+  critDamage: 1.5
+  knockbackForce: 3
   moveSpeed: 500
-  weaponType: 
-  currentWeapon: {fileID: 0}
+  weaponType: Sword
+  currentWeapon: {fileID: 8328832661243791491, guid: c9e082fd7d7cc7f408ac3d74ca8ee0e1, type: 3}
   currentHelm: {fileID: 0}
   currentChest: {fileID: 0}
   currentLeg: {fileID: 0}
@@ -640,6 +641,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6754bec1bc4d447a892bc4d806f813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &3799353226893699606
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7151423482783304621}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 3
 --- !u!1 &8485091214581873900
 GameObject:
   m_ObjectHideFlags: 0

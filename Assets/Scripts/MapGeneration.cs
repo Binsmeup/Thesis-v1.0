@@ -36,6 +36,11 @@ public class MapGeneration : MonoBehaviour{
 
     private TileBase[,] grid;
 
+    private List<Vector3Int> enemySpawns = new List<Vector3Int>();
+    private List<Vector3Int> chestSpawns = new List<Vector3Int>();
+    private List<Vector3Int> portalSpawns = new List<Vector3Int>();
+    
+
     void Start(){
         GenerateMap();
     }
@@ -293,9 +298,9 @@ public class MapGeneration : MonoBehaviour{
         int enemySpawnedCount = 0;
         int chestSpawnedCount = 0;
         int portalSpawnedCount = 0;
-        List<Vector3Int> enemySpawns = new List<Vector3Int>();
-        List<Vector3Int> chestSpawns = new List<Vector3Int>();
-        List<Vector3Int> portalSpawns = new List<Vector3Int>();
+        enemySpawns.Clear();
+        chestSpawns.Clear();
+        portalSpawns.Clear();
 
         for (int x = 0; x < width; x++){
             for (int y = 0; y < height; y++){
@@ -365,27 +370,85 @@ public class MapGeneration : MonoBehaviour{
 
     void PositionPlayer(){
         List<Vector3Int> floorTiles = new List<Vector3Int>();
+        HashSet<GameObject> removedObjects = new HashSet<GameObject>();
+        int enemyRemoved = 0;
+        int chestRemoved = 0;
+        int portalRemoved = 0;
+        int enemyReposition;
+        int chestReposition;
+        int portalReposition;
 
         for (int x = 0; x < width; x++){
             for (int y = 0; y < height; y++){
-                Vector3Int tilePosition = new Vector3Int(x, y, 0);
+            Vector3Int tilePosition = new Vector3Int(x, y, 0);
             if (grid[x, y] == Floor){
-                floorTiles.Add(tilePosition);
+                    floorTiles.Add(tilePosition);
                 }
-            }
+            }  
         }
+
         if (floorTiles.Count > 0){
-        Vector3Int randomFloorTile;
+            Vector3Int randomFloorTile;
 
             do{
                 randomFloorTile = floorTiles[Random.Range(0, floorTiles.Count)];
-            }
-                while (HasWallsInRadius(randomFloorTile));
+            } while (HasWallsInRadius(randomFloorTile));
 
-        Player.transform.position = Tilemap.GetCellCenterWorld(randomFloorTile);
+            Player.transform.position = Tilemap.GetCellCenterWorld(randomFloorTile);
+
+            Vector3 center = Tilemap.GetCellCenterWorld(randomFloorTile);
+            CircleCollider2D collider = Player.GetComponent<CircleCollider2D>();
+            float radius = collider.radius;
+
+            Collider2D[] nearbyObjects = Physics2D.OverlapCircleAll(center, radius);
+            foreach (Collider2D nearbyObject in nearbyObjects){
+                if ((nearbyObject.CompareTag("Enemy") || nearbyObject.CompareTag("Chest") || nearbyObject.CompareTag("Portal"))
+                    && !removedObjects.Contains(nearbyObject.gameObject)){
+                    Debug.Log("Removing nearby object: " + nearbyObject.gameObject.name);
+                    if (nearbyObject.CompareTag("Enemy")) {
+                        enemyRemoved++;
+                    } else if (nearbyObject.CompareTag("Chest")) {
+                        chestRemoved++;
+                    } else if (nearbyObject.CompareTag("Portal")) {
+                        portalRemoved++;
+                    }
+                    removedObjects.Add(nearbyObject.gameObject);
+                    Destroy(nearbyObject.gameObject);
+                }
+            }
+            RemoveSpawnPos(center, radius);
+
+            enemyReposition = enemyCount - enemyRemoved;
+            chestReposition = chestCount - chestRemoved;
+            portalReposition = portalCount - portalRemoved;
+
+            SpawnObjects(enemySpawns, Enemy, ref enemyReposition, enemyCount, statScale);
+            SpawnObjects(chestSpawns, Chest, ref chestReposition, chestCount, 1f);
+            SpawnObjects(portalSpawns, Portal, ref portalReposition, portalCount, 1f);
         }
         else{
             Debug.LogWarning("bad");
+        }
+    }
+
+    void RemoveSpawnPos(Vector3 center, float radius){
+        SpawnRemover(center, radius, enemySpawns);
+        SpawnRemover(center, radius, chestSpawns);
+        SpawnRemover(center, radius, portalSpawns);
+    }
+
+    void SpawnRemover(Vector3 center, float radius, List<Vector3Int> spawnPositions){
+        List<Vector3Int> positionsToRemove = new List<Vector3Int>();
+
+        foreach (Vector3Int spawnPosition in spawnPositions){
+            Vector3 spawnPositionWorld = Tilemap.GetCellCenterWorld(spawnPosition);
+            if (Vector3.Distance(center, spawnPositionWorld) <= radius){
+                positionsToRemove.Add(spawnPosition);
+            }
+        }
+
+        foreach (Vector3Int positionToRemove in positionsToRemove){
+            spawnPositions.Remove(positionToRemove);
         }
     }
 

@@ -264,9 +264,21 @@ PrefabInstance:
       propertyPath: knockbackForce
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2995588807214837019, guid: f7807d39e01ee3c47bbb6b99c6ef70dc, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124980029308615440, guid: f7807d39e01ee3c47bbb6b99c6ef70dc, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7151423482783304621, guid: f7807d39e01ee3c47bbb6b99c6ef70dc, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8006058866999150932, guid: f7807d39e01ee3c47bbb6b99c6ef70dc, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
