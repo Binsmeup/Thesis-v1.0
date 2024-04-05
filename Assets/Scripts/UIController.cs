@@ -85,6 +85,7 @@ public class UIController : MonoBehaviour
     void PlayButtonPressed()
     {
         SceneManager.LoadScene("GameScene");
+
     }
 
 

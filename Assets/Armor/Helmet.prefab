@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7dcf57ab5fa6f046946b02b06ba01d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: 2
+  item: 3
   isEquippable: 1
 --- !u!61 &302069721264584803
 BoxCollider2D:

@@ -2,22 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemPickUp : MonoBehaviour{
-    [SerializeField] public ItemManagement.Items item;
-    [SerializeField] public bool isEquippable;
-
+public class Chest : MonoBehaviour{
     private bool isPlayerInRange = false;
     private bool isMouseOverPickUp = false;
     private BoxCollider2D mouseCollider;
+    private Loot loot;
 
     private void Start(){
         mouseCollider = GetComponent<BoxCollider2D>();
+        loot = gameObject.GetComponent<Loot>();
     }
 
     private void Update(){
         if (isPlayerInRange && isMouseOverPickUp && Input.GetKeyDown(KeyCode.F))
         {
-            PickUpItem();
+            OpenChest();
         }
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         isMouseOverPickUp = mouseCollider.OverlapPoint((Vector2)ray.origin);
@@ -35,36 +34,13 @@ public class ItemPickUp : MonoBehaviour{
         }
     }
 
-    private void PickUpItem(){
+    private void OpenChest(){
         playerScript player = FindObjectOfType<playerScript>();
         HealthManager playerhp = FindObjectOfType<HealthManager>();
 
         if (player != null){
-            itemPickUp(player, playerhp);
-            if (!isEquippable){
-                IncreaseCounter(player);
-            }
+            loot.DropItem();
             Destroy(gameObject);
-        }
-    }
-
-    private void IncreaseCounter(playerScript player){
-        ItemManagement itemManagement = player.GetComponent<ItemManagement>();
-
-        if (itemManagement != null){
-            itemManagement.IncreaseItemCount(item);
-        }
-    }
-
-    private void itemPickUp(playerScript player, HealthManager playerhp){
-        ItemManagement itemManagement = player.GetComponent<ItemManagement>();
-
-        if (itemManagement != null){
-            ArmorHealth armorHealth = GetComponent<ArmorHealth>();
-            if (armorHealth != null){
-                player.SetArmorHP(armorHealth.armorHealth);
-            }
-            player.getItem(item);
         }
     }
 }

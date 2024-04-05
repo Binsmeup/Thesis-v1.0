@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 623175d241e6b0946a05b21d9207b70e, type: 3}
-  m_Name: Sword
+  m_Name: BeginnerSword
   m_EditorClassIdentifier: 
-  itemName: Sword
+  itemName: BeginnerSword
   Type: Weapon
   WeaponType: Sword
-  baseDmg: 10
+  baseDmg: 7.5
   dmgMulti: 1
-  critCHA: 5
+  critCHA: 2.5
   critDMG: 1.5
-  atkSPD: 0.3
+  atkSPD: 0.35
   maxHP: 0
   KB: 3
   MS: 0
   HelmetMaxHealth: 0
   ChestMaxHealth: 0
   LegMaxHealth: 0
-  itemObject: {fileID: 2717819469764107534, guid: a4c7c789cb2cefb478f929363ac93a48, type: 3}
+  itemObject: {fileID: 8328832661243791491, guid: c9e082fd7d7cc7f408ac3d74ca8ee0e1, type: 3}

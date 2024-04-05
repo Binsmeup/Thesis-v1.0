@@ -34,7 +34,6 @@ public class HealthManager : MonoBehaviour, IDamagable
     {
         set
         {
-
             _health = value;
             if (_health <= 0)
             {
@@ -88,14 +87,6 @@ public class HealthManager : MonoBehaviour, IDamagable
     {
         rb = GetComponent<Rigidbody2D>();
         physicsCollider = GetComponent<Collider2D>();
-    }
-    public void Update()
-    {
-        if (gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Player's Health: " + _health);
-            Debug.Log("Player's Max Health: " + maxHealth);
-        }
     }
 
     public void OnHit(float baseDamage, float damageMulti, float critChance, float critDamage, Vector2 knockback)
@@ -195,8 +186,7 @@ public class HealthManager : MonoBehaviour, IDamagable
         }
     }
 
-    private void dropItem()
-    {
+    private void dropItem(){
         loot.DropItem();
     }
 

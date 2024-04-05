@@ -9,13 +9,17 @@ public class PlayerUI : MonoBehaviour
     // Game Options
     public Button gameOptions;
     public Button gamePlay;
-    public Button gameRestart;
     public Button gameMainmenu;
+    public Button dieRestart;
+    public Button dieMainmenu;
 
     public Slider music;
     public Slider sfx;
 
     public VisualElement OptionsScreen;
+    public VisualElement Die;
+    public VisualElement HL;
+
 
     //Stats
     public Label attackSpeedLabel;
@@ -41,18 +45,19 @@ public class PlayerUI : MonoBehaviour
         // Game Menu
         gameOptions = root.Q<Button>("options");
         gamePlay = root.Q<Button>("play");
-        gameRestart = root.Q<Button>("restart");
         gameMainmenu = root.Q<Button>("home");
         OptionsScreen = root.Q<VisualElement>("optionsscreen");
+        HL = root.Q<VisualElement>("highlight");
+
         music = root.Q<Slider>("music");
         sfx = root.Q<Slider>("sound");
 
         gameOptions.clicked += OptionsButtonPressed;
         gamePlay.clicked += PlayButtonPressed;
-        gameRestart.clicked += RestartButtonPressed;
         gameMainmenu.clicked += HomeButtonPressed;
         music.RegisterValueChangedCallback(OnMusicVolumeChanged);
         sfx.RegisterValueChangedCallback(OnSFXVolumeChanged);
+
 
         //stats
         attackSpeedLabel = root.Q<Label>("attackspeed");
@@ -71,11 +76,20 @@ public class PlayerUI : MonoBehaviour
         healthBar = root.Q<ProgressBar>("healthbar");
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
 
+
+        //DIE
+        dieRestart = root.Q<Button>("restartD");
+        dieMainmenu = root.Q<Button>("homeD");
+        Die = root.Q<VisualElement>("whenudie");
+        dieRestart.clicked += DieRestartButtonPressed;
+        dieMainmenu.clicked += DieMainmenuButtonPressed;
+
         if (playerObject != null)
         {
             healthManager = playerObject.GetComponent<HealthManager>();
         }
 
+  
 
         // Load the music and SFX volumes from PlayerPrefs
         if (PlayerPrefs.HasKey("MusicVolume"))
@@ -92,6 +106,7 @@ public class PlayerUI : MonoBehaviour
     {
         if (healthManager != null)
         {
+            // Update health bar
             healthBar.title = $"Health: {healthManager.health}/{healthManager.maxHealth}";
             healthBar.lowValue = 0;
             healthBar.highValue = healthManager.maxHealth;
@@ -115,38 +130,62 @@ public class PlayerUI : MonoBehaviour
             criticalDamageLabel.text = "Critical Damage: " + player.critDamage.ToString();
             knockbackForceLabel.text = "Knockback Force: " + player.knockbackForce.ToString();
             moveSpeedLabel.text = "Movement Speed: " + player.moveSpeed.ToString();
-
-
         }
     }
 
+
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         UpdateUI();
+        if (healthManager.health <= 0)
+        {
+            Debug.Log("Health is 0 or less");
+            Time.timeScale = 1f;
+            Die.style.display = DisplayStyle.Flex;
+        }
+        else
+        {
+
+            Die.style.display = DisplayStyle.None;
+        }
     }
 
     // Update is called once per frame
     void OptionsButtonPressed()
     {
+        Time.timeScale = 0f;
+        HL.style.display = DisplayStyle.Flex;
         OptionsScreen.style.display = DisplayStyle.Flex;
+        
+
     }
 
     void PlayButtonPressed()
     {
+        Time.timeScale = 1f;
+        HL.style.display = DisplayStyle.None;
         OptionsScreen.style.display = DisplayStyle.None;
-    }
-
-    void RestartButtonPressed()
-    {
-        SceneManager.LoadScene("GameScene");
+        
     }
 
     void HomeButtonPressed()
     {
         SceneManager.LoadScene("Main_Menu");
+        Time.timeScale = 1f;
+
     }
 
+    void DieRestartButtonPressed()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("GameScene");
+        Die.style.display = DisplayStyle.None;
+    }
+
+    void DieMainmenuButtonPressed()
+    {
+        SceneManager.LoadScene("Main_Menu");
+    }
     // Method to handle music volume slider value change
     void OnMusicVolumeChanged(ChangeEvent<float> evt)
     {

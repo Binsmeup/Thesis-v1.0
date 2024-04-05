@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class ItemPickUp : MonoBehaviour{
-    [SerializeField] public ItemManagement.Items item;
-    [SerializeField] public bool isEquippable;
-
+public class Portal : MonoBehaviour{
     private bool isPlayerInRange = false;
     private bool isMouseOverPickUp = false;
     private BoxCollider2D mouseCollider;
@@ -17,7 +15,7 @@ public class ItemPickUp : MonoBehaviour{
     private void Update(){
         if (isPlayerInRange && isMouseOverPickUp && Input.GetKeyDown(KeyCode.F))
         {
-            PickUpItem();
+            EnterPortal();
         }
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         isMouseOverPickUp = mouseCollider.OverlapPoint((Vector2)ray.origin);
@@ -35,36 +33,38 @@ public class ItemPickUp : MonoBehaviour{
         }
     }
 
-    private void PickUpItem(){
+    private void EnterPortal(){
         playerScript player = FindObjectOfType<playerScript>();
-        HealthManager playerhp = FindObjectOfType<HealthManager>();
 
         if (player != null){
-            itemPickUp(player, playerhp);
-            if (!isEquippable){
-                IncreaseCounter(player);
-            }
+            NextFloor();
             Destroy(gameObject);
         }
     }
-
-    private void IncreaseCounter(playerScript player){
-        ItemManagement itemManagement = player.GetComponent<ItemManagement>();
-
-        if (itemManagement != null){
-            itemManagement.IncreaseItemCount(item);
+    private void NextFloor(){
+        MapGeneration mapGenerator = FindObjectOfType<MapGeneration>();
+        if (mapGenerator != null) {
+            mapGenerator.floorCount++;
+            ClearScene();
+            mapGenerator.GenerateMap();
         }
     }
+    private void ClearScene() {
+        GameObject[] allObjects = SceneManager.GetActiveScene().GetRootGameObjects();
 
-    private void itemPickUp(playerScript player, HealthManager playerhp){
-        ItemManagement itemManagement = player.GetComponent<ItemManagement>();
+        List<string> excludeNames = new List<string>();
 
-        if (itemManagement != null){
-            ArmorHealth armorHealth = GetComponent<ArmorHealth>();
-            if (armorHealth != null){
-                player.SetArmorHP(armorHealth.armorHealth);
+        excludeNames.Add(Camera.main.gameObject.name);
+        excludeNames.Add("Player");
+        excludeNames.Add(FindObjectOfType<MapGeneration>().gameObject.name);
+        excludeNames.Add("Grid");
+        excludeNames.Add("ItemList");
+        excludeNames.Add("UIDocument");
+
+        foreach (GameObject obj in allObjects) {
+            if (!excludeNames.Contains(obj.name)) {
+                Destroy(obj);
             }
-            player.getItem(item);
         }
     }
 }
