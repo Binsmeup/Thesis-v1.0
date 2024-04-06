@@ -2,20 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
-public class MapGeneration : MonoBehaviour{
+public class MapGenerationShowcase : MonoBehaviour{
     public Tilemap Tilemap;
+    public Tilemap WallCollision;
+    public Tilemap Item;
     public Tile Floor;
     public Tile Wall;
-    public Tile Object1;
+    public Tile Debris;
+    public Tile EnemyLocation;
+    public Tile ChestLocation;
+    public Tile PortalLocation;
 
     public GameObject Player;
     public GameObject Enemy;
     public GameObject Portal;
     public GameObject Chest;
-
-    public Tilemap WallCollision;
-    public Tilemap Item;
 
     public int floorCount;
     public int defaultWidth;
@@ -23,7 +26,25 @@ public class MapGeneration : MonoBehaviour{
     public int defaultDensity;
     public int defaultIteration;
     public int defaultEnemyCount;
+    public int defaultChestCount;
     public float perlinScale = 0.1f;
+
+    public bool floorRules;
+
+    public bool OneLine;
+
+    public float cooldown;
+
+    public float noiseCooldown;
+    public bool cooldownOnNoise;
+
+    public float cellularCooldown;
+    public bool cooldownOnCellular;
+
+    public float perlinCooldown;
+    public bool cooldownOnPerlin;
+
+    public bool cooldownOnIteration;
 
     private int width;
     private int height;
@@ -42,37 +63,49 @@ public class MapGeneration : MonoBehaviour{
     
 
     void Start(){
-        GenerateMap();
+        //StartCoroutine(GenerateMap());
     }
 
-    public void GenerateMap(){
+    public IEnumerator GenerateMap(){
         ClearTiles();
+        yield return new WaitForSeconds(cooldown);
         VariableSetUp();
+        yield return new WaitForSeconds(cooldown);
         CreateGrid();
+        yield return new WaitForSeconds(cooldown);
         GenerateNoise();
+        while (!noiseFinished){
+        yield return null;
+        }
         ApplyCellularAutomata();
+        while (!cellularAutomataFinished){
+        yield return null;
+        }
         FloodFill();
+        yield return new WaitForSeconds(cooldown);
         ApplyPerlinNoise();
+        while (!perlinNoiseFinished){
+        yield return null;
+        }
         MoveWalls();
+        yield return new WaitForSeconds(cooldown);
         PositionPlayer();
     }
 
     void VariableSetUp(){
-        width = defaultWidth + (4 * floorCount);
-            if (width >= 360){
-                width = 360;
-            }
-        height = defaultHeight + (4 * floorCount);
-        if (height >= 360){
-                height = 360;
-            }
-        density = defaultDensity;
-        iteration = defaultIteration;
-        enemyCount = defaultEnemyCount + (3 * floorCount);
-        if (enemyCount >= 210){
-                enemyCount = 210;
-            }
-        switch (floorCount){
+        switch (floorRules){
+            case true:
+            defaultWidth = 52;
+            defaultHeight = 52;
+            defaultDensity = 57;
+            defaultIteration = 6;
+            defaultEnemyCount = 12;
+
+            width = defaultWidth + (4 * floorCount);
+            height = defaultHeight + (4 * floorCount);
+            enemyCount = defaultEnemyCount + (3 * floorCount);
+
+            switch (floorCount){
             case int n when n >= 1 && n <= 4:
                 statScale = 0.1f;
                 chestCount = 1;
@@ -134,7 +167,43 @@ public class MapGeneration : MonoBehaviour{
                 statScale = 0.3f + ((floorCount-20)*0.01f);
                 chestCount = 0;
             break;
+        }
+            break;
+
+            case false:
+            width = defaultWidth;
+            height = defaultHeight;
+            density = defaultDensity;
+            iteration = defaultIteration;
+            enemyCount = defaultEnemyCount;
+            chestCount = defaultChestCount;
+
+            break;
+        }
+        if (width >= 360){
+             width = 360;
+        }
+        if (height >= 360){
+            height = 360;
+        }
+        if (enemyCount >= 210){
+            enemyCount = 210;
         }   
+    }
+
+    bool noiseFinished = false;
+    bool cellularAutomataFinished = false;
+    bool perlinNoiseFinished = false;
+
+    void GenerateNoise(){
+        StartCoroutine(Noise());
+    }
+
+    void ApplyCellularAutomata(){
+        StartCoroutine(CellularAutomata());
+    }
+    void ApplyPerlinNoise(){
+        StartCoroutine(PerlinNoiseActivate());
     }
 
     void CreateGrid(){
@@ -149,7 +218,7 @@ public class MapGeneration : MonoBehaviour{
         }
     }
 
-    void GenerateNoise(){
+    IEnumerator Noise(){
         for (int x = 0; x < width; x++){
             for (int y = 0; y < height; y++){
                 Vector3Int tilePosition = new Vector3Int(x, y, 0);
@@ -158,11 +227,22 @@ public class MapGeneration : MonoBehaviour{
                     grid[x, y] = Wall;
                     Tilemap.SetTile(tilePosition, Wall);
                 }
+                if (!OneLine){
+                    if (cooldownOnNoise){
+                        yield return new WaitForSeconds(noiseCooldown);
+                    }
+                }
+            }
+            if (cooldownOnNoise){
+                if (OneLine){
+                    yield return new WaitForSeconds(noiseCooldown);
+                }
             }
         }
+        noiseFinished = true;
     }
 
-    void ApplyCellularAutomata(){
+    IEnumerator CellularAutomata(){
         for (int currentIteration = 0; currentIteration < iteration; currentIteration++){
             TileBase[,] newGrid = CopyGrid();
 
@@ -177,10 +257,27 @@ public class MapGeneration : MonoBehaviour{
                     else{
                         grid[x, y] = Floor;
                     }
+                    if (!OneLine){
+                        if (cooldownOnCellular){
+                            UpdateGrid();
+                            yield return new WaitForSeconds(cellularCooldown);
+                        }
+                    }
+                }
+                if (cooldownOnCellular){
+                    if (OneLine){
+                        UpdateGrid();
+                        yield return new WaitForSeconds(cellularCooldown);
+                    }
                 }
             }
             UpdateGrid();
+            if (cooldownOnIteration){
+                Debug.Log("Iteration Count = " + currentIteration);
+                yield return new WaitForSeconds(cooldown);
+            }
         }
+        cellularAutomataFinished = true;
     }
 
     private bool HasOutOfBoundsNeighbor(int x, int y){
@@ -294,7 +391,7 @@ public class MapGeneration : MonoBehaviour{
         FloodFillConnect(x, y - 1, visited, group);
     }
 
-    void ApplyPerlinNoise(){
+    IEnumerator PerlinNoiseActivate(){
         int enemySpawnedCount = 0;
         int chestSpawnedCount = 0;
         int portalSpawnedCount = 0;
@@ -312,31 +409,53 @@ public class MapGeneration : MonoBehaviour{
                     float randomChance = Random.Range(0f, 100f);
 
                     if (modifiedValue >= 0 && modifiedValue < 1 && randomChance <= 5f){
-                        Item.SetTile(tilePosition, Object1);
+                        Item.SetTile(tilePosition, Debris);
                     }
-                    else if (modifiedValue >= 1 && modifiedValue < 2){
+                    else if (modifiedValue >= 1 && modifiedValue < 1.75f){
                         enemySpawns.Add(tilePosition);
+                        Item.SetTile(tilePosition, EnemyLocation);
                     }
-                    else if (modifiedValue >= 2 && modifiedValue < 3 && randomChance <= 15f){
+                    else if (modifiedValue >= 1.76f && modifiedValue < 3 && randomChance <= 15f){
                         //coin
                     }
-                    else if (modifiedValue >= 2 && modifiedValue < 3){
-                        chestSpawns.Add(tilePosition);
-                        portalSpawns.Add(tilePosition);
+                    else if (modifiedValue >= 1.76f && modifiedValue < 3){
+                        if (randomChance <= 50f){
+                            chestSpawns.Add(tilePosition);
+                            Item.SetTile(tilePosition, ChestLocation);
+                        }
+                        else{
+                            portalSpawns.Add(tilePosition);
+                            Item.SetTile(tilePosition, PortalLocation);
+                        }
+                    }
+                }
+                if (!OneLine){
+                    if (cooldownOnPerlin){
+                        yield return new WaitForSeconds(perlinCooldown);
                     }
                 }
             }
+            if (cooldownOnPerlin){
+                if (OneLine){
+                    yield return new WaitForSeconds(perlinCooldown);
+                }
+            }
         }
-
+        yield return new WaitForSeconds(cooldown);
         SpawnObjects(enemySpawns, Enemy, ref enemySpawnedCount, enemyCount, statScale);
+        yield return new WaitForSeconds(cooldown);
         SpawnObjects(chestSpawns, Chest, ref chestSpawnedCount, chestCount, 1f);
+        yield return new WaitForSeconds(cooldown);
         SpawnObjects(portalSpawns, Portal, ref portalSpawnedCount, portalCount, 1f);
+        yield return new WaitForSeconds(cooldown);
+        perlinNoiseFinished = true;
     }
 
     void SpawnObjects(List<Vector3Int> spawnPositions, GameObject prefab, ref int spawnedCount, int totalCount, float scale){
         while (spawnedCount < totalCount && spawnPositions.Count > 0) {
             Vector3Int spawnPosition = spawnPositions[Random.Range(0, spawnPositions.Count)];
             spawnPositions.Remove(spawnPosition);
+            Item.SetTile(spawnPosition, null);
 
             GameObject obj = Instantiate(prefab, Tilemap.GetCellCenterWorld(spawnPosition), Quaternion.identity);
 
@@ -353,6 +472,7 @@ public class MapGeneration : MonoBehaviour{
             spawnedCount++;
         }
     }
+
     void MoveWalls(){
         for (int x = 0; x < width; x++){
             for (int y = 0; y < height; y++){
@@ -365,7 +485,7 @@ public class MapGeneration : MonoBehaviour{
                     Tilemap.SetTile(tilePosition, null);
                 }
             }
-        }   
+        }  
     }
 
     void PositionPlayer(){
@@ -380,11 +500,11 @@ public class MapGeneration : MonoBehaviour{
 
         for (int x = 0; x < width; x++){
             for (int y = 0; y < height; y++){
-            Vector3Int tilePosition = new Vector3Int(x, y, 0);
-            if (grid[x, y] == Floor){
+                Vector3Int tilePosition = new Vector3Int(x, y, 0);
+                if (grid[x, y] == Floor){
                     floorTiles.Add(tilePosition);
                 }
-            }  
+            }
         }
 
         if (floorTiles.Count > 0){
@@ -394,29 +514,32 @@ public class MapGeneration : MonoBehaviour{
                 randomFloorTile = floorTiles[Random.Range(0, floorTiles.Count)];
             } while (HasWallsInRadius(randomFloorTile));
 
-            Player.transform.position = Tilemap.GetCellCenterWorld(randomFloorTile);
+            Vector3 spawnPosition = Tilemap.GetCellCenterWorld(randomFloorTile);
+            
+            GameObject playerInstance = Instantiate(Player, spawnPosition, Quaternion.identity);
 
-            Vector3 center = Tilemap.GetCellCenterWorld(randomFloorTile);
-            CircleCollider2D collider = Player.GetComponent<CircleCollider2D>();
+            CircleCollider2D collider = playerInstance.GetComponent<CircleCollider2D>();
             float radius = collider.radius;
 
-            Collider2D[] nearbyObjects = Physics2D.OverlapCircleAll(center, radius);
+            Collider2D[] nearbyObjects = Physics2D.OverlapCircleAll(spawnPosition, radius);
             foreach (Collider2D nearbyObject in nearbyObjects){
                 if ((nearbyObject.CompareTag("Enemy") || nearbyObject.CompareTag("Chest") || nearbyObject.CompareTag("Portal"))
                     && !removedObjects.Contains(nearbyObject.gameObject)){
                     Debug.Log("Removing nearby object: " + nearbyObject.gameObject.name);
-                    if (nearbyObject.CompareTag("Enemy")) {
+                    if (nearbyObject.CompareTag("Enemy")){
                         enemyRemoved++;
-                    } else if (nearbyObject.CompareTag("Chest")) {
+                    }
+                    else if (nearbyObject.CompareTag("Chest")){
                         chestRemoved++;
-                    } else if (nearbyObject.CompareTag("Portal")) {
+                    }
+                    else if (nearbyObject.CompareTag("Portal")){
                         portalRemoved++;
                     }
                     removedObjects.Add(nearbyObject.gameObject);
                     Destroy(nearbyObject.gameObject);
                 }
             }
-            RemoveSpawnPos(center, radius);
+            RemoveSpawnPos(spawnPosition, radius);
 
             enemyReposition = enemyCount - enemyRemoved;
             chestReposition = chestCount - chestRemoved;
@@ -427,10 +550,9 @@ public class MapGeneration : MonoBehaviour{
             SpawnObjects(portalSpawns, Portal, ref portalReposition, portalCount, 1f);
         }
         else{
-            Debug.LogWarning("bad");
+            Debug.LogWarning("No valid floor tiles to spawn the player.");
         }
     }
-
 
 
     void RemoveSpawnPos(Vector3 center, float radius){
@@ -451,6 +573,7 @@ public class MapGeneration : MonoBehaviour{
 
         foreach (Vector3Int positionToRemove in positionsToRemove){
             spawnPositions.Remove(positionToRemove);
+            Item.SetTile(positionToRemove, null);
         }
     }
 
@@ -473,8 +596,25 @@ public class MapGeneration : MonoBehaviour{
         return false;
     }
 
+    private void ClearScene() {
+        GameObject[] allObjects = SceneManager.GetActiveScene().GetRootGameObjects();
+
+        List<string> excludeNames = new List<string>();
+
+        excludeNames.Add(Camera.main.gameObject.name);
+        excludeNames.Add("1");
+        excludeNames.Add(FindObjectOfType<MapGenerationShowcase>().gameObject.name);
+        excludeNames.Add("Grid");
+        foreach (GameObject obj in allObjects) {
+            if (!excludeNames.Contains(obj.name)) {
+                Destroy(obj);
+            }
+        }
+    }
+
 
     public void ClearTiles() {
+        ClearScene();
         Tilemap.ClearAllTiles();
         WallCollision.ClearAllTiles();
         Item.ClearAllTiles();
