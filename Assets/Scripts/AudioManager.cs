@@ -31,12 +31,12 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        
+        // Subscribe to the sceneLoaded event
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     private void OnDestroy()
     {
-        
+        // Unsubscribe from the sceneLoaded event when the AudioManager is destroyed
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -53,7 +53,7 @@ public class AudioManager : MonoBehaviour
         {
             // Load appropriate background music based on the scene name
             string sceneName = SceneManager.GetActiveScene().name;
-            Debug.Log("Current Scene: " + sceneName); 
+            Debug.Log("Current Scene: " + sceneName); // Add this line for debugging
 
             if (sceneName == "Main_menu")
             {
@@ -61,7 +61,7 @@ public class AudioManager : MonoBehaviour
             }
             else if (sceneName == "GameScene")
             {
-                Debug.Log("Playing BGMGame");
+                Debug.Log("Playing BGMGame"); // Add this line for debugging
                 musicSource.clip = BGMGame;
             }
 

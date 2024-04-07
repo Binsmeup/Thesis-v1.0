@@ -4,22 +4,17 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 
-public class PlayerUI : MonoBehaviour
-{
+public class PlayerUI : MonoBehaviour{
     // Game Options
     public Button gameOptions;
     public Button gamePlay;
+    public Button gameRestart;
     public Button gameMainmenu;
-    public Button dieRestart;
-    public Button dieMainmenu;
 
     public Slider music;
     public Slider sfx;
 
     public VisualElement OptionsScreen;
-    public VisualElement Die;
-    public VisualElement HL;
-
 
     //Stats
     public Label attackSpeedLabel;
@@ -38,26 +33,24 @@ public class PlayerUI : MonoBehaviour
     private HealthManager healthManager;
     private playerScript player;
 
-    void Start()
-    {
+    void Start(){
         var root = GetComponent<UIDocument>().rootVisualElement;
 
         // Game Menu
         gameOptions = root.Q<Button>("options");
         gamePlay = root.Q<Button>("play");
+        gameRestart = root.Q<Button>("restart");
         gameMainmenu = root.Q<Button>("home");
         OptionsScreen = root.Q<VisualElement>("optionsscreen");
-        HL = root.Q<VisualElement>("highlight");
-
         music = root.Q<Slider>("music");
         sfx = root.Q<Slider>("sound");
 
         gameOptions.clicked += OptionsButtonPressed;
         gamePlay.clicked += PlayButtonPressed;
+        gameRestart.clicked += RestartButtonPressed;
         gameMainmenu.clicked += HomeButtonPressed;
         music.RegisterValueChangedCallback(OnMusicVolumeChanged);
         sfx.RegisterValueChangedCallback(OnSFXVolumeChanged);
-
 
         //stats
         attackSpeedLabel = root.Q<Label>("attackspeed");
@@ -76,36 +69,22 @@ public class PlayerUI : MonoBehaviour
         healthBar = root.Q<ProgressBar>("healthbar");
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
 
-
-        //DIE
-        dieRestart = root.Q<Button>("restartD");
-        dieMainmenu = root.Q<Button>("homeD");
-        Die = root.Q<VisualElement>("whenudie");
-        dieRestart.clicked += DieRestartButtonPressed;
-        dieMainmenu.clicked += DieMainmenuButtonPressed;
-
-        if (playerObject != null)
-        {
+        if (playerObject != null){
             healthManager = playerObject.GetComponent<HealthManager>();
         }
 
-  
 
         // Load the music and SFX volumes from PlayerPrefs
-        if (PlayerPrefs.HasKey("MusicVolume"))
-        {
+        if (PlayerPrefs.HasKey("MusicVolume")){
             music.value = PlayerPrefs.GetFloat("MusicVolume");
         }
-        if (PlayerPrefs.HasKey("SFXVolume"))
-        {
+        if (PlayerPrefs.HasKey("SFXVolume")){
             sfx.value = PlayerPrefs.GetFloat("SFXSlider");
         }
     }
 
-    void UpdateUI()
-    {
-        if (healthManager != null)
-        {
+    void UpdateUI(){
+        if (healthManager != null){
             // Update health bar
             healthBar.title = $"Health: {healthManager.health}/{healthManager.maxHealth}";
             healthBar.lowValue = 0;
@@ -121,8 +100,7 @@ public class PlayerUI : MonoBehaviour
             armorBar.value = armorValue;
         }
 
-        if (player != null)
-        {
+        if (player != null){
             attackSpeedLabel.text = "Attack Speed: " + player.attackSpeed.ToString();
             baseDamageLabel.text = "Base Damage: " + player.baseDamage.ToString();
             damageMultiplierLabel.text = "Damage Multiplier: " + player.damageMulti.ToString();
@@ -130,65 +108,35 @@ public class PlayerUI : MonoBehaviour
             criticalDamageLabel.text = "Critical Damage: " + player.critDamage.ToString();
             knockbackForceLabel.text = "Knockback Force: " + player.knockbackForce.ToString();
             moveSpeedLabel.text = "Movement Speed: " + player.moveSpeed.ToString();
+
+
         }
     }
-
 
     // Update is called once per frame
     void Update(){
         UpdateUI();
-        if (healthManager.health <= 0)
-        {
-            Debug.Log("Health is 0 or less");
-            Time.timeScale = 1f;
-            Die.style.display = DisplayStyle.Flex;
-        }
-        else
-        {
-
-            Die.style.display = DisplayStyle.None;
-        }
     }
 
     // Update is called once per frame
-    void OptionsButtonPressed()
-    {
-        Time.timeScale = 0f;
-        HL.style.display = DisplayStyle.Flex;
+    void OptionsButtonPressed(){
         OptionsScreen.style.display = DisplayStyle.Flex;
-        
-
     }
 
-    void PlayButtonPressed()
-    {
-        Time.timeScale = 1f;
-        HL.style.display = DisplayStyle.None;
+    void PlayButtonPressed(){
         OptionsScreen.style.display = DisplayStyle.None;
-        
     }
 
-    void HomeButtonPressed()
-    {
-        SceneManager.LoadScene("Main_Menu");
-        Time.timeScale = 1f;
-
-    }
-
-    void DieRestartButtonPressed()
-    {
-        Time.timeScale = 1f;
+    void RestartButtonPressed(){
         SceneManager.LoadScene("GameScene");
-        Die.style.display = DisplayStyle.None;
     }
 
-    void DieMainmenuButtonPressed()
-    {
+    void HomeButtonPressed(){
         SceneManager.LoadScene("Main_Menu");
     }
+
     // Method to handle music volume slider value change
-    void OnMusicVolumeChanged(ChangeEvent<float> evt)
-    {
+    void OnMusicVolumeChanged(ChangeEvent<float> evt){
         float volume = evt.newValue;
         AudioManager.BGM.SetMusicVolume(volume);
         PlayerPrefs.SetFloat("MusicVolume", volume);
@@ -196,8 +144,7 @@ public class PlayerUI : MonoBehaviour
     }
 
     // Method to handle sound effects volume slider value change
-    void OnSFXVolumeChanged(ChangeEvent<float> evt)
-    {
+    void OnSFXVolumeChanged(ChangeEvent<float> evt){
         float volume = evt.newValue;
         AudioManager.BGM.SetSFXVolume(volume);
         PlayerPrefs.SetFloat("SFXVolume", volume);

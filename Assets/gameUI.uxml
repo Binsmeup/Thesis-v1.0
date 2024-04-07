@@ -15,6 +15,7 @@
                 <ui:Button display-tooltip-when-elided="true" class="button2" style="left: 110px; top: 170px; right: 362px;" />
                 <ui:Button display-tooltip-when-elided="true" class="button6" style="top: 170px; left: 362px; background-color: rgba(188, 188, 188, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
             </ui:VisualElement>
+            <ui:Button text="DEBUG" parse-escape-sequences="true" display-tooltip-when-elided="true" name="debug-button" class="button" style="margin-top: 20px; top: 930px; -unity-font-style: bold; left: 50px;" />
         </ui:VisualElement>
         <ui:VisualElement name="LoadingScreen3" style="width: 1920px; height: 1080px; position: absolute; background-image: url(&apos;project://database/Assets/assets/gathering%20data.png?fileID=2800000&amp;guid=cc8d56a8dc2ea8343b422147abf4501c&amp;type=3#gathering data&apos;); display: none;" />
         <ui:VisualElement name="Leaderboard" style="flex-grow: 1; width: 1920px; height: 1080px; position: absolute; background-image: url(&apos;project://database/Assets/assets/yes.png?fileID=2800000&amp;guid=9a19333af65ed42418ccb90e53fd5070&amp;type=3#yes&apos;); display: none;">

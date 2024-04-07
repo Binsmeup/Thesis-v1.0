@@ -8,10 +8,6 @@ public class CameraFollow : MonoBehaviour
     public float yOffset = 0f;
     public Transform target;
 
-    void Start()
-    {
-        Debug.Log("CameraFollow Start() method called.");
-    }
     void Update(){
         Vector3 newPos = new Vector3(target.position.x,target.position.y + yOffset,-10f);
         transform.position = Vector3.Slerp(transform.position,newPos,FollowSpeed*Time.deltaTime);
