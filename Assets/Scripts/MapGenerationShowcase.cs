@@ -66,7 +66,8 @@ public class MapGenerationShowcase : MonoBehaviour{
         //StartCoroutine(GenerateMap());
     }
 
-    public IEnumerator GenerateMap(){
+    public IEnumerator GenerateMap()
+    {
         ClearTiles();
         yield return new WaitForSeconds(cooldown);
         VariableSetUp();
@@ -92,7 +93,7 @@ public class MapGenerationShowcase : MonoBehaviour{
         PositionPlayer();
     }
 
-    void VariableSetUp(){
+    public void VariableSetUp(){
         switch (floorRules){
             case true:
             defaultWidth = 52;
@@ -195,18 +196,18 @@ public class MapGenerationShowcase : MonoBehaviour{
     bool cellularAutomataFinished = false;
     bool perlinNoiseFinished = false;
 
-    void GenerateNoise(){
+    public void GenerateNoise(){
         StartCoroutine(Noise());
     }
 
-    void ApplyCellularAutomata(){
+    public void ApplyCellularAutomata(){
         StartCoroutine(CellularAutomata());
     }
-    void ApplyPerlinNoise(){
+    public void ApplyPerlinNoise(){
         StartCoroutine(PerlinNoiseActivate());
     }
 
-    void CreateGrid(){
+    public void CreateGrid(){
         grid = new TileBase[width, height];
 
         for (int x = 0; x < width; x++){
@@ -335,7 +336,7 @@ public class MapGenerationShowcase : MonoBehaviour{
             }
         }
     }
- void FloodFill(){
+    public void FloodFill(){
         List<List<Vector2Int>> groups = new List<List<Vector2Int>>();
 
         bool[,] visited = new bool[width, height];
@@ -473,7 +474,7 @@ public class MapGenerationShowcase : MonoBehaviour{
         }
     }
 
-    void MoveWalls(){
+    public void MoveWalls(){
         for (int x = 0; x < width; x++){
             for (int y = 0; y < height; y++){
                 Vector3Int tilePosition = new Vector3Int(x, y, 0);
@@ -488,7 +489,7 @@ public class MapGenerationShowcase : MonoBehaviour{
         }  
     }
 
-    void PositionPlayer(){
+    public void PositionPlayer(){
         List<Vector3Int> floorTiles = new List<Vector3Int>();
         HashSet<GameObject> removedObjects = new HashSet<GameObject>();
         int enemyRemoved = 0;
@@ -605,6 +606,7 @@ public class MapGenerationShowcase : MonoBehaviour{
         excludeNames.Add("1");
         excludeNames.Add(FindObjectOfType<MapGenerationShowcase>().gameObject.name);
         excludeNames.Add("Grid");
+        excludeNames.Add("UIDocument");
         foreach (GameObject obj in allObjects) {
             if (!excludeNames.Contains(obj.name)) {
                 Destroy(obj);
@@ -619,4 +621,5 @@ public class MapGenerationShowcase : MonoBehaviour{
         WallCollision.ClearAllTiles();
         Item.ClearAllTiles();
     }
+
 }
