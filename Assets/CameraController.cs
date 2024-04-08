@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float dragSpeed = 2; // Speed of camera dragging
-    public float zoomSpeed = 2; // Speed of zooming
+    public float dragSpeed = 2;
+    public float zoomSpeed = 2; 
 
     private Vector3 dragOrigin;
     private Camera mainCamera;
@@ -15,7 +15,6 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        // Camera dragging
         if (Input.GetMouseButtonDown(0))
         {
             dragOrigin = mainCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -26,7 +25,6 @@ public class CameraController : MonoBehaviour
             mainCamera.transform.position += difference;
         }
 
-        // Camera zooming
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll != 0)
         {
