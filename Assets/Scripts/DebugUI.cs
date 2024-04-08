@@ -20,6 +20,7 @@ public class DebugUI : MonoBehaviour
     public Button applyPN;
     public Button movewalls;
     public Button positionPlayer;
+    
 
     //TextField
     public TextField floorcount;
@@ -35,6 +36,7 @@ public class DebugUI : MonoBehaviour
     public Toggle cellular_CD;
     public Toggle perlin_CD;
     public Toggle CD_iteration;
+    public Toggle CD;
 
     public int floorCountValue;
     public int defaultWidthValue;
@@ -70,7 +72,7 @@ public class DebugUI : MonoBehaviour
         cellular_CD = root.Q<Toggle>("cooldownOnCellular");
         perlin_CD = root.Q<Toggle>("cooldownOnPerlin");
         CD_iteration = root.Q<Toggle>("cooldownOnIteration");
-
+        CD = root.Q<Toggle>("cooldown");
 
         GMnoFR.clicked += OnGMnoFRClicked;
         GMwithFR.clicked += OnGMwithFRClicked;
@@ -95,8 +97,10 @@ public class DebugUI : MonoBehaviour
         cellular_CD.RegisterValueChangedCallback(evt => OnCellularCDChanged(evt.newValue));
         perlin_CD.RegisterValueChangedCallback(evt => OnPerlinCDChanged(evt.newValue));
         CD_iteration.RegisterValueChangedCallback(evt => OnCDIterationChanged(evt.newValue));
+        CD.RegisterValueChangedCallback(evt => OnCDChanged(evt.newValue));
 
         mapGenerationShowcase = FindObjectOfType<MapGenerationShowcase>();
+        EnableButtons();
     }
 
 
@@ -104,7 +108,8 @@ public class DebugUI : MonoBehaviour
     {
         if (mapGenerationShowcase != null)
         {
-            mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap());
+            mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap());//not  sure what to do here
+            DisableButtons();
         }
         else
         {
@@ -115,16 +120,16 @@ public class DebugUI : MonoBehaviour
 
     void OnGMwithFRClicked()
     {
-            bool floorRulesValue = mapGenerationShowcase.floorRules = true;
-            mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap());
-  
+        mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap());//not  sure what to do here
+        DisableButtons();
 
     }
 
     void OnCleartilesClicked()
     {
 
-            mapGenerationShowcase.ClearTiles();
+        mapGenerationShowcase.ClearTiles();
+        EnableButtons();
     }
 
     void OnVarsetClicked()
@@ -135,36 +140,110 @@ public class DebugUI : MonoBehaviour
     void OnCreategridClicked()
     {
         mapGenerationShowcase.CreateGrid();
+        creategrid.SetEnabled(false);
+        genNoise.SetEnabled(true);
+        applyCA.SetEnabled(false);
+        floodfill.SetEnabled(false);
+        applyPN.SetEnabled(false);
+        movewalls.SetEnabled(false);
+        positionPlayer.SetEnabled(false);
     }
 
     void OnGenNoiseClicked()
     {
         mapGenerationShowcase.GenerateNoise();
+        creategrid.SetEnabled(false);
+        genNoise.SetEnabled(false);
+        applyCA.SetEnabled(true);
+        floodfill.SetEnabled(false);
+        applyPN.SetEnabled(false);
+        movewalls.SetEnabled(false);
+        positionPlayer.SetEnabled(false);
     }
 
     void OnApplyCAClicked()
     {
         mapGenerationShowcase.ApplyCellularAutomata();
+        creategrid.SetEnabled(false);
+        genNoise.SetEnabled(false);
+        applyCA.SetEnabled(false);
+        floodfill.SetEnabled(true);
+        applyPN.SetEnabled(false);
+        movewalls.SetEnabled(false);
+        positionPlayer.SetEnabled(false);
     }
 
     void OnFloodfillClicked()
     {
         mapGenerationShowcase.FloodFill();
+        creategrid.SetEnabled(false);
+        genNoise.SetEnabled(false);
+        applyCA.SetEnabled(false);
+        floodfill.SetEnabled(false);
+        applyPN.SetEnabled(true);
+        movewalls.SetEnabled(false);
+        positionPlayer.SetEnabled(false);
     }
 
     void OnApplyPNClicked()
     {
         mapGenerationShowcase.ApplyPerlinNoise();
+        creategrid.SetEnabled(false);
+        genNoise.SetEnabled(false);
+        applyCA.SetEnabled(false);
+        floodfill.SetEnabled(false);
+        applyPN.SetEnabled(false);
+        movewalls.SetEnabled(true);
+        positionPlayer.SetEnabled(false);
     }
 
     void OnMovewallsClicked()
     {
         mapGenerationShowcase.MoveWalls();
+        creategrid.SetEnabled(false);
+        genNoise.SetEnabled(false);
+        applyCA.SetEnabled(false);
+        floodfill.SetEnabled(false);
+        applyPN.SetEnabled(false);
+        movewalls.SetEnabled(false);
+        positionPlayer.SetEnabled(true);
     }
 
     void OnPositionPlayerClicked()
     {
         mapGenerationShowcase.PositionPlayer();
+        creategrid.SetEnabled(false);
+        genNoise.SetEnabled(false);
+        applyCA.SetEnabled(false);
+        floodfill.SetEnabled(false);
+        applyPN.SetEnabled(false);
+        movewalls.SetEnabled(false);
+        positionPlayer.SetEnabled(false);
+    }
+    public void DisableButtons()
+    {
+        GMnoFR.SetEnabled(false);
+        GMwithFR.SetEnabled(false);
+        creategrid.SetEnabled(false);
+        genNoise.SetEnabled(false);
+        applyCA.SetEnabled(false);
+        floodfill.SetEnabled(false);
+        applyPN.SetEnabled(false);
+        movewalls.SetEnabled(false);
+        positionPlayer.SetEnabled(false);
+    }
+
+    public void EnableButtons()
+    {
+        GMnoFR.SetEnabled(true);
+        GMwithFR.SetEnabled(true);
+        creategrid.SetEnabled(true);
+        genNoise.SetEnabled(false);
+        applyCA.SetEnabled(false);
+        floodfill.SetEnabled(false);
+        applyPN.SetEnabled(false);
+        movewalls.SetEnabled(false);
+        positionPlayer.SetEnabled(false);
     }
 
     public void OnFloorcountChanged(string newText)
@@ -263,5 +342,9 @@ public class DebugUI : MonoBehaviour
     void OnCDIterationChanged(bool newValue)
     {
         Debug.Log("Cooldown Iteration toggled: " + newValue);
+    }
+    void OnCDChanged(bool newValue)
+    {
+        Debug.Log("Cooldowntoggled: " + newValue);
     }
 }

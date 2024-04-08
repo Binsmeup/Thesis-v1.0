@@ -66,7 +66,8 @@ public class MapGenerationShowcase : MonoBehaviour{
         //StartCoroutine(GenerateMap());
     }
 
-    public IEnumerator GenerateMap(){
+    public IEnumerator GenerateMap()
+    {
         ClearTiles();
         yield return new WaitForSeconds(cooldown);
         VariableSetUp();
@@ -620,4 +621,5 @@ public class MapGenerationShowcase : MonoBehaviour{
         WallCollision.ClearAllTiles();
         Item.ClearAllTiles();
     }
+
 }

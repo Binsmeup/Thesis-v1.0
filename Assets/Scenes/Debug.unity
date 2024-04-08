@@ -745,6 +745,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c05262f1d2aa7d428fa3cd926efd318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapGenerationShowcase: {fileID: 0}
+  floorCountValue: 0
+  defaultWidthValue: 0
+  defaultHeightValue: 0
+  defaultDensityValue: 0
+  defaultIterationValue: 0
+  defaultEnemyCValue: 0
 --- !u!114 &1589692124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -787,6 +794,7 @@ GameObject:
   - component: {fileID: 1887020440}
   - component: {fileID: 1887020439}
   - component: {fileID: 1887020438}
+  - component: {fileID: 1887020441}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -868,6 +876,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1887020441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887020437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 499835e82be72e240b01fb9fb115f420, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragSpeed: 2
+  zoomSpeed: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
