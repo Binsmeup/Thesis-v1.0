@@ -20,7 +20,8 @@ public class DebugUI : MonoBehaviour
     public Button applyPN;
     public Button movewalls;
     public Button positionPlayer;
-    
+    public Button back;
+
 
     //TextField
     public TextField floorcount;
@@ -29,14 +30,16 @@ public class DebugUI : MonoBehaviour
     public TextField defaultDensity;
     public TextField defaultIteration;
     public TextField defaultEnemyC;
-
+    public TextField noiseCooldown;
+    public TextField cellularCooldown;
+    public TextField perlinCooldown;
+    public TextField CD;
 
     //Toggle
     public Toggle noise_CD;
     public Toggle cellular_CD;
     public Toggle perlin_CD;
     public Toggle CD_iteration;
-    public Toggle CD;
 
     public int floorCountValue;
     public int defaultWidthValue;
@@ -44,6 +47,10 @@ public class DebugUI : MonoBehaviour
     public int defaultDensityValue;
     public int defaultIterationValue;
     public int defaultEnemyCValue;
+    public int noiseCooldownValue;
+    public int cellularCooldownValue;
+    public int perlinCooldownValue;
+    public int cooldownValue;
 
     void Start()
     {
@@ -60,6 +67,7 @@ public class DebugUI : MonoBehaviour
         applyPN = root.Q<Button>("ApplyPerlinNoise");
         movewalls = root.Q<Button>("MoveWalls");
         positionPlayer = root.Q<Button>("PositionPlayer");
+        back = root.Q<Button>("L-back");
 
         floorcount = root.Q<TextField>("floorCountInput");
         defaultWidth = root.Q<TextField>("defaultWidthInput");
@@ -67,12 +75,15 @@ public class DebugUI : MonoBehaviour
         defaultDensity = root.Q<TextField>("defaultDensityInput");
         defaultIteration = root.Q<TextField>("defaultIterationInput");
         defaultEnemyC = root.Q<TextField>("defaultEnemyCountInput");
+        noiseCooldown = root.Q<TextField>("noiseCooldownInput");
+        cellularCooldown = root.Q<TextField>("CACooldownInput");
+        perlinCooldown = root.Q<TextField>("perlinCooldownInput");
+        CD = root.Q<TextField>("cooldownInput");
 
         noise_CD = root.Q<Toggle>("cooldownOnNoise");
         cellular_CD = root.Q<Toggle>("cooldownOnCellular");
         perlin_CD = root.Q<Toggle>("cooldownOnPerlin");
         CD_iteration = root.Q<Toggle>("cooldownOnIteration");
-        CD = root.Q<Toggle>("cooldown");
 
         GMnoFR.clicked += OnGMnoFRClicked;
         GMwithFR.clicked += OnGMwithFRClicked;
@@ -85,6 +96,7 @@ public class DebugUI : MonoBehaviour
         applyPN.clicked += OnApplyPNClicked;
         movewalls.clicked += OnMovewallsClicked;
         positionPlayer.clicked += OnPositionPlayerClicked;
+        back.clicked += OnBackClicked;
 
         floorcount.RegisterCallback<ChangeEvent<string>>(evt => OnFloorcountChanged(evt.newValue));
         defaultWidth.RegisterCallback<ChangeEvent<string>>(evt => OnDefaultWidthChanged(evt.newValue));
@@ -92,12 +104,16 @@ public class DebugUI : MonoBehaviour
         defaultDensity.RegisterCallback<ChangeEvent<string>>(evt => OnDefaultDensityChanged(evt.newValue));
         defaultIteration.RegisterCallback<ChangeEvent<string>>(evt => OnDefaultIterationChanged(evt.newValue));
         defaultEnemyC.RegisterCallback<ChangeEvent<string>>(evt => OnDefaultEnemyCChanged(evt.newValue));
+        noiseCooldown.RegisterCallback<ChangeEvent<string>>(evt => OnNoiseCooldownChanged(evt.newValue));
+        cellularCooldown.RegisterCallback<ChangeEvent<string>>(evt => OnCellularCooldownChanged(evt.newValue));
+        perlinCooldown.RegisterCallback<ChangeEvent<string>>(evt => OnPerlinCooldownChanged(evt.newValue));
+        CD.RegisterCallback<ChangeEvent<string>>(evt => OnGeneralCooldownChanged(evt.newValue));
 
         noise_CD.RegisterValueChangedCallback(evt => OnNoiseCDChanged(evt.newValue));
         cellular_CD.RegisterValueChangedCallback(evt => OnCellularCDChanged(evt.newValue));
         perlin_CD.RegisterValueChangedCallback(evt => OnPerlinCDChanged(evt.newValue));
         CD_iteration.RegisterValueChangedCallback(evt => OnCDIterationChanged(evt.newValue));
-        CD.RegisterValueChangedCallback(evt => OnCDChanged(evt.newValue));
+
 
         mapGenerationShowcase = FindObjectOfType<MapGenerationShowcase>();
         EnableButtons();
@@ -108,7 +124,7 @@ public class DebugUI : MonoBehaviour
     {
         if (mapGenerationShowcase != null)
         {
-            mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap());//not sure what to do here
+            mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap(false, floorCountValue, defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue));//not sure what to do here
             DisableButtons();
         }
         else
@@ -120,7 +136,7 @@ public class DebugUI : MonoBehaviour
 
     void OnGMwithFRClicked()
     {
-        mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap());//not sure what to do here
+        mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap(true, floorCountValue, defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue));//not sure what to do here
         DisableButtons();
 
     }
@@ -134,7 +150,7 @@ public class DebugUI : MonoBehaviour
 
     void OnVarsetClicked()
     {
-        mapGenerationShowcase.VariableSetUp();
+        mapGenerationShowcase.VariableSetUp(defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue);
         EnableButtons();
         creategrid.SetEnabled(true);
 
@@ -212,6 +228,11 @@ public class DebugUI : MonoBehaviour
         applyPN.SetEnabled(false);
         movewalls.SetEnabled(false);
         positionPlayer.SetEnabled(false);
+    }
+
+    public void OnBackClicked()
+    {
+        SceneManager.LoadScene("Main_menu");
     }
 
     public void OnFloorcountChanged(string newText)
@@ -292,27 +313,83 @@ public class DebugUI : MonoBehaviour
             Debug.LogWarning("Invalid input for enemy count.");
         }
     }
+
+    void OnNoiseCooldownChanged(string newText)
+    {
+        if (int.TryParse(newText, out int newValue))
+        {
+            noiseCooldownValue = newValue;
+            Debug.Log("Noise cooldown value: " + noiseCooldownValue);
+        }
+        else
+        {
+            Debug.LogWarning("Invalid input for noise cooldown.");
+        }
+    }
+
+    void OnCellularCooldownChanged(string newText)
+    {
+        if (int.TryParse(newText, out int newValue))
+        {
+            cellularCooldownValue = newValue;
+            Debug.Log("Cellular cooldown value: " + cellularCooldownValue);
+        }
+        else
+        {
+            Debug.LogWarning("Invalid input for cellular cooldown.");
+        }
+    }
+
+    void OnPerlinCooldownChanged(string newText)
+    {
+        if (int.TryParse(newText, out int newValue))
+        {
+            perlinCooldownValue = newValue;
+            Debug.Log("Perlin cooldown value: " + perlinCooldownValue);
+        }
+        else
+        {
+            Debug.LogWarning("Invalid input for perlin cooldown.");
+        }
+    }
+
+    void OnGeneralCooldownChanged(string newText)
+    {
+        if (int.TryParse(newText, out int newValue))
+        {
+            cooldownValue = newValue;
+            Debug.Log("cooldown value: " + cooldownValue);
+        }
+        else
+        {
+            Debug.LogWarning("Invalid input for general cooldown.");
+        }
+    }
+
+
+
     void OnNoiseCDChanged(bool newValue)
     {
+        mapGenerationShowcase.noiseCDChange(newValue);
         Debug.Log("Noise Cooldown toggled: " + newValue);
     }
 
     void OnCellularCDChanged(bool newValue)
     {
+        mapGenerationShowcase.celluarCDChange(newValue);
         Debug.Log("Cellular Cooldown toggled: " + newValue);
     }
 
     void OnPerlinCDChanged(bool newValue)
     {
+        mapGenerationShowcase.perlinCDChange(newValue);
         Debug.Log("Perlin Cooldown toggled: " + newValue);
     }
 
     void OnCDIterationChanged(bool newValue)
     {
+        mapGenerationShowcase.iterationCDChange(newValue);
         Debug.Log("Cooldown Iteration toggled: " + newValue);
     }
-    void OnCDChanged(bool newValue)
-    {
-        Debug.Log("Cooldowntoggled: " + newValue);
-    }
+
 }

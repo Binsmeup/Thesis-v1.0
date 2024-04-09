@@ -12,6 +12,7 @@ public class UIController : MonoBehaviour
     public Button optionButton;
     public Button creditsButton;
     public Button closeButton;
+    public Button debug;
     public VisualElement MainMenu;
 
     //Leaderboard
@@ -38,6 +39,7 @@ public class UIController : MonoBehaviour
         optionButton = root.Q<Button>("options-button");
         creditsButton = root.Q<Button>("credits-button");
         closeButton = root.Q<Button>("close-button");
+        debug = root.Q<Button>("debug-button");
 
         //VisualElements
         MainMenu = root.Q<VisualElement>("MainMenu");
@@ -68,7 +70,7 @@ public class UIController : MonoBehaviour
         creditsButton.clicked += CreditsButtonPressed;
         Cbackmenu.clicked += ShowMainMenu;
 
-        //Close
+        debug.clicked += DebugPressed;
         closeButton.clicked += CloseButtonPressed;
 
         ShowMainMenu();
@@ -82,8 +84,14 @@ public class UIController : MonoBehaviour
         Credits.style.display = DisplayStyle.None;
     }
 
+    void DebugPressed()
+    {
+        SceneManager.LoadScene("Debug");
+    }
+
     void PlayButtonPressed()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("GameScene");
     }
 
@@ -128,4 +136,5 @@ public class UIController : MonoBehaviour
         Application.Quit();
         Debug.Log("Quit!!!");
     }
+
 }
