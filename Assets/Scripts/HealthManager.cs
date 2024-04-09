@@ -15,6 +15,7 @@ public class HealthManager : MonoBehaviour, IDamagable
     public bool _damageCooldown;
     public float maxHealth;
     public float _health;
+    public float weightLevel;
     public bool _targettable;
 
     public bool damageCooldown
@@ -89,10 +90,8 @@ public class HealthManager : MonoBehaviour, IDamagable
         physicsCollider = GetComponent<Collider2D>();
     }
 
-    public void OnHit(float baseDamage, float damageMulti, float critChance, float critDamage, Vector2 knockback)
-    {
-        if (!damageCooldown)
-        {
+    public void OnHit(float baseDamage, float damageMulti, float critChance, float critDamage, Vector2 knockback){
+        if (!damageCooldown){
             List<string> ArmorParts = new List<string>();
 
             if (HelmHP > 0)
@@ -104,68 +103,25 @@ public class HealthManager : MonoBehaviour, IDamagable
             if (LegHP > 0)
                 ArmorParts.Add("Leg");
 
-            if (ArmorParts.Count > 0)
-            {
+            if (ArmorParts.Count > 0){
                 string randomPart = ArmorParts[Random.Range(0, ArmorParts.Count)];
                 DamageArmorPart(randomPart);
-                rb.AddForce(knockback, ForceMode2D.Impulse);
+                rb.AddForce((knockback), ForceMode2D.Impulse);
             }
-            else
-            {
+            else{
                 float critValue = Random.Range(0f, 100f);
-                if (critChance >= critValue)
-                {
+                if (critChance >= critValue){
                     health -= (baseDamage * damageMulti * critDamage);
-                    rb.AddForce(knockback, ForceMode2D.Impulse);
+                    rb.AddForce((knockback), ForceMode2D.Impulse);
                 }
-                else
-                {
+                else{
                     health -= (baseDamage * damageMulti);
-                    rb.AddForce(knockback, ForceMode2D.Impulse);
+                    rb.AddForce((knockback), ForceMode2D.Impulse);
 
                 }
             }
         }
-        if (hasDamageCooldown)
-        {
-            damageCooldown = true;
-        }
-    }
-
-    public void OnHit(float baseDamage, float damageMulti, float critChance, float critDamage)
-    {
-        if (!damageCooldown)
-        {
-            List<string> partsWithHP = new List<string>();
-            if (HelmHP > 0)
-                partsWithHP.Add("Helm");
-
-            if (ChestHP > 0)
-                partsWithHP.Add("Chest");
-
-            if (LegHP > 0)
-                partsWithHP.Add("Leg");
-
-            if (partsWithHP.Count > 0)
-            {
-                string randomPart = partsWithHP[Random.Range(0, partsWithHP.Count)];
-                DamageArmorPart(randomPart);
-            }
-            else
-            {
-                float critValue = Random.Range(0f, 100f);
-                if (critChance >= critValue)
-                {
-                    health -= (baseDamage * damageMulti * critDamage);
-                }
-                else
-                {
-                    health -= (baseDamage * damageMulti);
-                }
-            }
-        }
-        if (hasDamageCooldown)
-        {
+        if (hasDamageCooldown){
             damageCooldown = true;
         }
     }

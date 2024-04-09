@@ -108,7 +108,7 @@ public class DebugUI : MonoBehaviour
     {
         if (mapGenerationShowcase != null)
         {
-            mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap());//not sure what to do here
+            mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap(false,floorCountValue,defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue));//not sure what to do here
             DisableButtons();
         }
         else
@@ -120,7 +120,7 @@ public class DebugUI : MonoBehaviour
 
     void OnGMwithFRClicked()
     {
-        mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap());//not sure what to do here
+        mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap(true,floorCountValue,defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue));//not sure what to do here
         DisableButtons();
 
     }
@@ -134,7 +134,7 @@ public class DebugUI : MonoBehaviour
 
     void OnVarsetClicked()
     {
-        mapGenerationShowcase.VariableSetUp();
+        mapGenerationShowcase.VariableSetUp(defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue);
         EnableButtons();
         creategrid.SetEnabled(true);
 
@@ -294,21 +294,25 @@ public class DebugUI : MonoBehaviour
     }
     void OnNoiseCDChanged(bool newValue)
     {
+        mapGenerationShowcase.noiseCDChange(newValue);
         Debug.Log("Noise Cooldown toggled: " + newValue);
     }
 
     void OnCellularCDChanged(bool newValue)
     {
+        mapGenerationShowcase.celluarCDChange(newValue);
         Debug.Log("Cellular Cooldown toggled: " + newValue);
     }
 
     void OnPerlinCDChanged(bool newValue)
     {
+        mapGenerationShowcase.perlinCDChange(newValue);
         Debug.Log("Perlin Cooldown toggled: " + newValue);
     }
 
     void OnCDIterationChanged(bool newValue)
     {
+        mapGenerationShowcase.iterationCDChange(newValue);
         Debug.Log("Cooldown Iteration toggled: " + newValue);
     }
     void OnCDChanged(bool newValue)

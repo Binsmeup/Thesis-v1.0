@@ -91,10 +91,14 @@ public class playerScript : MonoBehaviour{
         }
     }
     private void OnTriggerEnter2D(Collider2D other){
+        float trueKnockbackForce;
         IDamagable damagable = other.GetComponent<IDamagable>();
-        if (damagable != null && other.tag == "Enemy") {
+        HealthManager healthManager = other.GetComponent<HealthManager>();
+        if (damagable != null && healthManager != null && other.tag == "Enemy") { 
+            float weightLevel = healthManager.weightLevel;
+            trueKnockbackForce = Mathf.Max(0, knockbackForce - weightLevel);
             Vector2 direction = (other.transform.position - transform.position).normalized;
-            Vector2 knockback = direction * knockbackForce;
+            Vector2 knockback = direction * trueKnockbackForce;
             damagable.OnHit(baseDamage, damageMulti, critChance, critDamage, knockback);
             Debug.Log("Enemy hit");
         }

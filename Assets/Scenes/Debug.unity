@@ -562,7 +562,7 @@ MonoBehaviour:
   Enemy: {fileID: 7912796300759740165, guid: f627d89519509414189ec05133599d62, type: 3}
   Portal: {fileID: 8513089777601362936, guid: c361e04e6381f1d47a6fcfaa6ef7249b, type: 3}
   Chest: {fileID: 5525550310558902087, guid: add8b76e3c7d14a4d851773166801d55, type: 3}
-  floorCount: 5
+  floorCount: 1
   defaultWidth: 52
   defaultHeight: 52
   defaultDensity: 57
@@ -574,12 +574,12 @@ MonoBehaviour:
   OneLine: 1
   cooldown: 1
   noiseCooldown: 0.01
-  cooldownOnNoise: 1
+  cooldownOnNoise: 0
   cellularCooldown: 0.01
-  cooldownOnCellular: 1
+  cooldownOnCellular: 0
   perlinCooldown: 0.01
-  cooldownOnPerlin: 1
-  cooldownOnIteration: 1
+  cooldownOnPerlin: 0
+  cooldownOnIteration: 0
 --- !u!4 &716499076
 Transform:
   m_ObjectHideFlags: 0

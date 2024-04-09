@@ -66,11 +66,20 @@ public class MapGenerationShowcase : MonoBehaviour{
         //StartCoroutine(GenerateMap());
     }
 
-    public IEnumerator GenerateMap()
-    {
+    public IEnumerator GenerateMap(bool floorRulesCheck, int setFloorValue, int defaultWidthValue,int defaultHeightValue, int defaultDensityValue,int defaultIterationValue,int defaultEnemyCValue){
+        switch(floorRulesCheck){
+            case true:
+            floorRules = true;
+            floorCount = setFloorValue;
+            break;
+
+            case false:
+            floorRules = false;
+            break;
+        }
         ClearTiles();
         yield return new WaitForSeconds(cooldown);
-        VariableSetUp();
+        VariableSetUp(defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue);
         yield return new WaitForSeconds(cooldown);
         CreateGrid();
         yield return new WaitForSeconds(cooldown);
@@ -93,7 +102,7 @@ public class MapGenerationShowcase : MonoBehaviour{
         PositionPlayer();
     }
 
-    public void VariableSetUp(){
+    public void VariableSetUp(int setWidth, int setHeight, int setDensity, int setIteration, int setEnemyCount){
         switch (floorRules){
             case true:
             defaultWidth = 52;
@@ -104,6 +113,8 @@ public class MapGenerationShowcase : MonoBehaviour{
 
             width = defaultWidth + (4 * floorCount);
             height = defaultHeight + (4 * floorCount);
+            density = defaultDensity;
+            iteration = defaultIteration;
             enemyCount = defaultEnemyCount + (3 * floorCount);
 
             switch (floorCount){
@@ -172,11 +183,11 @@ public class MapGenerationShowcase : MonoBehaviour{
             break;
 
             case false:
-            width = defaultWidth;
-            height = defaultHeight;
-            density = defaultDensity;
-            iteration = defaultIteration;
-            enemyCount = defaultEnemyCount;
+            width = setWidth;
+            height = setHeight;
+            density = setDensity;
+            iteration = setIteration;
+            enemyCount = setEnemyCount;
             chestCount = defaultChestCount;
 
             break;
@@ -621,5 +632,16 @@ public class MapGenerationShowcase : MonoBehaviour{
         WallCollision.ClearAllTiles();
         Item.ClearAllTiles();
     }
-
+    public void celluarCDChange(bool toggle){
+        cooldownOnCellular = toggle;
+    }
+    public void noiseCDChange(bool toggle){
+        cooldownOnNoise = toggle;
+    }
+    public void perlinCDChange(bool toggle){
+        cooldownOnPerlin = toggle;
+    }
+    public void iterationCDChange(bool toggle){
+        cooldownOnIteration = toggle;
+    }
 }
