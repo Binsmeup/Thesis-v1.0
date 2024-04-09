@@ -22,6 +22,8 @@ public class playerScript : MonoBehaviour{
     float cooldown;
     public float moveSpeed;
 
+    public int coins;
+
 
     public string weaponType;
     public GameObject currentWeapon;
@@ -96,11 +98,10 @@ public class playerScript : MonoBehaviour{
         HealthManager healthManager = other.GetComponent<HealthManager>();
         if (damagable != null && healthManager != null && other.tag == "Enemy") { 
             float weightLevel = healthManager.weightLevel;
-            trueKnockbackForce = Mathf.Max(0, knockbackForce - weightLevel);
+            trueKnockbackForce = Mathf.Max(0.5f, knockbackForce - weightLevel);
             Vector2 direction = (other.transform.position - transform.position).normalized;
             Vector2 knockback = direction * trueKnockbackForce;
             damagable.OnHit(baseDamage, damageMulti, critChance, critDamage, knockback);
-            Debug.Log("Enemy hit");
         }
     }
 
@@ -198,6 +199,10 @@ public class playerScript : MonoBehaviour{
     }
     public float GetArmorHP(){
         return tempArmorHP;
+    }
+
+    public void getCoins(int coinGain){
+        coins += coinGain;
     }
 }
 

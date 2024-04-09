@@ -19,8 +19,9 @@ MonoBehaviour:
   dmgMulti: 0
   critCHA: 0
   critDMG: 0
+  atkSPD: 0
   maxHP: 10
-  HP: 10
+  HP: 0
   KB: 0
   MS: 0
   HelmetMaxHealth: 0

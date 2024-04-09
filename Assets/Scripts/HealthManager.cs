@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthManager : MonoBehaviour, IDamagable
-{
+public class HealthManager : MonoBehaviour, IDamagable{
     public bool hasDamageCooldown = false;
     public float damageCooldownTimer;
 
@@ -18,11 +17,9 @@ public class HealthManager : MonoBehaviour, IDamagable
     public float weightLevel;
     public bool _targettable;
 
-    public bool damageCooldown
-    {
+    public bool damageCooldown{
         get { return _damageCooldown; }
-        set
-        {
+        set{
             _damageCooldown = value;
             if (_damageCooldown == true)
             {
@@ -31,20 +28,28 @@ public class HealthManager : MonoBehaviour, IDamagable
         }
     }
 
-    public float health
-    {
-        set
-        {
+    public float health{
+        set{
             _health = value;
-            if (_health <= 0)
-            {
-                if (gameObject.CompareTag("Enemy"))
-                {
-                    if (loot == null)
-                    {
+            if (_health <= 0){
+                if (gameObject.CompareTag("Enemy")){
+                    GameObject mapGeneratorObject = GameObject.Find("MapGenerator");
+                    Enemy enemy = GetComponent<Enemy>();
+                        if (mapGeneratorObject != null){
+                            MapGeneration mapGeneration = mapGeneratorObject.GetComponent<MapGeneration>();
+                            if (mapGeneration != null){
+                                mapGeneration.addKill();
+                            }
+                        if (enemy != null){
+                            if (enemy.isBoss){
+                                mapGeneration.CreatePortal();
+                            }
+                        
+                        }
+                    }
+                    if (loot == null){
                         loot = GetComponent<Loot>();
-                        if (loot == null)
-                        {
+                        if (loot == null){
                             loot = gameObject.AddComponent<Loot>();
                         }
                     }
