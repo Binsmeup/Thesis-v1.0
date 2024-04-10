@@ -58,13 +58,11 @@ public class HealthManager : MonoBehaviour, IDamagable{
                 }
                 Destroy(gameObject);
             }
-            if (maxHealth < _health)
-            {
+            if (maxHealth < _health){
                 _health = maxHealth;
             }
         }
-        get
-        {
+        get{
             return _health;
         }
     }
@@ -79,8 +77,7 @@ public class HealthManager : MonoBehaviour, IDamagable{
     public float LegHP;
 
 
-    public bool Targettable
-    {
+    public bool Targettable{
         get { return _targettable; }
         set
         {
@@ -89,10 +86,12 @@ public class HealthManager : MonoBehaviour, IDamagable{
         }
     }
 
-    public void Start()
-    {
+    public void Start(){
         rb = GetComponent<Rigidbody2D>();
         physicsCollider = GetComponent<Collider2D>();
+    }
+    public void HealUp(){
+        health = maxHealth;
     }
 
     public void OnHit(float baseDamage, float damageMulti, float critChance, float critDamage, Vector2 knockback){
@@ -131,10 +130,8 @@ public class HealthManager : MonoBehaviour, IDamagable{
         }
     }
 
-    private void DamageArmorPart(string part)
-    {
-        switch (part)
-        {
+    private void DamageArmorPart(string part){
+        switch (part){
             case "Helm":
                 HelmHP -= 1;
                 break;
@@ -151,14 +148,11 @@ public class HealthManager : MonoBehaviour, IDamagable{
         loot.DropItem();
     }
 
-    public void FixedUpdate()
-    {
-        if (damageCooldown)
-        {
+    public void FixedUpdate(){
+        if (damageCooldown){
             damageCooldownTimeElapsed += Time.deltaTime;
 
-            if (damageCooldownTimeElapsed > damageCooldownTimer)
-            {
+            if (damageCooldownTimeElapsed > damageCooldownTimer){
                 damageCooldown = false;
             }
         }

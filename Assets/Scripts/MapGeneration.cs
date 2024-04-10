@@ -22,6 +22,7 @@ public class MapGeneration : MonoBehaviour{
     public GameObject Chest;
 
     public GameObject Coin;
+    public GameObject Potion;
 
     public Tilemap WallCollision;
     public Tilemap Item;
@@ -68,6 +69,7 @@ public class MapGeneration : MonoBehaviour{
     private List<Vector3Int> chestSpawns = new List<Vector3Int>();
     private List<Vector3Int> portalSpawns = new List<Vector3Int>();
     private List<Vector3Int> coinSpawns = new List<Vector3Int>();
+    private List<Vector3Int> potionSpawns = new List<Vector3Int>();
     
 
     void Start(){
@@ -357,9 +359,12 @@ public class MapGeneration : MonoBehaviour{
         int chestSpawnedCount = 0;
         int portalSpawnedCount = 0;
         int coinSpawnedCount = 0;
+        int potionSpawnedCount = 0;
         int coinCount = 0;
+        int potionCount = 0;
         enemySpawns.Clear();
         coinSpawns.Clear();
+        potionSpawns.Clear();
         chestSpawns.Clear();
         portalSpawns.Clear();
 
@@ -372,8 +377,14 @@ public class MapGeneration : MonoBehaviour{
                     float modifiedValue = perlinValue * 3f; 
                     float randomChance = Random.Range(0f, 100f);
 
-                    if (modifiedValue >= 0 && modifiedValue < 0.5f && randomChance <= 5f){
-                        Item.SetTile(tilePosition, Object1);
+                    if (modifiedValue >= 0 && modifiedValue < 0.5f){
+                        if (randomChance <= 5f){
+                            Item.SetTile(tilePosition, Object1);
+                        }
+                        else if(randomChance >= 99f){
+                            potionSpawns.Add(tilePosition);
+                            potionCount++;
+                        }
                     }
                     else if (modifiedValue >= 0.51f && modifiedValue < 1.25f){
                         if (randomChance <= 50f){
@@ -405,6 +416,7 @@ public class MapGeneration : MonoBehaviour{
             }
         }
         SpawnObjects(coinSpawns, Coin, ref coinSpawnedCount, coinCount, 1f, false);
+        SpawnObjects(potionSpawns, Potion, ref potionSpawnedCount, potionCount, 1f, false);
         if (enableCharger || enableFast || enableRanged || enableTank || enableSniper){
             int dividedEnemyCount = DivideEnemyCount();
             if (enableCharger){

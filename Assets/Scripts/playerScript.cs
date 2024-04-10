@@ -14,6 +14,7 @@ public class playerScript : MonoBehaviour{
 
     public Animator anim;
     public float attackSpeed;
+    public float attackSpeedModifier;
     public float baseDamage;
     public float damageMulti;
     public float critChance;
@@ -36,7 +37,9 @@ public class playerScript : MonoBehaviour{
     Rigidbody2D rb;
 
     bool isMoving = false;
-    private bool canRotateWeapon = true;
+
+    public bool canAttack = true;
+    public bool canRotateWeapon = true;
 
     private ItemSOLibrary itemSOLibrary;
 
@@ -66,31 +69,50 @@ public class playerScript : MonoBehaviour{
             }
         }
 
-    if (cooldown <= 0f){
-        if (Input.GetMouseButtonDown(0)){
-            switch (weaponType){
-                case "Spear":
-                    anim.SetTrigger("AttackSpear");
-                    attackLimit();
+        if (canAttack){
+            if (Input.GetMouseButtonDown(0)){
+                    switch (weaponType){
+                    case "Spear":
+                        canAttack = false;
+                        canRotateWeapon = false;
+                        anim.SetTrigger("AttackSpear");
+                        attackLimit();
                     break;
 
-                case "Sword":
-                    anim.SetTrigger("AttackSword");
-                    attackLimit();
+                    case "Sword":
+                        canAttack = false;
+                        canRotateWeapon = false;
+                        anim.SetTrigger("AttackSword");
+                        attackLimit();
+                    break;
+                    case "Axe":
+                        canAttack = false;
+                        canRotateWeapon = false;
+                        anim.SetTrigger("AttackAxe");
+                        attackLimit();
+                    break;
+                    case "Bat":
+                        canAttack = false;
+                        canRotateWeapon = false;
+                        anim.SetTrigger("AttackBat");
+                        attackLimit();
+                    break;
+                    case "Dagger":
+                        canAttack = false;
+                        canRotateWeapon = false;
+                        anim.SetTrigger("AttackDagger");
+                        attackLimit();
                     break;
 
-                default:
+                    default:
                     break;
+                }
             }
         }
     }
-        else{
-        cooldown -= Time.deltaTime;
 
-            if (cooldown <= 0f){
-                canRotateWeapon = true;
-            }
-        }
+    public void OnAttackAnimationComplete() {
+        StartCoroutine(attackLimit());
     }
     private void OnTriggerEnter2D(Collider2D other){
         float trueKnockbackForce;
@@ -105,14 +127,16 @@ public class playerScript : MonoBehaviour{
         }
     }
 
-    private void attackLimit(){
-        cooldown = attackSpeed;
-        canRotateWeapon = false;
+    private IEnumerator attackLimit(){
+        cooldown = attackSpeed/attackSpeedModifier;
+        yield return new WaitForSeconds(cooldown);
+        canAttack = true;
+        canRotateWeapon = true;
     }
 
 
     private void FixedUpdate(){
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("SpearAttack") && !anim.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack")){
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("SpearAttack") && !anim.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack") && !anim.GetCurrentAnimatorStateInfo(0).IsName("AxeAttack") && !anim.GetCurrentAnimatorStateInfo(0).IsName("BatAttack")){
             if (movementInput != Vector2.zero){
                 rb.AddForce(movementInput * moveSpeed * Time.deltaTime);
                 IsMoving = true;
