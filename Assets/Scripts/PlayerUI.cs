@@ -5,16 +5,22 @@ using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 
 public class PlayerUI : MonoBehaviour{
+
     // Game Options
     public Button gameOptions;
     public Button gamePlay;
     public Button gameRestart;
     public Button gameMainmenu;
+    public Button dieRestart;
+    public Button dieMainmenu;
+
 
     public Slider music;
     public Slider sfx;
 
     public VisualElement OptionsScreen;
+    public VisualElement layer;
+    public VisualElement Die;
 
     //Stats
     public Label attackSpeedLabel;
@@ -29,7 +35,6 @@ public class PlayerUI : MonoBehaviour{
     public ProgressBar armorBar;
     public ProgressBar healthBar;
 
-
     private HealthManager healthManager;
     private playerScript player;
 
@@ -39,9 +44,16 @@ public class PlayerUI : MonoBehaviour{
         // Game Menu
         gameOptions = root.Q<Button>("options");
         gamePlay = root.Q<Button>("play");
+        dieRestart = root.Q<Button>("restartD");
+        dieMainmenu = root.Q<Button>("homeD");
         gameRestart = root.Q<Button>("restart");
         gameMainmenu = root.Q<Button>("home");
+
+
         OptionsScreen = root.Q<VisualElement>("optionsscreen");
+        Die = root.Q<VisualElement>("whenudie");
+        layer = root.Q<VisualElement>("Layer");
+
         music = root.Q<Slider>("music");
         sfx = root.Q<Slider>("sound");
 
@@ -49,6 +61,8 @@ public class PlayerUI : MonoBehaviour{
         gamePlay.clicked += PlayButtonPressed;
         gameRestart.clicked += RestartButtonPressed;
         gameMainmenu.clicked += HomeButtonPressed;
+        dieRestart.clicked += DieRestartButtonPressed;
+        dieMainmenu.clicked += DieMainmenuButtonPressed;
         music.RegisterValueChangedCallback(OnMusicVolumeChanged);
         sfx.RegisterValueChangedCallback(OnSFXVolumeChanged);
 
@@ -116,24 +130,51 @@ public class PlayerUI : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         UpdateUI();
+        if (healthManager.health <= 0)
+        {
+            Debug.Log("Health is 0 or less");
+            Time.timeScale = 1f;
+            Die.style.display = DisplayStyle.Flex;
+        }
+        else
+        {
+            Die.style.display = DisplayStyle.None;
+        }
     }
 
-    // Update is called once per frame
+
     void OptionsButtonPressed(){
+        Time.timeScale = 0f;
+        layer.style.display = DisplayStyle.Flex;
         OptionsScreen.style.display = DisplayStyle.Flex;
     }
 
     void PlayButtonPressed(){
+        Time.timeScale = 1f;
+        layer.style.display = DisplayStyle.None;
         OptionsScreen.style.display = DisplayStyle.None;
     }
 
     void RestartButtonPressed(){
+        Time.timeScale = 1f;
         SceneManager.LoadScene("GameScene");
     }
 
     void HomeButtonPressed(){
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Main_Menu");
     }
+    void DieRestartButtonPressed()
+    {
+        SceneManager.LoadScene("GameScene");
+    }
+
+    void DieMainmenuButtonPressed()
+    {
+        SceneManager.LoadScene("Main_Menu");
+    }
+
+
 
     // Method to handle music volume slider value change
     void OnMusicVolumeChanged(ChangeEvent<float> evt){
