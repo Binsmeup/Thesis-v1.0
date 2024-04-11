@@ -35,6 +35,13 @@ public class Projectile : MonoBehaviour
         else if (other.CompareTag("Wall")){
             Destroy(gameObject);
         }
+        if (other.tag == "Debris"){
+            Debris debris = other.GetComponent<Debris>();
+            if (debris != null){
+                debris.Destroy();
+                Destroy(gameObject);
+            }
+        }
     }
 
     IEnumerator ProjectileLifetime()

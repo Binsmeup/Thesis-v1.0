@@ -10,15 +10,22 @@ public class MapGenerationShowcase : MonoBehaviour{
     public Tilemap Item;
     public Tile Floor;
     public Tile Wall;
-    public Tile Debris;
+    public Tile Perlin1;
+    public Tile Perlin2;
+    public Tile Perlin3;
     public Tile EnemyLocation;
     public Tile ChestLocation;
     public Tile PortalLocation;
 
     public GameObject Player;
     public GameObject Enemy;
+    public GameObject Miniboss;
+    public GameObject Boss;
     public GameObject Portal;
     public GameObject Chest;
+    public GameObject Coin;
+    public GameObject Debris;
+    public GameObject Potion;
 
     public int floorCount;
     public int defaultWidth;
@@ -54,12 +61,17 @@ public class MapGenerationShowcase : MonoBehaviour{
     private int chestCount;
     private int portalCount = 1;
     private float statScale;
+    private bool miniBossFloor;
+    private bool bossFloor;
 
     private TileBase[,] grid;
 
     private List<Vector3Int> enemySpawns = new List<Vector3Int>();
     private List<Vector3Int> chestSpawns = new List<Vector3Int>();
     private List<Vector3Int> portalSpawns = new List<Vector3Int>();
+    private List<Vector3Int> coinSpawns = new List<Vector3Int>();
+    private List<Vector3Int> debrisSpawns = new List<Vector3Int>();
+    private List<Vector3Int> potionSpawns = new List<Vector3Int>();
     
 
     void Start(){
@@ -110,6 +122,8 @@ public class MapGenerationShowcase : MonoBehaviour{
             defaultDensity = 57;
             defaultIteration = 6;
             defaultEnemyCount = 12;
+            miniBossFloor = false;
+            bossFloor = false;
 
             width = defaultWidth + (4 * floorCount);
             height = defaultHeight + (4 * floorCount);
@@ -118,68 +132,60 @@ public class MapGenerationShowcase : MonoBehaviour{
             enemyCount = defaultEnemyCount + (3 * floorCount);
 
             switch (floorCount){
-            case int n when n >= 1 && n <= 4:
+            case int n when n >= 1 && n <= 5:
                 statScale = 0.1f;
                 chestCount = 1;
+                switch (floorCount){
+                    case 5:
+                    BossRoom();
+                    break;
+                default:
+
+                break;               
+            }
             break;
-            case int n when n >= 6 && n <= 9:
+            case int n when n >= 6 && n <= 10:
                 statScale = 0.15f;
                 chestCount = 2;
+                switch (floorCount){
+                    case 10:
+                    BossRoom();
+                    break;
+                default:
+                
+                break;               
+            }
             break;
-            case int n when n >= 11 && n <= 14:
+            case int n when n >= 11 && n <= 15:
                 statScale = 0.2f;
                 chestCount = 3;
+                switch (floorCount){
+                    case 15:
+                    BossRoom();
+                    break;
+                default:
+                
+                break;               
+            }
             break;
-            case int n when n >= 16 && n <= 19:
+            case int n when n >= 16 && n <= 20:
                 statScale = 0.25f;
                 chestCount = 4;
-            break;
-            case 5:
-                statScale = 0.1f;
-                chestCount = 0;
-                width = 40;
-                height = 40;
-                density = 50;
-                iteration = 10;
-                enemyCount = 0;
-                chestCount = 0;
-            break;
-            case 10:
-                statScale = 0.15f;
-                chestCount = 0;
-                width = 40;
-                height = 40;
-                density = 50;
-                iteration = 10;
-                enemyCount = 0;
-                chestCount = 0;
-            break;
-            case 15:
-                statScale = 0.2f;
-                chestCount = 0;
-                width = 40;
-                height = 40;
-                density = 50;
-                iteration = 10;
-                enemyCount = 0;
-                chestCount = 0;
-            break;
-            case 20:
-                statScale = 0.25f;
-                chestCount = 0;
-                width = 40;
-                height = 40;
-                density = 50;
-                iteration = 10;
-                enemyCount = 0;
-                chestCount = 0;
+                switch (floorCount){
+                    case 20:
+                    BossRoom();
+                    break;
+                default:
+                
+                break;               
+            }
             break;
 
             default:
                 statScale = 0.3f + ((floorCount-20)*0.01f);
                 chestCount = 0;
             break;
-        }
+        }   
             break;
 
             case false:
@@ -206,6 +212,18 @@ public class MapGenerationShowcase : MonoBehaviour{
     bool noiseFinished = false;
     bool cellularAutomataFinished = false;
     bool perlinNoiseFinished = false;
+
+    void BossRoom(){
+        bossFloor = true;
+        chestCount = 0;
+        width = 40;
+        height = 40;
+        density = 50;
+        iteration = 10;
+        enemyCount = 0;
+        chestCount = 0;
+        portalCount = 0;
+    }
 
     public void GenerateNoise(){
         StartCoroutine(Noise());
@@ -407,7 +425,16 @@ public class MapGenerationShowcase : MonoBehaviour{
         int enemySpawnedCount = 0;
         int chestSpawnedCount = 0;
         int portalSpawnedCount = 0;
+        int coinSpawnedCount = 0;
+        int debrisSpawnedCount = 0;
+        int potionSpawnedCount = 0;
+        int coinCount = 0;
+        int debrisCount = 0;
+        int potionCount = 0;
         enemySpawns.Clear();
+        coinSpawns.Clear();
+        debrisSpawns.Clear();
+        potionSpawns.Clear();
         chestSpawns.Clear();
         portalSpawns.Clear();
 
@@ -417,27 +444,60 @@ public class MapGenerationShowcase : MonoBehaviour{
 
                 if (grid[x, y] == Floor){
                     float perlinValue = Mathf.PerlinNoise(x * perlinScale, y * perlinScale);
-                    float modifiedValue = perlinValue * 3f; 
+                    float modifiedValue = perlinValue * 3f;
                     float randomChance = Random.Range(0f, 100f);
 
-                    if (modifiedValue >= 0 && modifiedValue < 1 && randomChance <= 5f){
-                        Item.SetTile(tilePosition, Debris);
+                    if (modifiedValue >= 0 && modifiedValue <= 0.5f){
+                        Item.SetTile(tilePosition, Perlin1);
+                        if (randomChance <= 60f){
+                            debrisSpawns.Add(tilePosition);
+                            debrisCount++;
+                        }
+                        else if(randomChance >= 99f){
+                            potionSpawns.Add(tilePosition);
+                            potionCount++;
+                        }
                     }
-                    else if (modifiedValue >= 1 && modifiedValue < 1.75f){
-                        enemySpawns.Add(tilePosition);
-                        Item.SetTile(tilePosition, EnemyLocation);
-                    }
-                    else if (modifiedValue >= 1.76f && modifiedValue < 3 && randomChance <= 15f){
-                        //coin
-                    }
-                    else if (modifiedValue >= 1.76f && modifiedValue < 3){
+                    else if (modifiedValue > 0.5f && modifiedValue <= 1.25f){
+                        Item.SetTile(tilePosition, Perlin2);
                         if (randomChance <= 50f){
-                            chestSpawns.Add(tilePosition);
+                            Item.SetTile(tilePosition, EnemyLocation);
+                            enemySpawns.Add(tilePosition);
+                        }
+                        else if (randomChance >= 90f && randomChance <= 94.49f){
+                            debrisSpawns.Add(tilePosition);
+                            debrisCount++;
+                        }
+                        else if (randomChance >= 95f){
+                            coinSpawns.Add(tilePosition);
+                            coinCount++;
+                        }
+                    }
+                    else if (modifiedValue > 1.25f && modifiedValue <= 1.75f){
+                        Item.SetTile(tilePosition, Perlin3);
+                        if (randomChance <= 10f){
+                            if (randomChance <= 35f){
+                                Item.SetTile(tilePosition, EnemyLocation);
+                                enemySpawns.Add(tilePosition);
+                            }
+                            else if (randomChance >= 75f && randomChance <= 89.9f){
+                                debrisSpawns.Add(tilePosition);
+                                debrisCount++;
+                            }
+                            else if (randomChance >= 90f){
+                                coinSpawns.Add(tilePosition);
+                                coinCount++;
+                            }
+                        }
+                    }
+                    else if (modifiedValue > 1.75f && modifiedValue <= 3){
+                        if (randomChance >= 50f){
                             Item.SetTile(tilePosition, ChestLocation);
+                            chestSpawns.Add(tilePosition);
                         }
                         else{
-                            portalSpawns.Add(tilePosition);
                             Item.SetTile(tilePosition, PortalLocation);
+                            portalSpawns.Add(tilePosition);
                         }
                     }
                 }
@@ -453,6 +513,12 @@ public class MapGenerationShowcase : MonoBehaviour{
                 }
             }
         }
+        yield return new WaitForSeconds(cooldown);
+        SpawnObjects(coinSpawns, Coin, ref coinSpawnedCount, coinCount, 1f);
+        yield return new WaitForSeconds(cooldown);
+        SpawnObjects(potionSpawns, Potion, ref potionSpawnedCount, potionCount, 1f);
+        yield return new WaitForSeconds(cooldown);
+        SpawnObjects(debrisSpawns, Debris, ref debrisSpawnedCount, debrisCount, 1f);
         yield return new WaitForSeconds(cooldown);
         SpawnObjects(enemySpawns, Enemy, ref enemySpawnedCount, enemyCount, statScale);
         yield return new WaitForSeconds(cooldown);
@@ -520,16 +586,24 @@ public class MapGenerationShowcase : MonoBehaviour{
         }
 
         if (floorTiles.Count > 0){
-            Vector3Int randomFloorTile;
+            Vector3Int playerSpawnPoint = Vector3Int.zero;
 
-            do{
-                randomFloorTile = floorTiles[Random.Range(0, floorTiles.Count)];
-            } while (HasWallsInRadius(randomFloorTile));
+            if (bossFloor) {
+                playerSpawnPoint = FindLowestMiddleFloor(floorTiles);
+                playerSpawnPoint += Vector3Int.up;
+            } else {
+                Vector3Int randomFloorTile;
 
-            Vector3 spawnPosition = Tilemap.GetCellCenterWorld(randomFloorTile);
-            
+                do {
+                    randomFloorTile = floorTiles[Random.Range(0, floorTiles.Count)];
+                } while (HasWallsInRadius(randomFloorTile));
+
+                playerSpawnPoint = randomFloorTile;
+            }
+
+            Vector3 spawnPosition = Tilemap.GetCellCenterWorld(playerSpawnPoint);
+
             GameObject playerInstance = Instantiate(Player, spawnPosition, Quaternion.identity);
-
             CircleCollider2D collider = playerInstance.GetComponent<CircleCollider2D>();
             float radius = collider.radius;
 
@@ -537,14 +611,11 @@ public class MapGenerationShowcase : MonoBehaviour{
             foreach (Collider2D nearbyObject in nearbyObjects){
                 if ((nearbyObject.CompareTag("Enemy") || nearbyObject.CompareTag("Chest") || nearbyObject.CompareTag("Portal"))
                     && !removedObjects.Contains(nearbyObject.gameObject)){
-                    Debug.Log("Removing nearby object: " + nearbyObject.gameObject.name);
-                    if (nearbyObject.CompareTag("Enemy")){
+                    if (nearbyObject.CompareTag("Enemy")) {
                         enemyRemoved++;
-                    }
-                    else if (nearbyObject.CompareTag("Chest")){
+                    } else if (nearbyObject.CompareTag("Chest")) {
                         chestRemoved++;
-                    }
-                    else if (nearbyObject.CompareTag("Portal")){
+                    } else if (nearbyObject.CompareTag("Portal")) {
                         portalRemoved++;
                     }
                     removedObjects.Add(nearbyObject.gameObject);
@@ -556,10 +627,18 @@ public class MapGenerationShowcase : MonoBehaviour{
             enemyReposition = enemyCount - enemyRemoved;
             chestReposition = chestCount - chestRemoved;
             portalReposition = portalCount - portalRemoved;
+            int miniBossCount = 0;
+            int bossCount = 0;
 
             SpawnObjects(enemySpawns, Enemy, ref enemyReposition, enemyCount, statScale);
             SpawnObjects(chestSpawns, Chest, ref chestReposition, chestCount, 1f);
             SpawnObjects(portalSpawns, Portal, ref portalReposition, portalCount, 1f);
+            if (miniBossFloor){
+                SpawnObjects(enemySpawns, Miniboss, ref miniBossCount, 1, 1f);
+            }
+            if (bossFloor){
+                SpawnObjects(enemySpawns, Boss, ref bossCount, 1, 1f);
+            }
         }
         else{
             Debug.LogWarning("No valid floor tiles to spawn the player.");
@@ -567,10 +646,27 @@ public class MapGenerationShowcase : MonoBehaviour{
     }
 
 
-    void RemoveSpawnPos(Vector3 center, float radius){
-        SpawnRemover(center, radius, enemySpawns);
-        SpawnRemover(center, radius, chestSpawns);
-        SpawnRemover(center, radius, portalSpawns);
+    void RemoveSpawnPos(Vector3 spawnPosition, float radius){
+        SpawnRemover(spawnPosition, radius, enemySpawns);
+        SpawnRemover(spawnPosition, radius, chestSpawns);
+        SpawnRemover(spawnPosition, radius, portalSpawns);
+    }
+
+    Vector3Int FindLowestMiddleFloor(List<Vector3Int> floorTiles) {
+        int lowestY = int.MaxValue;
+        int middleX = width / 2;
+        Vector3Int lowestMiddleFloor = Vector3Int.zero;
+
+        foreach (Vector3Int floorTile in floorTiles) {
+            if (floorTile.x == middleX) {
+                if (floorTile.y < lowestY) {
+                    lowestY = floorTile.y;
+                    lowestMiddleFloor = floorTile;
+                }
+            }
+        }
+
+        return lowestMiddleFloor;
     }
 
     void SpawnRemover(Vector3 center, float radius, List<Vector3Int> spawnPositions){

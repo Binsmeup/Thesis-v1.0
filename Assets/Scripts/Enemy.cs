@@ -24,5 +24,11 @@ public class Enemy : MonoBehaviour
                 damagable.OnHit(baseDamage, damageMulti, critChance, critDamage, knockback);
             }
         }
+        else if (collider.CompareTag("Debris")){
+            Debris debris = collider.GetComponent<Debris>();
+            if (debris != null){
+                debris.Destroy();
+            }
+        }
     }
 }

@@ -7,8 +7,6 @@ public class MapGeneration : MonoBehaviour{
     public Tilemap Tilemap;
     public Tile Floor;
     public Tile Wall;
-    public Tile Object1;
-
     public GameObject Player;
     public GameObject Basic;
 
@@ -22,10 +20,10 @@ public class MapGeneration : MonoBehaviour{
     public GameObject Chest;
 
     public GameObject Coin;
+    public GameObject Debris;
     public GameObject Potion;
 
     public Tilemap WallCollision;
-    public Tilemap Item;
 
     public int killCount;
 
@@ -69,6 +67,7 @@ public class MapGeneration : MonoBehaviour{
     private List<Vector3Int> chestSpawns = new List<Vector3Int>();
     private List<Vector3Int> portalSpawns = new List<Vector3Int>();
     private List<Vector3Int> coinSpawns = new List<Vector3Int>();
+    private List<Vector3Int> debrisSpawns = new List<Vector3Int>();
     private List<Vector3Int> potionSpawns = new List<Vector3Int>();
     
 
@@ -359,11 +358,14 @@ public class MapGeneration : MonoBehaviour{
         int chestSpawnedCount = 0;
         int portalSpawnedCount = 0;
         int coinSpawnedCount = 0;
+        int debrisSpawnedCount = 0;
         int potionSpawnedCount = 0;
         int coinCount = 0;
+        int debrisCount = 0;
         int potionCount = 0;
         enemySpawns.Clear();
         coinSpawns.Clear();
+        debrisSpawns.Clear();
         potionSpawns.Clear();
         chestSpawns.Clear();
         portalSpawns.Clear();
@@ -377,35 +379,44 @@ public class MapGeneration : MonoBehaviour{
                     float modifiedValue = perlinValue * 3f; 
                     float randomChance = Random.Range(0f, 100f);
 
-                    if (modifiedValue >= 0 && modifiedValue < 0.5f){
-                        if (randomChance <= 5f){
-                            Item.SetTile(tilePosition, Object1);
+                    if (modifiedValue >= 0 && modifiedValue <= 0.5f){
+                        if (randomChance <= 60f){
+                            debrisSpawns.Add(tilePosition);
+                            debrisCount++;
                         }
                         else if(randomChance >= 99f){
                             potionSpawns.Add(tilePosition);
                             potionCount++;
                         }
                     }
-                    else if (modifiedValue >= 0.51f && modifiedValue < 1.25f){
+                    else if (modifiedValue > 0.5f && modifiedValue <= 1.25f){
                         if (randomChance <= 50f){
                             enemySpawns.Add(tilePosition);
                         }
-                        else if (randomChance >= 92.5f){
+                        else if (randomChance >= 90f && randomChance <= 95f){
+                            debrisSpawns.Add(tilePosition);
+                            debrisCount++;
+                        }
+                        else if (randomChance > 95f){
                             coinSpawns.Add(tilePosition);
                             coinCount++;
                         }
                     }
-                    else if (modifiedValue >= 1.26f && modifiedValue < 1.75f && randomChance <= 10f){
+                    else if (modifiedValue > 1.25f && modifiedValue <= 1.75f && randomChance <= 10f){
                         if (randomChance <= 35f){
                             enemySpawns.Add(tilePosition);
                         }
-                        else if (randomChance >= 85f){
+                        else if (randomChance >= 75f && randomChance <= 90f){
+                            debrisSpawns.Add(tilePosition);
+                            debrisCount++;
+                        }
+                        else if (randomChance > 90f){
                             coinSpawns.Add(tilePosition);
                             coinCount++;
                         }
                     }
-                    else if (modifiedValue >= 1.76f && modifiedValue < 3){
-                        if (randomChance <= 50f){
+                    else if (modifiedValue > 1.75f && modifiedValue < 3){
+                        if (randomChance >= 50f){
                             chestSpawns.Add(tilePosition);
                         }
                         else{
@@ -417,6 +428,7 @@ public class MapGeneration : MonoBehaviour{
         }
         SpawnObjects(coinSpawns, Coin, ref coinSpawnedCount, coinCount, 1f, false);
         SpawnObjects(potionSpawns, Potion, ref potionSpawnedCount, potionCount, 1f, false);
+        SpawnObjects(debrisSpawns, Debris, ref debrisSpawnedCount, debrisCount, 1f, false);
         if (enableCharger || enableFast || enableRanged || enableTank || enableSniper){
             int dividedEnemyCount = DivideEnemyCount();
             if (enableCharger){
@@ -674,7 +686,6 @@ public class MapGeneration : MonoBehaviour{
     public void ClearTiles() {
         Tilemap.ClearAllTiles();
         WallCollision.ClearAllTiles();
-        Item.ClearAllTiles();
     }
     int DivideEnemyCount(){
     bool[] enemyTypes = new bool[] { enableCharger, enableFast, enableRanged, enableTank, enableSniper };

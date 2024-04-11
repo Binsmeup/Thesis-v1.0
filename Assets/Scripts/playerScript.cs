@@ -125,6 +125,12 @@ public class playerScript : MonoBehaviour{
             Vector2 knockback = direction * trueKnockbackForce;
             damagable.OnHit(baseDamage, damageMulti, critChance, critDamage, knockback);
         }
+        else if (other.tag == "Debris"){
+            Debris debris = other.GetComponent<Debris>();
+            if (debris != null){
+                debris.Destroy();
+            }
+        }
     }
 
     private IEnumerator attackLimit(){
