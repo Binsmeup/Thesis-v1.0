@@ -40,6 +40,7 @@ public class DebugUI : MonoBehaviour
     public Toggle cellular_CD;
     public Toggle perlin_CD;
     public Toggle CD_iteration;
+    public Toggle oneLine;
 
     public int floorCountValue;
     public int defaultWidthValue;
@@ -84,6 +85,7 @@ public class DebugUI : MonoBehaviour
         cellular_CD = root.Q<Toggle>("cooldownOnCellular");
         perlin_CD = root.Q<Toggle>("cooldownOnPerlin");
         CD_iteration = root.Q<Toggle>("cooldownOnIteration");
+        oneLine= root.Q<Toggle>("OneLine");
 
         GMnoFR.clicked += OnGMnoFRClicked;
         GMwithFR.clicked += OnGMwithFRClicked;
@@ -113,7 +115,9 @@ public class DebugUI : MonoBehaviour
         cellular_CD.RegisterValueChangedCallback(evt => OnCellularCDChanged(evt.newValue));
         perlin_CD.RegisterValueChangedCallback(evt => OnPerlinCDChanged(evt.newValue));
         CD_iteration.RegisterValueChangedCallback(evt => OnCDIterationChanged(evt.newValue));
+        oneLine.RegisterValueChangedCallback(evt => OnOneLineChanged(evt.newValue));
 
+        
 
         mapGenerationShowcase = FindObjectOfType<MapGenerationShowcase>();
         EnableButtons();
@@ -389,6 +393,12 @@ public class DebugUI : MonoBehaviour
     void OnCDIterationChanged(bool newValue)
     {
         mapGenerationShowcase.iterationCDChange(newValue);
+        Debug.Log("Cooldown Iteration toggled: " + newValue);
+    }
+
+    void OnOneLineChanged(bool newValue)
+    {
+        mapGenerationShowcase.OneLineChange(newValue);
         Debug.Log("Cooldown Iteration toggled: " + newValue);
     }
 

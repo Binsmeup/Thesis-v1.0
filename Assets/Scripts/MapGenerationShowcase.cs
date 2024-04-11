@@ -765,4 +765,9 @@ public class MapGenerationShowcase : MonoBehaviour
     {
         cooldownOnIteration = toggle;
     }
+    public void OneLineChange(bool toggle)
+    {
+        OneLine = toggle;
+    }
+
 }
