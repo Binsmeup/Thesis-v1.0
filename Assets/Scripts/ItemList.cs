@@ -4,7 +4,7 @@ using UnityEngine;
 public class ItemList : ScriptableObject{
 
     public string itemName,Type,WeaponType;
-    public float baseDmg,dmgMulti,critCHA,critDMG,atkSPD,maxHP,KB,MS,HelmetMaxHealth,ChestMaxHealth,LegMaxHealth;
+    public float baseDmg,dmgMulti,critCHA,critDMG,atkSPD,atkSPDModifier,maxHP,HP,KB,MS,HelmetMaxHealth,ChestMaxHealth,LegMaxHealth;
     public GameObject itemObject;
     private float TempArmorHP;
     private float TempArmorHPDrop;
@@ -64,6 +64,7 @@ public class ItemList : ScriptableObject{
     }
 
         healthManager.maxHealth += maxHP;
+        healthManager.health += HP;
         healthManager.HelmMaxHP += HelmetMaxHealth;
         healthManager.ChestMaxHP += ChestMaxHealth;
         healthManager.LegMaxHP += LegMaxHealth;
@@ -74,6 +75,7 @@ public class ItemList : ScriptableObject{
         playerStats.baseDamage += baseDmg;
         playerStats.damageMulti += dmgMulti;
         playerStats.attackSpeed += atkSPD;
+        playerStats.attackSpeedModifier += atkSPDModifier;
         playerStats.critChance += critCHA;
         playerStats.critDamage += critDMG;
         playerStats.knockbackForce += KB;
@@ -114,12 +116,14 @@ public class ItemList : ScriptableObject{
         }
 
         healthManager.maxHealth -= maxHP;
+        healthManager.health -= HP;
 
         playerStats.baseDamage -= baseDmg;
         playerStats.damageMulti -= dmgMulti;
         playerStats.critChance -= critCHA;
         playerStats.critDamage -= critDMG;
         playerStats.attackSpeed -= atkSPD;
+        playerStats.attackSpeedModifier -= atkSPDModifier;
         playerStats.knockbackForce -= KB;
         playerStats.moveSpeed -= MS;
 

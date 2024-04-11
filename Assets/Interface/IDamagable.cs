@@ -11,8 +11,6 @@ public interface IDamagable{
 
     public void OnHit(float baseDamage, float damageMulti, float critChance, float critDamage, Vector2 knockback);
 
-    public void OnHit(float baseDamage, float damageMulti, float critChance, float critDamage);
-
     
 
 }

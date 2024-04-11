@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - Chest
   - Portal
+  - Wall
+  - Debris
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -14,8 +17,8 @@ TagManager:
   - Wall
   - Water
   - UI
-  - 
-  - 
+  - Debris
+  - Player
   - 
   - 
   - 

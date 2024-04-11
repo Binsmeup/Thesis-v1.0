@@ -85,7 +85,7 @@ public class DebugUI : MonoBehaviour
         cellular_CD = root.Q<Toggle>("cooldownOnCellular");
         perlin_CD = root.Q<Toggle>("cooldownOnPerlin");
         CD_iteration = root.Q<Toggle>("cooldownOnIteration");
-        oneLine= root.Q<Toggle>("OneLine");
+        oneLine = root.Q<Toggle>("OneLine");
 
         GMnoFR.clicked += OnGMnoFRClicked;
         GMwithFR.clicked += OnGMwithFRClicked;
@@ -117,7 +117,7 @@ public class DebugUI : MonoBehaviour
         CD_iteration.RegisterValueChangedCallback(evt => OnCDIterationChanged(evt.newValue));
         oneLine.RegisterValueChangedCallback(evt => OnOneLineChanged(evt.newValue));
 
-        
+
 
         mapGenerationShowcase = FindObjectOfType<MapGenerationShowcase>();
         EnableButtons();
@@ -370,8 +370,6 @@ public class DebugUI : MonoBehaviour
         }
     }
 
-
-
     void OnNoiseCDChanged(bool newValue)
     {
         mapGenerationShowcase.noiseCDChange(newValue);
@@ -395,7 +393,6 @@ public class DebugUI : MonoBehaviour
         mapGenerationShowcase.iterationCDChange(newValue);
         Debug.Log("Cooldown Iteration toggled: " + newValue);
     }
-
     void OnOneLineChanged(bool newValue)
     {
         mapGenerationShowcase.OneLineChange(newValue);

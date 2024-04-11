@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 623175d241e6b0946a05b21d9207b70e, type: 3}
+  m_Name: RareBat
+  m_EditorClassIdentifier: 
+  itemName: RareBat
+  Type: Weapon
+  WeaponType: Bat
+  baseDmg: 20
+  dmgMulti: 1.3
+  critCHA: 15
+  critDMG: 2
+  atkSPD: 0.4
+  atkSPDModifier: 0
+  maxHP: 0
+  HP: 0
+  KB: 6
+  MS: 0
+  HelmetMaxHealth: 0
+  ChestMaxHealth: 0
+  LegMaxHealth: 0
+  itemObject: {fileID: 2717819469764107534, guid: 1c1ba70cf0dc8f5489e92d6bedeb25b3, type: 3}

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Loot : MonoBehaviour
 {
-    public float goldMin;
-    public float goldMax;
+    public int goldMin;
+    public int goldMax;
     public float itemDropChance;
     public float legendaryChance;
     public float rareChance;
@@ -15,11 +15,19 @@ public class Loot : MonoBehaviour
     public List<ItemList> commonItems;
 
     public void DropItem(){
-        float dropChance = Random.Range(0f, 1f);
+        float dropChance = Random.Range(0f, 100f);
+        int goldDrop = Random.Range(goldMin, goldMax);
+        GameObject player = GameObject.Find("Player");
+        if (player != null){
+            playerScript script = player.GetComponent<playerScript>();
+            if (script != null){
+                script.getCoins(goldDrop);
+            }
+        }
 
         if (dropChance <= itemDropChance){
-            float legendaryItemPool = Random.Range(0f, 1f);
-            float rareItemPool = Random.Range(0f, 1f);
+            float legendaryItemPool = Random.Range(0f, 100f);
+            float rareItemPool = Random.Range(0f, 100f);
 
             if (legendaryItemPool <= legendaryChance){
                 DropRandomItem(legendaryItems);

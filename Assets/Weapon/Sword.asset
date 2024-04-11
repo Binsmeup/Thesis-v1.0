@@ -16,11 +16,12 @@ MonoBehaviour:
   Type: Weapon
   WeaponType: Sword
   baseDmg: 10
-  dmgMulti: 1
+  dmgMulti: 1.1
   critCHA: 5
   critDMG: 1.5
   atkSPD: 0.3
   maxHP: 0
+  HP: 0
   KB: 3
   MS: 0
   HelmetMaxHealth: 0

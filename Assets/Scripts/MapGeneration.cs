@@ -7,15 +7,25 @@ public class MapGeneration : MonoBehaviour{
     public Tilemap Tilemap;
     public Tile Floor;
     public Tile Wall;
-    public Tile Object1;
-
     public GameObject Player;
-    public GameObject Enemy;
+    public GameObject Basic;
+
+    public GameObject Charger;
+    public GameObject Fast;
+    public GameObject RangedEnemy;
+    public GameObject Sniper;
+    public GameObject Tank;
+    public GameObject Boss;
     public GameObject Portal;
     public GameObject Chest;
 
+    public GameObject Coin;
+    public GameObject Debris;
+    public GameObject Potion;
+
     public Tilemap WallCollision;
-    public Tilemap Item;
+
+    public int killCount;
 
     public int floorCount;
     public int defaultWidth;
@@ -25,6 +35,14 @@ public class MapGeneration : MonoBehaviour{
     public int defaultEnemyCount;
     public float perlinScale = 0.1f;
 
+    public enum EnemyType {
+        Charger,
+        Fast,
+        Ranged,
+        Tank,
+        Sniper
+    }
+
     private int width;
     private int height;
     private int density;
@@ -32,13 +50,25 @@ public class MapGeneration : MonoBehaviour{
     private int enemyCount;
     private int chestCount;
     private int portalCount = 1;
+    private bool miniBossFloor;
+    private bool bossFloor;
     private float statScale;
+    private bool enableSpeedScaling;
+    
+    private bool enableCharger;
+    private bool enableFast;
+    private bool enableRanged;
+    private bool enableTank;
+    private bool enableSniper;
 
     private TileBase[,] grid;
 
     private List<Vector3Int> enemySpawns = new List<Vector3Int>();
     private List<Vector3Int> chestSpawns = new List<Vector3Int>();
     private List<Vector3Int> portalSpawns = new List<Vector3Int>();
+    private List<Vector3Int> coinSpawns = new List<Vector3Int>();
+    private List<Vector3Int> debrisSpawns = new List<Vector3Int>();
+    private List<Vector3Int> potionSpawns = new List<Vector3Int>();
     
 
     void Start(){
@@ -68,66 +98,83 @@ public class MapGeneration : MonoBehaviour{
             }
         density = defaultDensity;
         iteration = defaultIteration;
+        miniBossFloor = false;
+        bossFloor = false;
         enemyCount = defaultEnemyCount + (3 * floorCount);
         if (enemyCount >= 210){
                 enemyCount = 210;
             }
         switch (floorCount){
-            case int n when n >= 1 && n <= 4:
+            case int n when n >= 1 && n <= 5:
                 statScale = 0.1f;
                 chestCount = 1;
+                switch (floorCount){
+                    case 4:
+                    miniBossFloor = true;
+                    break;
+                    case 5:
+                    BossRoom();
+                    break;
+                default:
+
+                break;               
+            }
             break;
-            case int n when n >= 6 && n <= 9:
+            case int n when n >= 6 && n <= 10:
                 statScale = 0.15f;
                 chestCount = 2;
+                enableCharger = true;
+                enableFast = true;
+                switch (floorCount){
+                    case 9:
+                    miniBossFloor = true;
+                    break;
+                    case 10:
+                    BossRoom();
+                    break;
+                default:
+                
+                break;               
+            }
             break;
-            case int n when n >= 11 && n <= 14:
+            case int n when n >= 11 && n <= 15:
                 statScale = 0.2f;
                 chestCount = 3;
+                enableRanged = true;
+                enableCharger = true;
+                enableFast = true;
+                enableSpeedScaling = true;
+                switch (floorCount){
+                    case 14:
+                    miniBossFloor = true;
+                    break;
+                    case 15:
+                    BossRoom();
+                    break;
+                default:
+                
+                break;               
+            }
             break;
-            case int n when n >= 16 && n <= 19:
+            case int n when n >= 16 && n <= 20:
                 statScale = 0.25f;
                 chestCount = 4;
-            break;
-            case 5:
-                statScale = 0.1f;
-                chestCount = 0;
-                width = 40;
-                height = 40;
-                density = 50;
-                iteration = 10;
-                enemyCount = 0;
-                chestCount = 0;
-            break;
-            case 10:
-                statScale = 0.15f;
-                chestCount = 0;
-                width = 40;
-                height = 40;
-                density = 50;
-                iteration = 10;
-                enemyCount = 0;
-                chestCount = 0;
-            break;
-            case 15:
-                statScale = 0.2f;
-                chestCount = 0;
-                width = 40;
-                height = 40;
-                density = 50;
-                iteration = 10;
-                enemyCount = 0;
-                chestCount = 0;
-            break;
-            case 20:
-                statScale = 0.25f;
-                chestCount = 0;
-                width = 40;
-                height = 40;
-                density = 50;
-                iteration = 10;
-                enemyCount = 0;
-                chestCount = 0;
+                enableCharger = true;
+                enableFast = true;
+                enableRanged = true;
+                enableSniper = true;
+                enableTank = true;
+                switch (floorCount){
+                    case 19:
+                    miniBossFloor = true;
+                    break;
+                    case 20:
+                    BossRoom();
+                    break;
+                default:
+                
+                break;               
+            }
             break;
 
             default:
@@ -135,6 +182,18 @@ public class MapGeneration : MonoBehaviour{
                 chestCount = 0;
             break;
         }   
+    }
+
+    void BossRoom(){
+        bossFloor = true;
+        chestCount = 0;
+        width = 40;
+        height = 40;
+        density = 50;
+        iteration = 10;
+        enemyCount = 0;
+        chestCount = 0;
+        portalCount = 0;
     }
 
     void CreateGrid(){
@@ -298,7 +357,16 @@ public class MapGeneration : MonoBehaviour{
         int enemySpawnedCount = 0;
         int chestSpawnedCount = 0;
         int portalSpawnedCount = 0;
+        int coinSpawnedCount = 0;
+        int debrisSpawnedCount = 0;
+        int potionSpawnedCount = 0;
+        int coinCount = 0;
+        int debrisCount = 0;
+        int potionCount = 0;
         enemySpawns.Clear();
+        coinSpawns.Clear();
+        debrisSpawns.Clear();
+        potionSpawns.Clear();
         chestSpawns.Clear();
         portalSpawns.Clear();
 
@@ -311,44 +379,124 @@ public class MapGeneration : MonoBehaviour{
                     float modifiedValue = perlinValue * 3f; 
                     float randomChance = Random.Range(0f, 100f);
 
-                    if (modifiedValue >= 0 && modifiedValue < 1 && randomChance <= 5f){
-                        Item.SetTile(tilePosition, Object1);
+                    if (modifiedValue >= 0 && modifiedValue <= 0.5f){
+                        if (randomChance <= 60f){
+                            debrisSpawns.Add(tilePosition);
+                            debrisCount++;
+                        }
+                        else if(randomChance >= 99f){
+                            potionSpawns.Add(tilePosition);
+                            potionCount++;
+                        }
                     }
-                    else if (modifiedValue >= 1 && modifiedValue < 2){
-                        enemySpawns.Add(tilePosition);
+                    else if (modifiedValue > 0.5f && modifiedValue <= 1.25f){
+                        if (randomChance <= 50f){
+                            enemySpawns.Add(tilePosition);
+                        }
+                        else if (randomChance >= 90f && randomChance <= 95f){
+                            debrisSpawns.Add(tilePosition);
+                            debrisCount++;
+                        }
+                        else if (randomChance > 95f){
+                            coinSpawns.Add(tilePosition);
+                            coinCount++;
+                        }
                     }
-                    else if (modifiedValue >= 2 && modifiedValue < 3 && randomChance <= 15f){
-                        //coin
+                    else if (modifiedValue > 1.25f && modifiedValue <= 1.75f && randomChance <= 10f){
+                        if (randomChance <= 35f){
+                            enemySpawns.Add(tilePosition);
+                        }
+                        else if (randomChance >= 75f && randomChance <= 90f){
+                            debrisSpawns.Add(tilePosition);
+                            debrisCount++;
+                        }
+                        else if (randomChance > 90f){
+                            coinSpawns.Add(tilePosition);
+                            coinCount++;
+                        }
                     }
-                    else if (modifiedValue >= 2 && modifiedValue < 3){
-                        chestSpawns.Add(tilePosition);
-                        portalSpawns.Add(tilePosition);
+                    else if (modifiedValue > 1.75f && modifiedValue < 3){
+                        if (randomChance >= 50f){
+                            chestSpawns.Add(tilePosition);
+                        }
+                        else{
+                            portalSpawns.Add(tilePosition);
+                        }
                     }
                 }
             }
         }
-
-        SpawnObjects(enemySpawns, Enemy, ref enemySpawnedCount, enemyCount, statScale);
-        SpawnObjects(chestSpawns, Chest, ref chestSpawnedCount, chestCount, 1f);
-        SpawnObjects(portalSpawns, Portal, ref portalSpawnedCount, portalCount, 1f);
+        SpawnObjects(coinSpawns, Coin, ref coinSpawnedCount, coinCount, 1f, false);
+        SpawnObjects(potionSpawns, Potion, ref potionSpawnedCount, potionCount, 1f, false);
+        SpawnObjects(debrisSpawns, Debris, ref debrisSpawnedCount, debrisCount, 1f, false);
+        if (enableCharger || enableFast || enableRanged || enableTank || enableSniper){
+            int dividedEnemyCount = DivideEnemyCount();
+            if (enableCharger){
+                SpawnObjects(enemySpawns, Charger, ref enemySpawnedCount, dividedEnemyCount, statScale, false);
+                enemySpawnedCount = 0;
+            }
+            if (enableFast){
+                SpawnObjects(enemySpawns, Fast, ref enemySpawnedCount, dividedEnemyCount, statScale, false);
+                enemySpawnedCount = 0;
+            }
+            if (enableRanged){
+                SpawnObjects(enemySpawns, RangedEnemy, ref enemySpawnedCount, dividedEnemyCount, statScale, false);
+                enemySpawnedCount = 0;
+            }
+            if (enableTank){
+                SpawnObjects(enemySpawns, Tank, ref enemySpawnedCount, dividedEnemyCount, statScale, false);
+                enemySpawnedCount = 0;
+            }
+            if (enableSniper){
+                SpawnObjects(enemySpawns, Sniper, ref enemySpawnedCount, dividedEnemyCount, statScale, false);
+                enemySpawnedCount = 0;
+            }
+            SpawnObjects(enemySpawns, Basic, ref enemySpawnedCount, dividedEnemyCount, statScale, false);
+        }
+        else{
+            SpawnObjects(enemySpawns, Basic, ref enemySpawnedCount, enemyCount, statScale, false);
+        }
+        SpawnObjects(chestSpawns, Chest, ref chestSpawnedCount, chestCount, 1f, false);
+        SpawnObjects(portalSpawns, Portal, ref portalSpawnedCount, portalCount, 1f, false);
     }
 
-    void SpawnObjects(List<Vector3Int> spawnPositions, GameObject prefab, ref int spawnedCount, int totalCount, float scale){
+    void SpawnObjects(List<Vector3Int> spawnPositions, GameObject prefab, ref int spawnedCount, int totalCount, float scale, bool miniBoss){
+        float miniBossScaling = 1;
+        if (miniBoss){
+            miniBossScaling = 3f;
+        }
         while (spawnedCount < totalCount && spawnPositions.Count > 0) {
             Vector3Int spawnPosition = spawnPositions[Random.Range(0, spawnPositions.Count)];
             spawnPositions.Remove(spawnPosition);
 
             GameObject obj = Instantiate(prefab, Tilemap.GetCellCenterWorld(spawnPosition), Quaternion.identity);
+            if (miniBoss) {
+                obj.name = "MiniBoss_" + prefab.name;
+            }
 
             HealthManager healthManager = obj.GetComponent<HealthManager>();
             Enemy enemyScript = obj.GetComponent<Enemy>();
+            EnemyChase speedScript = obj.GetComponent<EnemyChase>();
+            Loot lootScript = obj.GetComponent<Loot>();
 
             if (healthManager != null) {
-                healthManager.maxHealth *= (1 + statScale * (floorCount-1)) ;
+                healthManager.maxHealth *= (1 + statScale * (floorCount-1))*(miniBossScaling);
                 healthManager.health = healthManager.maxHealth;
             }
             if (enemyScript != null){
-                enemyScript.baseDamage *= (1 + statScale * (floorCount-1));
+                enemyScript.baseDamage *= (1 + statScale * (floorCount-1))*(miniBossScaling/2);
+            }
+            if (speedScript != null){
+                if (enableSpeedScaling){
+                    speedScript.moveForce *= (1 + statScale) ;
+                }
+            }
+            if (lootScript != null){
+                if (miniBoss){
+                    lootScript.goldMin += 3;
+                    lootScript.goldMax += 5;
+                    lootScript.itemDropChance = 100f;
+                }
             }
             spawnedCount++;
         }
@@ -380,23 +528,32 @@ public class MapGeneration : MonoBehaviour{
 
         for (int x = 0; x < width; x++){
             for (int y = 0; y < height; y++){
-            Vector3Int tilePosition = new Vector3Int(x, y, 0);
-            if (grid[x, y] == Floor){
+                Vector3Int tilePosition = new Vector3Int(x, y, 0);
+                if (grid[x, y] == Floor){
                     floorTiles.Add(tilePosition);
                 }
             }  
         }
 
         if (floorTiles.Count > 0){
-            Vector3Int randomFloorTile;
+            Vector3Int playerSpawnPoint = Vector3Int.zero;
 
-            do{
-                randomFloorTile = floorTiles[Random.Range(0, floorTiles.Count)];
-            } while (HasWallsInRadius(randomFloorTile));
+            if (bossFloor) {
+                playerSpawnPoint = FindLowestMiddleFloor(floorTiles);
+                playerSpawnPoint += Vector3Int.up;
+            } else {
+                Vector3Int randomFloorTile;
 
-            Player.transform.position = Tilemap.GetCellCenterWorld(randomFloorTile);
+                do {
+                    randomFloorTile = floorTiles[Random.Range(0, floorTiles.Count)];
+                } while (HasWallsInRadius(randomFloorTile));
 
-            Vector3 center = Tilemap.GetCellCenterWorld(randomFloorTile);
+                playerSpawnPoint = randomFloorTile;
+            }
+
+            Player.transform.position = Tilemap.GetCellCenterWorld(playerSpawnPoint);
+
+            Vector3 center = Tilemap.GetCellCenterWorld(playerSpawnPoint);
             CircleCollider2D collider = Player.GetComponent<CircleCollider2D>();
             float radius = collider.radius;
 
@@ -404,7 +561,6 @@ public class MapGeneration : MonoBehaviour{
             foreach (Collider2D nearbyObject in nearbyObjects){
                 if ((nearbyObject.CompareTag("Enemy") || nearbyObject.CompareTag("Chest") || nearbyObject.CompareTag("Portal"))
                     && !removedObjects.Contains(nearbyObject.gameObject)){
-                    Debug.Log("Removing nearby object: " + nearbyObject.gameObject.name);
                     if (nearbyObject.CompareTag("Enemy")) {
                         enemyRemoved++;
                     } else if (nearbyObject.CompareTag("Chest")) {
@@ -421,17 +577,60 @@ public class MapGeneration : MonoBehaviour{
             enemyReposition = enemyCount - enemyRemoved;
             chestReposition = chestCount - chestRemoved;
             portalReposition = portalCount - portalRemoved;
+            int miniBossCount = 0;
+            int bossCount = 0;
 
-            SpawnObjects(enemySpawns, Enemy, ref enemyReposition, enemyCount, statScale);
-            SpawnObjects(chestSpawns, Chest, ref chestReposition, chestCount, 1f);
-            SpawnObjects(portalSpawns, Portal, ref portalReposition, portalCount, 1f);
+            SpawnObjects(enemySpawns, Basic, ref enemyReposition, enemyCount, statScale, false);
+            SpawnObjects(chestSpawns, Chest, ref chestReposition, chestCount, 1f, false);
+            SpawnObjects(portalSpawns, Portal, ref portalReposition, portalCount, 1f, false);
+            if (miniBossFloor){
+                string chosenType = ChooseType();
+                switch (chosenType) {
+                    case "Charger":
+                    SpawnObjects(enemySpawns, Charger, ref miniBossCount, 1, 1f, true);
+                    break;
+                    case "Fast":
+                    SpawnObjects(enemySpawns, Fast, ref miniBossCount, 1, 1f, true);
+                    break;
+                    case "Ranged":
+                    SpawnObjects(enemySpawns, RangedEnemy, ref miniBossCount, 1, 1f, true);
+                    break;
+                    case "Sniper":
+                    SpawnObjects(enemySpawns, Sniper, ref miniBossCount, 1, 1f, true);
+                    break;
+                    case "Tank":
+                    SpawnObjects(enemySpawns, Tank, ref miniBossCount, 1, 1f, true);
+                    break;
+                    case "Basic":
+                    SpawnObjects(enemySpawns, Basic, ref miniBossCount, 1, 1f, true);
+                    break;
+                }
+            }
+            if (bossFloor){
+                SpawnObjects(enemySpawns, Boss, ref bossCount, 1, 1f, false);
+            }
         }
         else{
             Debug.LogWarning("bad");
         }
     }
 
+    Vector3Int FindLowestMiddleFloor(List<Vector3Int> floorTiles) {
+        int lowestY = int.MaxValue;
+        int middleX = width / 2;
+        Vector3Int lowestMiddleFloor = Vector3Int.zero;
 
+        foreach (Vector3Int floorTile in floorTiles) {
+            if (floorTile.x == middleX) {
+                if (floorTile.y < lowestY) {
+                    lowestY = floorTile.y;
+                    lowestMiddleFloor = floorTile;
+                }
+            }
+        }
+
+        return lowestMiddleFloor;
+    }
 
     void RemoveSpawnPos(Vector3 center, float radius){
         SpawnRemover(center, radius, enemySpawns);
@@ -473,10 +672,59 @@ public class MapGeneration : MonoBehaviour{
         return false;
     }
 
+    public void addKill(){
+        killCount++;
+    }
+
+    public void CreatePortal(){
+        Vector3Int centerTile = new Vector3Int(width / 2, height / 2, 0);
+
+        Vector3 portalPosition = Tilemap.GetCellCenterWorld(centerTile);
+        GameObject portalObject = Instantiate(Portal, portalPosition, Quaternion.identity);
+    }
 
     public void ClearTiles() {
         Tilemap.ClearAllTiles();
         WallCollision.ClearAllTiles();
-        Item.ClearAllTiles();
+    }
+    int DivideEnemyCount(){
+    bool[] enemyTypes = new bool[] { enableCharger, enableFast, enableRanged, enableTank, enableSniper };
+    
+    int enabledEnemyTypes = 1;
+
+    foreach (bool enabled in enemyTypes) {
+        if (enabled) {
+            enabledEnemyTypes++;
+        }
+    }
+
+    int dividedEnemyCount = enemyCount / enabledEnemyTypes;
+    return dividedEnemyCount;
+    }
+    public string ChooseType() {
+        List<EnemyType> enabledTypes = new List<EnemyType>();
+
+        if (enableCharger) {
+            enabledTypes.Add(EnemyType.Charger);
+        }
+        if (enableFast) {
+            enabledTypes.Add(EnemyType.Fast);
+        }
+        if (enableRanged) {
+            enabledTypes.Add(EnemyType.Ranged);
+        }
+        if (enableTank) {
+            enabledTypes.Add(EnemyType.Tank);
+        }
+        if (enableSniper) {
+            enabledTypes.Add(EnemyType.Sniper);
+        }
+
+        if (enabledTypes.Count == 0) {
+            return "Basic";
+        }
+
+        int randomIndex = UnityEngine.Random.Range(0, enabledTypes.Count);
+        return enabledTypes[randomIndex].ToString();
     }
 }
