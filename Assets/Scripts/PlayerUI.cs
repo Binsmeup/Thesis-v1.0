@@ -127,9 +127,9 @@ public class PlayerUI : MonoBehaviour{
         }
     }
 
-    // Update is called once per frame
     void Update(){
         UpdateUI();
+
         if (healthManager.health <= 0)
         {
             Debug.Log("Health is 0 or less");
