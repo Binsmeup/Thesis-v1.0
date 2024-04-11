@@ -108,7 +108,7 @@ public class DebugUI : MonoBehaviour
     {
         if (mapGenerationShowcase != null)
         {
-            mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap(false,floorCountValue,defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue));//not sure what to do here
+            mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap(false,floorCountValue,defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue));
             DisableButtons();
         }
         else
@@ -120,7 +120,7 @@ public class DebugUI : MonoBehaviour
 
     void OnGMwithFRClicked()
     {
-        mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap(true,floorCountValue,defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue));//not sure what to do here
+        mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap(true,floorCountValue,defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue));
         DisableButtons();
 
     }
