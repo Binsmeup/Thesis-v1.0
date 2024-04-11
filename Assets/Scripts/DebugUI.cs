@@ -37,6 +37,7 @@ public class DebugUI : MonoBehaviour
     public Toggle perlin_CD;
     public Toggle CD_iteration;
     public Toggle CD;
+    public Toggle oneLine;
 
     public int floorCountValue;
     public int defaultWidthValue;
@@ -73,6 +74,7 @@ public class DebugUI : MonoBehaviour
         perlin_CD = root.Q<Toggle>("cooldownOnPerlin");
         CD_iteration = root.Q<Toggle>("cooldownOnIteration");
         CD = root.Q<Toggle>("cooldown");
+        oneLine = root.Q<Toggle>("OneLine");
 
         GMnoFR.clicked += OnGMnoFRClicked;
         GMwithFR.clicked += OnGMwithFRClicked;
@@ -98,6 +100,9 @@ public class DebugUI : MonoBehaviour
         perlin_CD.RegisterValueChangedCallback(evt => OnPerlinCDChanged(evt.newValue));
         CD_iteration.RegisterValueChangedCallback(evt => OnCDIterationChanged(evt.newValue));
         CD.RegisterValueChangedCallback(evt => OnCDChanged(evt.newValue));
+        oneLine.RegisterValueChangedCallback(evt => OnOneLineChanged(evt.newValue));
+
+
 
         mapGenerationShowcase = FindObjectOfType<MapGenerationShowcase>();
         EnableButtons();
@@ -292,6 +297,59 @@ public class DebugUI : MonoBehaviour
             Debug.LogWarning("Invalid input for enemy count.");
         }
     }
+
+    void OnNoiseCooldownChanged(string newText)
+    {
+        if (int.TryParse(newText, out int newValue))
+        {
+            noiseCooldownValue = newValue;
+            Debug.Log("Noise cooldown value: " + noiseCooldownValue);
+        }
+        else
+        {
+            Debug.LogWarning("Invalid input for noise cooldown.");
+        }
+    }
+
+    void OnCellularCooldownChanged(string newText)
+    {
+        if (int.TryParse(newText, out int newValue))
+        {
+            cellularCooldownValue = newValue;
+            Debug.Log("Cellular cooldown value: " + cellularCooldownValue);
+        }
+        else
+        {
+            Debug.LogWarning("Invalid input for cellular cooldown.");
+        }
+    }
+
+    void OnPerlinCooldownChanged(string newText)
+    {
+        if (int.TryParse(newText, out int newValue))
+        {
+            perlinCooldownValue = newValue;
+            Debug.Log("Perlin cooldown value: " + perlinCooldownValue);
+        }
+        else
+        {
+            Debug.LogWarning("Invalid input for perlin cooldown.");
+        }
+    }
+
+    void OnGeneralCooldownChanged(string newText)
+    {
+        if (int.TryParse(newText, out int newValue))
+        {
+            cooldownValue = newValue;
+            Debug.Log("cooldown value: " + cooldownValue);
+        }
+        else
+        {
+            Debug.LogWarning("Invalid input for general cooldown.");
+        }
+    }
+
     void OnNoiseCDChanged(bool newValue)
     {
         mapGenerationShowcase.noiseCDChange(newValue);
@@ -319,4 +377,10 @@ public class DebugUI : MonoBehaviour
     {
         Debug.Log("Cooldowntoggled: " + newValue);
     }
+    void OnOneLineChanged(bool newValue)
+    {
+        mapGenerationShowcase.OneLineChange(newValue);
+        Debug.Log("Cooldown Iteration toggled: " + newValue);
+    }
+
 }
