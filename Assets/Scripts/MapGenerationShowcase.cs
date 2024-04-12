@@ -728,7 +728,19 @@ public class MapGenerationShowcase : MonoBehaviour{
         WallCollision.ClearAllTiles();
         Item.ClearAllTiles();
     }
-    public void celluarCDChange(bool toggle){
+    public void CDValueChange(float value){
+        cooldown = value;
+    }
+    public void perlinCDValueChange(float value){
+        perlinCooldown = value;
+    }
+    public void NoiseCDValueChange(float value){
+        noiseCooldown = value;
+    }
+    public void CellularCDValueChange(float value){
+        cellularCooldown = value;
+    }
+    public void cellularCDChange(bool toggle){
         cooldownOnCellular = toggle;
     }
     public void noiseCDChange(bool toggle){
@@ -740,8 +752,7 @@ public class MapGenerationShowcase : MonoBehaviour{
     public void iterationCDChange(bool toggle){
         cooldownOnIteration = toggle;
     }
-    public void OneLineChange(bool toggle)
-    {
+    public void OneLineChange(bool toggle){
         OneLine = toggle;
     }
 }
