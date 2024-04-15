@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyChase : MonoBehaviour{
+public class EnemyChase : MonoBehaviour
+{
     public string playerTag = "Player";
     public float chaseRange = 10f;
     public float moveForce = 5f;
@@ -19,17 +20,26 @@ public class EnemyChase : MonoBehaviour{
 
     public float endLag;
 
-    public Transform player;
     private Rigidbody2D rb;
     private Transform visualTransform;
     private Vector3 lastKnownPosition;
     private bool isCharging = false;
+    public Transform player;
 
     public bool isChargeCooldown = false;
 
-    private void Start(){
+    private void Start()
+    {
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag(playerTag).transform;
+        GameObject playerObject = GameObject.FindGameObjectWithTag(playerTag);
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+        }
+        else
+        {
+            Debug.LogWarning("Player object not found with tag: " + playerTag);
+        }
 
         GameObject visualObject = new GameObject("VisualObject");
         visualTransform = visualObject.transform;
@@ -37,37 +47,45 @@ public class EnemyChase : MonoBehaviour{
         visualTransform.localPosition = Vector3.zero;
     }
 
-    private void Update(){
-        if (isCharging || !canMove)
+    private void Update()
+    {
+        if (isCharging || !canMove || player == null)
             return;
-        if (inChargeRange() && canCharge && !isChargeCooldown){
-        StartCharge();
+        if (inChargeRange() && canCharge && !isChargeCooldown)
+        {
+            StartCharge();
         }
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (distanceToPlayer < chaseRange && !IsObstacleBetween()){
+        if (distanceToPlayer < chaseRange && !IsObstacleBetween())
+        {
             EnemyShoot enemyShoot = GetComponent<EnemyShoot>();
-            if (enemyShoot != null){
+            if (enemyShoot != null)
+            {
                 enemyShoot.shootReady = true;
             }
             lastKnownPosition = player.position;
 
             Vector3 direction = (player.position - transform.position).normalized;
 
-            if (distanceToPlayer > minDistanceThreshold){
+            if (distanceToPlayer > minDistanceThreshold)
+            {
                 rb.AddForce(direction * moveForce * Time.deltaTime);
             }
 
             RotateTowardsPlayer(direction);
         }
-        else if (lastKnownPosition != Vector3.zero){
+        else if (lastKnownPosition != Vector3.zero)
+        {
             EnemyShoot enemyShoot = GetComponent<EnemyShoot>();
-            if (enemyShoot != null){
+            if (enemyShoot != null)
+            {
                 enemyShoot.shootReady = false;
             }
             Vector3 directionToLastKnown = (lastKnownPosition - transform.position).normalized;
 
-            if (Vector3.Distance(transform.position, lastKnownPosition) > minDistanceThreshold){
+            if (Vector3.Distance(transform.position, lastKnownPosition) > minDistanceThreshold)
+            {
                 rb.AddForce(directionToLastKnown * moveForce * Time.deltaTime);
             }
 
@@ -75,30 +93,36 @@ public class EnemyChase : MonoBehaviour{
         }
     }
 
-    public bool IsObstacleBetween(){
-        RaycastHit2D hit = Physics2D.Linecast(transform.position, player.position, LayerMask.GetMask("Wall"));
+    public bool IsObstacleBetween()
+    {
+        if (player == null)
+            return false;
 
+        RaycastHit2D hit = Physics2D.Linecast(transform.position, player.position, LayerMask.GetMask("Wall"));
         return hit.collider != null;
     }
 
-    private void RotateTowardsPlayer(Vector3 direction){
+    private void RotateTowardsPlayer(Vector3 direction)
+    {
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         visualTransform.rotation = Quaternion.RotateTowards(visualTransform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
     }
 
-    bool inChargeRange(){
-        return Vector3.Distance(transform.position, player.position) < chaseRange && !IsObstacleBetween();
+    bool inChargeRange()
+    {
+        return player != null && Vector3.Distance(transform.position, player.position) < chaseRange && !IsObstacleBetween();
     }
 
-    public void StartCharge(){
-        if (canCharge){
-            if (!isCharging && Vector3.Distance(transform.position, player.position) < chargeRange){
-                StartCoroutine(ChargeCoroutine());
-            }
+    public void StartCharge()
+    {
+        if (canCharge && !isCharging && player != null && Vector3.Distance(transform.position, player.position) < chargeRange)
+        {
+            StartCoroutine(ChargeCoroutine());
         }
     }
 
-    private IEnumerator ChargeCoroutine(){
+    private IEnumerator ChargeCoroutine()
+    {
         Enemy enemy = GetComponent<Enemy>();
         isCharging = true;
 
@@ -114,7 +138,8 @@ public class EnemyChase : MonoBehaviour{
         isChargeCooldown = true;
         yield return new WaitForSeconds(chargeCooldown);
         isChargeCooldown = false;
-        if (enemy.isBoss){
+        if (enemy.isBoss)
+        {
             BossSkills skills = GetComponent<BossSkills>();
             canCharge = false;
             StartCoroutine(skills.Cooldown(skills.skillCooldown));
