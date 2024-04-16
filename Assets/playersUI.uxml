@@ -33,8 +33,8 @@
             </ui:VisualElement>
             <ui:VisualElement name="middle" class="container" style="width: 40%; height: 150px; position: absolute; bottom: 0; left: 30%; right: 576px; background-color: rgb(30, 30, 30);">
                 <ui:VisualElement name="attackContainer" style="width: 20%; height: 100%; position: absolute; background-color: rgb(30, 30, 30);">
-                    <ui:VisualElement name="attack" class="attackimg" style="position: absolute; top: 25%; left: 10%; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; right: auto;" />
-                    <ui:Label display-tooltip-when-elided="true" name="damage" text="XX" class="attackValue" style="left: 55%; top: 25%; color: rgb(255, 255, 255); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; right: auto; font-size: 30px;" />
+                    <ui:VisualElement name="killIcon" class="attackimg" style="position: absolute; top: 25%; left: 10%; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; right: auto;" />
+                    <ui:Label display-tooltip-when-elided="true" name="kill" text="XX" class="attackValue" style="left: 55%; top: 25%; color: rgb(255, 255, 255); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; right: auto; font-size: 30px;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="healtharmorcontainer" class="text" style="width: 60%; height: 100%; position: absolute; left: 20%; justify-content: flex-start; border-top-width: 0; border-right-width: 10px; border-bottom-width: 0; border-left-width: 10px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); background-color: rgb(30, 30, 30);">
                     <ui:VisualElement name="armorimg" class="armorimg" style="position: absolute; top: -9px; left: 18px; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
@@ -42,9 +42,9 @@
                     <ui:ProgressBar value="22" title="X/X" name="armorbar" class="text" style="height: 40px; width: 315px; position: absolute; top: 20px; left: 108px; background-color: rgba(0, 0, 0, 0); font-size: 20px; -unity-text-align: upper-left; color: rgb(0, 0, 0);" />
                     <ui:ProgressBar value="22" title="X/X" name="healthbar" style="height: 40px; width: 315px; position: absolute; top: 85px; left: 108px; background-color: rgba(0, 0, 0, 0); font-size: 20px; color: rgb(0, 0, 0);" />
                 </ui:VisualElement>
-                <ui:VisualElement name="GoldContainer" style="width: 20%; height: 100%; position: absolute; left: 80%; background-color: rgb(30, 30, 30);">
+                <ui:VisualElement name="gold" style="width: 20%; height: 100%; position: absolute; left: 80%; background-color: rgb(30, 30, 30);">
                     <ui:VisualElement name="gold" class="goldimg" style="position: absolute; top: 25%; left: 10%; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
-                    <ui:Label display-tooltip-when-elided="true" name="goldcount" text="XX" class="goldcount" style="left: 55%; top: 25%; -unity-text-align: middle-center; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; color: rgb(255, 255, 255); font-size: 30px;" />
+                    <ui:Label display-tooltip-when-elided="true" name="coin" text="XX" class="goldcount" style="left: 55%; top: 25%; -unity-text-align: middle-center; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; color: rgb(255, 255, 255); font-size: 30px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="top" class="container" style="width: 100%; height: 100px; position: absolute; border-bottom-width: 10px; border-top-width: 0; align-items: center; background-color: rgb(30, 30, 30); background-image: url(&apos;project://database/Assets/assets/1.png?fileID=2800000&amp;guid=3270350bbaf40444f995f1e022541d27&amp;type=3#1&apos;);">
@@ -97,7 +97,7 @@
             <ui:Button display-tooltip-when-elided="true" name="downbutton" class="downbutton" style="border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; position: absolute; left: 1370px; top: -5px; right: 20px; width: 100px; height: 100px; display: flex;" />
         </ui:VisualElement>
         <ui:VisualElement name="whenudie" style="position: absolute; width: 1920px; height: 1080px; display: none; background-image: url(&apos;project://database/Assets/assets/bro%20falls%20with%20bg.png?fileID=2800000&amp;guid=d80ff3a18c88dd9418daf6bd3de7e5dd&amp;type=3#bro falls with bg&apos;);">
-            <ui:TextField picking-mode="Ignore" label="Name: " text="__________" readonly="false" name="naming" class="text" style="position: absolute; top: 556px; left: 1004px; font-size: 40px; background-color: rgb(12, 12, 12); width: 450px; height: 60px;" />
+            <ui:TextField picking-mode="Ignore" label="Name: " text="__________" readonly="false" name="naming" value=" " is-delayed="false" class="text" style="position: absolute; top: 556px; left: 1004px; font-size: 40px; background-color: rgb(12, 12, 12); width: 450px; height: 60px;" />
             <ui:Label text="YOU DIED" display-tooltip-when-elided="true" class="text" style="top: 30%; left: 25%; font-size: 80px; width: 50%; -unity-text-align: upper-center;" />
             <ui:Label text="Kills:  XXXXX" display-tooltip-when-elided="true" name="KillsFin" class="text" style="top: 490px; left: 200px; font-size: 40px; width: 50%; -unity-text-align: upper-left;" />
             <ui:Label text="Floor: XXX" display-tooltip-when-elided="true" name="FloorFin" class="text" style="top: 560px; left: 200px; font-size: 40px; width: 50%; -unity-text-align: upper-left; align-items: stretch; bottom: 456px;" />
@@ -105,9 +105,10 @@
             <ui:Button display-tooltip-when-elided="true" name="check" class="checkbutton" style="position: absolute; width: 100px; height: 100px; top: 536px; left: 1478px; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-color: rgba(188, 188, 188, 0);" />
             <ui:Label text="Submitted!" display-tooltip-when-elided="true" name="submitted" class="text" style="top: 628px; left: 1122px; font-size: 40px; width: 396px; -unity-text-align: upper-center; display: none;" />
             <ui:Button display-tooltip-when-elided="true" name="homeD" class="homebutton" style="position: absolute; width: 100px; height: 100px; top: 800px; left: 730px; display: none;" />
-            <ui:Label text="Restart" display-tooltip-when-elided="true" name="restar" class="text" style="top: 900px; left: 904px; font-size: 40px; width: 396px; -unity-text-align: upper-center;" />
-            <ui:Label text="Home" display-tooltip-when-elided="true" name="hom" class="text" style="top: 900px; left: 586px; font-size: 40px; width: 396px; -unity-text-align: upper-center;" />
+            <ui:Label text="Restart" display-tooltip-when-elided="true" name="restar" class="text" style="top: 900px; left: 904px; font-size: 40px; width: 396px; -unity-text-align: upper-center; display: none;" />
+            <ui:Label text="Home" display-tooltip-when-elided="true" name="hom" class="text" style="top: 900px; left: 586px; font-size: 40px; width: 396px; -unity-text-align: upper-center; display: none;" />
             <ui:Button display-tooltip-when-elided="true" name="restartD" class="restartbutton" style="position: absolute; width: 100px; height: 100px; top: 800px; left: 1044px; display: none;" />
+            <ui:Label text="Press Check Button" display-tooltip-when-elided="true" name="sub" class="text" style="top: 907px; left: 612px; font-size: 50px; width: 624px; -unity-text-align: upper-left;" />
         </ui:VisualElement>
         <ui:VisualElement name="LoadingScreen5" style="position: absolute; width: 1920px; height: 1080px; background-image: url(&apos;project://database/Assets/assets/heading%20back.png?fileID=2800000&amp;guid=b096a92dfab7db34781488bb99d3fe31&amp;type=3#heading back&apos;); display: none;" />
     </ui:VisualElement>

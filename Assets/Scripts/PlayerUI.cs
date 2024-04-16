@@ -34,11 +34,16 @@ public class PlayerUI : MonoBehaviour{
     public Label criticalDamageLabel;
     public Label knockbackForceLabel;
     public Label moveSpeedLabel;
+    public Label coins;
+    public Label kills;
     public Label floorcount;
     public Label timed;
     public Label floorFinal;
     public Label killFinal;
     public Label finalTime;
+    public Label before;
+    public Label homed;
+    public Label rest;
     //bars
     public ProgressBar armorBar;
     public ProgressBar healthBar;
@@ -62,12 +67,17 @@ public class PlayerUI : MonoBehaviour{
         floorcount = root.Q<Label>("Floor");
         timed = root.Q<Label>("timecount");
         startTime = Time.time;
+        coins = root.Q<Label>("coin");
+        kills = root.Q<Label>("kill");
         killFinal = root.Q<Label>("KillsFin");
         floorFinal = root.Q<Label>("FloorFin");
         finalTime = root.Q<Label>("TimeFin");
         submit = root.Q<Label>("submitted");
         named = root.Q<TextField>("naming");
         send = root.Q<Button>("check");
+        before = root.Q<Label>("sub");
+        homed = root.Q<Label>("hom");
+        rest = root.Q<Label>("restar");
         send.clicked += SendButtonPressed;
 
 
@@ -149,6 +159,8 @@ public class PlayerUI : MonoBehaviour{
             floorcount.text = "Floor: " + mapGeneration.floorCount;
             killFinal.text = "Kills: " + mapGeneration.killCount;
             floorFinal.text = "Floor: " + mapGeneration.floorCount;
+            kills.text = mapGeneration.killCount.ToString();
+            coins.text = player.coins.ToString();
 
             if (timerRunning)
             {
@@ -222,6 +234,9 @@ public class PlayerUI : MonoBehaviour{
         submit.style.display = DisplayStyle.Flex;
         dieMainmenu.style.display = DisplayStyle.Flex;
         dieRestart.style.display = DisplayStyle.Flex;
+        homed.style.display = DisplayStyle.Flex;
+        rest.style.display = DisplayStyle.Flex;
+        before.style.display = DisplayStyle.None;
     }
 
     // Method to handle music volume slider value change
