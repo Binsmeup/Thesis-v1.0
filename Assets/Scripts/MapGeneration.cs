@@ -462,8 +462,10 @@ public class MapGeneration : MonoBehaviour{
 
     void SpawnObjects(List<Vector3Int> spawnPositions, GameObject prefab, ref int spawnedCount, int totalCount, float scale, bool miniBoss){
         float miniBossScaling = 1;
+        float miniBossScalingATK = 1f;
         if (miniBoss){
             miniBossScaling = 3f;
+            miniBossScalingATK = 2f;
         }
         while (spawnedCount < totalCount && spawnPositions.Count > 0) {
             Vector3Int spawnPosition = spawnPositions[Random.Range(0, spawnPositions.Count)];
@@ -484,7 +486,7 @@ public class MapGeneration : MonoBehaviour{
                 healthManager.health = healthManager.maxHealth;
             }
             if (enemyScript != null){
-                enemyScript.baseDamage *= (1 + statScale * (floorCount-1))*(miniBossScaling/2);
+                enemyScript.baseDamage *= (1 + statScale * (floorCount-1))*(miniBossScaling/miniBossScalingATK);
             }
             if (speedScript != null){
                 if (enableSpeedScaling){
