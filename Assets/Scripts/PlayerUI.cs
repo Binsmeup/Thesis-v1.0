@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
@@ -34,9 +35,10 @@ public class PlayerUI : MonoBehaviour{
     public Label knockbackForceLabel;
     public Label moveSpeedLabel;
     public Label floorcount;
+    public Label timed;
     public Label floorFinal;
     public Label killFinal;
-
+    public Label finalTime;
     //bars
     public ProgressBar armorBar;
     public ProgressBar healthBar;
@@ -46,7 +48,8 @@ public class PlayerUI : MonoBehaviour{
     private MapGeneration mapGeneration;
 
     public string playerName;
-
+    private float startTime;
+    private bool timerRunning = true;
     void Start(){
         var root = GetComponent<UIDocument>().rootVisualElement;
 
@@ -57,8 +60,11 @@ public class PlayerUI : MonoBehaviour{
         gameRestart = root.Q<Button>("restart");
         gameMainmenu = root.Q<Button>("home");
         floorcount = root.Q<Label>("Floor");
+        timed = root.Q<Label>("timecount");
+        startTime = Time.time;
         killFinal = root.Q<Label>("KillsFin");
         floorFinal = root.Q<Label>("FloorFin");
+        finalTime = root.Q<Label>("TimeFin");
         submit = root.Q<Label>("submitted");
         named = root.Q<TextField>("naming");
         send = root.Q<Button>("check");
@@ -132,6 +138,7 @@ public class PlayerUI : MonoBehaviour{
         }
 
         if (player != null){
+
             attackSpeedLabel.text = "Attack Speed: " + player.attackSpeed.ToString();
             baseDamageLabel.text = "Base Damage: " + player.baseDamage.ToString();
             damageMultiplierLabel.text = "Damage Multiplier: " + player.damageMulti.ToString();
@@ -142,6 +149,15 @@ public class PlayerUI : MonoBehaviour{
             floorcount.text = "Floor: " + mapGeneration.floorCount;
             killFinal.text = "Kills: " + mapGeneration.killCount;
             floorFinal.text = "Floor: " + mapGeneration.floorCount;
+
+            if (timerRunning)
+            {
+                TimeSpan timeElapsed = TimeSpan.FromSeconds(Time.time - startTime);
+
+                string timerText = string.Format("{0:D2}:{1:D2}:{2:D2}", timeElapsed.Hours, timeElapsed.Minutes, timeElapsed.Seconds);
+
+                timed.text = timerText;
+            }
         }
     }
 
@@ -152,6 +168,8 @@ public class PlayerUI : MonoBehaviour{
         {
             Debug.Log("Health is 0 or less");
             Time.timeScale = 1f;
+            timerRunning = false;
+            finalTime.text = "Time: " + timed.text;
             Die.style.display = DisplayStyle.Flex;
         }
         else
@@ -196,9 +214,14 @@ public class PlayerUI : MonoBehaviour{
     {
         string playerName = named.value;
         Debug.Log("Player Name: " + playerName);
+        Debug.Log("Player floor: " + mapGeneration.floorCount);
+        Debug.Log("Player kill: " + mapGeneration.killCount);
+        Debug.Log("Player time: " + timed.text);
         named.SetEnabled(false);
         send.SetEnabled(false);
         submit.style.display = DisplayStyle.Flex;
+        dieMainmenu.style.display = DisplayStyle.Flex;
+        dieRestart.style.display = DisplayStyle.Flex;
     }
 
     // Method to handle music volume slider value change

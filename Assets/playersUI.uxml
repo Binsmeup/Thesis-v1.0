@@ -76,7 +76,7 @@
                 </ui:VisualElement>
                 <ui:VisualElement name="floortimnercontainer" style="position: absolute; left: 90px; height: 100%; width: 400px; border-right-width: 10px; border-left-width: 10px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); background-color: rgb(30, 30, 30);">
                     <ui:Label text="Floor: X" display-tooltip-when-elided="true" name="Floor" class="floorlevel" style="position: absolute; left: 20px; top: 30px; color: rgb(255, 255, 255); display: flex;" />
-                    <ui:Label text="Time: X" display-tooltip-when-elided="true" name="time" class="floorlevel" style="position: absolute; left: 205px; top: 30px; color: rgb(255, 255, 255); display: flex;" />
+                    <ui:Label text="Time: X" display-tooltip-when-elided="true" name="timecount" class="floorlevel" style="position: absolute; left: 205px; top: 30px; color: rgb(255, 255, 255); display: flex;" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:Button display-tooltip-when-elided="true" name="options" class="options" style="border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; position: absolute; left: 1800px; top: -5px; right: 20px; width: 100px; height: 100px; display: flex;" />
@@ -97,17 +97,17 @@
             <ui:Button display-tooltip-when-elided="true" name="downbutton" class="downbutton" style="border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; position: absolute; left: 1370px; top: -5px; right: 20px; width: 100px; height: 100px; display: flex;" />
         </ui:VisualElement>
         <ui:VisualElement name="whenudie" style="position: absolute; width: 1920px; height: 1080px; display: none; background-image: url(&apos;project://database/Assets/assets/bro%20falls%20with%20bg.png?fileID=2800000&amp;guid=d80ff3a18c88dd9418daf6bd3de7e5dd&amp;type=3#bro falls with bg&apos;);">
-            <ui:TextField picking-mode="Ignore" label="Name: " value="                   " text="__________" readonly="false" name="naming" class="text" style="position: absolute; top: 556px; left: 1004px; font-size: 40px; background-color: rgb(12, 12, 12); width: 450px; height: 60px;" />
+            <ui:TextField picking-mode="Ignore" label="Name: " text="__________" readonly="false" name="naming" class="text" style="position: absolute; top: 556px; left: 1004px; font-size: 40px; background-color: rgb(12, 12, 12); width: 450px; height: 60px;" />
             <ui:Label text="YOU DIED" display-tooltip-when-elided="true" class="text" style="top: 30%; left: 25%; font-size: 80px; width: 50%; -unity-text-align: upper-center;" />
             <ui:Label text="Kills:  XXXXX" display-tooltip-when-elided="true" name="KillsFin" class="text" style="top: 490px; left: 200px; font-size: 40px; width: 50%; -unity-text-align: upper-left;" />
             <ui:Label text="Floor: XXX" display-tooltip-when-elided="true" name="FloorFin" class="text" style="top: 560px; left: 200px; font-size: 40px; width: 50%; -unity-text-align: upper-left; align-items: stretch; bottom: 456px;" />
             <ui:Label text="Time: XXXXX" display-tooltip-when-elided="true" name="TimeFin" class="text" style="top: 630px; left: 200px; font-size: 40px; width: 50%; -unity-text-align: upper-left;" />
             <ui:Button display-tooltip-when-elided="true" name="check" class="checkbutton" style="position: absolute; width: 100px; height: 100px; top: 536px; left: 1478px; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-color: rgba(188, 188, 188, 0);" />
             <ui:Label text="Submitted!" display-tooltip-when-elided="true" name="submitted" class="text" style="top: 628px; left: 1122px; font-size: 40px; width: 396px; -unity-text-align: upper-center; display: none;" />
-            <ui:Button display-tooltip-when-elided="true" name="homeD" class="homebutton" style="position: absolute; width: 100px; height: 100px; top: 800px; left: 730px;" />
+            <ui:Button display-tooltip-when-elided="true" name="homeD" class="homebutton" style="position: absolute; width: 100px; height: 100px; top: 800px; left: 730px; display: none;" />
             <ui:Label text="Restart" display-tooltip-when-elided="true" name="restar" class="text" style="top: 900px; left: 904px; font-size: 40px; width: 396px; -unity-text-align: upper-center;" />
             <ui:Label text="Home" display-tooltip-when-elided="true" name="hom" class="text" style="top: 900px; left: 586px; font-size: 40px; width: 396px; -unity-text-align: upper-center;" />
-            <ui:Button display-tooltip-when-elided="true" name="restartD" class="restartbutton" style="position: absolute; width: 100px; height: 100px; top: 800px; left: 1044px;" />
+            <ui:Button display-tooltip-when-elided="true" name="restartD" class="restartbutton" style="position: absolute; width: 100px; height: 100px; top: 800px; left: 1044px; display: none;" />
         </ui:VisualElement>
         <ui:VisualElement name="LoadingScreen5" style="position: absolute; width: 1920px; height: 1080px; background-image: url(&apos;project://database/Assets/assets/heading%20back.png?fileID=2800000&amp;guid=b096a92dfab7db34781488bb99d3fe31&amp;type=3#heading back&apos;); display: none;" />
     </ui:VisualElement>
