@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 
-public class DebugUI : MonoBehaviour
-{
+public class DebugUI : MonoBehaviour{
     public MapGenerationShowcase mapGenerationShowcase;
 
     //Buttons
@@ -21,7 +20,7 @@ public class DebugUI : MonoBehaviour
     public Button movewalls;
     public Button positionPlayer;
     public Button back;
-
+    
 
     //TextField
     public TextField floorcount;
@@ -30,6 +29,7 @@ public class DebugUI : MonoBehaviour
     public TextField defaultDensity;
     public TextField defaultIteration;
     public TextField defaultEnemyC;
+
     public TextField noiseCooldown;
     public TextField cellularCooldown;
     public TextField perlinCooldown;
@@ -48,13 +48,12 @@ public class DebugUI : MonoBehaviour
     public int defaultDensityValue;
     public int defaultIterationValue;
     public int defaultEnemyCValue;
-    public int noiseCooldownValue;
-    public int cellularCooldownValue;
-    public int perlinCooldownValue;
-    public int cooldownValue;
+    public float noiseCooldownValue;
+    public float cellularCooldownValue;
+    public float perlinCooldownValue;
+    public float cooldownValue;
 
-    void Start()
-    {
+    void Start(){
         var root = GetComponent<UIDocument>().rootVisualElement;
 
         GMnoFR = root.Q<Button>("generateMap-without-FR");
@@ -115,6 +114,7 @@ public class DebugUI : MonoBehaviour
         cellular_CD.RegisterValueChangedCallback(evt => OnCellularCDChanged(evt.newValue));
         perlin_CD.RegisterValueChangedCallback(evt => OnPerlinCDChanged(evt.newValue));
         CD_iteration.RegisterValueChangedCallback(evt => OnCDIterationChanged(evt.newValue));
+        CD.RegisterValueChangedCallback(evt => OnCDChanged(evt.newValue));
         oneLine.RegisterValueChangedCallback(evt => OnOneLineChanged(evt.newValue));
 
 
@@ -123,93 +123,83 @@ public class DebugUI : MonoBehaviour
         EnableButtons();
     }
 
+    public void OnBackClicked(){
+        SceneManager.LoadScene("Main_menu");
+    }
 
-    void OnGMnoFRClicked()
-    {
-        if (mapGenerationShowcase != null)
-        {
-            mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap(false, floorCountValue, defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue));//not sure what to do here
+
+    void OnGMnoFRClicked(){
+        if (mapGenerationShowcase != null){
+            mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap(false,floorCountValue,defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue));
             DisableButtons();
         }
-        else
-        {
+        else{
             Debug.LogWarning("MapGenerationShowcase not found!");
         }
     }
 
 
-    void OnGMwithFRClicked()
-    {
-        mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap(true, floorCountValue, defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue));//not sure what to do here
+    void OnGMwithFRClicked(){
+        mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap(true,floorCountValue,defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue));
         DisableButtons();
 
     }
 
-    void OnCleartilesClicked()
-    {
+    void OnCleartilesClicked(){
 
         mapGenerationShowcase.ClearTiles();
         EnableButtons();
     }
 
-    void OnVarsetClicked()
-    {
+    void OnVarsetClicked(){
         mapGenerationShowcase.VariableSetUp(defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue);
         EnableButtons();
         creategrid.SetEnabled(true);
 
     }
 
-    void OnCreategridClicked()
-    {
+    void OnCreategridClicked(){
         mapGenerationShowcase.CreateGrid();
         DisableButtons();
         genNoise.SetEnabled(true);
 
     }
 
-    void OnGenNoiseClicked()
-    {
+    void OnGenNoiseClicked(){
         mapGenerationShowcase.GenerateNoise();
         DisableButtons();
         applyCA.SetEnabled(true);
     }
 
-    void OnApplyCAClicked()
-    {
+    void OnApplyCAClicked(){
         mapGenerationShowcase.ApplyCellularAutomata();
         DisableButtons();
         floodfill.SetEnabled(true);
     }
 
-    void OnFloodfillClicked()
-    {
+    void OnFloodfillClicked(){
         mapGenerationShowcase.FloodFill();
         DisableButtons();
         applyPN.SetEnabled(true);
     }
 
-    void OnApplyPNClicked()
-    {
+    void OnApplyPNClicked(){
         mapGenerationShowcase.ApplyPerlinNoise();
         DisableButtons();
         movewalls.SetEnabled(true);
     }
 
-    void OnMovewallsClicked()
-    {
+    void OnMovewallsClicked(){
         mapGenerationShowcase.MoveWalls();
         DisableButtons();
         positionPlayer.SetEnabled(true);
     }
 
-    void OnPositionPlayerClicked()
-    {
+    void OnPositionPlayerClicked(){
         mapGenerationShowcase.PositionPlayer();
         DisableButtons();
     }
-    public void DisableButtons()
-    {
+    public void DisableButtons(){
         GMnoFR.SetEnabled(false);
         GMwithFR.SetEnabled(false);
         creategrid.SetEnabled(false);
@@ -221,8 +211,7 @@ public class DebugUI : MonoBehaviour
         positionPlayer.SetEnabled(false);
     }
 
-    public void EnableButtons()
-    {
+    public void EnableButtons(){
         GMnoFR.SetEnabled(true);
         GMwithFR.SetEnabled(true);
         creategrid.SetEnabled(false);
@@ -234,167 +223,134 @@ public class DebugUI : MonoBehaviour
         positionPlayer.SetEnabled(false);
     }
 
-    public void OnBackClicked()
-    {
-        SceneManager.LoadScene("Main_menu");
-    }
+    public void OnFloorcountChanged(string newText){
 
-    public void OnFloorcountChanged(string newText)
-    {
-
-        if (int.TryParse(newText, out int newValue))
-        {
+        if (int.TryParse(newText, out int newValue)){
             floorCountValue = newValue;
             Debug.Log("Floor count value: " + floorCountValue);
         }
-        else
-        {
+        else{
             Debug.LogWarning("Invalid input for floor count.");
         }
     }
 
-    public void OnDefaultWidthChanged(string newText)
-    {
-        if (int.TryParse(newText, out int newValue))
-        {
+    public void OnDefaultWidthChanged(string newText){
+        if (int.TryParse(newText, out int newValue)){
             defaultWidthValue = newValue;
             Debug.Log("width value: " + defaultWidthValue);
         }
-        else
-        {
+        else{
             Debug.LogWarning("Invalid input for width.");
         }
     }
 
-    public void OnDefaultHeightChanged(string newText)
-    {
-        if (int.TryParse(newText, out int newValue))
-        {
+    public void OnDefaultHeightChanged(string newText){
+        if (int.TryParse(newText, out int newValue)){
             defaultHeightValue = newValue;
             Debug.Log("height value: " + defaultHeightValue);
         }
-        else
-        {
+        else{
             Debug.LogWarning("Invalid input for height.");
         }
     }
 
-    public void OnDefaultDensityChanged(string newText)
-    {
-        if (int.TryParse(newText, out int newValue))
-        {
+    public void OnDefaultDensityChanged(string newText){
+        if (int.TryParse(newText, out int newValue)){
             defaultDensityValue = newValue;
             Debug.Log("density value: " + defaultDensityValue);
         }
-        else
-        {
+        else{
             Debug.LogWarning("Invalid input for density.");
         }
     }
 
-    public void OnDefaultIterationChanged(string newText)
-    {
-        if (int.TryParse(newText, out int newValue))
-        {
+    public void OnDefaultIterationChanged(string newText){
+        if (int.TryParse(newText, out int newValue)){
             defaultIterationValue = newValue;
             Debug.Log("iteration value: " + defaultIterationValue);
         }
-        else
-        {
+        else{
             Debug.LogWarning("Invalid input for iteration.");
         }
     }
 
-    public void OnDefaultEnemyCChanged(string newText)
-    {
-        if (int.TryParse(newText, out int newValue))
-        {
+    public void OnDefaultEnemyCChanged(string newText){
+        if (int.TryParse(newText, out int newValue)){
             defaultEnemyCValue = newValue;
             Debug.Log("enemy count value: " + defaultEnemyCValue);
         }
-        else
-        {
+        else{
             Debug.LogWarning("Invalid input for enemy count.");
         }
     }
 
-    void OnNoiseCooldownChanged(string newText)
-    {
-        if (int.TryParse(newText, out int newValue))
-        {
+    void OnNoiseCooldownChanged(string newText){
+        if (float.TryParse(newText, out float newValue)){
             noiseCooldownValue = newValue;
+            mapGenerationShowcase.NoiseCDValueChange(newValue);
             Debug.Log("Noise cooldown value: " + noiseCooldownValue);
         }
-        else
-        {
+        else{
             Debug.LogWarning("Invalid input for noise cooldown.");
         }
     }
 
-    void OnCellularCooldownChanged(string newText)
-    {
-        if (int.TryParse(newText, out int newValue))
-        {
+    void OnCellularCooldownChanged(string newText){
+        if (float.TryParse(newText, out float newValue)){
             cellularCooldownValue = newValue;
+            mapGenerationShowcase.CellularCDValueChange(newValue);
             Debug.Log("Cellular cooldown value: " + cellularCooldownValue);
         }
-        else
-        {
+        else{
             Debug.LogWarning("Invalid input for cellular cooldown.");
         }
     }
 
-    void OnPerlinCooldownChanged(string newText)
-    {
-        if (int.TryParse(newText, out int newValue))
-        {
+    void OnPerlinCooldownChanged(string newText){
+        if (float.TryParse(newText, out float newValue)){
             perlinCooldownValue = newValue;
+            mapGenerationShowcase.perlinCDValueChange(newValue);
             Debug.Log("Perlin cooldown value: " + perlinCooldownValue);
         }
-        else
-        {
+        else{
             Debug.LogWarning("Invalid input for perlin cooldown.");
         }
     }
 
-    void OnGeneralCooldownChanged(string newText)
-    {
-        if (int.TryParse(newText, out int newValue))
-        {
+    void OnGeneralCooldownChanged(string newText){
+        if (float.TryParse(newText, out float newValue)){
             cooldownValue = newValue;
+            mapGenerationShowcase.CDValueChange(newValue);
             Debug.Log("cooldown value: " + cooldownValue);
         }
-        else
-        {
+        else{
             Debug.LogWarning("Invalid input for general cooldown.");
         }
     }
 
-    void OnNoiseCDChanged(bool newValue)
-    {
+    void OnNoiseCDChanged(bool newValue){
         mapGenerationShowcase.noiseCDChange(newValue);
         Debug.Log("Noise Cooldown toggled: " + newValue);
     }
 
-    void OnCellularCDChanged(bool newValue)
-    {
-        mapGenerationShowcase.celluarCDChange(newValue);
+    void OnCellularCDChanged(bool newValue){
+        mapGenerationShowcase.cellularCDChange(newValue);
         Debug.Log("Cellular Cooldown toggled: " + newValue);
     }
 
-    void OnPerlinCDChanged(bool newValue)
-    {
+    void OnPerlinCDChanged(bool newValue){
         mapGenerationShowcase.perlinCDChange(newValue);
         Debug.Log("Perlin Cooldown toggled: " + newValue);
     }
 
-    void OnCDIterationChanged(bool newValue)
-    {
+    void OnCDIterationChanged(bool newValue){
         mapGenerationShowcase.iterationCDChange(newValue);
         Debug.Log("Cooldown Iteration toggled: " + newValue);
     }
-    void OnOneLineChanged(bool newValue)
-    {
+    void OnCDChanged(string newValue){
+        Debug.Log("Cooldowntoggled: " + newValue);
+    }
+    void OnOneLineChanged(bool newValue){
         mapGenerationShowcase.OneLineChange(newValue);
         Debug.Log("Cooldown Iteration toggled: " + newValue);
     }

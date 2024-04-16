@@ -56,7 +56,12 @@ public class HealthManager : MonoBehaviour, IDamagable{
 
                     dropItem();
                 }
+                if (!gameObject.CompareTag("Player")){
                 Destroy(gameObject);
+                }
+                else if (gameObject.CompareTag("Player")){
+                    Targettable = false;
+                }
             }
             if (maxHealth < _health){
                 _health = maxHealth;

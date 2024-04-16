@@ -21,6 +21,9 @@ public class PlayerUI : MonoBehaviour{
     public VisualElement OptionsScreen;
     public VisualElement layer;
     public VisualElement Die;
+    public Label submit;
+    public Button send;
+    public TextField named;
 
     //Stats
     public Label attackSpeedLabel;
@@ -38,6 +41,8 @@ public class PlayerUI : MonoBehaviour{
     private HealthManager healthManager;
     private playerScript player;
 
+    public string playerName;
+
     void Start(){
         var root = GetComponent<UIDocument>().rootVisualElement;
 
@@ -48,6 +53,10 @@ public class PlayerUI : MonoBehaviour{
         dieMainmenu = root.Q<Button>("homeD");
         gameRestart = root.Q<Button>("restart");
         gameMainmenu = root.Q<Button>("home");
+        submit = root.Q<Label>("submitted");
+        named = root.Q<TextField>("naming");
+        send = root.Q<Button>("check");
+        send.clicked += SendButtonPressed;
 
 
         OptionsScreen = root.Q<VisualElement>("optionsscreen");
@@ -174,7 +183,14 @@ public class PlayerUI : MonoBehaviour{
         SceneManager.LoadScene("Main_Menu");
     }
 
-
+    void SendButtonPressed()
+    {
+        string playerName = named.value;
+        Debug.Log("Player Name: " + playerName);
+        named.SetEnabled(false);
+        send.SetEnabled(false);
+        submit.style.display = DisplayStyle.Flex;
+    }
 
     // Method to handle music volume slider value change
     void OnMusicVolumeChanged(ChangeEvent<float> evt){

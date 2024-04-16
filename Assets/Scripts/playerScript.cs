@@ -39,6 +39,7 @@ public class playerScript : MonoBehaviour{
     bool isMoving = false;
 
     public bool canAttack = true;
+    public bool isDead = false;
     public bool canRotateWeapon = true;
 
     private ItemSOLibrary itemSOLibrary;
@@ -69,7 +70,7 @@ public class playerScript : MonoBehaviour{
             }
         }
 
-        if (canAttack){
+        if (canAttack && !isDead){
             if (Input.GetMouseButtonDown(0)){
                     switch (weaponType){
                     case "Spear":
@@ -142,7 +143,7 @@ public class playerScript : MonoBehaviour{
 
 
     private void FixedUpdate(){
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("SpearAttack") && !anim.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack") && !anim.GetCurrentAnimatorStateInfo(0).IsName("AxeAttack") && !anim.GetCurrentAnimatorStateInfo(0).IsName("BatAttack")){
+        if (!isDead && !anim.GetCurrentAnimatorStateInfo(0).IsName("SpearAttack") && !anim.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack") && !anim.GetCurrentAnimatorStateInfo(0).IsName("AxeAttack") && !anim.GetCurrentAnimatorStateInfo(0).IsName("BatAttack")){
             if (movementInput != Vector2.zero){
                 rb.AddForce(movementInput * moveSpeed * Time.deltaTime);
                 IsMoving = true;
