@@ -33,6 +33,9 @@ public class PlayerUI : MonoBehaviour{
     public Label criticalDamageLabel;
     public Label knockbackForceLabel;
     public Label moveSpeedLabel;
+    public Label floorcount;
+    public Label floorFinal;
+    public Label killFinal;
 
     //bars
     public ProgressBar armorBar;
@@ -40,19 +43,22 @@ public class PlayerUI : MonoBehaviour{
 
     private HealthManager healthManager;
     private playerScript player;
+    private MapGeneration mapGeneration;
 
     public string playerName;
 
     void Start(){
         var root = GetComponent<UIDocument>().rootVisualElement;
 
-        // Game Menu
         gameOptions = root.Q<Button>("options");
         gamePlay = root.Q<Button>("play");
         dieRestart = root.Q<Button>("restartD");
         dieMainmenu = root.Q<Button>("homeD");
         gameRestart = root.Q<Button>("restart");
         gameMainmenu = root.Q<Button>("home");
+        floorcount = root.Q<Label>("Floor");
+        killFinal = root.Q<Label>("KillsFin");
+        floorFinal = root.Q<Label>("FloorFin");
         submit = root.Q<Label>("submitted");
         named = root.Q<TextField>("naming");
         send = root.Q<Button>("check");
@@ -91,6 +97,8 @@ public class PlayerUI : MonoBehaviour{
         armorBar = root.Q<ProgressBar>("armorbar");
         healthBar = root.Q<ProgressBar>("healthbar");
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        GameObject mapGenerationObject = GameObject.FindWithTag("MapGeneration");
+        mapGeneration = mapGenerationObject.GetComponent<MapGeneration>();
 
         if (playerObject != null){
             healthManager = playerObject.GetComponent<HealthManager>();
@@ -131,8 +139,9 @@ public class PlayerUI : MonoBehaviour{
             criticalDamageLabel.text = "Critical Damage: " + player.critDamage.ToString();
             knockbackForceLabel.text = "Knockback Force: " + player.knockbackForce.ToString();
             moveSpeedLabel.text = "Movement Speed: " + player.moveSpeed.ToString();
-
-
+            floorcount.text = "Floor: " + mapGeneration.floorCount;
+            killFinal.text = "Kills: " + mapGeneration.killCount;
+            floorFinal.text = "Floor: " + mapGeneration.floorCount;
         }
     }
 
