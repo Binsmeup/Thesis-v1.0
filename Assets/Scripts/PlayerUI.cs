@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
@@ -21,6 +22,9 @@ public class PlayerUI : MonoBehaviour{
     public VisualElement OptionsScreen;
     public VisualElement layer;
     public VisualElement Die;
+    public Label submit;
+    public Button send;
+    public TextField named;
 
     //Stats
     public Label attackSpeedLabel;
@@ -30,24 +34,51 @@ public class PlayerUI : MonoBehaviour{
     public Label criticalDamageLabel;
     public Label knockbackForceLabel;
     public Label moveSpeedLabel;
-
+    public Label coins;
+    public Label kills;
+    public Label floorcount;
+    public Label timed;
+    public Label floorFinal;
+    public Label killFinal;
+    public Label finalTime;
+    public Label before;
+    public Label homed;
+    public Label rest;
     //bars
     public ProgressBar armorBar;
     public ProgressBar healthBar;
 
     private HealthManager healthManager;
     private playerScript player;
+    private MapGeneration mapGeneration;
 
+    public string playerName;
+    private float startTime;
+    private bool timerRunning = true;
     void Start(){
         var root = GetComponent<UIDocument>().rootVisualElement;
 
-        // Game Menu
         gameOptions = root.Q<Button>("options");
         gamePlay = root.Q<Button>("play");
         dieRestart = root.Q<Button>("restartD");
         dieMainmenu = root.Q<Button>("homeD");
         gameRestart = root.Q<Button>("restart");
         gameMainmenu = root.Q<Button>("home");
+        floorcount = root.Q<Label>("Floor");
+        timed = root.Q<Label>("timecount");
+        startTime = Time.time;
+        coins = root.Q<Label>("coin");
+        kills = root.Q<Label>("kill");
+        killFinal = root.Q<Label>("KillsFin");
+        floorFinal = root.Q<Label>("FloorFin");
+        finalTime = root.Q<Label>("TimeFin");
+        submit = root.Q<Label>("submitted");
+        named = root.Q<TextField>("naming");
+        send = root.Q<Button>("check");
+        before = root.Q<Label>("sub");
+        homed = root.Q<Label>("hom");
+        rest = root.Q<Label>("restar");
+        send.clicked += SendButtonPressed;
 
 
         OptionsScreen = root.Q<VisualElement>("optionsscreen");
@@ -82,6 +113,8 @@ public class PlayerUI : MonoBehaviour{
         armorBar = root.Q<ProgressBar>("armorbar");
         healthBar = root.Q<ProgressBar>("healthbar");
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        GameObject mapGenerationObject = GameObject.FindWithTag("MapGeneration");
+        mapGeneration = mapGenerationObject.GetComponent<MapGeneration>();
 
         if (playerObject != null){
             healthManager = playerObject.GetComponent<HealthManager>();
@@ -115,6 +148,7 @@ public class PlayerUI : MonoBehaviour{
         }
 
         if (player != null){
+
             attackSpeedLabel.text = "Attack Speed: " + player.attackSpeed.ToString();
             baseDamageLabel.text = "Base Damage: " + player.baseDamage.ToString();
             damageMultiplierLabel.text = "Damage Multiplier: " + player.damageMulti.ToString();
@@ -122,8 +156,20 @@ public class PlayerUI : MonoBehaviour{
             criticalDamageLabel.text = "Critical Damage: " + player.critDamage.ToString();
             knockbackForceLabel.text = "Knockback Force: " + player.knockbackForce.ToString();
             moveSpeedLabel.text = "Movement Speed: " + player.moveSpeed.ToString();
+            floorcount.text = "Floor: " + mapGeneration.floorCount;
+            killFinal.text = "Kills: " + mapGeneration.killCount;
+            floorFinal.text = "Floor: " + mapGeneration.floorCount;
+            kills.text = mapGeneration.killCount.ToString();
+            coins.text = player.coins.ToString();
 
+            if (timerRunning)
+            {
+                TimeSpan timeElapsed = TimeSpan.FromSeconds(Time.time - startTime);
 
+                string timerText = string.Format("{0:D2}:{1:D2}:{2:D2}", timeElapsed.Hours, timeElapsed.Minutes, timeElapsed.Seconds);
+
+                timed.text = timerText;
+            }
         }
     }
 
@@ -134,6 +180,8 @@ public class PlayerUI : MonoBehaviour{
         {
             Debug.Log("Health is 0 or less");
             Time.timeScale = 1f;
+            timerRunning = false;
+            finalTime.text = "Time: " + timed.text;
             Die.style.display = DisplayStyle.Flex;
         }
         else
@@ -174,7 +222,22 @@ public class PlayerUI : MonoBehaviour{
         SceneManager.LoadScene("Main_Menu");
     }
 
-
+    void SendButtonPressed()
+    {
+        string playerName = named.value;
+        Debug.Log("Player Name: " + playerName);
+        Debug.Log("Player floor: " + mapGeneration.floorCount);
+        Debug.Log("Player kill: " + mapGeneration.killCount);
+        Debug.Log("Player time: " + timed.text);
+        named.SetEnabled(false);
+        send.SetEnabled(false);
+        submit.style.display = DisplayStyle.Flex;
+        dieMainmenu.style.display = DisplayStyle.Flex;
+        dieRestart.style.display = DisplayStyle.Flex;
+        homed.style.display = DisplayStyle.Flex;
+        rest.style.display = DisplayStyle.Flex;
+        before.style.display = DisplayStyle.None;
+    }
 
     // Method to handle music volume slider value change
     void OnMusicVolumeChanged(ChangeEvent<float> evt){
