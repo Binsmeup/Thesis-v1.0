@@ -11,6 +11,7 @@ TagManager:
   - Debris
   - Weapon
   - MapGeneration
+  - Leaderboard
   layers:
   - Default
   - TransparentFX

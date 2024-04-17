@@ -1,10 +1,13 @@
 using UnityEngine;
 using Mono.Data.Sqlite;
+using System;
+using System.Data;
 
 public class Leaderboard : MonoBehaviour{
     private string dbName = "URI=file:Leaderboard.db";
 
     void Start(){
+        createDB();
     }
 
     public void createDB(){
@@ -12,21 +15,47 @@ public class Leaderboard : MonoBehaviour{
             connection.Open();
 
             using (var command = connection.CreateCommand()){
-                command.CommandText = "CREATE TABLE IF NOT EXISTS leaderboard (name VARCHAR(50), killCount INT, floorCount INT, timeCount TIMESTAMP, healthValue FLOAT, armorValue INT, damageValue FLOAT, helmEquipped VARCHAR(50), chestEquipped VARCHAR(50), legEquipped VARCHAR(50), weaponEquipped VARCHAR(50))";
+                command.CommandText = "CREATE TABLE IF NOT EXISTS leaderboard (name VARCHAR(50), killCount INT, floorCount INT, timeCount INT, healthValue FLOAT, armorValue INT, damageValue FLOAT, helmEquipped VARCHAR(50), chestEquipped VARCHAR(50), legEquipped VARCHAR(50), weaponEquipped VARCHAR(50))";
                 command.ExecuteNonQuery();
             }
             connection.Close();
         }
     }
-    public void addScore(string playerName, int killScore, int floorScore, int timeScore, float healthScore, int armorScore, float damageScore, string equippedHelm, string equippedChest, string equippedLeg, string equippedWeapon){
+    public void addScore(string playerName, int killScore, int floorScore, int timeScore, float healthScore, float armorScore, float damageScore, string equippedHelm, string equippedChest, string equippedLeg, string equippedWeapon){
         using (var connection = new SqliteConnection(dbName)){
             connection.Open();
 
             using (var command = connection.CreateCommand()){
-                command.CommandText = "INSERT INTO leaderboard (name, killCount, floorCount, timeCount, healthValue, armorValue, damageValue, helmEquipped, chestEquipped, legEquipped, weaponEquipped) VALUES ('" + playerName + "', '" + killScore + "', '" + floorScore + "', '" + timeScore + "', '" + healthScore + "', '" + armorScore + "', '" + damageScore + "', '" + equippedHelm + "', '" + equippedChest + "', '" + equippedLeg + "', '" + equippedWeapon + "')";
+                command.CommandText = "INSERT INTO leaderboard (name, killCount, floorCount, timeCount, healthValue, armorValue, damageValue, helmEquipped, chestEquipped, legEquipped, weaponEquipped) VALUES (@name, @killCount, @floorCount, @timeCount, @healthValue, @armorValue, @damageValue, @helmEquipped, @chestEquipped, @legEquipped, @weaponEquipped)";
+                command.Parameters.AddWithValue("@name", playerName);
+                command.Parameters.AddWithValue("@killCount", killScore);
+                command.Parameters.AddWithValue("@floorCount", floorScore);
+                command.Parameters.AddWithValue("@timeCount", timeScore);
+                command.Parameters.AddWithValue("@healthValue", healthScore);
+                command.Parameters.AddWithValue("@armorValue", armorScore);
+                command.Parameters.AddWithValue("@damageValue", damageScore);
+                command.Parameters.AddWithValue("@helmEquipped", equippedHelm);
+                command.Parameters.AddWithValue("@chestEquipped", equippedChest);
+                command.Parameters.AddWithValue("@legEquipped", equippedLeg);
+                command.Parameters.AddWithValue("@weaponEquipped", equippedWeapon);
                 command.ExecuteNonQuery();
             }
         connection.Close();
+        }
+    }
+    public void printScores(){
+        using (var connection = new SqliteConnection(dbName)){
+            connection.Open();
+
+            using (var command = connection.CreateCommand()){
+                command.CommandText = "SELECT * FROM leaderboard";
+
+                using (IDataReader reader = command.ExecuteReader()){
+                    while (reader.Read())
+                        Debug.Log("Name: " + reader["name"]+ "\t Kill Count: " + reader["killCount"]+ "\t Floor Count: " + reader["floorCount"]+ "\t Run Time: " + reader["timeCount"]+ "\t Max Health: " + reader["healthValue"]+ "\t Max Armor: " + reader["armorValue"]+ "\t Max Damage: " + reader["damageValue"]+ "\t Equipped Helmet: " + reader["helmEquipped"]+ "\t Equipped Chestplate: " + reader["chestEquipped"]+ "\t Equipped Leggings: " + reader["legEquipped"]+ "\t Equipped Weapon: " + reader["weaponEquipped"]);
+                }
+            }
+            connection.Close();
         }
     }
 }
