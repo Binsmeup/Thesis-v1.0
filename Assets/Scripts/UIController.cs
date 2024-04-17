@@ -26,13 +26,12 @@ public class UIController : MonoBehaviour
     public List<Label> floorLabels;
     public List<Label> timeLabels;
     public List<Label> killCountLabels;
-
-    //create fuction sort order base on this four buttons
+    //Sort
     public Button NAMES;
     public Button FLOORS;
     public Button TIME;
     public Button KILLCOUNT;
-    //create fuction sort order base on this four buttons
+
 
     private Leaderboard leaderboard;
 
@@ -51,7 +50,6 @@ public class UIController : MonoBehaviour
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
 
-        // Initialize UI elements
         InitializeUI(root);
 
         leaderboard = FindObjectOfType<Leaderboard>();
@@ -81,7 +79,7 @@ public class UIController : MonoBehaviour
         TIME.clicked += SortByTime;
         KILLCOUNT.clicked += SortByKillCount;
 
-        // Show main menu initially
+
         ShowMainMenu();
     }
 
@@ -96,7 +94,7 @@ public class UIController : MonoBehaviour
         debug = root.Q<Button>("debug-button");
         Cbackmenu = root.Q<Button>("C-back");
 
-        // Sort buttons
+        //Sort buttons
         NAMES = root.Q<Button>("Name");
         FLOORS = root.Q<Button>("Floor");
         TIME = root.Q<Button>("Time");
@@ -110,7 +108,6 @@ public class UIController : MonoBehaviour
         MainMenu = root.Q<VisualElement>("MainMenu");
         Leaderboard = root.Q<VisualElement>("Leaderboard");
 
-        // Find and assign leaderboard UI elements
         nameLabels = new List<Label>();
         floorLabels = new List<Label>();
         timeLabels = new List<Label>();
