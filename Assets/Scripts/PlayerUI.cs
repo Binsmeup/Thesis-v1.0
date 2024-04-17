@@ -51,6 +51,7 @@ public class PlayerUI : MonoBehaviour{
     private HealthManager healthManager;
     private playerScript player;
     private MapGeneration mapGeneration;
+    private Leaderboard leaderboard;
 
     public string playerName;
     private float startTime;
@@ -106,9 +107,6 @@ public class PlayerUI : MonoBehaviour{
         knockbackForceLabel = root.Q<Label>("knockbackforce");
         moveSpeedLabel = root.Q<Label>("movespeed");
 
-        player = GameObject.FindObjectOfType<playerScript>();
-
-
         //Bar
         armorBar = root.Q<ProgressBar>("armorbar");
         healthBar = root.Q<ProgressBar>("healthbar");
@@ -116,8 +114,12 @@ public class PlayerUI : MonoBehaviour{
         GameObject mapGenerationObject = GameObject.FindWithTag("MapGeneration");
         mapGeneration = mapGenerationObject.GetComponent<MapGeneration>();
 
+        GameObject leaderboardManager = GameObject.FindWithTag("Leaderboard");
+        leaderboard = leaderboardManager.GetComponent<Leaderboard>();
+
         if (playerObject != null){
             healthManager = playerObject.GetComponent<HealthManager>();
+            player = playerObject.GetComponent<playerScript>();
         }
 
 
@@ -178,7 +180,6 @@ public class PlayerUI : MonoBehaviour{
 
         if (healthManager.health <= 0)
         {
-            Debug.Log("Health is 0 or less");
             Time.timeScale = 1f;
             timerRunning = false;
             finalTime.text = "Time: " + timed.text;
@@ -222,15 +223,40 @@ public class PlayerUI : MonoBehaviour{
         SceneManager.LoadScene("Main_Menu");
     }
 
-    void SendButtonPressed()
-    {
+    void SendButtonPressed(){
         string playerName = named.value;
+        float maxDamage = player.baseDamage * player.damageMulti;
+        float maxArmorValue = healthManager.HelmMaxHP + healthManager.ChestMaxHP + healthManager.LegMaxHP;
+        string playerHelm = "None";
+        string playerChest = "None";
+        string playerLeg = "None";
+        string playerWeapon = "None";
+        if (player.currentHelm != null){
+            playerHelm = player.currentHelm.name;
+        }
+        if (player.currentChest != null){
+            playerChest = player.currentChest.name;
+        }
+        if (player.currentLeg != null){
+            playerLeg = player.currentLeg.name;
+        }
+        if (player.currentWeapon != null){
+            playerWeapon = player.currentWeapon.name;
+        }
+        string timeText = timed.text;
+        string[] timeComponents = timeText.Split(':');
+        int hours = int.Parse(timeComponents[0]);
+        int minutes = int.Parse(timeComponents[1]);
+        int seconds = int.Parse(timeComponents[2]);
+        int timeElapsedSeconds = hours * 3600 + minutes * 60 + seconds;
         Debug.Log("Player Name: " + playerName);
         Debug.Log("Player floor: " + mapGeneration.floorCount);
         Debug.Log("Player kill: " + mapGeneration.killCount);
         Debug.Log("Player time: " + timed.text);
         named.SetEnabled(false);
         send.SetEnabled(false);
+        leaderboard.addScore(playerName, mapGeneration.killCount, mapGeneration.floorCount, timeElapsedSeconds, healthManager.maxHealth, maxArmorValue, maxDamage, playerHelm, playerChest, playerLeg, playerWeapon);
+        leaderboard.printScoresOrderedByName();
         submit.style.display = DisplayStyle.Flex;
         dieMainmenu.style.display = DisplayStyle.Flex;
         dieRestart.style.display = DisplayStyle.Flex;
