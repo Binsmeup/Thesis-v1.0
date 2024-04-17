@@ -106,7 +106,7 @@ public class Leaderboard : MonoBehaviour
 
             using (var command = connection.CreateCommand())
             {
-                command.CommandText = "SELECT * FROM leaderboard ORDER BY floorCount";
+                command.CommandText = "SELECT * FROM leaderboard ORDER BY floorCount DESC";
 
                 using (IDataReader reader = command.ExecuteReader())
                 {
@@ -135,7 +135,7 @@ public class Leaderboard : MonoBehaviour
 
             using (var command = connection.CreateCommand())
             {
-                command.CommandText = "SELECT * FROM leaderboard ORDER BY timeCount";
+                command.CommandText = "SELECT * FROM leaderboard ORDER BY timeCount DESC";
 
                 using (IDataReader reader = command.ExecuteReader())
                 {
@@ -164,7 +164,7 @@ public class Leaderboard : MonoBehaviour
 
             using (var command = connection.CreateCommand())
             {
-                command.CommandText = "SELECT * FROM leaderboard ORDER BY killCount";
+                command.CommandText = "SELECT * FROM leaderboard ORDER BY killCount DESC";
 
                 using (IDataReader reader = command.ExecuteReader())
                 {
@@ -191,7 +191,7 @@ public class Leaderboard : MonoBehaviour
 
             using (var command = connection.CreateCommand())
             {
-                command.CommandText = "SELECT * FROM leaderboard";
+                command.CommandText = "SELECT * FROM leaderboard ";
 
                 using (IDataReader reader = command.ExecuteReader())
                 {

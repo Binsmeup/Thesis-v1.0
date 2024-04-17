@@ -240,7 +240,7 @@ public class UIController : MonoBehaviour
 
     void UpdateLeaderboardUI()
     {
-
+        leaderboard.printScores();
         List<Leaderboard.LeaderboardEntry> leaderboardEntries = leaderboard.OrderedByName();
 
         for (int i = 0; i < leaderboardEntries.Count && i < nameLabels.Count; i++)
