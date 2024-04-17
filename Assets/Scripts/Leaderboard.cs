@@ -67,7 +67,7 @@ public class Leaderboard : MonoBehaviour
         }
     }
 
-    public List<LeaderboardEntry> getLeaderboardEntriesOrderedByName()
+    public List<LeaderboardEntry> OrderedByName()
     {
         List<LeaderboardEntry> entries = new List<LeaderboardEntry>();
         using (var connection = new SqliteConnection(dbName))
@@ -97,7 +97,7 @@ public class Leaderboard : MonoBehaviour
         return entries;
     }
 
-    public List<LeaderboardEntry> getLeaderboardEntriesOrderedByFloor()
+    public List<LeaderboardEntry> OrderedByFloor()
     {
         List<LeaderboardEntry> entries = new List<LeaderboardEntry>();
         using (var connection = new SqliteConnection(dbName))
@@ -117,7 +117,6 @@ public class Leaderboard : MonoBehaviour
                         entry.killCount = Convert.ToInt32(reader["killCount"]);
                         entry.floorCount = Convert.ToInt32(reader["floorCount"]);
                         entry.timeCount = Convert.ToInt32(reader["timeCount"]);
-                        // Add other fields as needed
                         entries.Add(entry);
                     }
                 }
@@ -127,7 +126,7 @@ public class Leaderboard : MonoBehaviour
         return entries;
     }
 
-    public List<LeaderboardEntry> getLeaderboardEntriesOrderedByTime()
+    public List<LeaderboardEntry> OrderedByTime()
     {
         List<LeaderboardEntry> entries = new List<LeaderboardEntry>();
         using (var connection = new SqliteConnection(dbName))
@@ -147,7 +146,6 @@ public class Leaderboard : MonoBehaviour
                         entry.killCount = Convert.ToInt32(reader["killCount"]);
                         entry.floorCount = Convert.ToInt32(reader["floorCount"]);
                         entry.timeCount = Convert.ToInt32(reader["timeCount"]);
-                        // Add other fields as needed
                         entries.Add(entry);
                     }
                 }
@@ -157,7 +155,7 @@ public class Leaderboard : MonoBehaviour
         return entries;
     }
 
-    public List<LeaderboardEntry> getLeaderboardEntriesOrderedByKillCount()
+    public List<LeaderboardEntry> OrderedByKillCount()
     {
         List<LeaderboardEntry> entries = new List<LeaderboardEntry>();
         using (var connection = new SqliteConnection(dbName))
@@ -177,7 +175,6 @@ public class Leaderboard : MonoBehaviour
                         entry.killCount = Convert.ToInt32(reader["killCount"]);
                         entry.floorCount = Convert.ToInt32(reader["floorCount"]);
                         entry.timeCount = Convert.ToInt32(reader["timeCount"]);
-                        // Add other fields as needed
                         entries.Add(entry);
                     }
                 }
@@ -213,7 +210,6 @@ public class Leaderboard : MonoBehaviour
 
             using (var command = connection.CreateCommand())
             {
-                // SQL query with ORDER BY clause to arrange scores by player name
                 command.CommandText = "SELECT * FROM leaderboard ORDER BY name";
 
                 using (IDataReader reader = command.ExecuteReader())

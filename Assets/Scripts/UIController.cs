@@ -21,11 +21,18 @@ public class UIController : MonoBehaviour
     public VisualElement Leaderboard;
     public Button Lbackmenu;
 
-    // Leaderboard UI elements
+
     public List<Label> nameLabels;
     public List<Label> floorLabels;
     public List<Label> timeLabels;
     public List<Label> killCountLabels;
+
+    //create fuction sort order base on this four buttons
+    public Button NAMES;
+    public Button FLOORS;
+    public Button TIME;
+    public Button KILLCOUNT;
+    //create fuction sort order base on this four buttons
 
     private Leaderboard leaderboard;
 
@@ -68,6 +75,12 @@ public class UIController : MonoBehaviour
         Lbackmenu.clicked += ShowMainMenu;
         creditsButton.clicked += CreditsButtonPressed;
         Cbackmenu.clicked += ShowMainMenu;
+
+        NAMES.clicked += SortByName;
+        FLOORS.clicked += SortByFloor;
+        TIME.clicked += SortByTime;
+        KILLCOUNT.clicked += SortByKillCount;
+
         // Show main menu initially
         ShowMainMenu();
     }
@@ -82,6 +95,12 @@ public class UIController : MonoBehaviour
         closeButton = root.Q<Button>("close-button");
         debug = root.Q<Button>("debug-button");
         Cbackmenu = root.Q<Button>("C-back");
+
+        // Sort buttons
+        NAMES = root.Q<Button>("Name");
+        FLOORS = root.Q<Button>("Floor");
+        TIME = root.Q<Button>("Time");
+        KILLCOUNT = root.Q<Button>("KillCount");
 
         //VisualElements
         MainMenu = root.Q<VisualElement>("MainMenu");
@@ -168,10 +187,64 @@ public class UIController : MonoBehaviour
         PlayerPrefs.SetFloat("SFXVolume", volume);
     }
 
+
+    void SortByName()
+    {
+        List<Leaderboard.LeaderboardEntry> leaderboardEntries = leaderboard.OrderedByName();
+
+        for (int i = 0; i < leaderboardEntries.Count && i < nameLabels.Count; i++)
+        {
+            nameLabels[i].text = leaderboardEntries[i].name;
+            floorLabels[i].text = leaderboardEntries[i].floorCount.ToString();
+            timeLabels[i].text = leaderboardEntries[i].timeCount.ToString();
+            killCountLabels[i].text = leaderboardEntries[i].killCount.ToString();
+        }
+    }
+
+    void SortByFloor()
+    {
+        List<Leaderboard.LeaderboardEntry> leaderboardEntries = leaderboard.OrderedByFloor();
+
+        for (int i = 0; i < leaderboardEntries.Count && i < nameLabels.Count; i++)
+        {
+            nameLabels[i].text = leaderboardEntries[i].name;
+            floorLabels[i].text = leaderboardEntries[i].floorCount.ToString();
+            timeLabels[i].text = leaderboardEntries[i].timeCount.ToString();
+            killCountLabels[i].text = leaderboardEntries[i].killCount.ToString();
+        }
+    }
+
+    void SortByTime()
+    {
+        List<Leaderboard.LeaderboardEntry> leaderboardEntries = leaderboard.OrderedByTime();
+
+        for (int i = 0; i < leaderboardEntries.Count && i < nameLabels.Count; i++)
+        {
+            nameLabels[i].text = leaderboardEntries[i].name;
+            floorLabels[i].text = leaderboardEntries[i].floorCount.ToString();
+            timeLabels[i].text = leaderboardEntries[i].timeCount.ToString();
+            killCountLabels[i].text = leaderboardEntries[i].killCount.ToString();
+        }
+    }
+
+    void SortByKillCount()
+    {
+        List<Leaderboard.LeaderboardEntry> leaderboardEntries = leaderboard.OrderedByKillCount();
+
+        for (int i = 0; i < leaderboardEntries.Count && i < nameLabels.Count; i++)
+        {
+            nameLabels[i].text = leaderboardEntries[i].name;
+            floorLabels[i].text = leaderboardEntries[i].floorCount.ToString();
+            timeLabels[i].text = leaderboardEntries[i].timeCount.ToString();
+            killCountLabels[i].text = leaderboardEntries[i].killCount.ToString();
+        }
+
+    }
+
     void UpdateLeaderboardUI()
     {
 
-        List<Leaderboard.LeaderboardEntry> leaderboardEntries = leaderboard.getLeaderboardEntriesOrderedByName();
+        List<Leaderboard.LeaderboardEntry> leaderboardEntries = leaderboard.OrderedByName();
 
         for (int i = 0; i < leaderboardEntries.Count && i < nameLabels.Count; i++)
         {
