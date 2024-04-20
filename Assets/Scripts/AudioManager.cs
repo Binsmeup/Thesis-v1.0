@@ -51,7 +51,7 @@ public class AudioManager : MonoBehaviour
         {
             // Load appropriate background music based on the scene name
             string sceneName = SceneManager.GetActiveScene().name;
-            Debug.Log("Current Scene: " + sceneName); // Add this line for debugging
+
 
             if (sceneName == "Main_menu")
             {
@@ -59,7 +59,6 @@ public class AudioManager : MonoBehaviour
             }
             else if (sceneName == "GameScene")
             {
-                Debug.Log("Playing BGMGame"); // Add this line for debugging
                 musicSource.clip = BGMGame;
             }
 
@@ -118,7 +117,7 @@ public class AudioManager : MonoBehaviour
     {
         if (musicSource != null)
         {
-            // Convert the slider value (0 to 1) to the appropriate volume level (0% to 100%)
+
             musicSource.volume = Mathf.Clamp01(volume / 100f);
         }
     }
@@ -128,7 +127,6 @@ public class AudioManager : MonoBehaviour
     {
         if (sfxSource != null)
         {
-            // Convert the slider value (0 to 1) to the appropriate volume level (0% to 100%)
             sfxSource.volume = Mathf.Clamp01(volume / 100f);
         }
     }
@@ -138,13 +136,12 @@ public class AudioManager : MonoBehaviour
     {
         if (sfxSource != null)
         {
-            // Return the current volume level (0% to 100%)
             return sfxSource.volume * 100f;
         }
         else
         {
-            // If the sfxSource is null, return a default value
-            return 100f; // Assuming the default volume is 100%
+
+            return 100f;
         }
     }
 
@@ -152,13 +149,12 @@ public class AudioManager : MonoBehaviour
     {
         if (musicSource != null)
         {
-            // Return the current volume level (0% to 100%)
             return musicSource.volume * 100f;
         }
         else
         {
-            // If the musicSource is null, return a default value
-            return 100f; // Assuming the default volume is 100%
+  
+            return 100f; 
         }
     }
 }

@@ -60,6 +60,7 @@ public class ItemManagement : MonoBehaviour
         LegendDagger
     }
 
+
     public void IncreaseItemCount(Items items){
         if (itemCounters.ContainsKey(items)){
             itemCounters[items]++;

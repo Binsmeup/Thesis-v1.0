@@ -8,9 +8,11 @@ public class Chest : MonoBehaviour{
     private BoxCollider2D mouseCollider;
     private Loot loot;
 
+    private PlayerUI playerUI;
     private void Start(){
         mouseCollider = GetComponent<BoxCollider2D>();
         loot = gameObject.GetComponent<Loot>();
+        playerUI = FindObjectOfType<PlayerUI>();
     }
 
     private void Update(){
@@ -25,12 +27,16 @@ public class Chest : MonoBehaviour{
     private void OnTriggerEnter2D(Collider2D other){
         if (other.CompareTag("Player")){
             isPlayerInRange = true;
+            playerUI.ShowFButton();
+            playerUI.SetItemName("Chest");
         }
     }
 
     private void OnTriggerExit2D(Collider2D other){
         if (other.CompareTag("Player")){
             isPlayerInRange = false;
+            playerUI.HideFButton();
+            playerUI.ClearItemName();
         }
     }
 

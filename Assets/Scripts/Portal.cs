@@ -31,6 +31,8 @@ public class Portal : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = true;
+            playerUI.ShowFButton();
+            playerUI.SetItemName("Portal");
         }
     }
 
@@ -38,7 +40,9 @@ public class Portal : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerInRange = false;
+            isPlayerInRange = false; 
+            playerUI.HideFButton();
+            playerUI.ClearItemName();
         }
     }
 

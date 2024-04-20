@@ -34,14 +34,12 @@ public class ItemPickUp : MonoBehaviour
         if (isMouseOverPickUp)
         {
             itemName = item.ToString();
-            Debug.Log("Item Name: " + itemName);
             playerUI.ShowItemDetail(itemName);
             
         }
         else
         {
             itemName = item.ToString();
-            Debug.Log("Hide Item Name: " + itemName);
             playerUI.HideItemDetail(itemName);
             
         }

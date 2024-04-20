@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class PlayerUI : MonoBehaviour
 {
     private Dictionary<string, VisualElement> itemVisualElements = new Dictionary<string, VisualElement>();
-
     // Game Options
     public Button gameOptions;
     public Button gamePlay;
@@ -114,10 +113,15 @@ public class PlayerUI : MonoBehaviour
     public ProgressBar armorBar;
     public ProgressBar healthBar;
 
+    public Texture2D ExampleTexture;
     private HealthManager healthManager;
     private playerScript player;
     private MapGeneration mapGeneration;
     private Leaderboard leaderboard;
+    public string weaponC;
+    public string helmetC;
+    public string chestC;
+    public string legsC;
 
     public string playerName;
     private float startTime;
@@ -152,10 +156,12 @@ public class PlayerUI : MonoBehaviour
 
         //inventory
         weapon = root.Q<Button>("WEAPON");
-        helmet = root.Q<Button>("HELMENT");
+        helmet = root.Q<Button>("HELMET");
         chestplate = root.Q<Button>("CHESTPLATE");
         legs = root.Q<Button>("LEGS");
 
+
+        
         //items
         boxhover = root.Q<VisualElement>("itemhover");
         itemVisualElements.Add("BeginnerSword", root.Q<VisualElement>("BeginnerSword"));
@@ -231,6 +237,11 @@ public class PlayerUI : MonoBehaviour
         music.RegisterValueChangedCallback(OnMusicVolumeChanged);
         sfx.RegisterValueChangedCallback(OnSFXVolumeChanged);
 
+        weapon.RegisterCallback<MouseEnterEvent>(OnWeaponHoverEnter);
+        weapon.RegisterCallback<MouseLeaveEvent>(OnWeaponHoverLeave);
+
+
+
         //stats
         attackSpeedLabel = root.Q<Label>("attackspeed");
         baseDamageLabel = root.Q<Label>("basedamage");
@@ -294,13 +305,13 @@ public class PlayerUI : MonoBehaviour
     {
         if (healthManager != null)
         {
-            // Update health bar
+
             healthBar.title = $"Health: {healthManager.health}/{healthManager.maxHealth}";
             healthBar.lowValue = 0;
             healthBar.highValue = healthManager.maxHealth;
             healthBar.value = healthManager.health;
 
-            // Update armor bar
+
             float armorValue = healthManager.HelmHP + healthManager.ChestHP + healthManager.LegHP;
             float maxArmorValue = healthManager.HelmMaxHP + healthManager.ChestMaxHP + healthManager.LegMaxHP;
             armorBar.title = $"Armor: {armorValue}/{maxArmorValue}";
@@ -311,7 +322,6 @@ public class PlayerUI : MonoBehaviour
 
         if (player != null)
         {
-
             attackSpeedLabel.text = "Attack Speed: " + player.attackSpeed.ToString();
             baseDamageLabel.text = "Base Damage: " + player.baseDamage.ToString();
             damageMultiplierLabel.text = "Damage Multiplier: " + player.damageMulti.ToString();
@@ -324,6 +334,38 @@ public class PlayerUI : MonoBehaviour
             floorFinal.text = "Floor: " + mapGeneration.floorCount;
             kills.text = mapGeneration.killCount.ToString();
             coins.text = player.coins.ToString();
+            weaponC = player.currentWeapon.name;
+
+            if (player.currentChest != null)
+            {
+                chestC = player.currentChest.name;
+                chestplate.style.display = DisplayStyle.Flex;
+                chestplate.RegisterCallback<MouseEnterEvent>(OnChestplateHoverEnter);
+                chestplate.RegisterCallback<MouseLeaveEvent>(OnChestplateHoverLeave);
+            }
+            else {
+            }
+            if (player.currentHelm != null)
+            {
+                helmetC = player.currentHelm.name;
+                helmet.style.display = DisplayStyle.Flex;
+                helmet.RegisterCallback<MouseEnterEvent>(OnHelmetHoverEnter);
+                helmet.RegisterCallback<MouseLeaveEvent>(OnHelmetHoverLeave);
+            }
+            else
+            {
+            }
+            if (player.currentLeg != null)
+            {
+                legsC = player.currentLeg.name;
+                legs.style.display = DisplayStyle.Flex;
+                legs.RegisterCallback<MouseEnterEvent>(OnLegsHoverEnter);
+                legs.RegisterCallback<MouseLeaveEvent>(OnLegsHoverLeave);
+            }
+            else
+            {
+               
+            }
 
             if (timerRunning)
             {
@@ -359,6 +401,7 @@ public class PlayerUI : MonoBehaviour
         }
 
     }
+
 
 
     void OptionsButtonPressed()
@@ -430,10 +473,6 @@ public class PlayerUI : MonoBehaviour
         int minutes = int.Parse(timeComponents[1]);
         int seconds = int.Parse(timeComponents[2]);
         int timeElapsedSeconds = hours * 3600 + minutes * 60 + seconds;
-        Debug.Log("Player Name: " + playerName);
-        Debug.Log("Player floor: " + mapGeneration.floorCount);
-        Debug.Log("Player kill: " + mapGeneration.killCount);
-        Debug.Log("Player time: " + timed.text);
         named.SetEnabled(false);
         send.SetEnabled(false);
         leaderboard.addScore(playerName, mapGeneration.killCount, mapGeneration.floorCount, timeElapsedSeconds, healthManager.maxHealth, maxArmorValue, maxDamage, playerHelm, playerChest, playerLeg, playerWeapon);
@@ -448,7 +487,8 @@ public class PlayerUI : MonoBehaviour
     }
 
 
-    public void ShowItemDetail(string itemName)
+
+public void ShowItemDetail(string itemName)
     {
         if (itemVisualElements.ContainsKey(itemName))
         {
@@ -487,13 +527,55 @@ public class PlayerUI : MonoBehaviour
         itemNames.text = "";
     }
 
+    void OnWeaponHoverEnter(MouseEnterEvent evt)
+    {
+
+        ShowItemDetail(weaponC);
+
+    }
+
+    void OnWeaponHoverLeave(MouseLeaveEvent evt)
+    {
+        HideItemDetail(weaponC);
+
+    }
+
+    void OnHelmetHoverEnter(MouseEnterEvent evt)
+    {
+        ShowItemDetail(helmetC);
+    }
+
+    void OnHelmetHoverLeave(MouseLeaveEvent evt)
+    {
+        HideItemDetail(helmetC);
+    }
+
+    void OnChestplateHoverEnter(MouseEnterEvent evt)
+    {
+        ShowItemDetail(chestC);
+    }
+
+    void OnChestplateHoverLeave(MouseLeaveEvent evt)
+    {
+        HideItemDetail(chestC);
+    }
+
+    void OnLegsHoverEnter(MouseEnterEvent evt)
+    {
+        ShowItemDetail(legsC);
+    }
+
+    void OnLegsHoverLeave(MouseLeaveEvent evt)
+    {
+        HideItemDetail(legsC);
+    }
+
     // Method to handle music volume slider value change
     void OnMusicVolumeChanged(ChangeEvent<float> evt)
     {
         float volume = evt.newValue;
         AudioManager.BGM.SetMusicVolume(volume);
         PlayerPrefs.SetFloat("MusicVolume", volume);
-        Debug.LogWarning(volume);
     }
 
     // Method to handle sound effects volume slider value change
@@ -502,6 +584,5 @@ public class PlayerUI : MonoBehaviour
         float volume = evt.newValue;
         AudioManager.BGM.SetSFXVolume(volume);
         PlayerPrefs.SetFloat("SFXVolume", volume);
-        Debug.LogWarning(volume);
     }
 }
