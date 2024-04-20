@@ -5,7 +5,9 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 
-public class PlayerUI : MonoBehaviour{
+public class PlayerUI : MonoBehaviour
+{
+    private Dictionary<string, VisualElement> itemVisualElements = new Dictionary<string, VisualElement>();
 
     // Game Options
     public Button gameOptions;
@@ -14,7 +16,13 @@ public class PlayerUI : MonoBehaviour{
     public Button gameMainmenu;
     public Button dieRestart;
     public Button dieMainmenu;
+    public Button Fbutton;
 
+    //Item Slot
+    public Button weapon;
+    public Button helmet;
+    public Button chestplate;
+    public Button legs;
 
     public Slider music;
     public Slider sfx;
@@ -22,9 +30,66 @@ public class PlayerUI : MonoBehaviour{
     public VisualElement OptionsScreen;
     public VisualElement layer;
     public VisualElement Die;
+    public VisualElement LS4;
+    public VisualElement LS5;
     public Label submit;
     public Button send;
     public TextField named;
+
+    //Items
+    public VisualElement boxhover; 
+    public VisualElement pickup;
+    public VisualElement BeginnerSword;
+    public VisualElement Sword;
+    public VisualElement Spear;
+    public VisualElement IronHelmet;
+    public VisualElement IronChestplate;
+    public VisualElement IronLeggings;
+    public VisualElement RingOfStrength;
+    public VisualElement RingOfSpeed;
+    public VisualElement RingOfHealth;
+    public VisualElement DeathGem;
+    public VisualElement PrecisionGem;
+    public VisualElement SonicGem;
+    public VisualElement FrenzyGem;
+    public VisualElement TitanGem;
+    public VisualElement VitalityNecklace;
+    public VisualElement MightyNecklace;
+    public VisualElement SwiftyNecklace;
+    public VisualElement NimbleNecklace;
+    public VisualElement DeadeyeNecklace;
+    public VisualElement LethalNecklace;
+    public VisualElement RingOfPrecision;
+    public VisualElement RingOfFatality;
+    public VisualElement RingOfHaste;
+    public VisualElement LeatherHood;
+    public VisualElement LeatherArmor;
+    public VisualElement LeatherPants;
+    public VisualElement SteelHelmet;
+    public VisualElement SteelChestplate;
+    public VisualElement SteelLeggings;
+    public VisualElement TitaniumHelmet;
+    public VisualElement TitaniumChestplate;
+    public VisualElement TitaniumLeggings;
+    public VisualElement JuggernautHelmet;
+    public VisualElement JuggernautChestplate;
+    public VisualElement JuggernautLeggings;
+    public VisualElement DarksteelHelmet;
+    public VisualElement DarksteelChestplate;
+    public VisualElement DarksteelLeggings;
+    public VisualElement Axe;
+    public VisualElement Bat;
+    public VisualElement Dagger;
+    public VisualElement RareSword;
+    public VisualElement RareSpear;
+    public VisualElement RareAxe;
+    public VisualElement RareBat;
+    public VisualElement RareDagger;
+    public VisualElement LegendSword;
+    public VisualElement LegendSpear;
+    public VisualElement LegendAxe;
+    public VisualElement LegendBat;
+    public VisualElement LegendDagger;
 
     //Stats
     public Label attackSpeedLabel;
@@ -44,6 +109,7 @@ public class PlayerUI : MonoBehaviour{
     public Label before;
     public Label homed;
     public Label rest;
+    public Label itemNames;
     //bars
     public ProgressBar armorBar;
     public ProgressBar healthBar;
@@ -56,7 +122,9 @@ public class PlayerUI : MonoBehaviour{
     public string playerName;
     private float startTime;
     private bool timerRunning = true;
-    void Start(){
+    public string previousFloorValue;
+    void Start()
+    {
         var root = GetComponent<UIDocument>().rootVisualElement;
 
         gameOptions = root.Q<Button>("options");
@@ -65,9 +133,11 @@ public class PlayerUI : MonoBehaviour{
         dieMainmenu = root.Q<Button>("homeD");
         gameRestart = root.Q<Button>("restart");
         gameMainmenu = root.Q<Button>("home");
+        Fbutton = root.Q<Button>("fbutton");
         floorcount = root.Q<Label>("Floor");
         timed = root.Q<Label>("timecount");
         startTime = Time.time;
+        itemNames = root.Q<Label>("itemNames");       
         coins = root.Q<Label>("coin");
         kills = root.Q<Label>("kill");
         killFinal = root.Q<Label>("KillsFin");
@@ -79,16 +149,79 @@ public class PlayerUI : MonoBehaviour{
         before = root.Q<Label>("sub");
         homed = root.Q<Label>("hom");
         rest = root.Q<Label>("restar");
-        send.clicked += SendButtonPressed;
+
+        //inventory
+        weapon = root.Q<Button>("WEAPON");
+        helmet = root.Q<Button>("HELMENT");
+        chestplate = root.Q<Button>("CHESTPLATE");
+        legs = root.Q<Button>("LEGS");
+
+        //items
+        boxhover = root.Q<VisualElement>("itemhover");
+        itemVisualElements.Add("BeginnerSword", root.Q<VisualElement>("BeginnerSword"));
+        itemVisualElements.Add("Sword", root.Q<VisualElement>("Sword"));
+        itemVisualElements.Add("Spear", root.Q<VisualElement>("Spear"));
+        itemVisualElements.Add("IronHelmet", root.Q<VisualElement>("IronHelmet"));
+        itemVisualElements.Add("IronChestplate", root.Q<VisualElement>("IronChestplate"));
+        itemVisualElements.Add("IronLeggings", root.Q<VisualElement>("IronLeggings"));
+        itemVisualElements.Add("RingOfStrength", root.Q<VisualElement>("RingOfStrength"));
+        itemVisualElements.Add("RingOfSpeed", root.Q<VisualElement>("RingOfSpeed"));
+        itemVisualElements.Add("RingOfHealth", root.Q<VisualElement>("RingOfHealth"));
+        itemVisualElements.Add("DeathGem", root.Q<VisualElement>("DeathGem"));
+        itemVisualElements.Add("PrecisionGem", root.Q<VisualElement>("PrecisionGem"));
+        itemVisualElements.Add("SonicGem", root.Q<VisualElement>("SonicGem"));
+        itemVisualElements.Add("FrenzyGem", root.Q<VisualElement>("FrenzyGem"));
+        itemVisualElements.Add("TitanGem", root.Q<VisualElement>("TitanGem"));
+        itemVisualElements.Add("VitalityNecklace", root.Q<VisualElement>("VitalityNecklace"));
+        itemVisualElements.Add("MightyNecklace", root.Q<VisualElement>("MightyNecklace"));
+        itemVisualElements.Add("SwiftyNecklace", root.Q<VisualElement>("SwiftyNecklace"));
+        itemVisualElements.Add("NimbleNecklace", root.Q<VisualElement>("NimbleNecklace"));
+        itemVisualElements.Add("DeadeyeNecklace", root.Q<VisualElement>("DeadeyeNecklace"));
+        itemVisualElements.Add("LethalNecklace", root.Q<VisualElement>("LethalNecklace"));
+        itemVisualElements.Add("RingOfPrecision", root.Q<VisualElement>("RingOfPrecision"));
+        itemVisualElements.Add("RingOfFatality", root.Q<VisualElement>("RingOfFatality"));
+        itemVisualElements.Add("RingOfHaste", root.Q<VisualElement>("RingOfHaste"));
+        itemVisualElements.Add("LeatherHood", root.Q<VisualElement>("LeatherHood"));
+        itemVisualElements.Add("LeatherArmor", root.Q<VisualElement>("LeatherArmor"));
+        itemVisualElements.Add("LeatherPants", root.Q<VisualElement>("LeatherPants"));
+        itemVisualElements.Add("SteelHelmet", root.Q<VisualElement>("SteelHelmet"));
+        itemVisualElements.Add("SteelChestplate", root.Q<VisualElement>("SteelChestplate"));
+        itemVisualElements.Add("SteelLeggings", root.Q<VisualElement>("SteelLeggings"));
+        itemVisualElements.Add("TitaniumHelmet", root.Q<VisualElement>("TitaniumHelmet"));
+        itemVisualElements.Add("TitaniumChestplate", root.Q<VisualElement>("TitaniumChestplate"));
+        itemVisualElements.Add("TitaniumLeggings", root.Q<VisualElement>("TitaniumLeggings"));
+        itemVisualElements.Add("JuggernautHelmet", root.Q<VisualElement>("JuggernautHelmet"));
+        itemVisualElements.Add("JuggernautChestplate", root.Q<VisualElement>("JuggernautChestplate"));
+        itemVisualElements.Add("JuggernautLeggings", root.Q<VisualElement>("JuggernautLeggings"));
+        itemVisualElements.Add("DarksteelHelmet", root.Q<VisualElement>("DarksteelHelmet"));
+        itemVisualElements.Add("DarksteelChestplate", root.Q<VisualElement>("DarksteelChestplate"));
+        itemVisualElements.Add("DarksteelLeggings", root.Q<VisualElement>("DarksteelLeggings"));
+        itemVisualElements.Add("Axe", root.Q<VisualElement>("Axe"));
+        itemVisualElements.Add("Bat", root.Q<VisualElement>("Bat"));
+        itemVisualElements.Add("Dagger", root.Q<VisualElement>("Dagger"));
+        itemVisualElements.Add("RareSword", root.Q<VisualElement>("RareSword"));
+        itemVisualElements.Add("RareSpear", root.Q<VisualElement>("RareSpear"));
+        itemVisualElements.Add("RareAxe", root.Q<VisualElement>("RareAxe"));
+        itemVisualElements.Add("RareBat", root.Q<VisualElement>("RareBat"));
+        itemVisualElements.Add("RareDagger", root.Q<VisualElement>("RareDagger"));
+        itemVisualElements.Add("LegendSword", root.Q<VisualElement>("LegendSword"));
+        itemVisualElements.Add("LegendSpear", root.Q<VisualElement>("LegendSpear"));
+        itemVisualElements.Add("LegendAxe", root.Q<VisualElement>("LegendAxe"));
+        itemVisualElements.Add("LegendBat", root.Q<VisualElement>("LegendBat"));
+        itemVisualElements.Add("LegendDagger", root.Q<VisualElement>("LegendDagger"));
 
 
+        LS4 = root.Q<VisualElement>("LoadingScreen4");
+        LS5 = root.Q<VisualElement>("LoadingScreen5");
         OptionsScreen = root.Q<VisualElement>("optionsscreen");
         Die = root.Q<VisualElement>("whenudie");
         layer = root.Q<VisualElement>("Layer");
 
         music = root.Q<Slider>("music");
         sfx = root.Q<Slider>("sound");
+        previousFloorValue = floorFinal.text;
 
+        send.clicked += SendButtonPressed;
         gameOptions.clicked += OptionsButtonPressed;
         gamePlay.clicked += PlayButtonPressed;
         gameRestart.clicked += RestartButtonPressed;
@@ -117,23 +250,50 @@ public class PlayerUI : MonoBehaviour{
         GameObject leaderboardManager = GameObject.FindWithTag("Leaderboard");
         leaderboard = leaderboardManager.GetComponent<Leaderboard>();
 
-        if (playerObject != null){
+        StartCoroutine(ShowAndHideLoadingScreen());
+
+        if (playerObject != null)
+        {
             healthManager = playerObject.GetComponent<HealthManager>();
             player = playerObject.GetComponent<playerScript>();
         }
 
 
         // Load the music and SFX volumes from PlayerPrefs
-        if (PlayerPrefs.HasKey("MusicVolume")){
+        if (PlayerPrefs.HasKey("MusicVolume"))
+        {
             music.value = PlayerPrefs.GetFloat("MusicVolume");
         }
-        if (PlayerPrefs.HasKey("SFXVolume")){
+        if (PlayerPrefs.HasKey("SFXVolume"))
+        {
             sfx.value = PlayerPrefs.GetFloat("SFXSlider");
         }
     }
 
-    void UpdateUI(){
-        if (healthManager != null){
+    public IEnumerator ShowAndHideLoadingScreen()
+    {
+        LS4.style.display = DisplayStyle.Flex;
+
+        yield return new WaitForSeconds(2f);
+
+        LS4.style.display = DisplayStyle.None;
+    }
+
+
+    private IEnumerator LoadMainMenuAfterDelay()
+    {
+        LS5.style.display = DisplayStyle.Flex;
+
+        yield return new WaitForSeconds(2f);
+
+        LS5.style.display = DisplayStyle.None;
+
+    }
+
+    void UpdateUI()
+    {
+        if (healthManager != null)
+        {
             // Update health bar
             healthBar.title = $"Health: {healthManager.health}/{healthManager.maxHealth}";
             healthBar.lowValue = 0;
@@ -149,7 +309,8 @@ public class PlayerUI : MonoBehaviour{
             armorBar.value = armorValue;
         }
 
-        if (player != null){
+        if (player != null)
+        {
 
             attackSpeedLabel.text = "Attack Speed: " + player.attackSpeed.ToString();
             baseDamageLabel.text = "Base Damage: " + player.baseDamage.ToString();
@@ -175,7 +336,8 @@ public class PlayerUI : MonoBehaviour{
         }
     }
 
-    void Update(){
+    void Update()
+    {
         UpdateUI();
 
         if (healthManager.health <= 0)
@@ -189,29 +351,42 @@ public class PlayerUI : MonoBehaviour{
         {
             Die.style.display = DisplayStyle.None;
         }
+
+        if (floorFinal.text != previousFloorValue)
+        {
+            StartCoroutine(ShowAndHideLoadingScreen());
+            previousFloorValue = floorFinal.text;
+        }
+
     }
 
 
-    void OptionsButtonPressed(){
+    void OptionsButtonPressed()
+    {
         Time.timeScale = 0f;
         layer.style.display = DisplayStyle.Flex;
         OptionsScreen.style.display = DisplayStyle.Flex;
     }
 
-    void PlayButtonPressed(){
+    void PlayButtonPressed()
+    {
         Time.timeScale = 1f;
         layer.style.display = DisplayStyle.None;
         OptionsScreen.style.display = DisplayStyle.None;
     }
 
-    void RestartButtonPressed(){
+    void RestartButtonPressed()
+    {
         Time.timeScale = 1f;
         SceneManager.LoadScene("GameScene");
     }
 
-    void HomeButtonPressed(){
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("Main_Menu");
+    void HomeButtonPressed()
+    {
+
+        StartCoroutine(LoadMainMenuAfterDelay());
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("Main_Menu");
     }
     void DieRestartButtonPressed()
     {
@@ -223,7 +398,8 @@ public class PlayerUI : MonoBehaviour{
         SceneManager.LoadScene("Main_Menu");
     }
 
-    void SendButtonPressed(){
+    void SendButtonPressed()
+    {
         string playerName = named.value;
         float maxDamage = player.baseDamage * player.damageMulti;
         float maxArmorValue = healthManager.HelmMaxHP + healthManager.ChestMaxHP + healthManager.LegMaxHP;
@@ -231,16 +407,20 @@ public class PlayerUI : MonoBehaviour{
         string playerChest = "None";
         string playerLeg = "None";
         string playerWeapon = "None";
-        if (player.currentHelm != null){
+        if (player.currentHelm != null)
+        {
             playerHelm = player.currentHelm.name;
         }
-        if (player.currentChest != null){
+        if (player.currentChest != null)
+        {
             playerChest = player.currentChest.name;
         }
-        if (player.currentLeg != null){
+        if (player.currentLeg != null)
+        {
             playerLeg = player.currentLeg.name;
         }
-        if (player.currentWeapon != null){
+        if (player.currentWeapon != null)
+        {
             playerWeapon = player.currentWeapon.name;
         }
         string timeText = timed.text;
@@ -263,10 +443,52 @@ public class PlayerUI : MonoBehaviour{
         homed.style.display = DisplayStyle.Flex;
         rest.style.display = DisplayStyle.Flex;
         before.style.display = DisplayStyle.None;
+
+    }
+
+
+    public void ShowItemDetail(string itemName)
+    {
+        if (itemVisualElements.ContainsKey(itemName))
+        {
+            itemVisualElements[itemName].style.display = DisplayStyle.Flex;
+        }
+        else
+        {
+            Debug.LogError($"VisualElement for item {itemName} not found.");
+        }
+    }
+
+    public void HideItemDetail(string itemName)
+    {
+            itemVisualElements[itemName].style.display = DisplayStyle.None;
+    }
+
+    public void ShowFButton()
+    {
+        Fbutton.style.display = DisplayStyle.Flex;
+        boxhover.style.display = DisplayStyle.Flex;
+    }
+
+    public void HideFButton()
+    {
+        Fbutton.style.display = DisplayStyle.None;
+        boxhover.style.display = DisplayStyle.None;
+    }
+    public void SetItemName(string name)
+    {
+        itemNames.text = name;
+    }
+
+    // Method to clear the item name from the UI
+    public void ClearItemName()
+    {
+        itemNames.text = "";
     }
 
     // Method to handle music volume slider value change
-    void OnMusicVolumeChanged(ChangeEvent<float> evt){
+    void OnMusicVolumeChanged(ChangeEvent<float> evt)
+    {
         float volume = evt.newValue;
         AudioManager.BGM.SetMusicVolume(volume);
         PlayerPrefs.SetFloat("MusicVolume", volume);
@@ -274,7 +496,8 @@ public class PlayerUI : MonoBehaviour{
     }
 
     // Method to handle sound effects volume slider value change
-    void OnSFXVolumeChanged(ChangeEvent<float> evt){
+    void OnSFXVolumeChanged(ChangeEvent<float> evt)
+    {
         float volume = evt.newValue;
         AudioManager.BGM.SetSFXVolume(volume);
         PlayerPrefs.SetFloat("SFXVolume", volume);
