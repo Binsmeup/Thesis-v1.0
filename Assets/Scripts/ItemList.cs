@@ -128,4 +128,5 @@ public class ItemList : ScriptableObject{
         playerStats.moveSpeed -= MS;
 
     }
+
 }

@@ -72,7 +72,8 @@ public class playerScript : MonoBehaviour{
 
         if (canAttack && !isDead){
             if (Input.GetMouseButtonDown(0)){
-                    switch (weaponType){
+                AudioManager.BGM.PlaySwingSound();
+                switch (weaponType){
                     case "Spear":
                         canAttack = false;
                         canRotateWeapon = false;
@@ -144,11 +145,21 @@ public class playerScript : MonoBehaviour{
 
     private void FixedUpdate(){
         if (!isDead && !anim.GetCurrentAnimatorStateInfo(0).IsName("SpearAttack") && !anim.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack") && !anim.GetCurrentAnimatorStateInfo(0).IsName("AxeAttack") && !anim.GetCurrentAnimatorStateInfo(0).IsName("BatAttack")){
-            if (movementInput != Vector2.zero){
+            if (movementInput != Vector2.zero) {
+                if (!AudioManager.BGM.sfxSource.isPlaying)
+                {
+                    AudioManager.BGM.PlayWalkSoundLoop();
+                }
+                else
+                {
+                    
+                }
                 rb.AddForce(movementInput * moveSpeed * Time.deltaTime);
                 IsMoving = true;
             }
-            else{
+            else
+            {
+                AudioManager.BGM.StopWalkSoundLoop();
                 IsMoving = false;
             }
         }
@@ -268,5 +279,6 @@ public class playerScript : MonoBehaviour{
     public void getCoins(int coinGain){
         coins += coinGain;
     }
+
 }
 

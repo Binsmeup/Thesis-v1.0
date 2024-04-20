@@ -1,12 +1,15 @@
+using System.Collections;
+using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
-
 
 public class AudioManager : MonoBehaviour
 {
     [Header("Source")]
     [SerializeField] private AudioSource musicSource;
-    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] public AudioSource sfxSource;
 
     [Header("Clips")]
     public AudioClip BGMMain;
@@ -14,12 +17,10 @@ public class AudioManager : MonoBehaviour
     public AudioClip swingSound;
     public AudioClip walkSound;
 
-    // Singleton instance
     public static AudioManager BGM;
 
     private void Awake()
     {
-        // Ensure only one instance of AudioManager exists
         if (BGM == null)
         {
             BGM = this;
@@ -31,18 +32,15 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        // Subscribe to the sceneLoaded event
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     private void OnDestroy()
     {
-        // Unsubscribe from the sceneLoaded event when the AudioManager is destroyed
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Start()
     {
-        // Play background music when the game starts
         PlayBackgroundMusic();
     }
 
@@ -86,7 +84,8 @@ public class AudioManager : MonoBehaviour
     {
         if (sfxSource != null && swingSound != null)
         {
-            sfxSource.PlayOneShot(swingSound);
+            sfxSource.clip = swingSound;
+            sfxSource.Play();
         }
         else
         {
@@ -94,12 +93,14 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // Play walk sound effect
-    public void PlayWalkSound()
+
+
+    public void PlayWalkSoundLoop()
     {
         if (sfxSource != null && walkSound != null)
         {
-            sfxSource.PlayOneShot(walkSound);
+            sfxSource.clip = walkSound;
+            sfxSource.Play();
         }
         else
         {
@@ -107,6 +108,10 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void StopWalkSoundLoop()
+    {
+        sfxSource.Stop();
+    }
 
     // Method to set music volume
     public void SetMusicVolume(float volume)

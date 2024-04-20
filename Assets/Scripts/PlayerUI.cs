@@ -266,7 +266,7 @@ public class PlayerUI : MonoBehaviour
         }
         if (PlayerPrefs.HasKey("SFXVolume"))
         {
-            sfx.value = PlayerPrefs.GetFloat("SFXSlider");
+            sfx.value = PlayerPrefs.GetFloat("SFXVolume");
         }
     }
 
@@ -395,6 +395,7 @@ public class PlayerUI : MonoBehaviour
 
     void DieMainmenuButtonPressed()
     {
+                StartCoroutine(LoadMainMenuAfterDelay());
         SceneManager.LoadScene("Main_Menu");
     }
 
