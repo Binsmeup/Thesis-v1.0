@@ -48,7 +48,9 @@ public class EnemyShoot : MonoBehaviour{
                     bullets = 10;
                 }
                 shots = 1;
+                enemyChase.IsAiming = true;
                 yield return new WaitForSeconds(lockDuration);
+                enemyChase.IsAiming = false;
                 Vector3 directionToPlayer = (enemyChase.player.position - transform.position).normalized;
                 StartCoroutine(Fire(directionToPlayer, bullets, shots, 60f));
             }
@@ -61,7 +63,9 @@ public class EnemyShoot : MonoBehaviour{
                     bullets = 20;
                     shots = 4;
                 }
+                enemyChase.IsAiming = true;
                 yield return new WaitForSeconds(lockDuration);
+                enemyChase.IsAiming = false;
                 Vector3 directionToPlayer = (enemyChase.player.position - transform.position).normalized;
                 StartCoroutine(Fire(directionToPlayer, bullets, shots, 360f));
             }
@@ -69,9 +73,14 @@ public class EnemyShoot : MonoBehaviour{
         else
         {
             if (canSnipe){
+                enemyChase.canMove = false;
+                enemyChase.IsAiming = true;
                 yield return new WaitForSeconds(lockDuration);
                 Vector3 directionToPlayer = (enemyChase.player.position - transform.position).normalized;
+                enemyChase.IsAiming = false;
+                enemyChase.IsAimLocked = true;
                 yield return new WaitForSeconds(reactionTime);
+                enemyChase.IsAimLocked = false;
                 StartCoroutine(Fire(directionToPlayer, 1, 1, 0f));
             }
             else{
@@ -93,6 +102,7 @@ public class EnemyShoot : MonoBehaviour{
             }
         }
         for (int a = 0 ; a < fireCount; a++){
+            enemyChase.IsShoot = true;
             for (int i = 0; i < projectileCount; i++){
                 Vector3 spreadDirection = Quaternion.Euler(0, 0, Random.Range(-spread, spread)) * directionToPlayer;
 
@@ -111,12 +121,15 @@ public class EnemyShoot : MonoBehaviour{
                 }
             }
             yield return new WaitForSeconds(fireCooldown);
+            enemyChase.IsShoot = false;
+            yield return new WaitForSeconds(0.1f);
         }
         if (enemy.isBoss){
             yield return new WaitForSeconds(enemyChase.endLag);
             enemyChase.canMove = true;
             StartCoroutine(skills.Cooldown(skills.skillCooldown));
         }
+        enemyChase.canMove = true;
     }
 
     private bool IsPlayerInRange(){

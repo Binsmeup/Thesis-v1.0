@@ -32,6 +32,26 @@ public class EnemyChase : MonoBehaviour{
         }
     }
 
+    public bool IsAiming {
+        set{
+            isAiming = value;
+            anim.SetBool("Aiming", isAiming);
+        }
+    }
+
+    public bool IsAimLocked {
+        set{
+            isAimLocked = value;
+            anim.SetBool("AimLock", isAimLocked);
+        }
+    }
+    public bool IsShoot {
+        set{
+            isShoot = value;
+            anim.SetBool("Shoot", isShoot);
+        }
+    }
+
     public Animator anim;
     public string playerTag = "Player";
     public float chaseRange = 10f;
@@ -54,10 +74,13 @@ public class EnemyChase : MonoBehaviour{
     private Vector3 lastKnownPosition;
     private bool isCharging = false;
     public Transform player;
-    public bool isMoving = false;
-    public bool isChargingAnim = false;
-    public bool isLockedIn = false;
-    public bool isCharged = false;
+    bool isMoving = false;
+    bool isChargingAnim = false;
+    bool isLockedIn = false;
+    bool isCharged = false;
+    bool isAiming = false;
+    bool isAimLocked = false;
+    bool isShoot = false;
 
     public bool isChargeCooldown = false;
 
