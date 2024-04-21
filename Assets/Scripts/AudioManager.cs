@@ -1,12 +1,15 @@
+using System.Collections;
+using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
-
 
 public class AudioManager : MonoBehaviour
 {
     [Header("Source")]
     [SerializeField] private AudioSource musicSource;
-    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] public AudioSource sfxSource;
 
     [Header("Clips")]
     public AudioClip BGMMain;
@@ -14,12 +17,10 @@ public class AudioManager : MonoBehaviour
     public AudioClip swingSound;
     public AudioClip walkSound;
 
-    // Singleton instance
     public static AudioManager BGM;
 
     private void Awake()
     {
-        // Ensure only one instance of AudioManager exists
         if (BGM == null)
         {
             BGM = this;
@@ -31,18 +32,15 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        // Subscribe to the sceneLoaded event
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     private void OnDestroy()
     {
-        // Unsubscribe from the sceneLoaded event when the AudioManager is destroyed
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Start()
     {
-        // Play background music when the game starts
         PlayBackgroundMusic();
     }
 
@@ -53,7 +51,7 @@ public class AudioManager : MonoBehaviour
         {
             // Load appropriate background music based on the scene name
             string sceneName = SceneManager.GetActiveScene().name;
-            Debug.Log("Current Scene: " + sceneName); // Add this line for debugging
+
 
             if (sceneName == "Main_menu")
             {
@@ -61,7 +59,6 @@ public class AudioManager : MonoBehaviour
             }
             else if (sceneName == "GameScene")
             {
-                Debug.Log("Playing BGMGame"); // Add this line for debugging
                 musicSource.clip = BGMGame;
             }
 
@@ -86,7 +83,8 @@ public class AudioManager : MonoBehaviour
     {
         if (sfxSource != null && swingSound != null)
         {
-            sfxSource.PlayOneShot(swingSound);
+            sfxSource.clip = swingSound;
+            sfxSource.Play();
         }
         else
         {
@@ -94,12 +92,14 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // Play walk sound effect
-    public void PlayWalkSound()
+
+
+    public void PlayWalkSoundLoop()
     {
         if (sfxSource != null && walkSound != null)
         {
-            sfxSource.PlayOneShot(walkSound);
+            sfxSource.clip = walkSound;
+            sfxSource.Play();
         }
         else
         {
@@ -107,13 +107,17 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void StopWalkSoundLoop()
+    {
+        sfxSource.Stop();
+    }
 
     // Method to set music volume
     public void SetMusicVolume(float volume)
     {
         if (musicSource != null)
         {
-            // Convert the slider value (0 to 1) to the appropriate volume level (0% to 100%)
+
             musicSource.volume = Mathf.Clamp01(volume / 100f);
         }
     }
@@ -123,7 +127,6 @@ public class AudioManager : MonoBehaviour
     {
         if (sfxSource != null)
         {
-            // Convert the slider value (0 to 1) to the appropriate volume level (0% to 100%)
             sfxSource.volume = Mathf.Clamp01(volume / 100f);
         }
     }
@@ -133,13 +136,12 @@ public class AudioManager : MonoBehaviour
     {
         if (sfxSource != null)
         {
-            // Return the current volume level (0% to 100%)
             return sfxSource.volume * 100f;
         }
         else
         {
-            // If the sfxSource is null, return a default value
-            return 100f; // Assuming the default volume is 100%
+
+            return 100f;
         }
     }
 
@@ -147,13 +149,12 @@ public class AudioManager : MonoBehaviour
     {
         if (musicSource != null)
         {
-            // Return the current volume level (0% to 100%)
             return musicSource.volume * 100f;
         }
         else
         {
-            // If the musicSource is null, return a default value
-            return 100f; // Assuming the default volume is 100%
+  
+            return 100f; 
         }
     }
 }

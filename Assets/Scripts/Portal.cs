@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Portal : MonoBehaviour{
+public class Portal : MonoBehaviour
+{
     private bool isPlayerInRange = false;
     private bool isMouseOverPickUp = false;
     private BoxCollider2D mouseCollider;
 
-    private void Start(){
+    private PlayerUI playerUI;
+    private void Start()
+    {
         mouseCollider = GetComponent<BoxCollider2D>();
+        playerUI = FindObjectOfType<PlayerUI>();
     }
 
-    private void Update(){
+    private void Update()
+    {
         if (isPlayerInRange && isMouseOverPickUp && Input.GetKeyDown(KeyCode.F))
         {
             EnterPortal();
@@ -21,35 +26,52 @@ public class Portal : MonoBehaviour{
         isMouseOverPickUp = mouseCollider.OverlapPoint((Vector2)ray.origin);
     }
 
-    private void OnTriggerEnter2D(Collider2D other){
-        if (other.CompareTag("Player")){
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
             isPlayerInRange = true;
+            playerUI.ShowFButton();
+            playerUI.SetItemName("Portal");
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other){
-        if (other.CompareTag("Player")){
-            isPlayerInRange = false;
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerInRange = false; 
+            playerUI.HideFButton();
+            playerUI.ClearItemName();
         }
     }
 
-    private void EnterPortal(){
+    private void EnterPortal()
+    {
         playerScript player = FindObjectOfType<playerScript>();
 
-        if (player != null){
+        if (player != null)
+        {
             NextFloor();
             Destroy(gameObject);
         }
+
     }
-    private void NextFloor(){
+    private void NextFloor()
+    { 
+
         MapGeneration mapGenerator = FindObjectOfType<MapGeneration>();
-        if (mapGenerator != null) {
+        if (mapGenerator != null)
+        {
             mapGenerator.floorCount++;
             ClearScene();
             mapGenerator.GenerateMap();
         }
+        
     }
-    private void ClearScene() {
+
+    private void ClearScene()
+    {
         GameObject[] allObjects = SceneManager.GetActiveScene().GetRootGameObjects();
 
         List<string> excludeNames = new List<string>();
@@ -61,8 +83,10 @@ public class Portal : MonoBehaviour{
         excludeNames.Add("ItemList");
         excludeNames.Add("UIDocument");
 
-        foreach (GameObject obj in allObjects) {
-            if (!excludeNames.Contains(obj.name)) {
+        foreach (GameObject obj in allObjects)
+        {
+            if (!excludeNames.Contains(obj.name))
+            {
                 Destroy(obj);
             }
         }

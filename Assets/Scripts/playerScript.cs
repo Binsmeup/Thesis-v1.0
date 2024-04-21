@@ -72,7 +72,8 @@ public class playerScript : MonoBehaviour{
 
         if (canAttack && !isDead){
             if (Input.GetMouseButtonDown(0)){
-                    switch (weaponType){
+                AudioManager.BGM.PlaySwingSound();
+                switch (weaponType){
                     case "Spear":
                         canAttack = false;
                         canRotateWeapon = false;
@@ -144,11 +145,21 @@ public class playerScript : MonoBehaviour{
 
     private void FixedUpdate(){
         if (!isDead && !anim.GetCurrentAnimatorStateInfo(0).IsName("SpearAttack") && !anim.GetCurrentAnimatorStateInfo(0).IsName("SwordAttack") && !anim.GetCurrentAnimatorStateInfo(0).IsName("AxeAttack") && !anim.GetCurrentAnimatorStateInfo(0).IsName("BatAttack")){
-            if (movementInput != Vector2.zero){
+            if (movementInput != Vector2.zero) {
+                if (!AudioManager.BGM.sfxSource.isPlaying)
+                {
+                    AudioManager.BGM.PlayWalkSoundLoop();
+                }
+                else
+                {
+                    
+                }
                 rb.AddForce(movementInput * moveSpeed * Time.deltaTime);
                 IsMoving = true;
             }
-            else{
+            else
+            {
+                AudioManager.BGM.StopWalkSoundLoop();
                 IsMoving = false;
             }
         }
@@ -162,18 +173,51 @@ public class playerScript : MonoBehaviour{
         movementInput = movementValue.Get<Vector2>();
     }
 
-    public void getItem(ItemManagement.Items item){
-    for (int i = 0; i < itemSOLibrary.itemList.Length; i++){
-        if (itemSOLibrary.itemList[i].itemName == item.ToString()){
-            if (itemSOLibrary.itemList[i].Type == "Weapon" || itemSOLibrary.itemList[i].Type == "Chestplate" ||
-                itemSOLibrary.itemList[i].Type == "Helmet" || itemSOLibrary.itemList[i].Type == "Leggings"){
-                itemDrop(item);
-            }
+    public void getItem(ItemManagement.Items item)
+    {
+        for (int i = 0; i < itemSOLibrary.itemList.Length; i++)
+        {
+            if (itemSOLibrary.itemList[i].itemName == item.ToString())
+            {
+                Debug.Log("Picked up item: " + itemSOLibrary.itemList[i].itemName);
+                if (itemSOLibrary.itemList[i].baseDmg > 0)
+                    Debug.Log("Base Damage: " + itemSOLibrary.itemList[i].baseDmg);
+                if (itemSOLibrary.itemList[i].dmgMulti > 0)
+                    Debug.Log("Damage Multiplier: " + itemSOLibrary.itemList[i].dmgMulti);
+                if (itemSOLibrary.itemList[i].critCHA > 0)
+                    Debug.Log("Critical Chance: " + itemSOLibrary.itemList[i].critCHA);
+                if (itemSOLibrary.itemList[i].critDMG > 0)
+                    Debug.Log("Critical Damage: " + itemSOLibrary.itemList[i].critDMG);
+                if (itemSOLibrary.itemList[i].atkSPD > 0)
+                    Debug.Log("Attack Speed: " + itemSOLibrary.itemList[i].atkSPD);
+                if (itemSOLibrary.itemList[i].atkSPDModifier > 0)
+                    Debug.Log("Attack Speed Modifier: " + itemSOLibrary.itemList[i].atkSPDModifier);
+                if (itemSOLibrary.itemList[i].maxHP > 0)
+                    Debug.Log("Max HP: " + itemSOLibrary.itemList[i].maxHP);
+                if (itemSOLibrary.itemList[i].HP > 0)
+                    Debug.Log("HP: " + itemSOLibrary.itemList[i].HP);
+                if (itemSOLibrary.itemList[i].KB > 0)
+                    Debug.Log("Knockback: " + itemSOLibrary.itemList[i].KB);
+                if (itemSOLibrary.itemList[i].MS > 0)
+                    Debug.Log("Move Speed: " + itemSOLibrary.itemList[i].MS);
+                if (itemSOLibrary.itemList[i].HelmetMaxHealth > 0)
+                    Debug.Log("Helmet Max Health: " + itemSOLibrary.itemList[i].HelmetMaxHealth);
+                if (itemSOLibrary.itemList[i].ChestMaxHealth > 0)
+                    Debug.Log("Chestplate Max Health: " + itemSOLibrary.itemList[i].ChestMaxHealth);
+                if (itemSOLibrary.itemList[i].LegMaxHealth > 0)
+                    Debug.Log("Leggings Max Health: " + itemSOLibrary.itemList[i].LegMaxHealth);
 
-            itemSOLibrary.itemList[i].onEquip();
+                if (itemSOLibrary.itemList[i].Type == "Weapon" || itemSOLibrary.itemList[i].Type == "Chestplate" ||
+                    itemSOLibrary.itemList[i].Type == "Helmet" || itemSOLibrary.itemList[i].Type == "Leggings")
+                {
+                    itemDrop(item);
+                }
+
+                itemSOLibrary.itemList[i].onEquip();
             }
         }
     }
+
     public void itemDrop(ItemManagement.Items item){
         for (int i = 0; i < itemSOLibrary.itemList.Length; i++){
             if (itemSOLibrary.itemList[i].itemName == item.ToString()){
@@ -235,5 +279,6 @@ public class playerScript : MonoBehaviour{
     public void getCoins(int coinGain){
         coins += coinGain;
     }
+
 }
 

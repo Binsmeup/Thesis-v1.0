@@ -444,3 +444,7 @@
     background-color: rgba(0, 0, 0, 0);
     background-image: url('project://database/Assets/assets/dow%20clicked.png?fileID=2800000&guid=dfcc96517fcc32844a8eaaaa63bd5497&type=3#dow clicked');
 }
+
+.itemimgpickedup {
+    background-image: url('project://database/Assets/assets/armor.png?fileID=2800000&guid=aace8343fa0b8de47bf9b51a00ae8372&type=3#armor');
+}
