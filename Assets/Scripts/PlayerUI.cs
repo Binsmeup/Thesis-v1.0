@@ -335,6 +335,11 @@ public class PlayerUI : MonoBehaviour
             kills.text = mapGeneration.killCount.ToString();
             coins.text = player.coins.ToString();
             weaponC = player.currentWeapon.name;
+/*            Sprite sprite = Resources.Load<Sprite>("Axe");
+            if (sprite != null)
+            {
+                weapon.style.backgroundImage = sprite.texture;
+            }*/
 
             if (player.currentChest != null)
             {
