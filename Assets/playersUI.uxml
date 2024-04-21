@@ -486,5 +486,6 @@
         </ui:VisualElement>
         <ui:VisualElement name="LoadingScreen4" style="position: absolute; width: 1920px; height: 1080px; background-image: url(&apos;project://database/Assets/assets/level%20progression%20loading%20screen.png?fileID=2800000&amp;guid=5265bfcd42c854b48a17f4592c6d549c&amp;type=3#level progression loading screen&apos;); display: none; overflow: visible;" />
         <ui:VisualElement name="LoadingScreen5" style="position: absolute; width: 1920px; height: 1080px; background-image: url(&apos;project://database/Assets/assets/heading%20back.png?fileID=2800000&amp;guid=b096a92dfab7db34781488bb99d3fe31&amp;type=3#heading back&apos;); display: none;" />
+        <ui:VisualElement name="LoadingScreen2" style="width: 1920px; height: 1080px; position: absolute; background-image: url(&apos;project://database/Assets/assets/start%20of%20level.png?fileID=2800000&amp;guid=b7bba85716e9add469ffb21e5301da90&amp;type=3#start of level&apos;); display: flex;" />
     </ui:VisualElement>
 </ui:UXML>

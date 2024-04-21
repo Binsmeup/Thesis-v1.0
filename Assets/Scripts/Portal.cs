@@ -18,6 +18,17 @@ public class Portal : MonoBehaviour
 
     private void Update()
     {
+        if (isPlayerInRange && isMouseOverPickUp)
+        {
+            playerUI.ShowFButton();
+            playerUI.SetItemName("Portal");
+        }
+        else
+        {
+            playerUI.HideFButton();
+            playerUI.ClearItemName();
+        }
+
         if (isPlayerInRange && isMouseOverPickUp && Input.GetKeyDown(KeyCode.F))
         {
             EnterPortal();
@@ -31,11 +42,6 @@ public class Portal : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = true;
-            if (isMouseOverPickUp)
-            {
-                playerUI.ShowFButton();
-                playerUI.SetItemName("Portal");
-            }
         }
     }
 
@@ -44,8 +50,6 @@ public class Portal : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = false; 
-            playerUI.HideFButton();
-            playerUI.ClearItemName();
         }
     }
 

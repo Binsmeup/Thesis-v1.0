@@ -16,6 +16,17 @@ public class Chest : MonoBehaviour{
     }
 
     private void Update(){
+        if (isPlayerInRange && isMouseOverPickUp)
+        {
+            playerUI.ShowFButton();
+            playerUI.SetItemName("Chest");
+        }
+        else
+        {
+            playerUI.HideFButton();
+            playerUI.ClearItemName();
+        }
+
         if (isPlayerInRange && isMouseOverPickUp && Input.GetKeyDown(KeyCode.F))
         {
             OpenChest();
@@ -27,20 +38,12 @@ public class Chest : MonoBehaviour{
     private void OnTriggerEnter2D(Collider2D other){
         if (other.CompareTag("Player")){
             isPlayerInRange = true;
-            isPlayerInRange = true;
-            if (isMouseOverPickUp)
-            {
-                playerUI.ShowFButton();
-                playerUI.SetItemName("Chest");
-            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D other){
         if (other.CompareTag("Player")){
             isPlayerInRange = false;
-            playerUI.HideFButton();
-            playerUI.ClearItemName();
         }
     }
 

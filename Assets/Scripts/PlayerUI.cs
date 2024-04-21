@@ -29,6 +29,7 @@ public class PlayerUI : MonoBehaviour
     public VisualElement OptionsScreen;
     public VisualElement layer;
     public VisualElement Die;
+    public VisualElement LS2;
     public VisualElement LS4;
     public VisualElement LS5;
     public Label submit;
@@ -258,7 +259,7 @@ public class PlayerUI : MonoBehaviour
         itemVisualElements.Add("LegendBat", root.Q<VisualElement>("LegendBat"));
         itemVisualElements.Add("LegendDagger", root.Q<VisualElement>("LegendDagger"));
 
-
+        LS2 = root.Q<VisualElement>("LoadingScreen2");
         LS4 = root.Q<VisualElement>("LoadingScreen4");
         LS5 = root.Q<VisualElement>("LoadingScreen5");
         OptionsScreen = root.Q<VisualElement>("optionsscreen");
@@ -303,7 +304,7 @@ public class PlayerUI : MonoBehaviour
         GameObject leaderboardManager = GameObject.FindWithTag("Leaderboard");
         leaderboard = leaderboardManager.GetComponent<Leaderboard>();
 
-        StartCoroutine(ShowAndHideLoadingScreen());
+        StartCoroutine(ShowAndHideLoadingScreen2());
 
         if (playerObject != null)
         {
@@ -323,7 +324,17 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
-    public IEnumerator ShowAndHideLoadingScreen()
+    public IEnumerator ShowAndHideLoadingScreen2()
+    {
+        LS2.style.display = DisplayStyle.Flex;
+
+
+        yield return new WaitForSeconds(2f);
+
+        LS2.style.display = DisplayStyle.None;
+    }
+
+    public IEnumerator ShowAndHideLoadingScreen4()
     {
         LS4.style.display = DisplayStyle.Flex;
 
@@ -331,8 +342,6 @@ public class PlayerUI : MonoBehaviour
 
         LS4.style.display = DisplayStyle.None;
     }
-
-
     private IEnumerator LoadMainMenuAfterDelay()
     {
         LS5.style.display = DisplayStyle.Flex;
@@ -457,7 +466,7 @@ public class PlayerUI : MonoBehaviour
 
         if (floorFinal.text != previousFloorValue)
         {
-            StartCoroutine(ShowAndHideLoadingScreen());
+            StartCoroutine(ShowAndHideLoadingScreen4());
             previousFloorValue = floorFinal.text;
         }
 
