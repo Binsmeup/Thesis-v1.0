@@ -31,8 +31,11 @@ public class Portal : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = true;
-            playerUI.ShowFButton();
-            playerUI.SetItemName("Portal");
+            if (isMouseOverPickUp)
+            {
+                playerUI.ShowFButton();
+                playerUI.SetItemName("Portal");
+            }
         }
     }
 

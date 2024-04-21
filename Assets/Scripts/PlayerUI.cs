@@ -119,7 +119,14 @@ public class PlayerUI : MonoBehaviour
     public Label six;
     public Label seven;
     public Label eight;
-
+    public Label oneL;
+    public Label twoL;
+    public Label threeL;
+    public Label fourL;
+    public Label fiveL;
+    public Label sixL;
+    public Label sevenL;
+    public Label eightL;
     //bars
     public ProgressBar armorBar;
     public ProgressBar healthBar;
@@ -180,7 +187,14 @@ public class PlayerUI : MonoBehaviour
         six = root.Q<Label>("6");
         seven = root.Q<Label>("7");
         eight = root.Q<Label>("8");
-
+        oneL = root.Q<Label>("1l");
+        twoL = root.Q<Label>("2l");
+        threeL = root.Q<Label>("3l");
+        fourL = root.Q<Label>("4l");
+        fiveL = root.Q<Label>("5l");
+        sixL = root.Q<Label>("6l");
+        sevenL = root.Q<Label>("7l");
+        eightL = root.Q<Label>("8l");
 
         //inventory
         weapon = root.Q<Button>("WEAPON");
