@@ -137,6 +137,7 @@ public class PlayerUI : MonoBehaviour
     private playerScript player;
     private MapGeneration mapGeneration;
     private Leaderboard leaderboard;
+    private ItemManagement itemManage; 
 
     public Sprite weaponS;
     public Sprite helmS;
@@ -188,6 +189,8 @@ public class PlayerUI : MonoBehaviour
         six = root.Q<Label>("6");
         seven = root.Q<Label>("7");
         eight = root.Q<Label>("8");
+
+
         oneL = root.Q<Label>("1l");
         twoL = root.Q<Label>("2l");
         threeL = root.Q<Label>("3l");
@@ -310,6 +313,7 @@ public class PlayerUI : MonoBehaviour
         {
             healthManager = playerObject.GetComponent<HealthManager>();
             player = playerObject.GetComponent<playerScript>();
+            itemManage = FindObjectOfType<ItemManagement>();
         }
 
 
@@ -356,7 +360,6 @@ public class PlayerUI : MonoBehaviour
     {
         if (healthManager != null)
         {
-
             healthBar.title = $"Health: {healthManager.health}/{healthManager.maxHealth}";
             healthBar.lowValue = 0;
             healthBar.highValue = healthManager.maxHealth;
@@ -387,11 +390,11 @@ public class PlayerUI : MonoBehaviour
             coins.text = player.coins.ToString();
             weaponC = player.currentWeapon.name;
 
-           
+
 
             weaponS = Resources.Load<Sprite>(weaponC);
             weapon.style.backgroundImage = weaponS.texture;
-  
+
 
             if (player.currentChest != null)
             {
@@ -404,7 +407,8 @@ public class PlayerUI : MonoBehaviour
                 chestplate.RegisterCallback<MouseEnterEvent>(OnChestplateHoverEnter);
                 chestplate.RegisterCallback<MouseLeaveEvent>(OnChestplateHoverLeave);
             }
-            else {
+            else
+            {
             }
 
             if (player.currentHelm != null)
@@ -434,8 +438,8 @@ public class PlayerUI : MonoBehaviour
             }
             else
             {
-               
             }
+
 
             if (timerRunning)
             {
@@ -446,8 +450,8 @@ public class PlayerUI : MonoBehaviour
                 timed.text = timerText;
             }
         }
+        
     }
-
     void Update()
     {
         UpdateUI();
@@ -558,7 +562,7 @@ public class PlayerUI : MonoBehaviour
 
 
 
-public void ShowItemDetail(string itemName)
+    public void ShowItemDetail(string itemName)
     {
 
         if (itemVisualElements.ContainsKey(itemName))
@@ -599,7 +603,7 @@ public void ShowItemDetail(string itemName)
         itemNames.text = "";
     }
 
-    void OnWeaponHoverEnter(MouseEnterEvent evt)
+    public void OnWeaponHoverEnter(MouseEnterEvent evt)
     {
 
         ShowItemDetail(weaponC);
@@ -641,6 +645,75 @@ public void ShowItemDetail(string itemName)
     {
         HideItemDetail(legsC);
     }
+
+    public void OnLabelHoverEnter(MouseEnterEvent evt, string labelName)
+    {
+
+    switch (labelName)
+        {
+        case "1":
+                ShowItemDetail(itemManage.item_one);
+                break;
+        case "2":
+                ShowItemDetail(itemManage.item_two);
+                break;
+        case "3":
+                ShowItemDetail(itemManage.item_three);
+                break;
+        case "4":
+                ShowItemDetail(itemManage.item_four);
+                break;
+        case "5":
+                ShowItemDetail(itemManage.item_five);
+                break;
+        case "6":
+                ShowItemDetail(itemManage.item_six);
+                break;
+        case "7":
+                ShowItemDetail(itemManage.item_seven);
+                break;
+        case "8":
+                ShowItemDetail(itemManage.item_eight);
+                break;
+        default:
+                break;
+        }
+    }
+
+    public void OnLabelHoverLeave(MouseLeaveEvent evt, string labelName)
+    {
+    switch (labelName)
+    {
+        case "1":
+                HideItemDetail(itemManage.item_one);
+                break;
+        case "2":
+                HideItemDetail(itemManage.item_two);
+                break;
+        case "3":
+                HideItemDetail(itemManage.item_three);
+                break;
+        case "4":
+                HideItemDetail(itemManage.item_four);
+                break;
+        case "5":
+                HideItemDetail(itemManage.item_five);
+                break;
+        case "6":
+                HideItemDetail(itemManage.item_six);
+                break;
+        case "7":
+                HideItemDetail(itemManage.item_seven);
+                break;
+        case "8":
+                HideItemDetail(itemManage.item_eight);
+                break;
+        default:
+                break;
+    }
+    }
+
+
 
     // Method to handle music volume slider value change
     void OnMusicVolumeChanged(ChangeEvent<float> evt)

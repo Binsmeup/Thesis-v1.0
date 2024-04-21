@@ -9,8 +9,8 @@ public class ItemPickUp : MonoBehaviour
     [SerializeField] public bool isEquippable;
     [SerializeField] public string itemName;
 
-    private bool isPlayerInRange = false;
-    private bool isMouseOverPickUp = false;
+    public bool isPlayerInRange = false;
+    public bool isMouseOverPickUp = false;
     private BoxCollider2D mouseCollider;
     private PlayerUI playerUI;
 
@@ -31,17 +31,25 @@ public class ItemPickUp : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         isMouseOverPickUp = mouseCollider.OverlapPoint((Vector2)ray.origin);
 
+
         if (isMouseOverPickUp)
         {
             itemName = item.ToString();
             playerUI.ShowItemDetail(itemName);
-            
+            if (isPlayerInRange)
+            {
+                Debug.Log("isMouseOverPickUp && isPlayerInRange: " + isMouseOverPickUp + ',' + isPlayerInRange);
+                playerUI.ShowFButton();
+                playerUI.SetItemName(itemName);
+            }
         }
         else
         {
             itemName = item.ToString();
             playerUI.HideItemDetail(itemName);
-            
+            playerUI.HideFButton();
+            playerUI.ClearItemName();
+
         }
     }
 
@@ -50,12 +58,8 @@ public class ItemPickUp : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = true;
-            if (isMouseOverPickUp)
-            {
-                playerUI.ShowFButton();
-                itemName = item.ToString();
-                playerUI.SetItemName(itemName);
-            }
+            Debug.Log("isPlayerInRange: " + isPlayerInRange);
+
         }
     }
     private void OnTriggerExit2D(Collider2D other)

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Chest : MonoBehaviour{
-    private bool isPlayerInRange = false;
-    private bool isMouseOverPickUp = false;
+    public bool isPlayerInRange = false;
+    public bool isMouseOverPickUp = false;
     private BoxCollider2D mouseCollider;
     private Loot loot;
 
@@ -16,10 +16,13 @@ public class Chest : MonoBehaviour{
     }
 
     private void Update(){
-        if (isPlayerInRange && isMouseOverPickUp)
+        if (isMouseOverPickUp)
         {
-            playerUI.ShowFButton();
-            playerUI.SetItemName("Chest");
+            if (isPlayerInRange)
+            {
+                playerUI.ShowFButton();
+                playerUI.SetItemName("Chest");
+            }
         }
         else
         {
@@ -44,6 +47,8 @@ public class Chest : MonoBehaviour{
     private void OnTriggerExit2D(Collider2D other){
         if (other.CompareTag("Player")){
             isPlayerInRange = false;
+            playerUI.HideFButton();
+            playerUI.ClearItemName();
         }
     }
 
