@@ -91,6 +91,10 @@ public class PlayerUI : MonoBehaviour
     public VisualElement LegendBat;
     public VisualElement LegendDagger;
 
+    public VisualElement chestText;
+    public Button chestButton;
+    public VisualElement port;
+    public Button portB;
     //Stats
     public Label attackSpeedLabel;
     public Label baseDamageLabel;
@@ -269,6 +273,10 @@ public class PlayerUI : MonoBehaviour
         Die = root.Q<VisualElement>("whenudie");
         layer = root.Q<VisualElement>("Layer");
 
+        chestButton = root.Q<Button>("chestbutton");
+        chestText = root.Q<VisualElement>("chest");
+        portB = root.Q<Button>("portbutton");
+        port = root.Q<VisualElement>("port");
         music = root.Q<Slider>("music");
         sfx = root.Q<Slider>("sound");
         previousFloorValue = floorFinal.text;
@@ -586,7 +594,27 @@ public class PlayerUI : MonoBehaviour
         Fbutton.style.display = DisplayStyle.Flex;
         boxhover.style.display = DisplayStyle.Flex;
     }
+    public void ShowChestButton()
+    {
+        chestButton.style.display = DisplayStyle.Flex;
+        chestText.style.display = DisplayStyle.Flex;
+    }
+    public void HideChestButton()
+    {
+        chestButton.style.display = DisplayStyle.None;
+        chestText.style.display = DisplayStyle.None;
+    }
 
+    public void ShowPortButton()
+    {
+        portB.style.display = DisplayStyle.Flex;
+        port.style.display = DisplayStyle.Flex;
+    }
+    public void HidePortButton()
+    {
+        portB.style.display = DisplayStyle.None;
+        port.style.display = DisplayStyle.None;
+    }
     public void HideFButton()
     {
         Fbutton.style.display = DisplayStyle.None;

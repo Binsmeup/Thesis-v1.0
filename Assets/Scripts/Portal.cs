@@ -25,18 +25,15 @@ public class Portal : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         isMouseOverPickUp = mouseCollider.OverlapPoint((Vector2)ray.origin);
 
-        if (isMouseOverPickUp)
+        if (isMouseOverPickUp && isPlayerInRange)
         {
-            if (isPlayerInRange)
-            {
-                playerUI.ShowFButton();
-                playerUI.SetItemName("Portal");
-            }
+
+            playerUI.ShowPortButton();
+
         }
         else
         {
-            playerUI.HideFButton();
-            playerUI.ClearItemName();
+            playerUI.HidePortButton();
         }
     }
 
@@ -53,9 +50,8 @@ public class Portal : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerInRange = false; 
-            playerUI.HideFButton();
-            playerUI.ClearItemName();
+            isPlayerInRange = false;
+            playerUI.HidePortButton();
         }
     }
 

@@ -35,7 +35,8 @@ public class ItemPickUp : MonoBehaviour
         {
             itemName = item.ToString();
             playerUI.ShowItemDetail(itemName);
-            if (isPlayerInRange)
+
+            if (isMouseOverPickUp && isPlayerInRange)
             {
                 playerUI.ShowFButton();
                 playerUI.SetItemName(itemName);
