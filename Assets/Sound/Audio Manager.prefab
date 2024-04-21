@@ -179,7 +179,7 @@ MonoBehaviour:
   BGMMain: {fileID: 8300000, guid: 4ebaa9280e0e8d84c85d524e1e4705fb, type: 3}
   BGMGame: {fileID: 8300000, guid: 7c3c5d7defc22dd42af23a82df58bdd5, type: 3}
   swingSound: {fileID: 8300000, guid: 079c57c18a428224a9c236a9f193ed97, type: 3}
-  walkSound: {fileID: 8300000, guid: 66a6eae76557fd940a2c37642e6f0326, type: 3}
+  walkSound: {fileID: 8300000, guid: fe92d086a69588b4596d363f7ff39b31, type: 3}
 --- !u!1 &8764687967087759997
 GameObject:
   m_ObjectHideFlags: 0

@@ -50,11 +50,12 @@ public class ItemPickUp : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = true;
-            playerUI.ShowFButton();
-            itemName = item.ToString();
-            Debug.Log("Item Name in OnTriggerEnter2D: " + itemName);
-            playerUI.SetItemName(itemName);
-
+            if (isMouseOverPickUp)
+            {
+                playerUI.ShowFButton();
+                itemName = item.ToString();
+                playerUI.SetItemName(itemName);
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D other)
