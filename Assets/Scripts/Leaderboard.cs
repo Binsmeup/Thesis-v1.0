@@ -152,21 +152,6 @@ public class Leaderboard : MonoBehaviour{
         }
         return entries;
     }
-    public void printScores(){
-        using (var connection = new SqliteConnection(dbName)){
-            connection.Open();
-
-            using (var command = connection.CreateCommand()){
-                command.CommandText = "SELECT * FROM leaderboard ";
-
-                using (IDataReader reader = command.ExecuteReader()){
-                    while (reader.Read())
-                        Debug.Log("Name: " + reader["name"] + "\t Kill Count: " + reader["killCount"] + "\t Floor Count: " + reader["floorCount"] + "\t Run Time: " + reader["timeCount"] + "\t Max Health: " + reader["healthValue"] + "\t Max Armor: " + reader["armorValue"] + "\t Max Damage: " + reader["damageValue"] + "\t Equipped Helmet: " + reader["helmEquipped"] + "\t Equipped Chestplate: " + reader["chestEquipped"] + "\t Equipped Leggings: " + reader["legEquipped"] + "\t Equipped Weapon: " + reader["weaponEquipped"]);
-                }
-            }
-            connection.Close();
-        }
-    }
     public void printScoresOrderedByName(){
         using (var connection = new SqliteConnection(dbName)){
             connection.Open();

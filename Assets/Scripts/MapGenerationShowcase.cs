@@ -124,6 +124,7 @@ public class MapGenerationShowcase : MonoBehaviour{
             defaultEnemyCount = 12;
             miniBossFloor = false;
             bossFloor = false;
+            portalCount = 1;
 
             width = defaultWidth + (4 * floorCount);
             height = defaultHeight + (4 * floorCount);

@@ -100,6 +100,7 @@ public class MapGeneration : MonoBehaviour{
         iteration = defaultIteration;
         miniBossFloor = false;
         bossFloor = false;
+        portalCount = 1;
         enemyCount = defaultEnemyCount + (3 * floorCount);
         if (enemyCount >= 210){
                 enemyCount = 210;
