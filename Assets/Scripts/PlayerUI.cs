@@ -118,6 +118,12 @@ public class PlayerUI : MonoBehaviour
     private playerScript player;
     private MapGeneration mapGeneration;
     private Leaderboard leaderboard;
+
+    public Sprite weaponS;
+    public Sprite helmS;
+    public Sprite chestS;
+    public Sprite legS;
+
     public string weaponC;
     public string helmetC;
     public string chestC;
@@ -335,25 +341,35 @@ public class PlayerUI : MonoBehaviour
             kills.text = mapGeneration.killCount.ToString();
             coins.text = player.coins.ToString();
             weaponC = player.currentWeapon.name;
-/*            Sprite sprite = Resources.Load<Sprite>("Axe");
-            if (sprite != null)
-            {
-                weapon.style.backgroundImage = sprite.texture;
-            }*/
+
+           
+
+                weaponS = Resources.Load<Sprite>(weaponC);
+                weapon.style.backgroundImage = weaponS.texture;
+  
 
             if (player.currentChest != null)
             {
                 chestC = player.currentChest.name;
                 chestplate.style.display = DisplayStyle.Flex;
+
+                chestS = Resources.Load<Sprite>(chestC);
+                chestplate.style.backgroundImage = chestS.texture;
+
                 chestplate.RegisterCallback<MouseEnterEvent>(OnChestplateHoverEnter);
                 chestplate.RegisterCallback<MouseLeaveEvent>(OnChestplateHoverLeave);
             }
             else {
             }
+
             if (player.currentHelm != null)
             {
                 helmetC = player.currentHelm.name;
                 helmet.style.display = DisplayStyle.Flex;
+
+                helmS = Resources.Load<Sprite>(helmetC);
+                helmet.style.backgroundImage = helmS.texture;
+
                 helmet.RegisterCallback<MouseEnterEvent>(OnHelmetHoverEnter);
                 helmet.RegisterCallback<MouseLeaveEvent>(OnHelmetHoverLeave);
             }
@@ -364,6 +380,10 @@ public class PlayerUI : MonoBehaviour
             {
                 legsC = player.currentLeg.name;
                 legs.style.display = DisplayStyle.Flex;
+
+                legS = Resources.Load<Sprite>(legsC);
+                legs.style.backgroundImage = legS.texture;
+
                 legs.RegisterCallback<MouseEnterEvent>(OnLegsHoverEnter);
                 legs.RegisterCallback<MouseLeaveEvent>(OnLegsHoverLeave);
             }
