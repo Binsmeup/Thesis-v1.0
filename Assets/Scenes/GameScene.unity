@@ -952,7 +952,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3825e7ec1699512468b95e1afab8e9d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ExampleTexture: {fileID: 0}
+  weaponS: {fileID: 0}
+  helmS: {fileID: 0}
+  chestS: {fileID: 0}
+  legS: {fileID: 0}
+  weaponC: 
+  helmetC: 
+  chestC: 
+  legsC: 
   playerName: 
+  previousFloorValue: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -37,7 +37,7 @@ public class PlayerUI : MonoBehaviour
     public TextField named;
 
     //Items
-    public VisualElement boxhover; 
+    public VisualElement boxhover;
     public VisualElement pickup;
     public VisualElement BeginnerSword;
     public VisualElement Sword;
@@ -137,7 +137,7 @@ public class PlayerUI : MonoBehaviour
     private playerScript player;
     private MapGeneration mapGeneration;
     private Leaderboard leaderboard;
-    private ItemManagement itemManage; 
+    private ItemManagement itemManage;
 
     public Sprite weaponS;
     public Sprite helmS;
@@ -167,7 +167,7 @@ public class PlayerUI : MonoBehaviour
         floorcount = root.Q<Label>("Floor");
         timed = root.Q<Label>("timecount");
         startTime = Time.time;
-        itemNames = root.Q<Label>("itemNames");       
+        itemNames = root.Q<Label>("itemNames");
         coins = root.Q<Label>("coin");
         kills = root.Q<Label>("kill");
         killFinal = root.Q<Label>("KillsFin");
@@ -207,7 +207,7 @@ public class PlayerUI : MonoBehaviour
         legs = root.Q<Button>("LEGS");
 
 
-        
+
         //items
         boxhover = root.Q<VisualElement>("itemhover");
         itemVisualElements.Add("BeginnerSword", root.Q<VisualElement>("BeginnerSword"));
@@ -450,7 +450,7 @@ public class PlayerUI : MonoBehaviour
                 timed.text = timerText;
             }
         }
-        
+
     }
     void Update()
     {
@@ -502,8 +502,8 @@ public class PlayerUI : MonoBehaviour
     {
 
         StartCoroutine(LoadMainMenuAfterDelay());
-            Time.timeScale = 1f;
-            SceneManager.LoadScene("Main_Menu");
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Main_Menu");
     }
     void DieRestartButtonPressed()
     {
@@ -512,7 +512,7 @@ public class PlayerUI : MonoBehaviour
 
     void DieMainmenuButtonPressed()
     {
-                StartCoroutine(LoadMainMenuAfterDelay());
+        StartCoroutine(LoadMainMenuAfterDelay());
         SceneManager.LoadScene("Main_Menu");
     }
 
@@ -578,7 +578,7 @@ public class PlayerUI : MonoBehaviour
 
     public void HideItemDetail(string itemName)
     {
-            itemVisualElements[itemName].style.display = DisplayStyle.None;
+        itemVisualElements[itemName].style.display = DisplayStyle.None;
     }
 
     public void ShowFButton()
@@ -649,68 +649,68 @@ public class PlayerUI : MonoBehaviour
     public void OnLabelHoverEnter(MouseEnterEvent evt, string labelName)
     {
 
-    switch (labelName)
+        switch (labelName)
         {
-        case "1":
+            case "1":
                 ShowItemDetail(itemManage.item_one);
                 break;
-        case "2":
+            case "2":
                 ShowItemDetail(itemManage.item_two);
                 break;
-        case "3":
+            case "3":
                 ShowItemDetail(itemManage.item_three);
                 break;
-        case "4":
+            case "4":
                 ShowItemDetail(itemManage.item_four);
                 break;
-        case "5":
+            case "5":
                 ShowItemDetail(itemManage.item_five);
                 break;
-        case "6":
+            case "6":
                 ShowItemDetail(itemManage.item_six);
                 break;
-        case "7":
+            case "7":
                 ShowItemDetail(itemManage.item_seven);
                 break;
-        case "8":
+            case "8":
                 ShowItemDetail(itemManage.item_eight);
                 break;
-        default:
+            default:
                 break;
         }
     }
 
     public void OnLabelHoverLeave(MouseLeaveEvent evt, string labelName)
     {
-    switch (labelName)
-    {
-        case "1":
+        switch (labelName)
+        {
+            case "1":
                 HideItemDetail(itemManage.item_one);
                 break;
-        case "2":
+            case "2":
                 HideItemDetail(itemManage.item_two);
                 break;
-        case "3":
+            case "3":
                 HideItemDetail(itemManage.item_three);
                 break;
-        case "4":
+            case "4":
                 HideItemDetail(itemManage.item_four);
                 break;
-        case "5":
+            case "5":
                 HideItemDetail(itemManage.item_five);
                 break;
-        case "6":
+            case "6":
                 HideItemDetail(itemManage.item_six);
                 break;
-        case "7":
+            case "7":
                 HideItemDetail(itemManage.item_seven);
                 break;
-        case "8":
+            case "8":
                 HideItemDetail(itemManage.item_eight);
                 break;
-        default:
+            default:
                 break;
-    }
+        }
     }
 
 

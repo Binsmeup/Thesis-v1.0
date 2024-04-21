@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Chest : MonoBehaviour{
-    public bool isPlayerInRange = false;
-    public bool isMouseOverPickUp = false;
+    private bool isPlayerInRange = false;
+    private bool isMouseOverPickUp = false;
     private BoxCollider2D mouseCollider;
     private Loot loot;
 

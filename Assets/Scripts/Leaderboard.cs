@@ -4,36 +4,29 @@ using System;
 using System.Data;
 using System.Collections.Generic;
 
-public class Leaderboard : MonoBehaviour
-{
+public class Leaderboard : MonoBehaviour{
     private string dbName = "URI=file:Leaderboard.db";
 
     // Data structure to hold leaderboard entries
     private List<LeaderboardEntry> entries = new List<LeaderboardEntry>();
 
     // Leaderboard entry structure
-    public class LeaderboardEntry
-    {
+    public class LeaderboardEntry{
         public string name;
         public int killCount;
         public int floorCount;
         public int timeCount;
-        // Add other fields as needed
     }
 
-    void Start()
-    {
+    void Start(){
         createDB();
     }
 
-    public void createDB()
-    {
-        using (var connection = new SqliteConnection(dbName))
-        {
+    public void createDB(){
+        using (var connection = new SqliteConnection(dbName)){
             connection.Open();
 
-            using (var command = connection.CreateCommand())
-            {
+            using (var command = connection.CreateCommand()){
                 command.CommandText = "CREATE TABLE IF NOT EXISTS leaderboard (name VARCHAR(50), killCount INT, floorCount INT, timeCount INT, healthValue FLOAT, armorValue INT, damageValue FLOAT, helmEquipped VARCHAR(50), chestEquipped VARCHAR(50), legEquipped VARCHAR(50), weaponEquipped VARCHAR(50))";
                 command.ExecuteNonQuery();
             }
@@ -41,14 +34,11 @@ public class Leaderboard : MonoBehaviour
         }
     }
 
-    public void addScore(string playerName, int killScore, int floorScore, int timeScore, float healthScore, float armorScore, float damageScore, string equippedHelm, string equippedChest, string equippedLeg, string equippedWeapon)
-    {
-        using (var connection = new SqliteConnection(dbName))
-        {
+    public void addScore(string playerName, int killScore, int floorScore, int timeScore, float healthScore, float armorScore, float damageScore, string equippedHelm, string equippedChest, string equippedLeg, string equippedWeapon){
+        using (var connection = new SqliteConnection(dbName)){
             connection.Open();
 
-            using (var command = connection.CreateCommand())
-            {
+            using (var command = connection.CreateCommand()){
                 command.CommandText = "INSERT INTO leaderboard (name, killCount, floorCount, timeCount, healthValue, armorValue, damageValue, helmEquipped, chestEquipped, legEquipped, weaponEquipped) VALUES (@name, @killCount, @floorCount, @timeCount, @healthValue, @armorValue, @damageValue, @helmEquipped, @chestEquipped, @legEquipped, @weaponEquipped)";
                 command.Parameters.AddWithValue("@name", playerName);
                 command.Parameters.AddWithValue("@killCount", killScore);
@@ -67,27 +57,21 @@ public class Leaderboard : MonoBehaviour
         }
     }
 
-    public List<LeaderboardEntry> OrderedByName()
-    {
+    public List<LeaderboardEntry> OrderedByName(){
         List<LeaderboardEntry> entries = new List<LeaderboardEntry>();
-        using (var connection = new SqliteConnection(dbName))
-        {
+        using (var connection = new SqliteConnection(dbName)){
             connection.Open();
 
-            using (var command = connection.CreateCommand())
-            {
+            using (var command = connection.CreateCommand()){
                 command.CommandText = "SELECT * FROM leaderboard ORDER BY name";
 
-                using (IDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
+                using (IDataReader reader = command.ExecuteReader()){
+                    while (reader.Read()){
                         LeaderboardEntry entry = new LeaderboardEntry();
                         entry.name = reader["name"].ToString();
                         entry.killCount = Convert.ToInt32(reader["killCount"]);
                         entry.floorCount = Convert.ToInt32(reader["floorCount"]);
                         entry.timeCount = Convert.ToInt32(reader["timeCount"]);
-                        // Add other fields as needed
                         entries.Add(entry);
                     }
                 }
@@ -97,21 +81,16 @@ public class Leaderboard : MonoBehaviour
         return entries;
     }
 
-    public List<LeaderboardEntry> OrderedByFloor()
-    {
+    public List<LeaderboardEntry> OrderedByFloor(){
         List<LeaderboardEntry> entries = new List<LeaderboardEntry>();
-        using (var connection = new SqliteConnection(dbName))
-        {
+        using (var connection = new SqliteConnection(dbName)){
             connection.Open();
 
-            using (var command = connection.CreateCommand())
-            {
+            using (var command = connection.CreateCommand()){
                 command.CommandText = "SELECT * FROM leaderboard ORDER BY floorCount DESC";
 
-                using (IDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
+                using (IDataReader reader = command.ExecuteReader()){
+                    while (reader.Read()){
                         LeaderboardEntry entry = new LeaderboardEntry();
                         entry.name = reader["name"].ToString();
                         entry.killCount = Convert.ToInt32(reader["killCount"]);
@@ -126,21 +105,16 @@ public class Leaderboard : MonoBehaviour
         return entries;
     }
 
-    public List<LeaderboardEntry> OrderedByTime()
-    {
+    public List<LeaderboardEntry> OrderedByTime(){
         List<LeaderboardEntry> entries = new List<LeaderboardEntry>();
-        using (var connection = new SqliteConnection(dbName))
-        {
+        using (var connection = new SqliteConnection(dbName)){
             connection.Open();
 
-            using (var command = connection.CreateCommand())
-            {
+            using (var command = connection.CreateCommand()){
                 command.CommandText = "SELECT * FROM leaderboard ORDER BY timeCount DESC";
 
-                using (IDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
+                using (IDataReader reader = command.ExecuteReader()){
+                    while (reader.Read()){
                         LeaderboardEntry entry = new LeaderboardEntry();
                         entry.name = reader["name"].ToString();
                         entry.killCount = Convert.ToInt32(reader["killCount"]);
@@ -155,21 +129,16 @@ public class Leaderboard : MonoBehaviour
         return entries;
     }
 
-    public List<LeaderboardEntry> OrderedByKillCount()
-    {
+    public List<LeaderboardEntry> OrderedByKillCount(){
         List<LeaderboardEntry> entries = new List<LeaderboardEntry>();
-        using (var connection = new SqliteConnection(dbName))
-        {
+        using (var connection = new SqliteConnection(dbName)){
             connection.Open();
 
-            using (var command = connection.CreateCommand())
-            {
+            using (var command = connection.CreateCommand()){
                 command.CommandText = "SELECT * FROM leaderboard ORDER BY killCount DESC";
 
-                using (IDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
+                using (IDataReader reader = command.ExecuteReader()){
+                    while (reader.Read()){
                         LeaderboardEntry entry = new LeaderboardEntry();
                         entry.name = reader["name"].ToString();
                         entry.killCount = Convert.ToInt32(reader["killCount"]);
@@ -183,18 +152,14 @@ public class Leaderboard : MonoBehaviour
         }
         return entries;
     }
-    public void printScores()
-    {
-        using (var connection = new SqliteConnection(dbName))
-        {
+    public void printScoresOrderedByName(){
+        using (var connection = new SqliteConnection(dbName)){
             connection.Open();
 
-            using (var command = connection.CreateCommand())
-            {
-                command.CommandText = "SELECT * FROM leaderboard ";
+            using (var command = connection.CreateCommand()){
+                command.CommandText = "SELECT * FROM leaderboard ORDER BY name";
 
-                using (IDataReader reader = command.ExecuteReader())
-                {
+                using (IDataReader reader = command.ExecuteReader()){
                     while (reader.Read())
                         Debug.Log("Name: " + reader["name"] + "\t Kill Count: " + reader["killCount"] + "\t Floor Count: " + reader["floorCount"] + "\t Run Time: " + reader["timeCount"] + "\t Max Health: " + reader["healthValue"] + "\t Max Armor: " + reader["armorValue"] + "\t Max Damage: " + reader["damageValue"] + "\t Equipped Helmet: " + reader["helmEquipped"] + "\t Equipped Chestplate: " + reader["chestEquipped"] + "\t Equipped Leggings: " + reader["legEquipped"] + "\t Equipped Weapon: " + reader["weaponEquipped"]);
                 }
@@ -202,20 +167,16 @@ public class Leaderboard : MonoBehaviour
             connection.Close();
         }
     }
-    public void printScoresOrderedByName()
-    {
-        using (var connection = new SqliteConnection(dbName))
-        {
+    public void printScores(){
+        using (var connection = new SqliteConnection(dbName)){
             connection.Open();
 
-            using (var command = connection.CreateCommand())
-            {
-                command.CommandText = "SELECT * FROM leaderboard ORDER BY name";
+            using (var command = connection.CreateCommand()){
+                command.CommandText = "SELECT * FROM leaderboard";
 
-                using (IDataReader reader = command.ExecuteReader())
-                {
+                using (IDataReader reader = command.ExecuteReader()){
                     while (reader.Read())
-                        Debug.Log("Name: " + reader["name"] + "\t Kill Count: " + reader["killCount"] + "\t Floor Count: " + reader["floorCount"] + "\t Run Time: " + reader["timeCount"] + "\t Max Health: " + reader["healthValue"] + "\t Max Armor: " + reader["armorValue"] + "\t Max Damage: " + reader["damageValue"] + "\t Equipped Helmet: " + reader["helmEquipped"] + "\t Equipped Chestplate: " + reader["chestEquipped"] + "\t Equipped Leggings: " + reader["legEquipped"] + "\t Equipped Weapon: " + reader["weaponEquipped"]);
+                        Debug.Log("Name: " + reader["name"]+ "\t Kill Count: " + reader["killCount"]+ "\t Floor Count: " + reader["floorCount"]+ "\t Run Time: " + reader["timeCount"]+ "\t Max Health: " + reader["healthValue"]+ "\t Max Armor: " + reader["armorValue"]+ "\t Max Damage: " + reader["damageValue"]+ "\t Equipped Helmet: " + reader["helmEquipped"]+ "\t Equipped Chestplate: " + reader["chestEquipped"]+ "\t Equipped Leggings: " + reader["legEquipped"]+ "\t Equipped Weapon: " + reader["weaponEquipped"]);
                 }
             }
             connection.Close();

@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-    public bool isPlayerInRange = false;
-    public bool isMouseOverPickUp = false;
+    private bool isPlayerInRange = false;
+    private bool isMouseOverPickUp = false;
     private BoxCollider2D mouseCollider;
 
     private PlayerUI playerUI;
@@ -18,6 +18,13 @@ public class Portal : MonoBehaviour
 
     private void Update()
     {
+        if (isPlayerInRange && isMouseOverPickUp && Input.GetKeyDown(KeyCode.F))
+        {
+            EnterPortal();
+        }
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        isMouseOverPickUp = mouseCollider.OverlapPoint((Vector2)ray.origin);
+
         if (isMouseOverPickUp)
         {
             if (isPlayerInRange)
@@ -28,15 +35,11 @@ public class Portal : MonoBehaviour
         }
         else
         {
+            playerUI.HideFButton();
+            playerUI.ClearItemName();
         }
-
-        if (isPlayerInRange && isMouseOverPickUp && Input.GetKeyDown(KeyCode.F))
-        {
-            EnterPortal();
-        }
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        isMouseOverPickUp = mouseCollider.OverlapPoint((Vector2)ray.origin);
     }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -50,7 +53,7 @@ public class Portal : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerInRange = false;
+            isPlayerInRange = false; 
             playerUI.HideFButton();
             playerUI.ClearItemName();
         }

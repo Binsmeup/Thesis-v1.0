@@ -21,6 +21,7 @@ public class BossSkills : MonoBehaviour{
     private HealthManager healthManager;
     private EnemyChase enemyChase;
     private EnemyShoot enemyShoot;
+    private SpriteRenderer spriteRenderer;
 
     public enum skillType {
         Charge,
@@ -28,6 +29,7 @@ public class BossSkills : MonoBehaviour{
         Spray
     }
     void Start(){
+        spriteRenderer = GetComponent<SpriteRenderer>();
         healthManager = GetComponent<HealthManager>();
         enemyChase = GetComponent<EnemyChase>();
         enemyShoot = GetComponent<EnemyShoot>();
@@ -110,6 +112,11 @@ public class BossSkills : MonoBehaviour{
         int randomIndex = UnityEngine.Random.Range(0, enabledTypes.Count);
         return enabledTypes[randomIndex].ToString();
     }
+    private void colorChange(Color color) {
+        if (spriteRenderer != null) {
+            spriteRenderer.color = color;
+        }
+    }
     public void Enraged(){
         Debug.Log("Enraged");
         rageActive = true;
@@ -118,6 +125,7 @@ public class BossSkills : MonoBehaviour{
         enemyChase.lockDuration = 0.5f;
         enemyShoot.bulletSpeed *= 1.5f;
         enemyShoot.fireCooldown = 0.5f;
+        colorChange(Color.red);
     }
     public IEnumerator Cooldown(float cooldownTime){
         yield return new WaitForSeconds(cooldownTime);

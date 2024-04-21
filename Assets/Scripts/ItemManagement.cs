@@ -23,7 +23,8 @@ public class ItemManagement : MonoBehaviour
     }
 
 
-    public enum Items{
+    public enum Items
+    {
         BeginnerSword,
         Sword,
         Spear,
@@ -78,11 +79,14 @@ public class ItemManagement : MonoBehaviour
     }
 
 
-    public void IncreaseItemCount(Items items){
-        if (itemCounters.ContainsKey(items)){
+    public void IncreaseItemCount(Items items)
+    {
+        if (itemCounters.ContainsKey(items))
+        {
             itemCounters[items]++;
         }
-        else{
+        else
+        {
             itemCounters[items] = 1;
         }
 
@@ -171,6 +175,6 @@ public class ItemManagement : MonoBehaviour
 
 
 
-            Debug.Log(items.ToString() + " count: " + itemCounters[items]);
+        Debug.Log(items.ToString() + " count: " + itemCounters[items]);
     }
 }

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 868975534192794109}
   - component: {fileID: 7989789755198727631}
   - component: {fileID: 2959776340057200328}
+  - component: {fileID: 3084096864096716801}
   m_Layer: 0
   m_Name: Sniper
   m_TagString: Enemy
@@ -34,7 +35,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.1396521, y: -0.52, z: 0}
-  m_LocalScale: {x: 0.14, y: 0.14, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -80,8 +81,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 398517138, guid: 9cc47fdda89f5ba48bf679a10f400c8f, type: 3}
+  m_Color: {r: 0.5754717, g: 0.14929691, b: 0.15326634, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -123,9 +124,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.005, y: -0.0275}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.06
 --- !u!50 &4392427928552337832
 Rigidbody2D:
   serializedVersion: 4
@@ -152,7 +153,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &8486547745549582360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,6 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7948d1de00ba947ba4972e4fd765bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 3084096864096716801}
   playerTag: Player
   chaseRange: 2
   moveForce: 100
@@ -306,12 +308,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 4983831210066008845, guid: 7d00e97059373a549a57b35cf764ddf3, type: 3}
-  canShoot: 0
+  canShoot: 1
   canSnipe: 1
   shootCooldown: 4
   bulletSpeed: 5
   lifeTime: 5
   lockDuration: 2
   reactionTime: 0.25
-  fireCooldown: 0
+  fireCooldown: 0.2
   shootReady: 0
+--- !u!95 &3084096864096716801
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9061302018463053941}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f9aed60e2fe65bf4193269f3c7116b65, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
