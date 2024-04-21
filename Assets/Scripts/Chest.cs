@@ -27,8 +27,12 @@ public class Chest : MonoBehaviour{
     private void OnTriggerEnter2D(Collider2D other){
         if (other.CompareTag("Player")){
             isPlayerInRange = true;
-            playerUI.ShowFButton();
-            playerUI.SetItemName("Chest");
+            isPlayerInRange = true;
+            if (isMouseOverPickUp)
+            {
+                playerUI.ShowFButton();
+                playerUI.SetItemName("Chest");
+            }
         }
     }
 

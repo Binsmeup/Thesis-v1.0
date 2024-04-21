@@ -109,6 +109,24 @@ public class PlayerUI : MonoBehaviour
     public Label homed;
     public Label rest;
     public Label itemNames;
+
+    //buff
+    public Label one;
+    public Label two;
+    public Label three;
+    public Label four;
+    public Label five;
+    public Label six;
+    public Label seven;
+    public Label eight;
+    public Label oneL;
+    public Label twoL;
+    public Label threeL;
+    public Label fourL;
+    public Label fiveL;
+    public Label sixL;
+    public Label sevenL;
+    public Label eightL;
     //bars
     public ProgressBar armorBar;
     public ProgressBar healthBar;
@@ -159,6 +177,24 @@ public class PlayerUI : MonoBehaviour
         before = root.Q<Label>("sub");
         homed = root.Q<Label>("hom");
         rest = root.Q<Label>("restar");
+
+        //buff
+        one = root.Q<Label>("1");
+        two = root.Q<Label>("2");
+        three = root.Q<Label>("3");
+        four = root.Q<Label>("4");
+        five = root.Q<Label>("5");
+        six = root.Q<Label>("6");
+        seven = root.Q<Label>("7");
+        eight = root.Q<Label>("8");
+        oneL = root.Q<Label>("1l");
+        twoL = root.Q<Label>("2l");
+        threeL = root.Q<Label>("3l");
+        fourL = root.Q<Label>("4l");
+        fiveL = root.Q<Label>("5l");
+        sixL = root.Q<Label>("6l");
+        sevenL = root.Q<Label>("7l");
+        eightL = root.Q<Label>("8l");
 
         //inventory
         weapon = root.Q<Button>("WEAPON");
@@ -344,8 +380,8 @@ public class PlayerUI : MonoBehaviour
 
            
 
-                weaponS = Resources.Load<Sprite>(weaponC);
-                weapon.style.backgroundImage = weaponS.texture;
+            weaponS = Resources.Load<Sprite>(weaponC);
+            weapon.style.backgroundImage = weaponS.texture;
   
 
             if (player.currentChest != null)
@@ -514,9 +550,11 @@ public class PlayerUI : MonoBehaviour
 
 public void ShowItemDetail(string itemName)
     {
+
         if (itemVisualElements.ContainsKey(itemName))
         {
             itemVisualElements[itemName].style.display = DisplayStyle.Flex;
+
         }
         else
         {

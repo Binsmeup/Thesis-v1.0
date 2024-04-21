@@ -558,7 +558,7 @@ PrefabInstance:
     - target: {fileID: 7960854399987181017, guid: 30a1ca12d0cc14344b18d676d4b6c2c4, type: 3}
       propertyPath: walkSound
       value: 
-      objectReference: {fileID: 8300000, guid: 7aad9f10f1544674c83e17c4ca0df519, type: 3}
+      objectReference: {fileID: 8300000, guid: fe92d086a69588b4596d363f7ff39b31, type: 3}
     - target: {fileID: 8785043420153675170, guid: 30a1ca12d0cc14344b18d676d4b6c2c4, type: 3}
       propertyPath: m_Volume
       value: 0.455
