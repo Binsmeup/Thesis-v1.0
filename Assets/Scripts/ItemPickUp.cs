@@ -41,13 +41,15 @@ public class ItemPickUp : MonoBehaviour
                 playerUI.ShowFButton();
                 playerUI.SetItemName(itemName);
             }
+            else
+            {
+                playerUI.HideFButton();
+            }
         }
         else
         {
             itemName = item.ToString();
             playerUI.HideItemDetail(itemName);
-            playerUI.HideFButton();
-            playerUI.ClearItemName();
 
         }
     }
@@ -64,8 +66,9 @@ public class ItemPickUp : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = false;
-            playerUI.HideFButton();
-            playerUI.ClearItemName();
+
+                playerUI.HideFButton();
+
         }
     }
 

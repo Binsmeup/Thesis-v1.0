@@ -26,7 +26,6 @@ public class Chest : MonoBehaviour{
 
         if (isMouseOverPickUp && isPlayerInRange)
         {
-                Debug.Log("isMouseOverPickUp and isPlayerInRange");
                 playerUI.ShowChestButton();
 
         }
@@ -39,7 +38,6 @@ public class Chest : MonoBehaviour{
     private void OnTriggerEnter2D(Collider2D other){
         if (other.CompareTag("Player")){
             isPlayerInRange = true;
-            Debug.Log("isPlayerInRange");
         }
     }
 
