@@ -124,6 +124,15 @@ public class PlayerUI : MonoBehaviour
     public Label six;
     public Label seven;
     public Label eight;
+    public Label nine;
+    public Label ten;
+    public Label eleven;
+    public Label twelve;
+    public Label thirteen;
+    public Label fourteen;
+    public Label fifteen;
+    public Label sixteen;
+    public Label seventeen;
     public Label oneL;
     public Label twoL;
     public Label threeL;
@@ -132,6 +141,15 @@ public class PlayerUI : MonoBehaviour
     public Label sixL;
     public Label sevenL;
     public Label eightL;
+    public Label nineL;
+    public Label tenL;
+    public Label elevenL;
+    public Label twelveL;
+    public Label thirteenL;
+    public Label fourteenL;
+    public Label fifteenL;
+    public Label sixteenL;
+    public Label seventeenL;
     //bars
     public ProgressBar armorBar;
     public ProgressBar healthBar;
@@ -193,7 +211,15 @@ public class PlayerUI : MonoBehaviour
         six = root.Q<Label>("6");
         seven = root.Q<Label>("7");
         eight = root.Q<Label>("8");
-
+        nine = root.Q<Label>("9");
+        ten = root.Q<Label>("10");
+        eleven = root.Q<Label>("11");
+        twelve = root.Q<Label>("12");
+        thirteen = root.Q<Label>("13");
+        fourteen = root.Q<Label>("14");
+        fifteen = root.Q<Label>("15");
+        sixteen = root.Q<Label>("16");
+        seventeen = root.Q<Label>("17");
 
         oneL = root.Q<Label>("1l");
         twoL = root.Q<Label>("2l");
@@ -203,6 +229,17 @@ public class PlayerUI : MonoBehaviour
         sixL = root.Q<Label>("6l");
         sevenL = root.Q<Label>("7l");
         eightL = root.Q<Label>("8l");
+        nineL = root.Q<Label>("9l");
+        tenL = root.Q<Label>("10l");
+        elevenL = root.Q<Label>("11l");
+        twelveL = root.Q<Label>("12l");
+        thirteenL = root.Q<Label>("13l");
+        fourteenL = root.Q<Label>("14l");
+        fifteenL = root.Q<Label>("15l");
+        sixteenL = root.Q<Label>("16l");
+        seventeenL = root.Q<Label>("17l");
+
+
 
         //inventory
         weapon = root.Q<Button>("WEAPON");
@@ -625,7 +662,6 @@ public class PlayerUI : MonoBehaviour
         itemNames.text = name;
     }
 
-    // Method to clear the item name from the UI
     public void ClearItemName()
     {
         itemNames.text = "";
@@ -676,7 +712,6 @@ public class PlayerUI : MonoBehaviour
 
     public void OnLabelHoverEnter(MouseEnterEvent evt, string labelName)
     {
-
         switch (labelName)
         {
             case "1":
@@ -702,6 +737,33 @@ public class PlayerUI : MonoBehaviour
                 break;
             case "8":
                 ShowItemDetail(itemManage.item_eight);
+                break;
+            case "9":
+                ShowItemDetail(itemManage.item_nine);
+                break;
+            case "10":
+                ShowItemDetail(itemManage.item_ten);
+                break;
+            case "11":
+                ShowItemDetail(itemManage.item_eleven);
+                break;
+            case "12":
+                ShowItemDetail(itemManage.item_twelve);
+                break;
+            case "13":
+                ShowItemDetail(itemManage.item_thirteen);
+                break;
+            case "14":
+                ShowItemDetail(itemManage.item_fourteen);
+                break;
+            case "15":
+                ShowItemDetail(itemManage.item_fifteen);
+                break;
+            case "16":
+                ShowItemDetail(itemManage.item_sixteen);
+                break;
+            case "17":
+                ShowItemDetail(itemManage.item_seventeen);
                 break;
             default:
                 break;
@@ -736,10 +798,38 @@ public class PlayerUI : MonoBehaviour
             case "8":
                 HideItemDetail(itemManage.item_eight);
                 break;
+            case "9":
+                HideItemDetail(itemManage.item_nine);
+                break;
+            case "10":
+                HideItemDetail(itemManage.item_ten);
+                break;
+            case "11":
+                HideItemDetail(itemManage.item_eleven);
+                break;
+            case "12":
+                HideItemDetail(itemManage.item_twelve);
+                break;
+            case "13":
+                HideItemDetail(itemManage.item_thirteen);
+                break;
+            case "14":
+                HideItemDetail(itemManage.item_fourteen);
+                break;
+            case "15":
+                HideItemDetail(itemManage.item_fifteen);
+                break;
+            case "16":
+                HideItemDetail(itemManage.item_sixteen);
+                break;
+            case "17":
+                HideItemDetail(itemManage.item_seventeen);
+                break;
             default:
                 break;
         }
     }
+
 
 
 

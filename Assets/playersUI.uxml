@@ -38,34 +38,61 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="top" class="container" style="width: 100%; height: 100px; position: absolute; border-bottom-width: 10px; border-top-width: 0; align-items: center; background-color: rgb(30, 30, 30); background-image: url(&apos;project://database/Assets/assets/1.png?fileID=2800000&amp;guid=3270350bbaf40444f995f1e022541d27&amp;type=3#1&apos;); display: flex;">
-                <ui:VisualElement name="floortimnercontainer" style="position: absolute; left: 90px; height: 100%; width: 400px; border-right-width: 10px; border-left-width: 10px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); background-color: rgb(30, 30, 30);">
-                    <ui:Label text="Floor: X" display-tooltip-when-elided="true" name="Floor" class="floorlevel" style="position: absolute; left: 20px; top: 30px; color: rgb(255, 255, 255); display: flex;" />
-                    <ui:Label text="Time: X" display-tooltip-when-elided="true" name="timecount" class="floorlevel" style="position: absolute; left: 205px; top: 30px; color: rgb(255, 255, 255); display: flex;" />
+                <ui:VisualElement name="floortimnercontainer" style="position: absolute; left: -6px; height: 100%; width: 338px; border-right-width: 10px; border-left-width: 10px; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); background-color: rgba(30, 30, 30, 0); top: 96px;">
+                    <ui:Label text="Floor: X" display-tooltip-when-elided="true" name="Floor" class="floorlevel" style="position: absolute; left: 6px; top: 16px; color: rgb(255, 255, 255); display: flex;" />
+                    <ui:Label text="Time: X" display-tooltip-when-elided="true" name="timecount" class="floorlevel" style="position: absolute; left: 167px; top: 16px; color: rgb(255, 255, 255); display: flex;" />
                 </ui:VisualElement>
-                <ui:VisualElement name="buffcontaioner" style="width: 800px; height: 100%; position: relative; left: auto; top: auto; border-left-width: 10px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-right-width: 0; background-color: rgb(30, 30, 30); display: flex;">
-                    <ui:Label display-tooltip-when-elided="true" name="1" class="cellbuffs" style="position: absolute; width: 12.5%; display: none;">
-                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="1l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); position: relative; height: 23px;" />
+                <ui:VisualElement name="buffcontaioner" style="width: 800px; height: 100%; position: relative; left: auto; top: auto; border-left-width: 10px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-right-width: 0; background-color: rgba(30, 30, 30, 0);">
+                    <ui:Label display-tooltip-when-elided="true" name="1" class="cellbuffs" style="position: absolute; left: -500px; border-left-width: 10px; right: 1272px; display: none;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="1l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); white-space: nowrap; position: relative; height: 23px;" />
                     </ui:Label>
-                    <ui:Label display-tooltip-when-elided="true" name="2" class="cellbuffs" style="position: absolute; left: 100px; width: 12.5%; display: none;">
-                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="2l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); position: relative; height: 23px;" />
+                    <ui:Label display-tooltip-when-elided="true" name="2" class="cellbuffs" style="position: absolute; width: 12.5%; left: -400px; display: none;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="2l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); white-space: nowrap; position: relative; height: 23px;" />
                     </ui:Label>
-                    <ui:Label display-tooltip-when-elided="true" name="3" class="cellbuffs" style="position: absolute; left: 200px; width: 12.5%; display: none;">
-                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="3l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); position: relative;" />
+                    <ui:Label display-tooltip-when-elided="true" name="3" class="cellbuffs" style="position: absolute; width: 12.5%; left: -300px; display: none;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="3l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); white-space: nowrap; position: relative; height: 23px;" />
                     </ui:Label>
-                    <ui:Label display-tooltip-when-elided="true" name="4" class="cellbuffs" style="position: absolute; left: 300px; width: 12.5%; display: none;">
-                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="4l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); position: relative; height: 23px;" />
+                    <ui:Label display-tooltip-when-elided="true" name="4" class="cellbuffs" style="position: absolute; width: 12.5%; left: -200px; display: none;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="4l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); white-space: nowrap; position: relative; height: 23px;" />
                     </ui:Label>
-                    <ui:Label display-tooltip-when-elided="true" name="5" class="cellbuffs" style="position: absolute; left: 400px; width: 12.5%; display: none;">
-                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="5l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); position: relative; height: 23px;" />
+                    <ui:Label display-tooltip-when-elided="true" name="5" class="cellbuffs" style="position: absolute; width: 12.5%; left: -100px; display: none;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="5l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); white-space: nowrap; position: relative; height: 23px;" />
                     </ui:Label>
-                    <ui:Label display-tooltip-when-elided="true" name="6" class="cellbuffs" style="position: absolute; left: 500px; width: 12.5%; display: none;">
-                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="6l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); position: relative; height: 23px;" />
+                    <ui:Label display-tooltip-when-elided="true" name="6" class="cellbuffs" style="position: absolute; width: 12.5%; display: none;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="6l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); white-space: nowrap; position: relative; height: 23px;" />
                     </ui:Label>
-                    <ui:Label display-tooltip-when-elided="true" name="7" class="cellbuffs" style="position: absolute; left: 600px; width: 12.5%; display: none;">
+                    <ui:Label display-tooltip-when-elided="true" name="7" class="cellbuffs" style="position: absolute; left: 100px; width: 12.5%; display: none;">
                         <ui:Label text="XXX" display-tooltip-when-elided="true" name="7l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); position: relative; height: 23px;" />
                     </ui:Label>
-                    <ui:Label display-tooltip-when-elided="true" name="8" class="cellbuffs" style="position: absolute; left: 700px; border-right-width: 10px; width: 12.5%; display: none;">
-                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="8l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); height: 23px; position: relative;" />
+                    <ui:Label display-tooltip-when-elided="true" name="8" class="cellbuffs" style="position: absolute; left: 200px; right: 572px; display: none;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="8l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); position: relative;" />
+                    </ui:Label>
+                    <ui:Label display-tooltip-when-elided="true" name="9" class="cellbuffs" style="position: absolute; left: 300px; width: 12.5%; display: none;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="9l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); position: relative; height: 23px;" />
+                    </ui:Label>
+                    <ui:Label display-tooltip-when-elided="true" name="10" class="cellbuffs" style="position: absolute; left: 400px; width: 12.5%; display: none;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="10l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); position: relative; height: 23px;" />
+                    </ui:Label>
+                    <ui:Label display-tooltip-when-elided="true" name="11" class="cellbuffs" style="position: absolute; left: 500px; width: 12.5%; display: none;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="11l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); position: relative; height: 23px;" />
+                    </ui:Label>
+                    <ui:Label display-tooltip-when-elided="true" name="12" class="cellbuffs" style="position: absolute; left: 600px; width: 12.5%; display: none;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="12l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); position: relative; height: 23px;" />
+                    </ui:Label>
+                    <ui:Label display-tooltip-when-elided="true" name="13" class="cellbuffs" style="position: absolute; left: 700px; border-right-width: 10px; right: 72px; display: none;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="13l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); height: 23px; position: relative;" />
+                    </ui:Label>
+                    <ui:Label display-tooltip-when-elided="true" name="14" class="cellbuffs" style="position: absolute; left: 800px; border-right-width: 10px; width: 12.5%; display: none;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="14l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); height: 23px; position: relative;" />
+                    </ui:Label>
+                    <ui:Label display-tooltip-when-elided="true" name="15" class="cellbuffs" style="position: absolute; left: 900px; border-right-width: 10px; width: 12.5%; display: none;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="15l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); height: 23px; position: relative;" />
+                    </ui:Label>
+                    <ui:Label display-tooltip-when-elided="true" name="16" class="cellbuffs" style="position: absolute; left: 1000px; border-right-width: 10px; width: 12.5%; display: none;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="16l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); height: 23px; position: relative;" />
+                    </ui:Label>
+                    <ui:Label display-tooltip-when-elided="true" name="17" class="cellbuffs" style="position: absolute; left: 1100px; border-right-width: 10px; width: 12.5%; display: none;">
+                        <ui:Label text="XXX" display-tooltip-when-elided="true" name="17l" class="text" style="width: 41px; font-size: 20px; top: 58px; left: 42px; -unity-text-align: upper-left; color: rgb(255, 255, 0); height: 23px; position: relative;" />
                     </ui:Label>
                 </ui:VisualElement>
             </ui:VisualElement>
