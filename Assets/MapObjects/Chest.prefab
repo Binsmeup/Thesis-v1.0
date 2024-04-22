@@ -195,8 +195,8 @@ MonoBehaviour:
   goldMin: 1
   goldMax: 5
   itemDropChance: 100
-  legendaryChance: 1
-  rareChance: 10
+  legendaryChance: 5
+  rareChance: 25
   legendaryItems:
   - {fileID: 11400000, guid: 10b069e4d5c5a5a44b131ff2e88f2f52, type: 2}
   - {fileID: 11400000, guid: 9684fc8bedd4c834d9a17e859ac421d2, type: 2}
