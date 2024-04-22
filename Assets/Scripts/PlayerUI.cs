@@ -513,7 +513,7 @@ public class PlayerUI : MonoBehaviour
 
         if (healthManager.health <= 0)
         {
-            Time.timeScale = 1f;
+            Time.timeScale = 0f;
             timerRunning = false;
             finalTime.text = "Time: " + timed.text;
             Die.style.display = DisplayStyle.Flex;
