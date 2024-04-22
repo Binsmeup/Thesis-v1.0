@@ -150,9 +150,14 @@ public class PlayerUI : MonoBehaviour
     public Label fifteenL;
     public Label sixteenL;
     public Label seventeenL;
+
     //bars
     public ProgressBar armorBar;
     public ProgressBar healthBar;
+    public Label H;
+    public Label C;
+    public Label L;
+
 
     public Texture2D ExampleTexture;
     private HealthManager healthManager;
@@ -246,7 +251,9 @@ public class PlayerUI : MonoBehaviour
         helmet = root.Q<Button>("HELMET");
         chestplate = root.Q<Button>("CHESTPLATE");
         legs = root.Q<Button>("LEGS");
-
+        H = root.Q<Label>("helms");
+        C = root.Q<Label>("chests");
+        L = root.Q<Label>("leggis");
 
 
         //items
@@ -410,6 +417,9 @@ public class PlayerUI : MonoBehaviour
             healthBar.highValue = healthManager.maxHealth;
             healthBar.value = healthManager.health;
 
+            H.text = $"Helmet: {healthManager.HelmHP}/{healthManager.HelmMaxHP}";
+            C.text = $"Chestplate: {healthManager.ChestHP}/{healthManager.ChestMaxHP}";
+            L.text = $"Leggings: {healthManager.LegHP}/{healthManager.LegMaxHP}";
 
             float armorValue = healthManager.HelmHP + healthManager.ChestHP + healthManager.LegHP;
             float maxArmorValue = healthManager.HelmMaxHP + healthManager.ChestMaxHP + healthManager.LegMaxHP;
@@ -561,8 +571,7 @@ public class PlayerUI : MonoBehaviour
         SceneManager.LoadScene("Main_Menu");
     }
 
-    void SendButtonPressed()
-    {
+    void SendButtonPressed(){
         string playerName = named.value;
         float maxDamage = player.baseDamage * player.damageMulti;
         float maxArmorValue = healthManager.HelmMaxHP + healthManager.ChestMaxHP + healthManager.LegMaxHP;

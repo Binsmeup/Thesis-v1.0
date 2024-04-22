@@ -225,13 +225,6 @@ MonoBehaviour:
   reactionTime: 0.25
   endLag: 0.5
   player: {fileID: 0}
-  isMoving: 0
-  isChargingAnim: 0
-  isLockedIn: 0
-  isCharged: 0
-  isAiming: 0
-  isAimLocked: 0
-  isShoot: 0
   isChargeCooldown: 0
 --- !u!114 &4287483774026412353
 MonoBehaviour:
@@ -248,8 +241,8 @@ MonoBehaviour:
   goldMin: 15
   goldMax: 30
   itemDropChance: 100
-  legendaryChance: 100
-  rareChance: 0
+  legendaryChance: 50
+  rareChance: 50
   legendaryItems:
   - {fileID: 11400000, guid: 10b069e4d5c5a5a44b131ff2e88f2f52, type: 2}
   - {fileID: 11400000, guid: 9684fc8bedd4c834d9a17e859ac421d2, type: 2}
