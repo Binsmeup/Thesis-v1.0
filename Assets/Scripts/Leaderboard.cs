@@ -3,14 +3,15 @@ using Mono.Data.Sqlite;
 using System;
 using System.Data;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 public class Leaderboard : MonoBehaviour{
     private string dbName = "URI=file:Leaderboard.db";
 
-    // Data structure to hold leaderboard entries
+    
     private List<LeaderboardEntry> entries = new List<LeaderboardEntry>();
 
-    // Leaderboard entry structure
+    private UIController UIcontroller;
     public class LeaderboardEntry{
         public string name;
         public int killCount;
@@ -20,6 +21,7 @@ public class Leaderboard : MonoBehaviour{
 
     void Start(){
         createDB();
+        UIcontroller = FindObjectOfType<UIController>();
     }
 
     public void createDB(){
@@ -179,6 +181,40 @@ public class Leaderboard : MonoBehaviour{
                         Debug.Log("Name: " + reader["name"]+ "\t Kill Count: " + reader["killCount"]+ "\t Floor Count: " + reader["floorCount"]+ "\t Run Time: " + reader["timeCount"]+ "\t Max Health: " + reader["healthValue"]+ "\t Max Armor: " + reader["armorValue"]+ "\t Max Damage: " + reader["damageValue"]+ "\t Equipped Helmet: " + reader["helmEquipped"]+ "\t Equipped Chestplate: " + reader["chestEquipped"]+ "\t Equipped Leggings: " + reader["legEquipped"]+ "\t Equipped Weapon: " + reader["weaponEquipped"]);
                 }
             }
+            connection.Close();
+        }
+    }
+
+    public void printScoresByName(string playerName, UIController UIcontroller)
+    {
+        using (var connection = new SqliteConnection(dbName))
+        {
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "SELECT * FROM leaderboard WHERE name = @name";
+                command.Parameters.AddWithValue("@name", playerName);
+
+                using (IDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        UIcontroller.nem.text = "Name: " + reader["name"];
+                        UIcontroller.kill.text = "Kill Count: " + reader["killCount"];
+                        UIcontroller.floor.text = "Floor Count: " + reader["floorCount"];
+                        UIcontroller.time.text = "Run Time: " + reader["timeCount"];
+                        UIcontroller.health.text = "Max Health: " + reader["healthValue"];
+                        UIcontroller.armor.text = "Max Armor: " + reader["armorValue"];
+                        UIcontroller.damage.text = "Max Damage: " + reader["damageValue"];
+                        UIcontroller.helm.text = "Equipped Helmet: " + reader["helmEquipped"];
+                        UIcontroller.chest.text = "Equipped Chestplate: " + reader["chestEquipped"];
+                        UIcontroller.legs.text = "Equipped Leggings: " + reader["legEquipped"];
+                        UIcontroller.weapon.text = "Equipped Weapon: " + reader["weaponEquipped"];
+                    }
+                }
+            }
+
             connection.Close();
         }
     }

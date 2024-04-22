@@ -29,6 +29,7 @@ public class PlayerUI : MonoBehaviour
     public VisualElement OptionsScreen;
     public VisualElement layer;
     public VisualElement Die;
+    public VisualElement LS2;
     public VisualElement LS4;
     public VisualElement LS5;
     public Label submit;
@@ -36,7 +37,7 @@ public class PlayerUI : MonoBehaviour
     public TextField named;
 
     //Items
-    public VisualElement boxhover; 
+    public VisualElement boxhover;
     public VisualElement pickup;
     public VisualElement BeginnerSword;
     public VisualElement Sword;
@@ -90,6 +91,10 @@ public class PlayerUI : MonoBehaviour
     public VisualElement LegendBat;
     public VisualElement LegendDagger;
 
+    public VisualElement chestText;
+    public Button chestButton;
+    public VisualElement port;
+    public Button portB;
     //Stats
     public Label attackSpeedLabel;
     public Label baseDamageLabel;
@@ -119,6 +124,15 @@ public class PlayerUI : MonoBehaviour
     public Label six;
     public Label seven;
     public Label eight;
+    public Label nine;
+    public Label ten;
+    public Label eleven;
+    public Label twelve;
+    public Label thirteen;
+    public Label fourteen;
+    public Label fifteen;
+    public Label sixteen;
+    public Label seventeen;
     public Label oneL;
     public Label twoL;
     public Label threeL;
@@ -127,6 +141,15 @@ public class PlayerUI : MonoBehaviour
     public Label sixL;
     public Label sevenL;
     public Label eightL;
+    public Label nineL;
+    public Label tenL;
+    public Label elevenL;
+    public Label twelveL;
+    public Label thirteenL;
+    public Label fourteenL;
+    public Label fifteenL;
+    public Label sixteenL;
+    public Label seventeenL;
     //bars
     public ProgressBar armorBar;
     public ProgressBar healthBar;
@@ -136,6 +159,7 @@ public class PlayerUI : MonoBehaviour
     private playerScript player;
     private MapGeneration mapGeneration;
     private Leaderboard leaderboard;
+    private ItemManagement itemManage;
 
     public Sprite weaponS;
     public Sprite helmS;
@@ -165,7 +189,7 @@ public class PlayerUI : MonoBehaviour
         floorcount = root.Q<Label>("Floor");
         timed = root.Q<Label>("timecount");
         startTime = Time.time;
-        itemNames = root.Q<Label>("itemNames");       
+        itemNames = root.Q<Label>("itemNames");
         coins = root.Q<Label>("coin");
         kills = root.Q<Label>("kill");
         killFinal = root.Q<Label>("KillsFin");
@@ -187,6 +211,16 @@ public class PlayerUI : MonoBehaviour
         six = root.Q<Label>("6");
         seven = root.Q<Label>("7");
         eight = root.Q<Label>("8");
+        nine = root.Q<Label>("9");
+        ten = root.Q<Label>("10");
+        eleven = root.Q<Label>("11");
+        twelve = root.Q<Label>("12");
+        thirteen = root.Q<Label>("13");
+        fourteen = root.Q<Label>("14");
+        fifteen = root.Q<Label>("15");
+        sixteen = root.Q<Label>("16");
+        seventeen = root.Q<Label>("17");
+
         oneL = root.Q<Label>("1l");
         twoL = root.Q<Label>("2l");
         threeL = root.Q<Label>("3l");
@@ -195,6 +229,17 @@ public class PlayerUI : MonoBehaviour
         sixL = root.Q<Label>("6l");
         sevenL = root.Q<Label>("7l");
         eightL = root.Q<Label>("8l");
+        nineL = root.Q<Label>("9l");
+        tenL = root.Q<Label>("10l");
+        elevenL = root.Q<Label>("11l");
+        twelveL = root.Q<Label>("12l");
+        thirteenL = root.Q<Label>("13l");
+        fourteenL = root.Q<Label>("14l");
+        fifteenL = root.Q<Label>("15l");
+        sixteenL = root.Q<Label>("16l");
+        seventeenL = root.Q<Label>("17l");
+
+
 
         //inventory
         weapon = root.Q<Button>("WEAPON");
@@ -203,7 +248,7 @@ public class PlayerUI : MonoBehaviour
         legs = root.Q<Button>("LEGS");
 
 
-        
+
         //items
         boxhover = root.Q<VisualElement>("itemhover");
         itemVisualElements.Add("BeginnerSword", root.Q<VisualElement>("BeginnerSword"));
@@ -258,13 +303,17 @@ public class PlayerUI : MonoBehaviour
         itemVisualElements.Add("LegendBat", root.Q<VisualElement>("LegendBat"));
         itemVisualElements.Add("LegendDagger", root.Q<VisualElement>("LegendDagger"));
 
-
+        LS2 = root.Q<VisualElement>("LoadingScreen2");
         LS4 = root.Q<VisualElement>("LoadingScreen4");
         LS5 = root.Q<VisualElement>("LoadingScreen5");
         OptionsScreen = root.Q<VisualElement>("optionsscreen");
         Die = root.Q<VisualElement>("whenudie");
         layer = root.Q<VisualElement>("Layer");
 
+        chestButton = root.Q<Button>("chestbutton");
+        chestText = root.Q<VisualElement>("chest");
+        portB = root.Q<Button>("portbutton");
+        port = root.Q<VisualElement>("port");
         music = root.Q<Slider>("music");
         sfx = root.Q<Slider>("sound");
         previousFloorValue = floorFinal.text;
@@ -303,12 +352,13 @@ public class PlayerUI : MonoBehaviour
         GameObject leaderboardManager = GameObject.FindWithTag("Leaderboard");
         leaderboard = leaderboardManager.GetComponent<Leaderboard>();
 
-        StartCoroutine(ShowAndHideLoadingScreen());
+        StartCoroutine(ShowAndHideLoadingScreen2());
 
         if (playerObject != null)
         {
             healthManager = playerObject.GetComponent<HealthManager>();
             player = playerObject.GetComponent<playerScript>();
+            itemManage = FindObjectOfType<ItemManagement>();
         }
 
 
@@ -323,7 +373,17 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
-    public IEnumerator ShowAndHideLoadingScreen()
+    public IEnumerator ShowAndHideLoadingScreen2()
+    {
+        LS2.style.display = DisplayStyle.Flex;
+
+
+        yield return new WaitForSeconds(2f);
+
+        LS2.style.display = DisplayStyle.None;
+    }
+
+    public IEnumerator ShowAndHideLoadingScreen4()
     {
         LS4.style.display = DisplayStyle.Flex;
 
@@ -331,8 +391,6 @@ public class PlayerUI : MonoBehaviour
 
         LS4.style.display = DisplayStyle.None;
     }
-
-
     private IEnumerator LoadMainMenuAfterDelay()
     {
         LS5.style.display = DisplayStyle.Flex;
@@ -347,7 +405,6 @@ public class PlayerUI : MonoBehaviour
     {
         if (healthManager != null)
         {
-
             healthBar.title = $"Health: {healthManager.health}/{healthManager.maxHealth}";
             healthBar.lowValue = 0;
             healthBar.highValue = healthManager.maxHealth;
@@ -378,11 +435,11 @@ public class PlayerUI : MonoBehaviour
             coins.text = player.coins.ToString();
             weaponC = player.currentWeapon.name;
 
-           
+
 
             weaponS = Resources.Load<Sprite>(weaponC);
             weapon.style.backgroundImage = weaponS.texture;
-  
+
 
             if (player.currentChest != null)
             {
@@ -395,7 +452,8 @@ public class PlayerUI : MonoBehaviour
                 chestplate.RegisterCallback<MouseEnterEvent>(OnChestplateHoverEnter);
                 chestplate.RegisterCallback<MouseLeaveEvent>(OnChestplateHoverLeave);
             }
-            else {
+            else
+            {
             }
 
             if (player.currentHelm != null)
@@ -425,8 +483,8 @@ public class PlayerUI : MonoBehaviour
             }
             else
             {
-               
             }
+
 
             if (timerRunning)
             {
@@ -437,8 +495,8 @@ public class PlayerUI : MonoBehaviour
                 timed.text = timerText;
             }
         }
-    }
 
+    }
     void Update()
     {
         UpdateUI();
@@ -457,7 +515,7 @@ public class PlayerUI : MonoBehaviour
 
         if (floorFinal.text != previousFloorValue)
         {
-            StartCoroutine(ShowAndHideLoadingScreen());
+            StartCoroutine(ShowAndHideLoadingScreen4());
             previousFloorValue = floorFinal.text;
         }
 
@@ -489,8 +547,8 @@ public class PlayerUI : MonoBehaviour
     {
 
         StartCoroutine(LoadMainMenuAfterDelay());
-            Time.timeScale = 1f;
-            SceneManager.LoadScene("Main_Menu");
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Main_Menu");
     }
     void DieRestartButtonPressed()
     {
@@ -499,7 +557,7 @@ public class PlayerUI : MonoBehaviour
 
     void DieMainmenuButtonPressed()
     {
-                StartCoroutine(LoadMainMenuAfterDelay());
+        StartCoroutine(LoadMainMenuAfterDelay());
         SceneManager.LoadScene("Main_Menu");
     }
 
@@ -548,7 +606,7 @@ public class PlayerUI : MonoBehaviour
 
 
 
-public void ShowItemDetail(string itemName)
+    public void ShowItemDetail(string itemName)
     {
 
         if (itemVisualElements.ContainsKey(itemName))
@@ -564,7 +622,7 @@ public void ShowItemDetail(string itemName)
 
     public void HideItemDetail(string itemName)
     {
-            itemVisualElements[itemName].style.display = DisplayStyle.None;
+        itemVisualElements[itemName].style.display = DisplayStyle.None;
     }
 
     public void ShowFButton()
@@ -572,7 +630,27 @@ public void ShowItemDetail(string itemName)
         Fbutton.style.display = DisplayStyle.Flex;
         boxhover.style.display = DisplayStyle.Flex;
     }
+    public void ShowChestButton()
+    {
+        chestButton.style.display = DisplayStyle.Flex;
+        chestText.style.display = DisplayStyle.Flex;
+    }
+    public void HideChestButton()
+    {
+        chestButton.style.display = DisplayStyle.None;
+        chestText.style.display = DisplayStyle.None;
+    }
 
+    public void ShowPortButton()
+    {
+        portB.style.display = DisplayStyle.Flex;
+        port.style.display = DisplayStyle.Flex;
+    }
+    public void HidePortButton()
+    {
+        portB.style.display = DisplayStyle.None;
+        port.style.display = DisplayStyle.None;
+    }
     public void HideFButton()
     {
         Fbutton.style.display = DisplayStyle.None;
@@ -583,13 +661,12 @@ public void ShowItemDetail(string itemName)
         itemNames.text = name;
     }
 
-    // Method to clear the item name from the UI
     public void ClearItemName()
     {
         itemNames.text = "";
     }
 
-    void OnWeaponHoverEnter(MouseEnterEvent evt)
+    public void OnWeaponHoverEnter(MouseEnterEvent evt)
     {
 
         ShowItemDetail(weaponC);
@@ -631,6 +708,129 @@ public void ShowItemDetail(string itemName)
     {
         HideItemDetail(legsC);
     }
+
+    public void OnLabelHoverEnter(MouseEnterEvent evt, string labelName)
+    {
+        switch (labelName)
+        {
+            case "1":
+                ShowItemDetail(itemManage.item_one);
+                break;
+            case "2":
+                ShowItemDetail(itemManage.item_two);
+                break;
+            case "3":
+                ShowItemDetail(itemManage.item_three);
+                break;
+            case "4":
+                ShowItemDetail(itemManage.item_four);
+                break;
+            case "5":
+                ShowItemDetail(itemManage.item_five);
+                break;
+            case "6":
+                ShowItemDetail(itemManage.item_six);
+                break;
+            case "7":
+                ShowItemDetail(itemManage.item_seven);
+                break;
+            case "8":
+                ShowItemDetail(itemManage.item_eight);
+                break;
+            case "9":
+                ShowItemDetail(itemManage.item_nine);
+                break;
+            case "10":
+                ShowItemDetail(itemManage.item_ten);
+                break;
+            case "11":
+                ShowItemDetail(itemManage.item_eleven);
+                break;
+            case "12":
+                ShowItemDetail(itemManage.item_twelve);
+                break;
+            case "13":
+                ShowItemDetail(itemManage.item_thirteen);
+                break;
+            case "14":
+                ShowItemDetail(itemManage.item_fourteen);
+                break;
+            case "15":
+                ShowItemDetail(itemManage.item_fifteen);
+                break;
+            case "16":
+                ShowItemDetail(itemManage.item_sixteen);
+                break;
+            case "17":
+                ShowItemDetail(itemManage.item_seventeen);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void OnLabelHoverLeave(MouseLeaveEvent evt, string labelName)
+    {
+        switch (labelName)
+        {
+            case "1":
+                HideItemDetail(itemManage.item_one);
+                break;
+            case "2":
+                HideItemDetail(itemManage.item_two);
+                break;
+            case "3":
+                HideItemDetail(itemManage.item_three);
+                break;
+            case "4":
+                HideItemDetail(itemManage.item_four);
+                break;
+            case "5":
+                HideItemDetail(itemManage.item_five);
+                break;
+            case "6":
+                HideItemDetail(itemManage.item_six);
+                break;
+            case "7":
+                HideItemDetail(itemManage.item_seven);
+                break;
+            case "8":
+                HideItemDetail(itemManage.item_eight);
+                break;
+            case "9":
+                HideItemDetail(itemManage.item_nine);
+                break;
+            case "10":
+                HideItemDetail(itemManage.item_ten);
+                break;
+            case "11":
+                HideItemDetail(itemManage.item_eleven);
+                break;
+            case "12":
+                HideItemDetail(itemManage.item_twelve);
+                break;
+            case "13":
+                HideItemDetail(itemManage.item_thirteen);
+                break;
+            case "14":
+                HideItemDetail(itemManage.item_fourteen);
+                break;
+            case "15":
+                HideItemDetail(itemManage.item_fifteen);
+                break;
+            case "16":
+                HideItemDetail(itemManage.item_sixteen);
+                break;
+            case "17":
+                HideItemDetail(itemManage.item_seventeen);
+                break;
+            default:
+                break;
+        }
+    }
+
+
+
 
     // Method to handle music volume slider value change
     void OnMusicVolumeChanged(ChangeEvent<float> evt)

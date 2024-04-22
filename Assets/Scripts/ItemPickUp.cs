@@ -35,13 +35,22 @@ public class ItemPickUp : MonoBehaviour
         {
             itemName = item.ToString();
             playerUI.ShowItemDetail(itemName);
-            
+
+            if (isMouseOverPickUp && isPlayerInRange)
+            {
+                playerUI.ShowFButton();
+                playerUI.SetItemName(itemName);
+            }
+            else
+            {
+                playerUI.HideFButton();
+            }
         }
         else
         {
             itemName = item.ToString();
             playerUI.HideItemDetail(itemName);
-            
+
         }
     }
 
@@ -50,12 +59,6 @@ public class ItemPickUp : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = true;
-            if (isMouseOverPickUp)
-            {
-                playerUI.ShowFButton();
-                itemName = item.ToString();
-                playerUI.SetItemName(itemName);
-            }
         }
     }
     private void OnTriggerExit2D(Collider2D other)
@@ -63,8 +66,9 @@ public class ItemPickUp : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = false;
-            playerUI.HideFButton();
-            playerUI.ClearItemName();
+
+                playerUI.HideFButton();
+
         }
     }
 

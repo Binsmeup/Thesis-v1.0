@@ -20,27 +20,31 @@ public class Chest : MonoBehaviour{
         {
             OpenChest();
         }
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         isMouseOverPickUp = mouseCollider.OverlapPoint((Vector2)ray.origin);
+
+        if (isMouseOverPickUp && isPlayerInRange)
+        {
+                playerUI.ShowChestButton();
+
+        }
+        else
+        {
+            playerUI.HideChestButton();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other){
         if (other.CompareTag("Player")){
             isPlayerInRange = true;
-            isPlayerInRange = true;
-            if (isMouseOverPickUp)
-            {
-                playerUI.ShowFButton();
-                playerUI.SetItemName("Chest");
-            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D other){
         if (other.CompareTag("Player")){
             isPlayerInRange = false;
-            playerUI.HideFButton();
-            playerUI.ClearItemName();
+            playerUI.HideChestButton();
         }
     }
 

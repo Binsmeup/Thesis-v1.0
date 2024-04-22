@@ -31,7 +31,20 @@ public class UIController : MonoBehaviour
     public Button FLOORS;
     public Button TIME;
     public Button KILLCOUNT;
-
+    //INFO
+    public VisualElement details;
+    public Label nem;
+    public Label kill;
+    public Label floor;
+    public Label run;
+    public Label time;
+    public Label health;
+    public Label armor;
+    public Label damage;
+    public Label helm;
+    public Label chest;
+    public Label legs;
+    public Label weapon;
 
     private Leaderboard leaderboard;
 
@@ -113,14 +126,34 @@ public class UIController : MonoBehaviour
         timeLabels = new List<Label>();
         killCountLabels = new List<Label>();
 
+        //dets
+        details = root.Q<VisualElement>("Details");
+        nem = root.Q<Label>("t1");
+        kill = root.Q<Label>("t2");
+        floor = root.Q<Label>("t3");
+        time = root.Q<Label>("t4");
+        health = root.Q<Label>("t5");
+        armor = root.Q<Label>("t6");
+        damage = root.Q<Label>("t7");
+        helm = root.Q<Label>("t8");
+        chest = root.Q<Label>("t9");
+        legs = root.Q<Label>("t10");
+        weapon = root.Q<Label>("t11");
         //Leaderboard Section
         Lbackmenu = root.Q<Button>("L-back");
+
         for (int i = 1; i <= 9; i++)
         {
             nameLabels.Add(root.Q<Label>($"Name{i}"));
             floorLabels.Add(root.Q<Label>($"Floor{i}"));
             timeLabels.Add(root.Q<Label>($"Time{i}"));
             killCountLabels.Add(root.Q<Label>($"KillCount{i}"));
+        }
+
+        foreach (var nameLabel in nameLabels)
+        {
+            nameLabel.RegisterCallback<MouseEnterEvent>(evt => OnNameLabelHoverEnter(nameLabel.text));
+            nameLabel.RegisterCallback<MouseLeaveEvent>(evt => OnNameLabelHoverLeave());
         }
 
     }
@@ -135,7 +168,7 @@ public class UIController : MonoBehaviour
     {
         MainMenu.style.display = DisplayStyle.None;
         Leaderboard.style.display = DisplayStyle.Flex;
-        UpdateLeaderboardUI(); 
+        UpdateLeaderboardUI();
     }
 
     void OptionsButtonPressed()
@@ -222,6 +255,15 @@ public class UIController : MonoBehaviour
             timeLabels[i].text = leaderboardEntries[i].timeCount.ToString();
             killCountLabels[i].text = leaderboardEntries[i].killCount.ToString();
         }
+    }
+    void OnNameLabelHoverEnter(string playerName)
+    {
+        details.style.display = DisplayStyle.Flex;
+        leaderboard.printScoresByName(playerName, this);
+    }
+    void OnNameLabelHoverLeave()
+    {
+        details.style.display = DisplayStyle.None;
     }
 
     void SortByKillCount()
