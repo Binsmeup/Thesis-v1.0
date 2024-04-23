@@ -199,14 +199,14 @@ public class MapGenerationShowcase : MonoBehaviour{
 
             break;
         }
-        if (width >= 360){
-             width = 360;
+        if (width >= 150){
+             width = 150;
         }
-        if (height >= 360){
-            height = 360;
+        if (height >= 150){
+            height = 150;
         }
-        if (enemyCount >= 210){
-            enemyCount = 210;
+        if (enemyCount >= 150){
+            enemyCount = 150;
         }   
     }
 

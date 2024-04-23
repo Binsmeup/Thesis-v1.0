@@ -564,7 +564,7 @@ MonoBehaviour:
   Enemy: {fileID: 6742648619159240483, guid: 9803f01ec4f354f42945b577f60aecd5, type: 3}
   Miniboss: {fileID: 6742648619159240483, guid: c81afdbc927fafe489a499b343d5516f, type: 3}
   Boss: {fileID: 5932223504228113520, guid: 956bfde8f4b6fe043af08eeb977c3b1e, type: 3}
-  Portal: {fileID: 8513089777601362936, guid: c361e04e6381f1d47a6fcfaa6ef7249b, type: 3}
+  Portal: {fileID: 6049890123541225630, guid: 5ed9e95cab4af544baac465217aeb5b9, type: 3}
   Chest: {fileID: 5525550310558902087, guid: add8b76e3c7d14a4d851773166801d55, type: 3}
   Coin: {fileID: 5481630336907744121, guid: e2235e5d38a3c9f4a968717d25eda057, type: 3}
   Debris: {fileID: 3918248795005935382, guid: d2a0025dc2ac5b342859a754bbd9154f, type: 3}
@@ -578,7 +578,7 @@ MonoBehaviour:
   defaultChestCount: 0
   perlinScale: 0.1
   floorRules: 0
-  OneLine: 1
+  OneLine: 0
   cooldown: 1
   noiseCooldown: 0.01
   cooldownOnNoise: 0
@@ -759,6 +759,10 @@ MonoBehaviour:
   defaultDensityValue: 0
   defaultIterationValue: 0
   defaultEnemyCValue: 0
+  noiseCooldownValue: 0
+  cellularCooldownValue: 0
+  perlinCooldownValue: 0
+  cooldownValue: 0
 --- !u!114 &1589692124
 MonoBehaviour:
   m_ObjectHideFlags: 0

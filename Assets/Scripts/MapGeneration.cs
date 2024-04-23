@@ -89,12 +89,12 @@ public class MapGeneration : MonoBehaviour{
 
     void VariableSetUp(){
         width = defaultWidth + (4 * floorCount);
-            if (width >= 360){
-                width = 360;
+            if (width >= 150){
+                width = 150;
             }
         height = defaultHeight + (4 * floorCount);
-        if (height >= 360){
-                height = 360;
+        if (height >= 150){
+                height = 150;
             }
         density = defaultDensity;
         iteration = defaultIteration;
@@ -102,8 +102,8 @@ public class MapGeneration : MonoBehaviour{
         bossFloor = false;
         portalCount = 1;
         enemyCount = defaultEnemyCount + (3 * floorCount);
-        if (enemyCount >= 210){
-                enemyCount = 210;
+        if (enemyCount >= 150){
+                enemyCount = 150;
             }
         switch (floorCount){
             case int n when n >= 1 && n <= 5:
@@ -181,6 +181,12 @@ public class MapGeneration : MonoBehaviour{
             default:
                 statScale = 0.3f + ((floorCount-20)*0.01f);
                 chestCount = 0;
+                enableCharger = true;
+                enableFast = true;
+                enableRanged = true;
+                enableSniper = true;
+                enableTank = true;
+                miniBossFloor = true;
             break;
         }   
     }
@@ -475,6 +481,10 @@ public class MapGeneration : MonoBehaviour{
             GameObject obj = Instantiate(prefab, Tilemap.GetCellCenterWorld(spawnPosition), Quaternion.identity);
             if (miniBoss) {
                 obj.name = "MiniBoss_" + prefab.name;
+                SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
+                if (spriteRenderer != null) {
+                    spriteRenderer.color = Color.red;
+                }
             }
 
             HealthManager healthManager = obj.GetComponent<HealthManager>();
