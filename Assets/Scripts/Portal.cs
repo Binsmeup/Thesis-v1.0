@@ -91,6 +91,8 @@ public class Portal : MonoBehaviour
         excludeNames.Add("Grid");
         excludeNames.Add("ItemList");
         excludeNames.Add("UIDocument");
+        excludeNames.Add("MiniMap");
+        excludeNames.Add("mins");
 
         foreach (GameObject obj in allObjects)
         {
