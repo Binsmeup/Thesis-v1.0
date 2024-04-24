@@ -565,7 +565,7 @@ MonoBehaviour:
   Miniboss: {fileID: 6742648619159240483, guid: c81afdbc927fafe489a499b343d5516f, type: 3}
   Boss: {fileID: 5932223504228113520, guid: 956bfde8f4b6fe043af08eeb977c3b1e, type: 3}
   Portal: {fileID: 6049890123541225630, guid: 5ed9e95cab4af544baac465217aeb5b9, type: 3}
-  Chest: {fileID: 5525550310558902087, guid: add8b76e3c7d14a4d851773166801d55, type: 3}
+  Chest: {fileID: 2542752363229847406, guid: cdb47739e728cdc4687482ed2f84150c, type: 3}
   Coin: {fileID: 5481630336907744121, guid: e2235e5d38a3c9f4a968717d25eda057, type: 3}
   Debris: {fileID: 3918248795005935382, guid: d2a0025dc2ac5b342859a754bbd9154f, type: 3}
   Potion: {fileID: 5481630336907744121, guid: 4269c4bfcf079ff4a941e17c19dc86b8, type: 3}
@@ -579,12 +579,12 @@ MonoBehaviour:
   perlinScale: 0.1
   floorRules: 0
   OneLine: 0
-  cooldown: 1
-  noiseCooldown: 0.01
+  cooldown: 0
+  noiseCooldown: 0
   cooldownOnNoise: 0
-  cellularCooldown: 0.01
+  cellularCooldown: 0
   cooldownOnCellular: 0
-  perlinCooldown: 0.01
+  perlinCooldown: 0
   cooldownOnPerlin: 0
   cooldownOnIteration: 0
 --- !u!4 &716499076

@@ -72,13 +72,15 @@ public class MapGenerationShowcase : MonoBehaviour{
     private List<Vector3Int> coinSpawns = new List<Vector3Int>();
     private List<Vector3Int> debrisSpawns = new List<Vector3Int>();
     private List<Vector3Int> potionSpawns = new List<Vector3Int>();
-    
 
-    void Start(){
-        //StartCoroutine(GenerateMap());
-    }
+    bool noiseFinished = false;
+    bool cellularAutomataFinished = false;
+    bool perlinNoiseFinished = false;
 
     public IEnumerator GenerateMap(bool floorRulesCheck, int setFloorValue, int defaultWidthValue,int defaultHeightValue, int defaultDensityValue,int defaultIterationValue,int defaultEnemyCValue){
+        noiseFinished = false;
+        cellularAutomataFinished = false;
+        perlinNoiseFinished = false;
         switch(floorRulesCheck){
             case true:
             floorRules = true;
@@ -209,10 +211,6 @@ public class MapGenerationShowcase : MonoBehaviour{
             enemyCount = 150;
         }   
     }
-
-    bool noiseFinished = false;
-    bool cellularAutomataFinished = false;
-    bool perlinNoiseFinished = false;
 
     void BossRoom(){
         bossFloor = true;
