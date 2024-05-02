@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Stylesheets.uss?fileID=7433441132597879392&amp;guid=f868701e1087d7340803448b9c9d12b7&amp;type=3#Stylesheets" />
+    <Style src="project://database/Assets/Stylesheets1.uss?fileID=7433441132597879392&amp;guid=35632dcb515ccaf4daaabbeb52c501b7&amp;type=3#Stylesheets1" />
+    <ui:VisualElement name="VisualElement" style="flex-grow: 1; width: 1920px; height: 1080px; position: absolute; display: flex; background-color: rgba(0, 0, 0, 0);">
+        <ui:VisualElement name="Auto_D" style="flex-grow: 1; display: flex;">
+            <ui:Button display-tooltip-when-elided="true" name="L-back" class="button3" style="background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); top: 59px; left: 23px; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+            <ui:Button display-tooltip-when-elided="true" name="restart" class="restartbutton" style="position: absolute; width: 100px; height: 100px; top: 51px; left: 1788px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

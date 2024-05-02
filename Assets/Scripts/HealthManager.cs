@@ -60,6 +60,8 @@ public class HealthManager : MonoBehaviour, IDamagable{
                 Destroy(gameObject);
                 }
                 else if (gameObject.CompareTag("Player")){
+                    playerScript script = gameObject.GetComponent<playerScript>();
+                    script.isDead = true;
                     Targettable = false;
                 }
             }
