@@ -11,6 +11,9 @@ public class AutoUIScript : MonoBehaviour
     public Button back;
     public Button restart;
 
+    public TextField floorCount;
+    public Label floorLabel;
+
     public int floorCountValue;
     public int defaultWidthValue;
     public int defaultHeightValue;
@@ -24,10 +27,13 @@ public class AutoUIScript : MonoBehaviour
         mapGenerationShowcase = FindObjectOfType<MapGenerationShowcase>();
         back = root.Q<Button>("L-back");
         restart = root.Q<Button>("restart");
+        floorCount = root.Q<TextField>("floorCountInput");
 
 
         back.clicked += OnbackClicked;
         restart.clicked += OnRestartClicked;
+
+        floorCount.RegisterCallback<ChangeEvent<string>>(evt => OnFloorcountChanged(evt.newValue));
 
         if (mapGenerationShowcase != null)
         {
@@ -48,7 +54,18 @@ public class AutoUIScript : MonoBehaviour
     {
         mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap(true, floorCountValue, defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue));
     }
+    public void OnFloorcountChanged(string newText)
+    {
 
-
+        if (int.TryParse(newText, out int newValue))
+        {
+            floorCountValue = newValue;
+            Debug.Log("Floor count value: " + floorCountValue);
+        }
+        else
+        {
+            Debug.LogWarning("Invalid input for floor count.");
+        }
+    }
 
 }
