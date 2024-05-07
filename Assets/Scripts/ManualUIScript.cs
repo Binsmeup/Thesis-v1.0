@@ -385,6 +385,7 @@ public class Manual : MonoBehaviour
         else{ 
         mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap(false, floorCountValue, defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue));
         DisableButtons();
+        varset.SetEnabled(false);
         }
     }
 
@@ -397,6 +398,7 @@ public class Manual : MonoBehaviour
     {
 
         mapGenerationShowcase.ClearTiles();
+        run.SetEnabled(true);
         EnableButtons();
     }
 
@@ -411,6 +413,7 @@ public class Manual : MonoBehaviour
         {
             mapGenerationShowcase.VariableSetUp(defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue);
             EnableButtons();
+            run.SetEnabled(false);
             creategrid.SetEnabled(true);
         }
 
@@ -478,7 +481,6 @@ public class Manual : MonoBehaviour
 
     public void EnableButtons()
     {
-        run.SetEnabled(true);
         creategrid.SetEnabled(false);
         genNoise.SetEnabled(false);
         applyCA.SetEnabled(false);
