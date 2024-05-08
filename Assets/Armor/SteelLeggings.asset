@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SteelLeggings
   m_EditorClassIdentifier: 
   itemName: SteelLeggings
-  Type: Helmet
+  Type: Leggings
   WeaponType: 
   baseDmg: 0
   dmgMulti: 0
