@@ -187,7 +187,6 @@ public class Manual : MonoBehaviour
         if (isShowing)
         {
             show.text = "Hide Variables";
-            floorcount.style.display = DisplayStyle.Flex;
             defaultWidth.style.display = DisplayStyle.Flex;
             defaultHeight.style.display = DisplayStyle.Flex;
             defaultDensity.style.display = DisplayStyle.Flex;
@@ -205,7 +204,6 @@ public class Manual : MonoBehaviour
             CD_iteration.style.display = DisplayStyle.Flex;
             oneLine.style.display = DisplayStyle.Flex;
 
-            label_1.style.display = DisplayStyle.Flex;
             label_2.style.display = DisplayStyle.Flex;
             label_3.style.display = DisplayStyle.Flex;
             label_4.style.display = DisplayStyle.Flex;
@@ -377,7 +375,7 @@ public class Manual : MonoBehaviour
     }
     void OnRunClicked()
     {
-        if (floorCountValue == 0 || defaultWidthValue == 0 || defaultHeightValue == 0 || defaultDensityValue == 0 || defaultIterationValue == 0 || defaultEnemyCValue == 0)
+        if (defaultWidthValue == 0 || defaultHeightValue == 0 || defaultDensityValue == 0 || defaultIterationValue == 0 || defaultEnemyCValue == 0)
         {
             notice.style.display = DisplayStyle.Flex;
             layer.style.display = DisplayStyle.Flex;
@@ -385,6 +383,7 @@ public class Manual : MonoBehaviour
         else{ 
         mapGenerationShowcase.StartCoroutine(mapGenerationShowcase.GenerateMap(false, floorCountValue, defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue));
         DisableButtons();
+        varset.SetEnabled(false);
         }
     }
 
@@ -402,7 +401,7 @@ public class Manual : MonoBehaviour
 
     void OnVarsetClicked()
     {
-        if (floorCountValue == 0 || defaultWidthValue == 0 || defaultHeightValue == 0 || defaultDensityValue == 0 || defaultIterationValue == 0 || defaultEnemyCValue == 0)
+        if (defaultWidthValue == 0 || defaultHeightValue == 0 || defaultDensityValue == 0 || defaultIterationValue == 0 || defaultEnemyCValue == 0)
         {
             notice.style.display = DisplayStyle.Flex;
             layer.style.display = DisplayStyle.Flex;
@@ -411,6 +410,7 @@ public class Manual : MonoBehaviour
         {
             mapGenerationShowcase.VariableSetUp(defaultWidthValue, defaultHeightValue, defaultDensityValue, defaultIterationValue, defaultEnemyCValue);
             EnableButtons();
+            run.SetEnabled(false);
             creategrid.SetEnabled(true);
         }
 
@@ -479,6 +479,7 @@ public class Manual : MonoBehaviour
     public void EnableButtons()
     {
         run.SetEnabled(true);
+        varset.SetEnabled(true);
         creategrid.SetEnabled(false);
         genNoise.SetEnabled(false);
         applyCA.SetEnabled(false);
