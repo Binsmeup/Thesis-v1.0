@@ -554,12 +554,12 @@ MonoBehaviour:
   Item: {fileID: 1445655577}
   Floor: {fileID: 11400000, guid: c07de527b5425a64aa08e112e2784b65, type: 2}
   Wall: {fileID: 11400000, guid: fe499c9a6d0199b4f8b87e7bdec5ce6c, type: 2}
-  Perlin1: {fileID: 11400000, guid: e5f65b9a88a34a14eaa37e5c73606145, type: 2}
-  Perlin2: {fileID: 11400000, guid: beee81ef027c34d4890dfa146e741b0f, type: 2}
-  Perlin3: {fileID: 11400000, guid: 5aa983744db4a9e40992d886e69a62d9, type: 2}
-  EnemyLocation: {fileID: 11400000, guid: dfd68006e6b8a5d4bb1f16ecc7da4da7, type: 2}
-  ChestLocation: {fileID: 11400000, guid: e5f504c1f05741b4eafaff396fd3afa7, type: 2}
-  PortalLocation: {fileID: 11400000, guid: 8ceaf97232a38fa4f9864ef5086e4347, type: 2}
+  Perlin1: {fileID: 11400000, guid: 225e10a3901b0464b9bfdf4c61013cb9, type: 2}
+  Perlin2: {fileID: 11400000, guid: 254714d5b3d2ab047bcc93dc7302620d, type: 2}
+  Perlin3: {fileID: 11400000, guid: 057864ba76920424faed9036d26450c0, type: 2}
+  EnemyLocation: {fileID: 11400000, guid: 25ea347033abd5c48a06e91884ec5be6, type: 2}
+  ChestLocation: {fileID: 11400000, guid: 57025f5c6642d924f9e3e6cffec130b1, type: 2}
+  PortalLocation: {fileID: 11400000, guid: b0321b8587c3823458a93f3c2075c2bd, type: 2}
   Player: {fileID: 7988788195518775468, guid: 5ff5b5940ee0d5a4ebed150da3d29059, type: 3}
   Enemy: {fileID: 6742648619159240483, guid: 9803f01ec4f354f42945b577f60aecd5, type: 3}
   Miniboss: {fileID: 6742648619159240483, guid: c81afdbc927fafe489a499b343d5516f, type: 3}
@@ -783,6 +783,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71eac590ca84c614fbc9eb6459a53567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapGenerationShowcase: {fileID: 0}
+  floorCountValue: 0
+  defaultWidthValue: 0
+  defaultHeightValue: 0
+  defaultDensityValue: 0
+  defaultIterationValue: 0
+  defaultEnemyCValue: 0
+  noiseCooldownValue: 0
+  cellularCooldownValue: 0
+  perlinCooldownValue: 0
+  cooldownValue: 0
 --- !u!1001 &1837377410
 PrefabInstance:
   m_ObjectHideFlags: 0
