@@ -467,6 +467,7 @@ public class Manual : MonoBehaviour
     public void DisableButtons()
     {
         run.SetEnabled(false);
+        varset.SetEnabled(false);
         creategrid.SetEnabled(false);
         genNoise.SetEnabled(false);
         applyCA.SetEnabled(false);
