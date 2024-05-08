@@ -24,38 +24,47 @@ public class ItemList : ScriptableObject{
             break;
 
         case "Helmet":
-            healthManager.HelmHP += TempArmorHP;
             if (playerStats.currentHelm != null){
+                TempArmorHPDrop = healthManager.HelmHP;
+                healthManager.HelmMaxHP = 0;
+                healthManager.HelmHP = 0;
                 Vector3 playerPosition = GameObject.Find("Player").transform.position;
                 ArmorHealth currentArmorHP = Instantiate(playerStats.currentHelm, playerPosition, Quaternion.identity).GetComponent<ArmorHealth>();
                 if (currentArmorHP != null){
                     currentArmorHP.armorHealth = TempArmorHPDrop;
                 }
             }
+            healthManager.HelmHP += TempArmorHP;
             playerStats.currentHelm = itemObject;
             break;
 
         case "Chestplate":
-            healthManager.ChestHP += TempArmorHP;
             if (playerStats.currentChest != null){
+                TempArmorHPDrop = healthManager.ChestHP;
+                healthManager.ChestMaxHP = 0;
+                healthManager.ChestHP = 0;
                 Vector3 playerPosition = GameObject.Find("Player").transform.position;
                 ArmorHealth currentArmorHP = Instantiate(playerStats.currentChest, playerPosition, Quaternion.identity).GetComponent<ArmorHealth>();
                 if (currentArmorHP != null){
                     currentArmorHP.armorHealth = TempArmorHPDrop;
                 }
             }
+            healthManager.ChestHP += TempArmorHP;
             playerStats.currentChest = itemObject;
             break;
         
         case "Leggings":
-            healthManager.LegHP += TempArmorHP;
             if (playerStats.currentLeg != null){
+                TempArmorHPDrop = healthManager.LegHP;
+                healthManager.LegMaxHP = 0;
+                healthManager.LegHP = 0;
                 Vector3 playerPosition = GameObject.Find("Player").transform.position;
                 ArmorHealth currentArmorHP = Instantiate(playerStats.currentLeg, playerPosition, Quaternion.identity).GetComponent<ArmorHealth>();
                 if (currentArmorHP != null){
                     currentArmorHP.armorHealth = TempArmorHPDrop;
                 }
             }
+            healthManager.LegHP += TempArmorHP;
             playerStats.currentLeg = itemObject;
             break;
 
@@ -88,33 +97,10 @@ public class ItemList : ScriptableObject{
         playerScript playerStats = GameObject.Find("Player").GetComponent<playerScript>();
 
 
-        switch (Type){
-            case "Helmet":
-                TempArmorHPDrop = healthManager.HelmHP;
-                healthManager.HelmMaxHP = 0;
-                healthManager.HelmHP = 0;
-            break;
-
-            case "Chestplate":
-                TempArmorHPDrop = healthManager.ChestHP;
-                healthManager.ChestMaxHP = 0;
-                healthManager.ChestHP = 0;
-            break;
-
-            case "Leggings":
-                TempArmorHPDrop = healthManager.LegHP;
-                healthManager.LegMaxHP = 0;
-                healthManager.LegHP = 0;
-            break;
-            
-            case "Weapon":
-            playerStats.weaponType = ("");
-            break;
-
-            default:
-            break;
+        if (Type == "Weapon") {
+            playerStats.weaponType = "";
         }
-
+        
         healthManager.maxHealth -= maxHP;
         healthManager.health -= HP;
 

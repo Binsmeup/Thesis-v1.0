@@ -566,9 +566,9 @@ MonoBehaviour:
   Boss: {fileID: 5932223504228113520, guid: 956bfde8f4b6fe043af08eeb977c3b1e, type: 3}
   Portal: {fileID: 6049890123541225630, guid: 5ed9e95cab4af544baac465217aeb5b9, type: 3}
   Chest: {fileID: 2542752363229847406, guid: cdb47739e728cdc4687482ed2f84150c, type: 3}
-  Coin: {fileID: 5481630336907744121, guid: e2235e5d38a3c9f4a968717d25eda057, type: 3}
+  Coin: {fileID: 5224094923718603130, guid: 2abaac763f1c4cb4887d8f2778daa1da, type: 3}
   Debris: {fileID: 3918248795005935382, guid: d2a0025dc2ac5b342859a754bbd9154f, type: 3}
-  Potion: {fileID: 5481630336907744121, guid: 4269c4bfcf079ff4a941e17c19dc86b8, type: 3}
+  Potion: {fileID: 399147549862628478, guid: 8d3a4e8b61ec3e746976abc367eba317, type: 3}
   floorCount: 1
   defaultWidth: 52
   defaultHeight: 52
