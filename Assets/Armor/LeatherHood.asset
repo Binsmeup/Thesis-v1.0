@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: LeatherHood
   Type: Helmet
   WeaponType: 
+  HexColor: '#813C00'
   baseDmg: 15
   dmgMulti: 0
   critCHA: 0

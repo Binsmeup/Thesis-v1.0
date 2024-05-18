@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: JuggernautLeggings
   Type: Leggings
   WeaponType: 
+  HexColor: '#D2C47C'
   baseDmg: 0
   dmgMulti: 0
   critCHA: 0

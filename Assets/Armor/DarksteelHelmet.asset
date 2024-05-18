@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: DarksteelHelmet
   Type: Helmet
   WeaponType: 
+  HexColor: '#2F2541'
   baseDmg: 30
   dmgMulti: 0.25
   critCHA: 0
