@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: SteelLeggings
   Type: Leggings
   WeaponType: 
+  HexColor: '#1e1e1e'
   baseDmg: 0
   dmgMulti: 0
   critCHA: 0

@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: DarksteelLeggings
   Type: Leggings
   WeaponType: 
+  HexColor: '#2F2541'
   baseDmg: 15
   dmgMulti: 0
   critCHA: 15

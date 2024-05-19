@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: DarksteelChestplate
   Type: Chestplate
   WeaponType: 
+  HexColor: '#2F2541'
   baseDmg: 30
   dmgMulti: 0
   critCHA: 0

@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ItemList", menuName = "ScriptableObjects/ItemList", order = 1)]
 public class ItemList : ScriptableObject{
 
-    public string itemName,Type,WeaponType;
+    public string itemName,Type,WeaponType,HexColor;
     public float baseDmg,dmgMulti,critCHA,critDMG,atkSPD,atkSPDModifier,maxHP,HP,KB,MS,HelmetMaxHealth,ChestMaxHealth,LegMaxHealth;
     public GameObject itemObject;
     private float TempArmorHP;
@@ -34,6 +34,21 @@ public class ItemList : ScriptableObject{
                     currentArmorHP.armorHealth = TempArmorHPDrop;
                 }
             }
+            GameObject player = GameObject.Find("Player");
+            Transform helmet = player.transform.Find("Armor/Helmet");
+
+            if (helmet != null){
+                GameObject helmetObject = helmet.gameObject;
+                if (!helmetObject.activeSelf){
+                    helmetObject.SetActive(true);
+                }
+                SpriteRenderer helmetSpriteRenderer = helmetObject.GetComponent<SpriteRenderer>();
+                if (helmetSpriteRenderer != null){
+                    if (ColorUtility.TryParseHtmlString(HexColor, out Color newColor)){
+                        helmetSpriteRenderer.color = newColor;
+                    }
+                } 
+            } 
             healthManager.HelmHP += TempArmorHP;
             playerStats.currentHelm = itemObject;
             break;
@@ -49,6 +64,22 @@ public class ItemList : ScriptableObject{
                     currentArmorHP.armorHealth = TempArmorHPDrop;
                 }
             }
+            GameObject player2 = GameObject.Find("Player");
+            Transform chest = player2.transform.Find("Armor/Chestplate");
+
+            if (chest != null){
+                GameObject chestObject = chest.gameObject;
+                if (!chestObject.activeSelf){
+                    chestObject.SetActive(true);
+                }
+                SpriteRenderer helmetSpriteRenderer = chestObject.GetComponent<SpriteRenderer>();
+                if (helmetSpriteRenderer != null){
+                    if (ColorUtility.TryParseHtmlString(HexColor, out Color newColor)){
+                        helmetSpriteRenderer.color = newColor;
+                    }
+                } 
+            } 
+            
             healthManager.ChestHP += TempArmorHP;
             playerStats.currentChest = itemObject;
             break;
@@ -62,6 +93,23 @@ public class ItemList : ScriptableObject{
                 ArmorHealth currentArmorHP = Instantiate(playerStats.currentLeg, playerPosition, Quaternion.identity).GetComponent<ArmorHealth>();
                 if (currentArmorHP != null){
                     currentArmorHP.armorHealth = TempArmorHPDrop;
+                }
+            }
+            GameObject player3 = GameObject.Find("Player");
+            Transform leg = player3.transform.Find("Armor/Leg");
+
+            if (leg != null){
+                foreach (Transform legPart in leg){
+                    GameObject legObject = legPart.gameObject;
+                    if (!legObject.activeSelf){
+                        legObject.SetActive(true);
+                    }
+                    SpriteRenderer legSpriteRenderer = legObject.GetComponent<SpriteRenderer>();
+                    if (legSpriteRenderer != null){
+                        if (ColorUtility.TryParseHtmlString(HexColor, out Color newColor)){
+                            legSpriteRenderer.color = newColor;
+                        }
+                    }
                 }
             }
             healthManager.LegHP += TempArmorHP;

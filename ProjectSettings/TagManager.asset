@@ -4,26 +4,26 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
-  - Chest
-  - Portal
-  - Wall
-  - Debris
-  - Weapon
-  - MapGeneration
   - Leaderboard
+  - MapGeneration
+  - Wall
+  - Weapon
+  - Enemy
+  - Portal
+  - Chest
+  - Debris
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Wall
+  - best
   - Water
   - UI
-  - Debris
-  - Player
-  - Minimap
-  - Floor
-  - Playergfx
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -46,6 +46,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: first
+    uniqueID: 2717813243
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

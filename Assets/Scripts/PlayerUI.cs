@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 
@@ -165,7 +166,7 @@ public class PlayerUI : MonoBehaviour
     private MapGeneration mapGeneration;
     private Leaderboard leaderboard;
     private ItemManagement itemManage;
-
+    
     public Sprite weaponS;
     public Sprite helmS;
     public Sprite chestS;
@@ -358,7 +359,6 @@ public class PlayerUI : MonoBehaviour
 
         GameObject leaderboardManager = GameObject.FindWithTag("Leaderboard");
         leaderboard = leaderboardManager.GetComponent<Leaderboard>();
-
         StartCoroutine(ShowAndHideLoadingScreen2());
 
         if (playerObject != null)
@@ -410,6 +410,8 @@ public class PlayerUI : MonoBehaviour
 
     void UpdateUI()
     {
+
+
         if (healthManager != null)
         {
             healthBar.title = $"Health: {healthManager.health}/{healthManager.maxHealth}";

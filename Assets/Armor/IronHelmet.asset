@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: IronHelmet
   Type: Helmet
   WeaponType: 
+  HexColor: '#FFFFFF'
   baseDmg: 5
   dmgMulti: 0
   critCHA: 0
