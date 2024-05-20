@@ -1503,11 +1503,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasDamageCooldown: 1
   damageCooldownTimer: 0.5
+  slider: {fileID: 0}
   _damageCooldown: 0
   maxHealth: 100
   _health: 100
   weightLevel: 0
   _targettable: 1
+  popUptext: {fileID: 7913350716652824696, guid: 7548ecd316d893c49ba08d24d74f3bf7, type: 3}
+  PopupPrefab: {fileID: 8632086921279115332, guid: 7548ecd316d893c49ba08d24d74f3bf7, type: 3}
   HelmMaxHP: 0
   HelmHP: 0
   ChestMaxHP: 0

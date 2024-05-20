@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class HealthManager : MonoBehaviour, IDamagable{
     public bool hasDamageCooldown = false;
     public float damageCooldownTimer;
+
+   [SerializeField] private Slider slider;
 
     private float damageCooldownTimeElapsed = 0f;
     private Rigidbody2D rb;
@@ -16,6 +20,8 @@ public class HealthManager : MonoBehaviour, IDamagable{
     public float _health;
     public float weightLevel;
     public bool _targettable;
+    public TMP_Text popUptext;
+    public GameObject PopupPrefab;
 
     public bool damageCooldown{
         get { return _damageCooldown; }
@@ -67,6 +73,8 @@ public class HealthManager : MonoBehaviour, IDamagable{
             }
             if (maxHealth < _health){
                 _health = maxHealth;
+
+                   
             }
         }
         get{
@@ -96,6 +104,15 @@ public class HealthManager : MonoBehaviour, IDamagable{
     public void Start(){
         rb = GetComponent<Rigidbody2D>();
         physicsCollider = GetComponent<Collider2D>();
+
+        slider = GetComponentInChildren<Slider>();
+
+        if (gameObject.CompareTag("Enemy"))
+        {
+            slider.value = health;
+            slider.maxValue = maxHealth;
+        }
+
     }
     public void HealUp(){
         health = maxHealth;
@@ -123,11 +140,27 @@ public class HealthManager : MonoBehaviour, IDamagable{
                 float critValue = Random.Range(0f, 100f);
                 if (critChance >= critValue){
                     health -= (baseDamage * damageMulti * critDamage);
+                    float damageValue = baseDamage * damageMulti * critDamage;
+                    SpawnPopup(Vector3.zero);
+                    popUptext.text = damageValue.ToString();
                     rb.AddForce((knockback), ForceMode2D.Impulse);
+                    if (gameObject.CompareTag("Enemy"))
+                    {
+                        slider.value = health;
+                        slider.maxValue = maxHealth;
+                    }
                 }
                 else{
                     health -= (baseDamage * damageMulti);
+                    SpawnPopup(Vector3.zero);
+                    float damageValue = baseDamage * damageMulti;
+                    popUptext.text = damageValue.ToString();
                     rb.AddForce((knockback), ForceMode2D.Impulse);
+                    if (gameObject.CompareTag("Enemy"))
+                    {
+                        slider.value = health;
+                        slider.maxValue = maxHealth;
+                    }
 
                 }
             }
@@ -150,9 +183,13 @@ public class HealthManager : MonoBehaviour, IDamagable{
                 break;
         }
     }
-
     private void dropItem(){
         loot.DropItem();
+    }
+    private void SpawnPopup(Vector3 offset)
+    {
+        GameObject popup = Instantiate(PopupPrefab, transform.position + offset, Quaternion.identity);
+        popup.transform.SetParent(transform);
     }
 
     public void FixedUpdate(){
