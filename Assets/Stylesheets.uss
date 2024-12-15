@@ -1,0 +1,438 @@
+.button {
+    width: 400px;
+    height: 80px;
+    margin-top: 0;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    position: absolute;
+    left: 1430px;
+    top: 100px;
+    right: 0;
+    bottom: 0;
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    font-size: 40px;
+    white-space: normal;
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    color: rgb(224, 224, 224);
+    background-color: rgb(20, 23, 34);
+}
+
+.button:hover {
+    width: 400px;
+    height: 80px;
+    margin-top: 0;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    position: absolute;
+    left: 1430px;
+    top: 100px;
+    right: 0;
+    bottom: 0;
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    font-size: 40px;
+    white-space: normal;
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    color: rgb(252, 210, 99);
+    background-color: rgb(20, 23, 34);
+}
+
+.button:active {
+    width: 400px;
+    height: 80px;
+    margin-top: 0;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    position: absolute;
+    left: 1430px;
+    top: 100px;
+    right: 0;
+    bottom: 0;
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    font-size: 40px;
+    white-space: normal;
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    color: rgb(252, 210, 99);
+    background-color: rgb(20, 20, 25);
+}
+
+.button1 {
+    position: absolute;
+    left: 120px;
+    top: 120px;
+    width: 800px;
+    height: 300px;
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    -unity-font-style: bold;
+    font-size: 80px;
+    color: rgb(255, 255, 255);
+    -unity-text-align: middle-center;
+    -unity-paragraph-spacing: 30px;
+    background-color: rgb(20, 23, 34);
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+}
+
+.button1:hover {
+    position: absolute;
+    left: 120px;
+    top: 120px;
+    width: 800px;
+    height: 300px;
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    -unity-font-style: bold;
+    font-size: 80px;
+    color: rgb(146, 204, 236);
+    -unity-text-align: middle-center;
+    -unity-paragraph-spacing: 30px;
+    background-color: rgb(20, 23, 34);
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+}
+
+.button1:active {
+    position: absolute;
+    left: 120px;
+    top: 120px;
+    width: 800px;
+    height: 300px;
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    -unity-font-style: bold;
+    font-size: 80px;
+    color: rgb(146, 204, 236);
+    -unity-text-align: middle-center;
+    -unity-paragraph-spacing: 30px;
+    background-color: rgb(20, 20, 25);
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+}
+
+.button2 {
+    width: 100px;
+    height: 100px;
+    top: 20px;
+    right: 20px;
+    left: 1800px;
+    position: absolute;
+    background-image: url('project://database/Assets/assets/close.png?fileID=2800000&guid=809580024c779924b95b95f141f65e05&type=3#close');
+    background-color: rgba(56, 56, 56, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.button2:hover {
+    width: 100px;
+    height: 100px;
+    top: 20px;
+    right: 20px;
+    left: 1800px;
+    position: absolute;
+    background-image: url('project://database/Assets/assets/close%20hover.png?fileID=2800000&guid=a2bc7b88a682233409a8decd0255e38f&type=3#close hover');
+    background-color: rgba(56, 56, 56, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.button2:active {
+    width: 100px;
+    height: 100px;
+    top: 20px;
+    right: 20px;
+    left: 1800px;
+    position: absolute;
+    background-image: url('project://database/Assets/assets/close%20button.png?fileID=2800000&guid=af4717abf3ca581498b549e5c2c4f57f&type=3#close button');
+    background-color: rgba(56, 56, 56, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.namefloortimekilllLeaderboard {
+}
+
+.button3 {
+    width: 100px;
+    height: 100px;
+    background-image: url('project://database/Assets/assets/go%20back.png?fileID=2800000&guid=c68cba133c037cd43b69c34e17575f02&type=3#go back');
+    position: absolute;
+}
+
+.button3:hover {
+    background-image: url('project://database/Assets/assets/go%20back%20hover.png?fileID=2800000&guid=68909a4927b0349468d158c654d58a5c&type=3#go back hover');
+}
+
+.button3:active {
+    background-image: url('project://database/Assets/assets/go%20back%20clicked.png?fileID=2800000&guid=4bc538866a00e1942bb28cb42fbaf66c&type=3#go back clicked');
+}
+
+.button4 {
+    width: 100px;
+    height: 100px;
+    background-image: url('project://database/Assets/assets/next.png?fileID=2800000&guid=dcda8c78011e5834d8ed1cb7c87c5733&type=3#next');
+    position: absolute;
+}
+
+.button4:hover {
+    width: 100px;
+    height: 100px;
+    background-image: url('project://database/Assets/assets/next%20hover.png?fileID=2800000&guid=5f298e757227e0247ad5b3eceb45a803&type=3#next hover');
+    position: absolute;
+}
+
+.button4:active {
+    width: 100px;
+    height: 100px;
+    background-image: url('project://database/Assets/assets/next%20clicked.png?fileID=2800000&guid=1ec97cc617d545c47a42a97a6b5fe4aa&type=3#next clicked');
+    position: absolute;
+}
+
+.button5 {
+    width: 100px;
+    height: 100px;
+    background-image: url('project://database/Assets/assets/previous.png?fileID=2800000&guid=76b436fdc67fd5842956b0f08f57a97f&type=3#previous');
+    position: absolute;
+}
+
+.button5:hover {
+    width: 100px;
+    height: 100px;
+    background-image: url('project://database/Assets/assets/previous%20hover.png?fileID=2800000&guid=b348e1a91d28bfc4abc67ca95db62735&type=3#previous hover');
+    position: absolute;
+}
+
+.button5:active {
+    width: 100px;
+    height: 100px;
+    background-image: url('project://database/Assets/assets/previous%20clicked.png?fileID=2800000&guid=3c735f849a8de914d9359fb38071d9dc&type=3#previous clicked');
+    position: absolute;
+}
+
+.musicfx {
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    font-size: 80px;
+    color: rgb(255, 255, 255);
+    position: absolute;
+}
+
+.credittext {
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    font-size: 80px;
+    -unity-text-align: upper-center;
+    -unity-paragraph-spacing: 20px;
+    letter-spacing: 10px;
+    word-spacing: 10px;
+    color: rgb(236, 236, 236);
+}
+
+.leaderboardtext {
+    font-size: 40px;
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    color: rgb(0, 255, 251);
+    -unity-text-align: middle-center;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 10px;
+    border-left-width: 0;
+}
+
+.leaderboardbuttons {
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    font-size: 50px;
+    color: rgb(255, 255, 255);
+    -unity-text-align: middle-center;
+    background-color: rgb(53, 53, 53);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 10px;
+    border-left-width: 0;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+}
+
+.leaderboardbuttons:hover {
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    font-size: 50px;
+    color: rgb(252, 210, 99);
+    -unity-text-align: middle-center;
+    background-color: rgb(41, 41, 41);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 10px;
+    border-left-width: 0;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+}
+
+.leaderboardbuttons:active {
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    font-size: 50px;
+    color: rgb(252, 210, 99);
+    -unity-text-align: middle-center;
+    background-color: rgb(38, 38, 38);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 10px;
+    border-left-width: 0;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+}
+
+.areyousure {
+    width: 600px;
+    height: 300px;
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    font-size: 40px;
+    -unity-text-align: upper-center;
+}
+
+.button6 {
+    width: 100px;
+    height: 100px;
+    background-image: url('project://database/Assets/assets/checked.png?fileID=2800000&guid=8c502ac7ccbd7a74c8dbc3cf4d7256ae&type=3#checked');
+    position: absolute;
+}
+
+.button6:hover {
+    width: 100px;
+    height: 100px;
+    background-image: url('project://database/Assets/assets/checked%20hover.png?fileID=2800000&guid=74f08df2980074449b882e174b4a1304&type=3#checked hover');
+    position: absolute;
+}
+
+.button6:active {
+    width: 100px;
+    height: 100px;
+    background-image: url('project://database/Assets/assets/checked%20clicked.png?fileID=2800000&guid=258ac3829aba2f14a8fdb25457124e26&type=3#checked clicked');
+    position: absolute;
+}
+
+.debugbuttons {
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    color: rgb(0, 255, 255);
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    position: absolute;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    width: auto;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.debugbuttons:hover {
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    color: rgb(252, 210, 99);
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    position: absolute;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    width: auto;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.debugbuttons:active {
+    -unity-font: url('project://database/Assets/assets/eight-bit-dragon.otf?fileID=12800000&guid=5b2f737e7d1040240a079b01468a81a3&type=3#eight-bit-dragon');
+    color: rgb(245, 187, 34);
+    -unity-font-definition: url('project://database/Assets/assets/eight-bit-dragon%20SDF%201.asset?fileID=11400000&guid=2e529d12155be324f9f23d3625f1b235&type=2#eight-bit-dragon SDF 1');
+    position: absolute;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-top-width: 10px;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-width: 10px;
+    width: auto;
+    height: auto;
+    background-color: rgb(34, 34, 34);
+}

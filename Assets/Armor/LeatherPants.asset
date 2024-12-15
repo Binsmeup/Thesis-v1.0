@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 623175d241e6b0946a05b21d9207b70e, type: 3}
+  m_Name: LeatherPants
+  m_EditorClassIdentifier: 
+  itemName: LeatherPants
+  Type: Leggings
+  WeaponType: 
+  HexColor: '#813C00'
+  baseDmg: 0
+  dmgMulti: 0
+  critCHA: 0
+  critDMG: 0
+  atkSPD: 0
+  atkSPDModifier: 0
+  maxHP: 0
+  HP: 0
+  KB: 0
+  MS: 35
+  HelmetMaxHealth: 0
+  ChestMaxHealth: 0
+  LegMaxHealth: 1
+  itemObject: {fileID: 8245899473584220931, guid: af0f8a91a1a15ac489dff042c742e515, type: 3}
