@@ -207,9 +207,12 @@ public class MapGenerationShowcase : MonoBehaviour{
         if (height >= 150){
             height = 150;
         }
+<<<<<<< HEAD
         if (iteration >= 10){
             iteration = 10;
         }
+=======
+>>>>>>> bd17dcf6538a948a8e8c4520e565fefe839de3d4
         if (enemyCount >= 150){
             enemyCount = 150;
         }   
@@ -367,6 +370,7 @@ public class MapGenerationShowcase : MonoBehaviour{
             }
         }
     }
+<<<<<<< HEAD
     public void FloodFill()
     {
         List<List<Vector2Int>> groups = new List<List<Vector2Int>>();
@@ -376,16 +380,30 @@ public class MapGenerationShowcase : MonoBehaviour{
         {
             for (long y = 0; y < height; y++)
             {
+=======
+    public void FloodFill(){
+        List<List<Vector2Int>> groups = new List<List<Vector2Int>>();
+
+        bool[,] visited = new bool[width, height];
+        for (int x = 0; x < width; x++){
+            for (int y = 0; y < height; y++){
+>>>>>>> bd17dcf6538a948a8e8c4520e565fefe839de3d4
                 visited[x, y] = grid[x, y] == Wall;
             }
         }
 
+<<<<<<< HEAD
         for (long x = 0; x < width; x++)
         {
             for (long y = 0; y < height; y++)
             {
                 if (!visited[x, y])
                 {
+=======
+        for (int x = 0; x < width; x++){
+            for (int y = 0; y < height; y++){
+                if (!visited[x, y]){
+>>>>>>> bd17dcf6538a948a8e8c4520e565fefe839de3d4
                     List<Vector2Int> group = new List<Vector2Int>();
                     FloodFillConnect(x, y, visited, group);
                     groups.Add(group);
@@ -396,15 +414,21 @@ public class MapGenerationShowcase : MonoBehaviour{
         List<Vector2Int> largestGroup = new List<Vector2Int>();
         int largestGroupIndex = -1;
 
+<<<<<<< HEAD
         for (int i = 0; i < groups.Count; i++)
         {
             if (groups[i].Count > largestGroup.Count)
             {
+=======
+        for (int i = 0; i < groups.Count; i++){
+            if (groups[i].Count > largestGroup.Count){
+>>>>>>> bd17dcf6538a948a8e8c4520e565fefe839de3d4
                 largestGroup = groups[i];
                 largestGroupIndex = i;
             }
         }
 
+<<<<<<< HEAD
         if (largestGroupIndex != -1)
         {
             groups.RemoveAt(largestGroupIndex);
@@ -413,10 +437,18 @@ public class MapGenerationShowcase : MonoBehaviour{
             {
                 foreach (Vector2Int cell in group)
                 {
+=======
+        if (largestGroupIndex != -1){
+            groups.RemoveAt(largestGroupIndex);
+
+            foreach (List<Vector2Int> group in groups){
+                foreach (Vector2Int cell in group){
+>>>>>>> bd17dcf6538a948a8e8c4520e565fefe839de3d4
                     grid[(int)cell.x, (int)cell.y] = Wall;
                 }
             }
         }
+<<<<<<< HEAD
         Debug.Log("completed");
         UpdateGrid();
     }
@@ -449,6 +481,26 @@ public class MapGenerationShowcase : MonoBehaviour{
     IEnumerator PerlinNoiseActivate(){
         int seed = Random.Range(0, 100000);
         PerlinNoiseGenerator perlin = new PerlinNoiseGenerator(seed);
+=======
+        UpdateGrid();
+    }
+
+    void FloodFillConnect(int x, int y, bool[,] visited, List<Vector2Int> group){
+        if (x < 0 || x >= width || y < 0 || y >= height || visited[x, y]){
+            return;
+        }
+
+        visited[x, y] = true;
+        group.Add(new Vector2Int(x, y));
+
+        FloodFillConnect(x + 1, y, visited, group);
+        FloodFillConnect(x - 1, y, visited, group);
+        FloodFillConnect(x, y + 1, visited, group);
+        FloodFillConnect(x, y - 1, visited, group);
+    }
+
+    IEnumerator PerlinNoiseActivate(){
+>>>>>>> bd17dcf6538a948a8e8c4520e565fefe839de3d4
         int enemySpawnedCount = 0;
         int chestSpawnedCount = 0;
         int portalSpawnedCount = 0;
@@ -470,11 +522,19 @@ public class MapGenerationShowcase : MonoBehaviour{
                 Vector3Int tilePosition = new Vector3Int(x, y, 0);
 
                 if (grid[x, y] == Floor){
+<<<<<<< HEAD
                     float perlinValue = perlin.Perlin(x * perlinScale, y * perlinScale);
                     float modifiedValue = perlinValue * 1.5f;
                     float randomChance = Random.Range(0f, 100f);
 
                     if (modifiedValue >= -1.5f && modifiedValue <= -1f){
+=======
+                    float perlinValue = Mathf.PerlinNoise(x * perlinScale, y * perlinScale);
+                    float modifiedValue = perlinValue * 3f;
+                    float randomChance = Random.Range(0f, 100f);
+
+                    if (modifiedValue >= 0 && modifiedValue <= 0.5f){
+>>>>>>> bd17dcf6538a948a8e8c4520e565fefe839de3d4
                         Item.SetTile(tilePosition, Perlin1);
                         if (randomChance <= 60f){
                             debrisSpawns.Add(tilePosition);
@@ -485,7 +545,11 @@ public class MapGenerationShowcase : MonoBehaviour{
                             potionCount++;
                         }
                     }
+<<<<<<< HEAD
                     else if (modifiedValue > -1f && modifiedValue <= -0.25f){
+=======
+                    else if (modifiedValue > 0.5f && modifiedValue <= 1.25f){
+>>>>>>> bd17dcf6538a948a8e8c4520e565fefe839de3d4
                         Item.SetTile(tilePosition, Perlin2);
                         if (randomChance <= 50f){
                             Item.SetTile(tilePosition, EnemyLocation);
@@ -500,7 +564,11 @@ public class MapGenerationShowcase : MonoBehaviour{
                             coinCount++;
                         }
                     }
+<<<<<<< HEAD
                     else if (modifiedValue > -0.25f && modifiedValue <= 0.25f){
+=======
+                    else if (modifiedValue > 1.25f && modifiedValue <= 1.75f){
+>>>>>>> bd17dcf6538a948a8e8c4520e565fefe839de3d4
                         Item.SetTile(tilePosition, Perlin3);
                         if (randomChance <= 10f){
                             if (randomChance <= 35f){
@@ -517,7 +585,11 @@ public class MapGenerationShowcase : MonoBehaviour{
                             }
                         }
                     }
+<<<<<<< HEAD
                     else if (modifiedValue > 0.25f && modifiedValue <= 1.5f){
+=======
+                    else if (modifiedValue > 1.75f && modifiedValue <= 3){
+>>>>>>> bd17dcf6538a948a8e8c4520e565fefe839de3d4
                         if (randomChance >= 50f){
                             Item.SetTile(tilePosition, ChestLocation);
                             chestSpawns.Add(tilePosition);
@@ -556,6 +628,7 @@ public class MapGenerationShowcase : MonoBehaviour{
         perlinNoiseFinished = true;
     }
 
+<<<<<<< HEAD
     public class PerlinNoiseGenerator{
         private int[] permutation;
         private const int permutationSize = 10000;
@@ -617,6 +690,8 @@ public class MapGenerationShowcase : MonoBehaviour{
     }
 
 
+=======
+>>>>>>> bd17dcf6538a948a8e8c4520e565fefe839de3d4
     void SpawnObjects(List<Vector3Int> spawnPositions, GameObject prefab, ref int spawnedCount, int totalCount, float scale){
         while (spawnedCount < totalCount && spawnPositions.Count > 0) {
             Vector3Int spawnPosition = spawnPositions[Random.Range(0, spawnPositions.Count)];

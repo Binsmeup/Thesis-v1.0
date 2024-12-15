@@ -361,8 +361,11 @@ public class MapGeneration : MonoBehaviour{
     }
 
     void ApplyPerlinNoise(){
+<<<<<<< HEAD
         int seed = Random.Range(0, 100000);
         PerlinNoiseGenerator perlin = new PerlinNoiseGenerator(seed);
+=======
+>>>>>>> bd17dcf6538a948a8e8c4520e565fefe839de3d4
         int enemySpawnedCount = 0;
         int chestSpawnedCount = 0;
         int portalSpawnedCount = 0;
@@ -384,11 +387,19 @@ public class MapGeneration : MonoBehaviour{
                 Vector3Int tilePosition = new Vector3Int(x, y, 0);
 
                 if (grid[x, y] == Floor){
+<<<<<<< HEAD
                     float perlinValue = perlin.Perlin(x * perlinScale, y * perlinScale);
                     float modifiedValue = perlinValue * 1.5f; 
                     float randomChance = Random.Range(0f, 100f);
 
                     if (modifiedValue >= -1.5f && modifiedValue <= -1f){
+=======
+                    float perlinValue = Mathf.PerlinNoise(x * perlinScale, y * perlinScale);
+                    float modifiedValue = perlinValue * 3f; 
+                    float randomChance = Random.Range(0f, 100f);
+
+                    if (modifiedValue >= 0 && modifiedValue <= 0.5f){
+>>>>>>> bd17dcf6538a948a8e8c4520e565fefe839de3d4
                         if (randomChance <= 60f){
                             debrisSpawns.Add(tilePosition);
                             debrisCount++;
@@ -398,7 +409,11 @@ public class MapGeneration : MonoBehaviour{
                             potionCount++;
                         }
                     }
+<<<<<<< HEAD
                     else if (modifiedValue > -1f && modifiedValue <= -0.25f){
+=======
+                    else if (modifiedValue > 0.5f && modifiedValue <= 1.25f){
+>>>>>>> bd17dcf6538a948a8e8c4520e565fefe839de3d4
                         if (randomChance <= 50f){
                             enemySpawns.Add(tilePosition);
                         }
@@ -411,7 +426,11 @@ public class MapGeneration : MonoBehaviour{
                             coinCount++;
                         }
                     }
+<<<<<<< HEAD
                     else if (modifiedValue > -0.25f && modifiedValue <= 0.25f && randomChance <= 10f){
+=======
+                    else if (modifiedValue > 1.25f && modifiedValue <= 1.75f && randomChance <= 10f){
+>>>>>>> bd17dcf6538a948a8e8c4520e565fefe839de3d4
                         if (randomChance <= 35f){
                             enemySpawns.Add(tilePosition);
                         }
@@ -424,7 +443,11 @@ public class MapGeneration : MonoBehaviour{
                             coinCount++;
                         }
                     }
+<<<<<<< HEAD
                     else if (modifiedValue > 0.25f && modifiedValue <= 1.5f){
+=======
+                    else if (modifiedValue > 1.75f && modifiedValue < 3){
+>>>>>>> bd17dcf6538a948a8e8c4520e565fefe839de3d4
                         if (randomChance >= 50f){
                             chestSpawns.Add(tilePosition);
                         }
@@ -469,6 +492,7 @@ public class MapGeneration : MonoBehaviour{
         SpawnObjects(portalSpawns, Portal, ref portalSpawnedCount, portalCount, 1f, false);
     }
 
+<<<<<<< HEAD
     public class PerlinNoiseGenerator
     {
         private int[] permutation;
@@ -530,6 +554,8 @@ public class MapGeneration : MonoBehaviour{
         }
     }
 
+=======
+>>>>>>> bd17dcf6538a948a8e8c4520e565fefe839de3d4
     void SpawnObjects(List<Vector3Int> spawnPositions, GameObject prefab, ref int spawnedCount, int totalCount, float scale, bool miniBoss){
         float miniBossScaling = 1;
         float miniBossScalingATK = 1f;
