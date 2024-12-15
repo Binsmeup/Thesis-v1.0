@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: LeatherArmor
   Type: Chestplate
   WeaponType: 
+  HexColor: '#813C00'
   baseDmg: 0
   dmgMulti: 0
   critCHA: 0

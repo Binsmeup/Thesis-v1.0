@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: SteelHelmet
   Type: Helmet
   WeaponType: 
+  HexColor: '#1e1e1e'
   baseDmg: 20
   dmgMulti: 0
   critCHA: 0

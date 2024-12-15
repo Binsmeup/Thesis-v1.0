@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: TitaniumLeggings
   Type: Leggings
   WeaponType: 
+  HexColor: '#E7FFAA'
   baseDmg: 10
   dmgMulti: 0
   critCHA: 0

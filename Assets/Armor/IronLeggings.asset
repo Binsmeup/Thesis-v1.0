@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: IronLeggings
   Type: Leggings
   WeaponType: 
+  HexColor: '#FFFFFF'
   baseDmg: 0
   dmgMulti: 0
   critCHA: 0

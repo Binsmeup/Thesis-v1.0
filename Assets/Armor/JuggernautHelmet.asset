@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: JuggernautHelmet
   Type: Helmet
   WeaponType: 
+  HexColor: '#D2C47C'
   baseDmg: 30
   dmgMulti: 0
   critCHA: 0
